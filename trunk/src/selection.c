@@ -249,66 +249,70 @@ highlight_selection(Score_t *score, gdouble x_origin, gdouble y_origin, gdouble 
 
 		}
 
+                
+                if (object->group_id == 0 ) {
 
-		switch (object->type) { /* This is beurk, but this is! */
-			/* RESTS */
-		case DOUBLEWHOLE:
-			object_x += Spacings.NotesRests.sa_doublewhole;
-			break;
-		case WHOLE:
-			object_x += Spacings.NotesRests.sa_whole;
-			break;
-		case HALF:
-			object_x += Spacings.NotesRests.sa_half;
-			break;
-		case QUARTER:
-			object_x += Spacings.NotesRests.sa_quarter;
-			break;
-		case EIGHTH:
-			object_x += Spacings.NotesRests.sa_eighth;
-			break;
-		case SIXTEENTH:
-			object_x += Spacings.NotesRests.sa_sixteenth;
-			break;
+                        switch (object->type) { /* This is beurk, but this is! */
+                                /* RESTS */
+                        case DOUBLEWHOLE:
+                                object_x += Spacings.NotesRests.sa_doublewhole;
+                                break;
+                        case WHOLE:
+                                object_x += Spacings.NotesRests.sa_whole;
+                                break;
+                        case HALF:
+                                object_x += Spacings.NotesRests.sa_half;
+                                break;
+                        case QUARTER:
+                                object_x += Spacings.NotesRests.sa_quarter;
+                                break;
+                        case EIGHTH:
+                                object_x += Spacings.NotesRests.sa_eighth;
+                                break;
+                        case SIXTEENTH:
+                                object_x += Spacings.NotesRests.sa_sixteenth;
+                                break;
 
-			/* RESTS */
-		case DOUBLEWHOLEREST:
-			object_x += Spacings.NotesRests.sa_doublewholerest;
-			break;
-		case WHOLEREST:
-			object_x += Spacings.NotesRests.sa_wholerest;
-			break;
-		case HALFREST:
-			object_x += Spacings.NotesRests.sa_halfrest;
-			break;
-		case QUARTERREST:
-			object_x += Spacings.NotesRests.sa_quarterrest;
-			break;
-		case EIGHTHREST:
-			object_x += Spacings.NotesRests.sa_eighthrest;
-			break;
-		case SIXTEENTHREST:
-			object_x += Spacings.NotesRests.sa_sixteenthrest;
-			break;
+                                /* RESTS */
+                        case DOUBLEWHOLEREST:
+                                object_x += Spacings.NotesRests.sa_doublewholerest;
+                                break;
+                        case WHOLEREST:
+                                object_x += Spacings.NotesRests.sa_wholerest;
+                                break;
+                        case HALFREST:
+                                object_x += Spacings.NotesRests.sa_halfrest;
+                                break;
+                        case QUARTERREST:
+                                object_x += Spacings.NotesRests.sa_quarterrest;
+                                break;
+                        case EIGHTHREST:
+                                object_x += Spacings.NotesRests.sa_eighthrest;
+                                break;
+                        case SIXTEENTHREST:
+                                object_x += Spacings.NotesRests.sa_sixteenthrest;
+                                break;
 
-			/* BARLINES */
-		case BARLINE_SINGLE:
-			object_x += Spacings.Barlines.sab;
-			break;
-		case BARLINE_DOUBLE:
-			object_x += Spacings.Barlines.sab;
-			break;
-		case BARLINE_OPENREPEAT:
-			object_x += Spacings.Barlines.sab;
-			break;
-		case BARLINE_CLOSEREPEAT:
-			object_x += Spacings.Barlines.sab;
-			break;
-		case BARLINE_OPENCLOSEREPEAT:
-			object_x += Spacings.Barlines.sab;
-			break;
+                                /* BARLINES */
+                        case BARLINE_SINGLE:
+                                object_x += Spacings.Barlines.sab;
+                                break;
+                        case BARLINE_DOUBLE:
+                                object_x += Spacings.Barlines.sab;
+                                break;
+                        case BARLINE_OPENREPEAT:
+                                object_x += Spacings.Barlines.sab;
+                                break;
+                        case BARLINE_CLOSEREPEAT:
+                                object_x += Spacings.Barlines.sab;
+                                break;
+                        case BARLINE_OPENCLOSEREPEAT:
+                                object_x += Spacings.Barlines.sab;
+                                break;
 
-		} /* switch */
+                        } /* switch */
+
+                }
 
 		/* Now, we now the x position where the object should be ;) */
 		if ( ((object_x + start_x - 30) >= x_origin) && ((object_x + start_x - 30) <= x) )
