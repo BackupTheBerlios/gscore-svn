@@ -327,6 +327,7 @@ undo_selection(void)
 
         staff = g_list_nth_data(Score.Staff_list, get_staff_selected(&Score));
 
+        if (staff) {
 	/* Parsing Objects structure */
 	listrunner = g_list_first(staff->Object_list);
 	while ( listrunner ) {
@@ -341,6 +342,10 @@ undo_selection(void)
 	g_list_free(listrunner);
 
 	return 0;
+
+        }
+
+        return -1;
 }
 
 
