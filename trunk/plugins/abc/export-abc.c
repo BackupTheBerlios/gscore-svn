@@ -183,6 +183,10 @@ static gchar *get_char_from_chord(Staff_t *staff, Object_t *object)
 
         char *retstr = "[";
 
+        retstr = g_strconcat(retstr,
+                             get_char_from_pitch(0, staff->key, object->type, object->pitch),
+                             NULL);
+
         listrunner_object = g_list_first(staff->Object_list);
         while ( listrunner_object ) {
                 object_data = (Object_t *)listrunner_object->data;

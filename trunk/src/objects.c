@@ -372,12 +372,13 @@ Object_t *object_get_left(Staff_t *staff, gdouble x)
         while ( listrunner_object ) {
                 object_data = (Object_t *)listrunner_object->data;
 
-                object_x += object_get_spacing(object_data->type);
+                if ( object_data->group_id == 0 ) {
+                        object_x += object_get_spacing(object_data->type);
                         
-                if ((staff->start_x + object_x) <= x) {
-                        ret_object = (Object_t *)object_data;
-
-                } 
+                        if (((staff->start_x + object_x) <= x)) {
+                                ret_object = (Object_t *)object_data;
+                        } 
+                }
 
                 listrunner_object = g_list_next(listrunner_object);
         } /* while ( listrunner_object )  */
@@ -417,41 +418,6 @@ gdouble object_get_x(Staff_t *staff, Object_t *object)
         return -1;
 }
 
-gdouble object_get_left_x(Staff_t *staff, gdouble x)
-{
-
-        GList *listrunner_object;
-
-        Object_t *object_data;
-        
-        gdouble retval = 0;
-
-        gint object_x = 0;
-
-        listrunner_object = g_list_first(staff->Object_list);
-        
-        if ( ! listrunner_object ) return -1;
-
-        while ( listrunner_object ) {
-
-                object_data = (Object_t *)listrunner_object->data;
-
-                object_x += object_get_spacing(object_data->type);
-                        
-                if ( ((staff->start_x + object_x) < x) && (object_data->group_id == 0) ) {
-/*                         printf("object_x = %d\n", object_x); */
-/*                         printf("x = %f\n", x); */
-                        retval = object_x;
-                }
-
-                listrunner_object = g_list_next(listrunner_object);
-        } /* while ( listrunner_object )  */
-
-        printf("retval = %f\n", retval);
-
-        return retval;
-}
-
 /* Returns the object closest to the right from the x position */
 Object_t *object_get_right(Staff_t *staff, gdouble x)
 {
@@ -470,13 +436,14 @@ Object_t *object_get_right(Staff_t *staff, gdouble x)
         while ( listrunner_object ) {
                 object_data = (Object_t *)listrunner_object->data;
 
-                if ((staff->start_x + object_x + 10) > x) {
-                        return (Object_t *)object_data;
+                if ( object_data == 0 ) {
+                        if ((staff->start_x + object_x + 10) > x) {
+                                return (Object_t *)object_data;
 
-                } 
+                        } 
 
-                object_x += object_get_spacing(object_data->type);
-                        
+                        object_x += object_get_spacing(object_data->type);
+                }
 
                 listrunner_object = g_list_next(listrunner_object);
         } /* while ( listrunner_object )  */

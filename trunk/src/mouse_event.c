@@ -45,6 +45,7 @@ gboolean set_min_y = FALSE;
 gboolean set_max_x = FALSE;
 gboolean set_max_y = FALSE;
 
+static gint staff_working_with = 0;
 
 gboolean 
 mouse_button_release_event(GtkWidget *widget, GdkEventButton *event, gpointer user_data)
@@ -60,6 +61,10 @@ mouse_button_release_event(GtkWidget *widget, GdkEventButton *event, gpointer us
 
 		highlight_selection(score, selection->x_origin, selection->y_origin, 
 				    selection->x, selection->y);
+
+                set_staff_unselect(score, get_staff_selected(score));
+                set_staff_selected(score, get_staff_id(score, get_staff_extremity_end_y(score, staff_working_with) - 5));
+/*                 set_staff_selected(score, get_staff_id(score, event->y)); */
 
 	}
 
@@ -86,7 +91,7 @@ gboolean
 mouse_button_press_event(GtkWidget *widget, GdkEventButton *event, gpointer user_data)
 {
         Score_t *score = score_get_from_widget(widget);
-        Staff_t *staff = staff_selected_get_from_score(score);
+/*         Staff_t *staff = staff_selected_get_from_score(score); */
 
 /*         show_object_tooltip(NULL); */
   
@@ -94,8 +99,7 @@ mouse_button_press_event(GtkWidget *widget, GdkEventButton *event, gpointer user
 
                 undo_selection(score);
 
-                set_staff_unselect(score, get_staff_selected(score));
-                set_staff_selected(score, get_staff_id(score, event->y));
+                staff_working_with = get_staff_id(score, event->y);
 
                 set_selection_origin(widget, (GdkEventButton *)event);
         }
