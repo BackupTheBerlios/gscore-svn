@@ -66,38 +66,38 @@ gboolean staff_set_time_signature(gint staff, gint signature_type, gint number_o
  *
  * @return TRUE if the staff is created, FALSE if not
  */
-gboolean create_staff(guint8 nb_lines, guint8 space_btw_lines,
+gboolean create_staff(Score_t *score, guint8 nb_lines, guint8 space_btw_lines,
                       gdouble extremity_begin_x, gdouble extremity_begin_y)
 {
 
-        Score.Staff = g_malloc(sizeof(Staff_t));
+        score->Staff = g_malloc(sizeof(Staff_t));
  
-        Score.Staff->nb_lines = nb_lines;
-        Score.Staff->space_btw_lines = space_btw_lines;
-        Score.Staff->is_selected = FALSE;
-        Score.Staff->key = NO_KEY;
-        Score.Staff->key_signature = KEY_SIGNATURE_EMPTY;
-        Score.Staff->time_signature[0] = TIME_SIGNATURE_NORMAL;
-        Score.Staff->time_signature[1] = 4;
-        Score.Staff->time_signature[2] = 4;
-        Score.Staff->measure_number = 1;
-        Score.Staff->total_measures = Score.Staff->measure_number;
-        Score.Staff->extremity_begin_x = extremity_begin_x;
-        Score.Staff->extremity_begin_y = extremity_begin_y;
+        score->Staff->nb_lines = nb_lines;
+        score->Staff->space_btw_lines = space_btw_lines;
+        score->Staff->is_selected = FALSE;
+        score->Staff->key = NO_KEY;
+        score->Staff->key_signature = KEY_SIGNATURE_EMPTY;
+        score->Staff->time_signature[0] = TIME_SIGNATURE_NORMAL;
+        score->Staff->time_signature[1] = 4;
+        score->Staff->time_signature[2] = 4;
+        score->Staff->measure_number = 1;
+        score->Staff->total_measures = score->Staff->measure_number;
+        score->Staff->extremity_begin_x = extremity_begin_x;
+        score->Staff->extremity_begin_y = extremity_begin_y;
 
-        Score.Staff->current_x = extremity_begin_x + Spacings.Clefs.sb + STANDARD_KEY_SIZE + Spacings.Clefs.sa;
-	Score.Staff->start_x = extremity_begin_x + Spacings.Clefs.sb + STANDARD_KEY_SIZE + Spacings.Clefs.sa;
+        score->Staff->current_x = extremity_begin_x + Spacings.Clefs.sb + STANDARD_KEY_SIZE + Spacings.Clefs.sa;
+	score->Staff->start_x = extremity_begin_x + Spacings.Clefs.sb + STANDARD_KEY_SIZE + Spacings.Clefs.sa;
 
-        Score.Staff->midi_instrument = MIDI_GRAND_PIANO;
-        Score.Staff->Object_list = NULL;
+        score->Staff->midi_instrument = MIDI_GRAND_PIANO;
+        score->Staff->Object_list = NULL;
 
-        Score.Staff_list =
-                g_list_append(Score.Staff_list, Score.Staff);
+        score->Staff_list =
+                g_list_append(score->Staff_list, score->Staff);
 
-        if (!Score.Staff_list)
+        if (!score->Staff_list)
                 return FALSE;
 
-        Score.nb_staves++;
+        score->nb_staves++;
 
         return TRUE;
 }
@@ -240,7 +240,7 @@ void staff_add_remove_ok(void)
 
         if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget))) {
                         /* Add a staff below ;) */
-                        create_staff(numberoflines, spacebetweenlines,
+                        create_staff(&Score, numberoflines, spacebetweenlines,
                                      extremityxbegin, extremityybegin);
                 }
 

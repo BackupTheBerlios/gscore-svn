@@ -121,7 +121,7 @@ gint object_get_spacing(gint type)
 }
 
 extern gboolean
-add_object(gint staff, gint type, accidentals_e accidentals, object_e nature, gulong group_id,
+add_object(Score_t *score, gint staff, gint type, accidentals_e accidentals, object_e nature, gulong group_id,
            gint x, gint y, gint x2, gint y2, gint x3, gint y3, 
            gint pitch, gint tab_number, gboolean is_selected)
 {
@@ -129,7 +129,7 @@ add_object(gint staff, gint type, accidentals_e accidentals, object_e nature, gu
 
 /*      printf("staff_selected: %d\n", staff); */
 
-        staff_data = g_list_nth_data(Score.Staff_list, staff);
+        staff_data = g_list_nth_data(score->Staff_list, staff);
 
 
         staff_data->Object = g_malloc(sizeof(Object_t));
@@ -139,7 +139,7 @@ add_object(gint staff, gint type, accidentals_e accidentals, object_e nature, gu
                 return FALSE;
         }
 
-        staff_data->Object->id = ++Score.object_id;
+        staff_data->Object->id = ++score->object_id;
         staff_data->Object->type = type;
         staff_data->Object->nature = nature;
         staff_data->Object->accidentals = accidentals;
@@ -160,7 +160,7 @@ add_object(gint staff, gint type, accidentals_e accidentals, object_e nature, gu
         if (group_id == 0) {
                 staff_set_current_x(staff, staff_get_current_x(staff) + object_get_spacing(type));
 
-		Score.staff_extremity_end_x += object_get_spacing(type);
+		score->staff_extremity_end_x += object_get_spacing(type);
         }
 
         return TRUE;

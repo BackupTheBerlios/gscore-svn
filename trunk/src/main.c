@@ -124,7 +124,7 @@ void gscore_init(void)
 
 	/* Create a Staff, to have something when we start the software */
 
-	if( ! create_staff(5, 8, Spacings.Measures.xpsfm, Spacings.Measures.ypsfm))
+	if( ! create_staff(&Score, 5, 8, Spacings.Measures.xpsfm, Spacings.Measures.ypsfm))
 		printf("ERROR CREATING STAFF");
 
 	set_staff_selected(0);

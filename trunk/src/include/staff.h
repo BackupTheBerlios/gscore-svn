@@ -25,9 +25,12 @@
 
 #include <glib.h>
 #include <gtk/gtk.h>
+#include "gscore.h"
 
-gboolean create_staff(guint8 nb_lines, guint8 space_btw_lines,
-                      gdouble extremity_begin_x, gdouble extremity_begin_y);
+gboolean create_staff(Score_t *score, guint8 nb_lines,
+		      guint8 space_btw_lines,
+                      gdouble extremity_begin_x,
+		      gdouble extremity_begin_y);
 
 gboolean delete_staff(gint staff);
 

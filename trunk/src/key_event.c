@@ -82,14 +82,14 @@ score_key_press_event(GtkWidget *widget, GdkEventKey *event)
                                         return;
                                 }
 
-                                add_object(get_staff_selected(), 
+                                add_object(&Score, get_staff_selected(), 
                                            Selection.object_type, 
                                            Selection.accidentals, Selection.nature, tmpobj->id, 
                                            0, 0, 0, 0, 0, 0, KeyCursor.position, 0, FALSE);           
                                 
 
                         } else {
-                                add_object(get_staff_selected(), 
+                                add_object(&Score, get_staff_selected(), 
                                            Selection.object_type, 
                                            Selection.accidentals, Selection.nature, 0, 
                                            0, 0, 0, 0, 0, 0, KeyCursor.position, 0, FALSE);
@@ -113,7 +113,7 @@ score_key_press_event(GtkWidget *widget, GdkEventKey *event)
 		case DYNAMIC_F:
 		case DYNAMIC_FF:
 		case DYNAMIC_FFF:
-			add_object(get_staff_selected(), 
+			add_object(&Score, get_staff_selected(), 
 				   Selection.object_type, 0, 0, 0,
 				   staff_get_current_x(get_staff_selected()), 
                                    0, 0, 0, 0, 0, KeyCursor.position, 0, FALSE);
@@ -185,7 +185,7 @@ score_key_press_event(GtkWidget *widget, GdkEventKey *event)
 		}
 		break;
 	case GDK_Tab: 		/* The TAB Key simply adds the single barline */
-		add_object(get_staff_selected(), 
+		add_object(&Score, get_staff_selected(), 
 			   BARLINE_SINGLE, 0, 0, 0, 0, 0, 0, 0, 0, 0, KeyCursor.position, 0, FALSE);
 		
 		gtk_widget_set_size_request(GTK_WIDGET(Score.area), Score.width, Score.height);
