@@ -138,8 +138,8 @@ gboolean abc_filter_import (Score_t **score,
 
         /* We give the structure to the pointer */
         /* I believe it's cleaner this way. Now it's up to you */
-        GSCORE_PLUGIN_STRUCT_INIT(*score);
+/*         GSCORE_PLUGIN_STRUCT_INIT(*score); */
         *score = spi;
 
-	return abc_load_file(filename,score);
+	return abc_load_file(filename,*score);
 }
