@@ -497,7 +497,7 @@ realize_object(Staff_t *staff, Object_t *object, gboolean display_barlines, gboo
 	gdouble extremity_end_y = 0;
 	gboolean is_selected = FALSE;
 
-	gboolean stemup = TRUE;
+	gboolean stemup = FALSE;
 	gboolean notehead_left = TRUE;
 
 	gint average = 0;
@@ -533,7 +533,7 @@ realize_object(Staff_t *staff, Object_t *object, gboolean display_barlines, gboo
 			stemup = TRUE;
 	}
 
-	printf("before, stemup = %d\n", stemup);
+	printf("after, stemup = %d\n", stemup);
 
 
 	switch(object->type) {

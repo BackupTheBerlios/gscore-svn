@@ -35,11 +35,11 @@ guint make_chord(Staff_t *staff, gulong group_id, gint pitch, gboolean *stemup, 
 	guint xpos = 0;
 	gint y = 0;
 
-
 	gdouble extremity_end_y = 0;
 	gint average = 0;
-	
 
+	* stemup = TRUE;
+	
 	extremity_end_y =  staff->extremity_begin_y +(staff->nb_lines - 1) * staff->space_btw_lines + staff->nb_lines - 1;
 	average = (extremity_end_y - staff->extremity_begin_y) / 2;
 
@@ -52,10 +52,13 @@ guint make_chord(Staff_t *staff, gulong group_id, gint pitch, gboolean *stemup, 
 			if (object->id == group_id) { /* Then, the chord is made with this note */
 				retval = xpos;
 				
-				if (y < staff->extremity_begin_y + average)
-					* stemup = FALSE;
-				else
-					* stemup = TRUE;
+				y = get_y_from_position(staff->key, staff->extremity_begin_y, object->pitch);
+
+/* 				if (y < staff->extremity_begin_y + average) { */
+/* 					* stemup = FALSE; */
+/* 				} else { */
+/* 					* stemup = TRUE; */
+/* 				} */
 			}
 
 			xpos += object_get_spacing(object->type);
@@ -65,7 +68,7 @@ guint make_chord(Staff_t *staff, gulong group_id, gint pitch, gboolean *stemup, 
 		listrunner_object = g_list_next(listrunner_object);
 	}
 
-	printf("ch stemup = %d\n", stemup);
+/* 	printf("ch stemup = %d\n", *stemup); */
 
 	return retval;
 
