@@ -4,6 +4,7 @@
 <glade-interface>
 
 <widget class="GtkWindow" id="main_window">
+  <property name="width_request">230</property>
   <property name="visible">True</property>
   <property name="title" translatable="yes">Gscore</property>
   <property name="type">GTK_WINDOW_TOPLEVEL</property>
@@ -16,6 +17,7 @@
   <property name="skip_pager_hint">False</property>
   <property name="type_hint">GDK_WINDOW_TYPE_HINT_NORMAL</property>
   <property name="gravity">GDK_GRAVITY_NORTH_WEST</property>
+  <property name="focus_on_map">True</property>
   <signal name="delete_event" handler="gtk_main_quit" last_modification_time="Sat, 17 Jan 2004 09:11:03 GMT"/>
 
   <child>
@@ -47,7 +49,7 @@
 		      <accelerator key="n" modifiers="GDK_CONTROL_MASK" signal="activate"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image1538">
+			<widget class="GtkImage" id="image1743">
 			  <property name="visible">True</property>
 			  <property name="stock">gtk-new</property>
 			  <property name="icon_size">1</property>
@@ -69,7 +71,7 @@
 		      <accelerator key="o" modifiers="GDK_CONTROL_MASK" signal="activate"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image1539">
+			<widget class="GtkImage" id="image1744">
 			  <property name="visible">True</property>
 			  <property name="stock">gtk-open</property>
 			  <property name="icon_size">1</property>
@@ -97,7 +99,7 @@
 		      <accelerator key="q" modifiers="GDK_CONTROL_MASK" signal="activate"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image1540">
+			<widget class="GtkImage" id="image1745">
 			  <property name="visible">True</property>
 			  <property name="stock">gtk-quit</property>
 			  <property name="icon_size">1</property>
@@ -117,23 +119,50 @@
 	  <child>
 	    <widget class="GtkMenuItem" id="mw_Plugins_menuitem">
 	      <property name="visible">True</property>
-	      <property name="label" translatable="yes">_Plugins</property>
+	      <property name="label" translatable="yes">_Preferences</property>
 	      <property name="use_underline">True</property>
 
 	      <child>
 		<widget class="GtkMenu" id="mw_Plugins_menuitem_menu">
 
 		  <child>
-		    <widget class="GtkImageMenuItem" id="mw_install_plugin_menuitem">
+		    <widget class="GtkImageMenuItem" id="score_options">
 		      <property name="visible">True</property>
-		      <property name="label" translatable="yes">_Install a new plugin...</property>
+		      <property name="label" translatable="yes">_Score options...</property>
 		      <property name="use_underline">True</property>
-		      <accelerator key="i" modifiers="GDK_CONTROL_MASK" signal="activate"/>
+		      <signal name="activate" handler="on_score_options_activate" last_modification_time="Sat, 19 Feb 2005 16:22:47 GMT"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image1541">
+			<widget class="GtkImage" id="image1746">
 			  <property name="visible">True</property>
-			  <property name="stock">gtk-floppy</property>
+			  <property name="stock">gtk-preferences</property>
+			  <property name="icon_size">1</property>
+			  <property name="xalign">0.5</property>
+			  <property name="yalign">0.5</property>
+			  <property name="xpad">0</property>
+			  <property name="ypad">0</property>
+			</widget>
+		      </child>
+		    </widget>
+		  </child>
+
+		  <child>
+		    <widget class="GtkSeparatorMenuItem" id="separator12">
+		      <property name="visible">True</property>
+		    </widget>
+		  </child>
+
+		  <child>
+		    <widget class="GtkImageMenuItem" id="parameters1">
+		      <property name="visible">True</property>
+		      <property name="label" translatable="yes">Parame_ters...</property>
+		      <property name="use_underline">True</property>
+		      <signal name="activate" handler="on_parameters1_activate" last_modification_time="Sat, 19 Feb 2005 16:23:21 GMT"/>
+
+		      <child internal-child="image">
+			<widget class="GtkImage" id="image1747">
+			  <property name="visible">True</property>
+			  <property name="stock">gtk-properties</property>
 			  <property name="icon_size">1</property>
 			  <property name="xalign">0.5</property>
 			  <property name="yalign">0.5</property>
@@ -167,7 +196,7 @@
 		      <accelerator key="F1" modifiers="0" signal="activate"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image1542">
+			<widget class="GtkImage" id="image1748">
 			  <property name="visible">True</property>
 			  <property name="stock">gtk-help</property>
 			  <property name="icon_size">1</property>
@@ -203,7 +232,7 @@
 		      <signal name="activate" handler="on_help_about_activate" last_modification_time="Tue, 21 Dec 2004 21:21:52 GMT"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image1543">
+			<widget class="GtkImage" id="image1749">
 			  <property name="visible">True</property>
 			  <property name="stock">gtk-home</property>
 			  <property name="icon_size">1</property>
@@ -415,7 +444,7 @@
 	      <property name="can_focus">True</property>
 	      <property name="relief">GTK_RELIEF_NONE</property>
 	      <property name="focus_on_click">True</property>
-	      <signal name="clicked" handler="beam_notes_selected" last_modification_time="Sun, 28 Nov 2004 23:43:16 GMT"/>
+	      <signal name="clicked" handler="beam_notes_selected" object="score_window" last_modification_time="Sun, 28 Nov 2004 23:43:16 GMT"/>
 
 	      <child>
 		<widget class="GtkImage" id="mw_beam_image_tb">
@@ -1574,6 +1603,7 @@
   <property name="skip_pager_hint">False</property>
   <property name="type_hint">GDK_WINDOW_TYPE_HINT_NORMAL</property>
   <property name="gravity">GDK_GRAVITY_NORTH_WEST</property>
+  <property name="focus_on_map">True</property>
   <signal name="set_focus" handler="score_activate_callback" after="yes" last_modification_time="Sun, 06 Feb 2005 18:46:21 GMT"/>
 
   <child>
@@ -1605,7 +1635,7 @@
 		      <accelerator key="s" modifiers="GDK_CONTROL_MASK" signal="activate"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image1698">
+			<widget class="GtkImage" id="image2355">
 			  <property name="visible">True</property>
 			  <property name="stock">gtk-save</property>
 			  <property name="icon_size">1</property>
@@ -1627,7 +1657,7 @@
 		      <accelerator key="s" modifiers="GDK_CONTROL_MASK | GDK_SHIFT_MASK" signal="activate"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image1699">
+			<widget class="GtkImage" id="image2356">
 			  <property name="visible">True</property>
 			  <property name="stock">gtk-save-as</property>
 			  <property name="icon_size">1</property>
@@ -1649,12 +1679,12 @@
 		  <child>
 		    <widget class="GtkImageMenuItem" id="sw_set_tempo_menuitem">
 		      <property name="visible">True</property>
-		      <property name="label" translatable="yes">Set tempo</property>
+		      <property name="label" translatable="yes">Set _tempo</property>
 		      <property name="use_underline">True</property>
-		      <signal name="activate" handler="gtk_widget_show" object="set_tempo" last_modification_time="Thu, 03 Jun 2004 07:46:44 GMT"/>
+		      <signal name="activate" handler="gtk_widget_show" last_modification_time="Thu, 03 Jun 2004 07:46:44 GMT"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image1700">
+			<widget class="GtkImage" id="image2357">
 			  <property name="visible">True</property>
 			  <property name="pixbuf">stock-tempo.png</property>
 			  <property name="xalign">0.5</property>
@@ -1669,35 +1699,14 @@
 		  <child>
 		    <widget class="GtkImageMenuItem" id="sw_headers_menuitem">
 		      <property name="visible">True</property>
-		      <property name="label" translatable="yes">Headers</property>
+		      <property name="label" translatable="yes">Set _headers</property>
 		      <property name="use_underline">True</property>
-		      <signal name="activate" handler="gtk_widget_show" object="set_header" last_modification_time="Fri, 29 Oct 2004 22:01:52 GMT"/>
+		      <signal name="activate" handler="gtk_widget_show" last_modification_time="Fri, 29 Oct 2004 22:01:52 GMT"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image1701">
+			<widget class="GtkImage" id="image2358">
 			  <property name="visible">True</property>
 			  <property name="stock">gtk-justify-center</property>
-			  <property name="icon_size">1</property>
-			  <property name="xalign">0.5</property>
-			  <property name="yalign">0.5</property>
-			  <property name="xpad">0</property>
-			  <property name="ypad">0</property>
-			</widget>
-		      </child>
-		    </widget>
-		  </child>
-
-		  <child>
-		    <widget class="GtkImageMenuItem" id="document_options1">
-		      <property name="visible">True</property>
-		      <property name="label" translatable="yes">Score _Options...</property>
-		      <property name="use_underline">True</property>
-		      <signal name="activate" handler="gtk_widget_show" object="document_options" last_modification_time="Mon, 12 Apr 2004 03:37:36 GMT"/>
-
-		      <child internal-child="image">
-			<widget class="GtkImage" id="image1702">
-			  <property name="visible">True</property>
-			  <property name="stock">gtk-properties</property>
 			  <property name="icon_size">1</property>
 			  <property name="xalign">0.5</property>
 			  <property name="yalign">0.5</property>
@@ -1732,7 +1741,7 @@
 		      <accelerator key="p" modifiers="GDK_CONTROL_MASK | GDK_SHIFT_MASK" signal="activate"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image1703">
+			<widget class="GtkImage" id="image2359">
 			  <property name="visible">True</property>
 			  <property name="stock">gtk-print-preview</property>
 			  <property name="icon_size">1</property>
@@ -1754,7 +1763,7 @@
 		      <accelerator key="p" modifiers="GDK_CONTROL_MASK" signal="activate"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image1704">
+			<widget class="GtkImage" id="image2360">
 			  <property name="visible">True</property>
 			  <property name="stock">gtk-print</property>
 			  <property name="icon_size">1</property>
@@ -1782,7 +1791,7 @@
 		      <accelerator key="w" modifiers="GDK_CONTROL_MASK" signal="activate"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image1705">
+			<widget class="GtkImage" id="image2361">
 			  <property name="visible">True</property>
 			  <property name="stock">gtk-close</property>
 			  <property name="icon_size">1</property>
@@ -1818,7 +1827,7 @@
 		      <accelerator key="z" modifiers="GDK_CONTROL_MASK" signal="activate"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image1706">
+			<widget class="GtkImage" id="image2362">
 			  <property name="visible">True</property>
 			  <property name="stock">gtk-undo</property>
 			  <property name="icon_size">1</property>
@@ -1840,7 +1849,7 @@
 		      <accelerator key="z" modifiers="GDK_CONTROL_MASK | GDK_SHIFT_MASK" signal="activate"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image1707">
+			<widget class="GtkImage" id="image2363">
 			  <property name="visible">True</property>
 			  <property name="stock">gtk-redo</property>
 			  <property name="icon_size">1</property>
@@ -1868,7 +1877,7 @@
 		      <accelerator key="x" modifiers="GDK_CONTROL_MASK" signal="activate"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image1708">
+			<widget class="GtkImage" id="image2364">
 			  <property name="visible">True</property>
 			  <property name="stock">gtk-cut</property>
 			  <property name="icon_size">1</property>
@@ -1890,7 +1899,7 @@
 		      <accelerator key="c" modifiers="GDK_CONTROL_MASK" signal="activate"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image1709">
+			<widget class="GtkImage" id="image2365">
 			  <property name="visible">True</property>
 			  <property name="stock">gtk-copy</property>
 			  <property name="icon_size">1</property>
@@ -1912,7 +1921,7 @@
 		      <accelerator key="v" modifiers="GDK_CONTROL_MASK" signal="activate"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image1710">
+			<widget class="GtkImage" id="image2366">
 			  <property name="visible">True</property>
 			  <property name="stock">gtk-paste</property>
 			  <property name="icon_size">1</property>
@@ -1934,7 +1943,7 @@
 		      <accelerator key="Delete" modifiers="0" signal="activate"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image1711">
+			<widget class="GtkImage" id="image2367">
 			  <property name="visible">True</property>
 			  <property name="stock">gtk-delete</property>
 			  <property name="icon_size">1</property>
@@ -1962,7 +1971,7 @@
 		      <accelerator key="j" modifiers="GDK_CONTROL_MASK" signal="activate"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image1712">
+			<widget class="GtkImage" id="image2368">
 			  <property name="visible">True</property>
 			  <property name="stock">gtk-jump-to</property>
 			  <property name="icon_size">1</property>
@@ -1974,29 +1983,301 @@
 		      </child>
 		    </widget>
 		  </child>
+		</widget>
+	      </child>
+	    </widget>
+	  </child>
+
+	  <child>
+	    <widget class="GtkMenuItem" id="selection1">
+	      <property name="visible">True</property>
+	      <property name="label" translatable="yes">Selection</property>
+	      <property name="use_underline">True</property>
+
+	      <child>
+		<widget class="GtkMenu" id="selection1_menu">
 
 		  <child>
-		    <widget class="GtkSeparatorMenuItem" id="separator11">
+		    <widget class="GtkImageMenuItem" id="undo1">
 		      <property name="visible">True</property>
-		    </widget>
-		  </child>
-
-		  <child>
-		    <widget class="GtkImageMenuItem" id="preferences">
-		      <property name="visible">True</property>
-		      <property name="label" translatable="yes">Pr_eferences</property>
+		      <property name="label" translatable="yes">Undo</property>
 		      <property name="use_underline">True</property>
-		      <signal name="activate" handler="on_preferences_activate" last_modification_time="Mon, 03 Jan 2005 00:04:47 GMT"/>
+		      <signal name="activate" handler="on_undo1_activate" last_modification_time="Sat, 19 Feb 2005 16:47:06 GMT"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image1713">
+			<widget class="GtkImage" id="image2369">
 			  <property name="visible">True</property>
-			  <property name="stock">gtk-preferences</property>
+			  <property name="stock">gtk-undo</property>
 			  <property name="icon_size">1</property>
 			  <property name="xalign">0.5</property>
 			  <property name="yalign">0.5</property>
 			  <property name="xpad">0</property>
 			  <property name="ypad">0</property>
+			</widget>
+		      </child>
+		    </widget>
+		  </child>
+
+		  <child>
+		    <widget class="GtkSeparatorMenuItem" id="separator17">
+		      <property name="visible">True</property>
+		    </widget>
+		  </child>
+
+		  <child>
+		    <widget class="GtkImageMenuItem" id="beam">
+		      <property name="visible">True</property>
+		      <property name="label" translatable="yes">Beam</property>
+		      <property name="use_underline">True</property>
+		      <signal name="activate" handler="on_beam_activate" last_modification_time="Sat, 19 Feb 2005 16:47:06 GMT"/>
+
+		      <child internal-child="image">
+			<widget class="GtkImage" id="image2370">
+			  <property name="visible">True</property>
+			  <property name="pixbuf">tb_beam.xpm</property>
+			  <property name="xalign">0.5</property>
+			  <property name="yalign">0.5</property>
+			  <property name="xpad">0</property>
+			  <property name="ypad">0</property>
+			</widget>
+		      </child>
+		    </widget>
+		  </child>
+
+		  <child>
+		    <widget class="GtkImageMenuItem" id="tie/slur">
+		      <property name="visible">True</property>
+		      <property name="label" translatable="yes">Tie/Slur</property>
+		      <property name="use_underline">True</property>
+		      <signal name="activate" handler="on_tie/slur_activate" last_modification_time="Sat, 19 Feb 2005 16:47:06 GMT"/>
+
+		      <child internal-child="image">
+			<widget class="GtkImage" id="image2371">
+			  <property name="visible">True</property>
+			  <property name="pixbuf">tb_tie.xpm</property>
+			  <property name="xalign">0.5</property>
+			  <property name="yalign">0.5</property>
+			  <property name="xpad">0</property>
+			  <property name="ypad">0</property>
+			</widget>
+		      </child>
+		    </widget>
+		  </child>
+
+		  <child>
+		    <widget class="GtkImageMenuItem" id="stem_up">
+		      <property name="visible">True</property>
+		      <property name="label" translatable="yes">Stem up</property>
+		      <property name="use_underline">True</property>
+		      <signal name="activate" handler="on_stem_up_activate" last_modification_time="Sat, 19 Feb 2005 16:47:06 GMT"/>
+
+		      <child internal-child="image">
+			<widget class="GtkImage" id="image2372">
+			  <property name="visible">True</property>
+			  <property name="pixbuf">tb_stemup.xpm</property>
+			  <property name="xalign">0.5</property>
+			  <property name="yalign">0.5</property>
+			  <property name="xpad">0</property>
+			  <property name="ypad">0</property>
+			</widget>
+		      </child>
+		    </widget>
+		  </child>
+
+		  <child>
+		    <widget class="GtkImageMenuItem" id="stem_down">
+		      <property name="visible">True</property>
+		      <property name="label" translatable="yes">Stem down</property>
+		      <property name="use_underline">True</property>
+		      <signal name="activate" handler="on_stem_down_activate" last_modification_time="Sat, 19 Feb 2005 16:47:06 GMT"/>
+
+		      <child internal-child="image">
+			<widget class="GtkImage" id="image2373">
+			  <property name="visible">True</property>
+			  <property name="pixbuf">tb_stemdown.xpm</property>
+			  <property name="xalign">0.5</property>
+			  <property name="yalign">0.5</property>
+			  <property name="xpad">0</property>
+			  <property name="ypad">0</property>
+			</widget>
+		      </child>
+		    </widget>
+		  </child>
+
+		  <child>
+		    <widget class="GtkImageMenuItem" id="add_duration">
+		      <property name="visible">True</property>
+		      <property name="label" translatable="yes">Add duration</property>
+		      <property name="use_underline">True</property>
+		      <signal name="activate" handler="on_add_duration_activate" last_modification_time="Sat, 19 Feb 2005 16:49:14 GMT"/>
+
+		      <child internal-child="image">
+			<widget class="GtkImage" id="image2374">
+			  <property name="visible">True</property>
+			  <property name="pixbuf">tb_augmentationdot.xpm</property>
+			  <property name="xalign">0.5</property>
+			  <property name="yalign">0.5</property>
+			  <property name="xpad">0</property>
+			  <property name="ypad">0</property>
+			</widget>
+		      </child>
+		    </widget>
+		  </child>
+
+		  <child>
+		    <widget class="GtkSeparatorMenuItem" id="separator18">
+		      <property name="visible">True</property>
+		    </widget>
+		  </child>
+
+		  <child>
+		    <widget class="GtkMenuItem" id="articulation1">
+		      <property name="visible">True</property>
+		      <property name="label" translatable="yes">Articulation</property>
+		      <property name="use_underline">True</property>
+
+		      <child>
+			<widget class="GtkMenu" id="articulation1_menu">
+
+			  <child>
+			    <widget class="GtkImageMenuItem" id="no_articulation">
+			      <property name="visible">True</property>
+			      <property name="label" translatable="yes">No articulation</property>
+			      <property name="use_underline">True</property>
+			      <signal name="activate" handler="on_no_articulation_activate" last_modification_time="Sat, 19 Feb 2005 16:47:06 GMT"/>
+
+			      <child internal-child="image">
+				<widget class="GtkImage" id="image2375">
+				  <property name="visible">True</property>
+				  <property name="pixbuf">tb_quarter.xpm</property>
+				  <property name="xalign">0.5</property>
+				  <property name="yalign">0.5</property>
+				  <property name="xpad">0</property>
+				  <property name="ypad">0</property>
+				</widget>
+			      </child>
+			    </widget>
+			  </child>
+
+			  <child>
+			    <widget class="GtkImageMenuItem" id="staccato">
+			      <property name="visible">True</property>
+			      <property name="label" translatable="yes">Staccato</property>
+			      <property name="use_underline">True</property>
+			      <signal name="activate" handler="on_staccato_activate" last_modification_time="Sat, 19 Feb 2005 16:47:06 GMT"/>
+
+			      <child internal-child="image">
+				<widget class="GtkImage" id="image2376">
+				  <property name="visible">True</property>
+				  <property name="pixbuf">tb_staccato.xpm</property>
+				  <property name="xalign">0.5</property>
+				  <property name="yalign">0.5</property>
+				  <property name="xpad">0</property>
+				  <property name="ypad">0</property>
+				</widget>
+			      </child>
+			    </widget>
+			  </child>
+
+			  <child>
+			    <widget class="GtkImageMenuItem" id="staccatissimo">
+			      <property name="visible">True</property>
+			      <property name="label" translatable="yes">Staccatissimo</property>
+			      <property name="use_underline">True</property>
+			      <signal name="activate" handler="on_staccatissimo_activate" last_modification_time="Sat, 19 Feb 2005 16:47:06 GMT"/>
+
+			      <child internal-child="image">
+				<widget class="GtkImage" id="image2377">
+				  <property name="visible">True</property>
+				  <property name="pixbuf">tb_staccatissimo.xpm</property>
+				  <property name="xalign">0.5</property>
+				  <property name="yalign">0.5</property>
+				  <property name="xpad">0</property>
+				  <property name="ypad">0</property>
+				</widget>
+			      </child>
+			    </widget>
+			  </child>
+
+			  <child>
+			    <widget class="GtkImageMenuItem" id="tenuto">
+			      <property name="visible">True</property>
+			      <property name="label" translatable="yes">Tenuto</property>
+			      <property name="use_underline">True</property>
+			      <signal name="activate" handler="on_tenuto_activate" last_modification_time="Sat, 19 Feb 2005 16:47:06 GMT"/>
+
+			      <child internal-child="image">
+				<widget class="GtkImage" id="image2378">
+				  <property name="visible">True</property>
+				  <property name="pixbuf">tb_tenuto.xpm</property>
+				  <property name="xalign">0.5</property>
+				  <property name="yalign">0.5</property>
+				  <property name="xpad">0</property>
+				  <property name="ypad">0</property>
+				</widget>
+			      </child>
+			    </widget>
+			  </child>
+
+			  <child>
+			    <widget class="GtkImageMenuItem" id="accent">
+			      <property name="visible">True</property>
+			      <property name="label" translatable="yes">Accent</property>
+			      <property name="use_underline">True</property>
+			      <signal name="activate" handler="on_accent_activate" last_modification_time="Sat, 19 Feb 2005 16:47:06 GMT"/>
+
+			      <child internal-child="image">
+				<widget class="GtkImage" id="image2379">
+				  <property name="visible">True</property>
+				  <property name="pixbuf">tb_accent.xpm</property>
+				  <property name="xalign">0.5</property>
+				  <property name="yalign">0.5</property>
+				  <property name="xpad">0</property>
+				  <property name="ypad">0</property>
+				</widget>
+			      </child>
+			    </widget>
+			  </child>
+
+			  <child>
+			    <widget class="GtkImageMenuItem" id="marcato_up">
+			      <property name="visible">True</property>
+			      <property name="label" translatable="yes">Marcato up</property>
+			      <property name="use_underline">True</property>
+			      <signal name="activate" handler="on_marcato_up_activate" last_modification_time="Sat, 19 Feb 2005 16:47:06 GMT"/>
+
+			      <child internal-child="image">
+				<widget class="GtkImage" id="image2380">
+				  <property name="visible">True</property>
+				  <property name="pixbuf">tb_marcato.xpm</property>
+				  <property name="xalign">0.5</property>
+				  <property name="yalign">0.5</property>
+				  <property name="xpad">0</property>
+				  <property name="ypad">0</property>
+				</widget>
+			      </child>
+			    </widget>
+			  </child>
+
+			  <child>
+			    <widget class="GtkImageMenuItem" id="marcato_down">
+			      <property name="visible">True</property>
+			      <property name="label" translatable="yes">Marcato down</property>
+			      <property name="use_underline">True</property>
+			      <signal name="activate" handler="on_marcato_down_activate" last_modification_time="Sat, 19 Feb 2005 16:47:06 GMT"/>
+
+			      <child internal-child="image">
+				<widget class="GtkImage" id="image2381">
+				  <property name="visible">True</property>
+				  <property name="pixbuf">tb_marcato2.xpm</property>
+				  <property name="xalign">0.5</property>
+				  <property name="yalign">0.5</property>
+				  <property name="xpad">0</property>
+				  <property name="ypad">0</property>
+				</widget>
+			      </child>
+			    </widget>
+			  </child>
 			</widget>
 		      </child>
 		    </widget>
@@ -2129,7 +2410,7 @@
 		      <signal name="activate" handler="gtk_widget_show" last_modification_time="Fri, 09 Apr 2004 07:46:40 GMT"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image1714">
+			<widget class="GtkImage" id="image2382">
 			  <property name="visible">True</property>
 			  <property name="stock">gtk-add</property>
 			  <property name="icon_size">1</property>
@@ -2149,14 +2430,29 @@
 		  </child>
 
 		  <child>
+		    <widget class="GtkMenuItem" id="set_instrument">
+		      <property name="visible">True</property>
+		      <property name="label" translatable="yes">Set _instrument</property>
+		      <property name="use_underline">True</property>
+		      <signal name="activate" handler="on_set_instrument_activate" last_modification_time="Sat, 19 Feb 2005 16:34:56 GMT"/>
+		    </widget>
+		  </child>
+
+		  <child>
+		    <widget class="GtkSeparatorMenuItem" id="separator14">
+		      <property name="visible">True</property>
+		    </widget>
+		  </child>
+
+		  <child>
 		    <widget class="GtkImageMenuItem" id="sw_set_key_menuitem">
 		      <property name="visible">True</property>
-		      <property name="label" translatable="yes">Set key</property>
+		      <property name="label" translatable="yes">Set/Change key</property>
 		      <property name="use_underline">True</property>
-		      <signal name="activate" handler="gtk_widget_show" object="set_key_signature" last_modification_time="Fri, 09 Apr 2004 07:49:42 GMT"/>
+		      <signal name="activate" handler="gtk_widget_show" last_modification_time="Fri, 09 Apr 2004 07:49:42 GMT"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image1715">
+			<widget class="GtkImage" id="image2383">
 			  <property name="visible">True</property>
 			  <property name="pixbuf">stock-key.png</property>
 			  <property name="xalign">0.5</property>
@@ -2177,7 +2473,7 @@
 		      <signal name="activate" handler="gtk_widget_show" last_modification_time="Fri, 09 Apr 2004 07:49:42 GMT"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image1716">
+			<widget class="GtkImage" id="image2384">
 			  <property name="visible">True</property>
 			  <property name="pixbuf">stock-key_signature.png</property>
 			  <property name="xalign">0.5</property>
@@ -2198,7 +2494,7 @@
 		      <signal name="activate" handler="gtk_widget_show" last_modification_time="Tue, 29 Jun 2004 01:09:21 GMT"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image1717">
+			<widget class="GtkImage" id="image2385">
 			  <property name="visible">True</property>
 			  <property name="pixbuf">stock-time_signature.png</property>
 			  <property name="xalign">0.5</property>
@@ -2228,7 +2524,7 @@
 			  <child>
 			    <widget class="GtkMenuItem" id="sw_chord_composer_menuitem">
 			      <property name="visible">True</property>
-			      <property name="label" translatable="yes">Chord composer</property>
+			      <property name="label" translatable="yes">Chord builder</property>
 			      <property name="use_underline">True</property>
 			      <signal name="activate" handler="on_chord_composer_activate" last_modification_time="Thu, 15 Jan 2004 04:04:46 GMT"/>
 			    </widget>
@@ -2268,7 +2564,7 @@
 		      <signal name="activate" handler="gtk_widget_show" last_modification_time="Mon, 06 Sep 2004 15:07:48 GMT"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image1718">
+			<widget class="GtkImage" id="image2386">
 			  <property name="visible">True</property>
 			  <property name="stock">gtk-select-font</property>
 			  <property name="icon_size">1</property>
@@ -2295,7 +2591,7 @@
 		      <signal name="activate" handler="on_key_change_activate" last_modification_time="Mon, 28 Jun 2004 22:32:08 GMT"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image1719">
+			<widget class="GtkImage" id="image2387">
 			  <property name="visible">True</property>
 			  <property name="pixbuf">stock-key_change.png</property>
 			  <property name="xalign">0.5</property>
@@ -2315,7 +2611,7 @@
 		      <signal name="activate" handler="on_signature_change_activate" last_modification_time="Mon, 28 Jun 2004 22:32:08 GMT"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image1720">
+			<widget class="GtkImage" id="image2388">
 			  <property name="visible">True</property>
 			  <property name="pixbuf">stock-key_signature_change.png</property>
 			  <property name="xalign">0.5</property>
@@ -2335,13 +2631,592 @@
 		      <signal name="activate" handler="on_time_change_activate" last_modification_time="Mon, 28 Jun 2004 22:32:08 GMT"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image1721">
+			<widget class="GtkImage" id="image2389">
 			  <property name="visible">True</property>
 			  <property name="pixbuf">stock-time_signature_change.png</property>
 			  <property name="xalign">0.5</property>
 			  <property name="yalign">0.5</property>
 			  <property name="xpad">0</property>
 			  <property name="ypad">0</property>
+			</widget>
+		      </child>
+		    </widget>
+		  </child>
+
+		  <child>
+		    <widget class="GtkSeparatorMenuItem" id="separator15">
+		      <property name="visible">True</property>
+		    </widget>
+		  </child>
+
+		  <child>
+		    <widget class="GtkMenuItem" id="note1">
+		      <property name="visible">True</property>
+		      <property name="label" translatable="yes">Note</property>
+		      <property name="use_underline">True</property>
+
+		      <child>
+			<widget class="GtkMenu" id="note1_menu">
+
+			  <child>
+			    <widget class="GtkImageMenuItem" id="doublewhole">
+			      <property name="visible">True</property>
+			      <property name="label" translatable="yes">Doublewhole</property>
+			      <property name="use_underline">True</property>
+			      <signal name="activate" handler="on_doublewhole_activate" last_modification_time="Sat, 19 Feb 2005 16:37:37 GMT"/>
+
+			      <child internal-child="image">
+				<widget class="GtkImage" id="image2390">
+				  <property name="visible">True</property>
+				  <property name="pixbuf">tb_doublewhole.xpm</property>
+				  <property name="xalign">0.5</property>
+				  <property name="yalign">0.5</property>
+				  <property name="xpad">0</property>
+				  <property name="ypad">0</property>
+				</widget>
+			      </child>
+			    </widget>
+			  </child>
+
+			  <child>
+			    <widget class="GtkImageMenuItem" id="whole">
+			      <property name="visible">True</property>
+			      <property name="label" translatable="yes">Whole</property>
+			      <property name="use_underline">True</property>
+			      <signal name="activate" handler="on_whole_activate" last_modification_time="Sat, 19 Feb 2005 16:40:37 GMT"/>
+
+			      <child internal-child="image">
+				<widget class="GtkImage" id="image2391">
+				  <property name="visible">True</property>
+				  <property name="pixbuf">tb_whole.xpm</property>
+				  <property name="xalign">0.5</property>
+				  <property name="yalign">0.5</property>
+				  <property name="xpad">0</property>
+				  <property name="ypad">0</property>
+				</widget>
+			      </child>
+			    </widget>
+			  </child>
+
+			  <child>
+			    <widget class="GtkImageMenuItem" id="half">
+			      <property name="visible">True</property>
+			      <property name="label" translatable="yes">Half</property>
+			      <property name="use_underline">True</property>
+			      <signal name="activate" handler="on_half_activate" last_modification_time="Sat, 19 Feb 2005 16:40:37 GMT"/>
+
+			      <child internal-child="image">
+				<widget class="GtkImage" id="image2392">
+				  <property name="visible">True</property>
+				  <property name="pixbuf">tb_half.xpm</property>
+				  <property name="xalign">0.5</property>
+				  <property name="yalign">0.5</property>
+				  <property name="xpad">0</property>
+				  <property name="ypad">0</property>
+				</widget>
+			      </child>
+			    </widget>
+			  </child>
+
+			  <child>
+			    <widget class="GtkImageMenuItem" id="quarter">
+			      <property name="visible">True</property>
+			      <property name="label" translatable="yes">Quarter</property>
+			      <property name="use_underline">True</property>
+			      <signal name="activate" handler="on_quarter_activate" last_modification_time="Sat, 19 Feb 2005 16:40:37 GMT"/>
+
+			      <child internal-child="image">
+				<widget class="GtkImage" id="image2393">
+				  <property name="visible">True</property>
+				  <property name="pixbuf">tb_quarter.xpm</property>
+				  <property name="xalign">0.5</property>
+				  <property name="yalign">0.5</property>
+				  <property name="xpad">0</property>
+				  <property name="ypad">0</property>
+				</widget>
+			      </child>
+			    </widget>
+			  </child>
+
+			  <child>
+			    <widget class="GtkImageMenuItem" id="eighth">
+			      <property name="visible">True</property>
+			      <property name="label" translatable="yes">Eighth</property>
+			      <property name="use_underline">True</property>
+			      <signal name="activate" handler="on_eighth_activate" last_modification_time="Sat, 19 Feb 2005 16:40:37 GMT"/>
+
+			      <child internal-child="image">
+				<widget class="GtkImage" id="image2394">
+				  <property name="visible">True</property>
+				  <property name="pixbuf">tb_eighth.xpm</property>
+				  <property name="xalign">0.5</property>
+				  <property name="yalign">0.5</property>
+				  <property name="xpad">0</property>
+				  <property name="ypad">0</property>
+				</widget>
+			      </child>
+			    </widget>
+			  </child>
+
+			  <child>
+			    <widget class="GtkImageMenuItem" id="sixteenth">
+			      <property name="visible">True</property>
+			      <property name="label" translatable="yes">Sixteenth</property>
+			      <property name="use_underline">True</property>
+			      <signal name="activate" handler="on_sixteenth_activate" last_modification_time="Sat, 19 Feb 2005 16:40:37 GMT"/>
+
+			      <child internal-child="image">
+				<widget class="GtkImage" id="image2395">
+				  <property name="visible">True</property>
+				  <property name="pixbuf">tb_sixteenth.xpm</property>
+				  <property name="xalign">0.5</property>
+				  <property name="yalign">0.5</property>
+				  <property name="xpad">0</property>
+				  <property name="ypad">0</property>
+				</widget>
+			      </child>
+			    </widget>
+			  </child>
+
+			  <child>
+			    <widget class="GtkImageMenuItem" id="thirtysecond">
+			      <property name="visible">True</property>
+			      <property name="label" translatable="yes">Thirtysecond</property>
+			      <property name="use_underline">True</property>
+			      <signal name="activate" handler="on_thirtysecond_activate" last_modification_time="Sat, 19 Feb 2005 16:40:37 GMT"/>
+
+			      <child internal-child="image">
+				<widget class="GtkImage" id="image2396">
+				  <property name="visible">True</property>
+				  <property name="pixbuf">tb_thirtysecond.xpm</property>
+				  <property name="xalign">0.5</property>
+				  <property name="yalign">0.5</property>
+				  <property name="xpad">0</property>
+				  <property name="ypad">0</property>
+				</widget>
+			      </child>
+			    </widget>
+			  </child>
+
+			  <child>
+			    <widget class="GtkImageMenuItem" id="sixtyfourth">
+			      <property name="visible">True</property>
+			      <property name="label" translatable="yes">Sixtyfourth</property>
+			      <property name="use_underline">True</property>
+			      <signal name="activate" handler="on_sixtyfourth_activate" last_modification_time="Sat, 19 Feb 2005 16:40:37 GMT"/>
+
+			      <child internal-child="image">
+				<widget class="GtkImage" id="image2397">
+				  <property name="visible">True</property>
+				  <property name="pixbuf">tb_sixtyfourth.xpm</property>
+				  <property name="xalign">0.5</property>
+				  <property name="yalign">0.5</property>
+				  <property name="xpad">0</property>
+				  <property name="ypad">0</property>
+				</widget>
+			      </child>
+			    </widget>
+			  </child>
+			</widget>
+		      </child>
+		    </widget>
+		  </child>
+
+		  <child>
+		    <widget class="GtkMenuItem" id="rest">
+		      <property name="visible">True</property>
+		      <property name="label" translatable="yes">Rest</property>
+		      <property name="use_underline">True</property>
+
+		      <child>
+			<widget class="GtkMenu" id="rest_menu">
+
+			  <child>
+			    <widget class="GtkImageMenuItem" id="doublewhole_rest">
+			      <property name="visible">True</property>
+			      <property name="label" translatable="yes">Doublewhole rest</property>
+			      <property name="use_underline">True</property>
+			      <signal name="activate" handler="on_doublewhole_rest_activate" last_modification_time="Sat, 19 Feb 2005 16:40:37 GMT"/>
+
+			      <child internal-child="image">
+				<widget class="GtkImage" id="image2398">
+				  <property name="visible">True</property>
+				  <property name="pixbuf">tb_doublewholerest.xpm</property>
+				  <property name="xalign">0.5</property>
+				  <property name="yalign">0.5</property>
+				  <property name="xpad">0</property>
+				  <property name="ypad">0</property>
+				</widget>
+			      </child>
+			    </widget>
+			  </child>
+
+			  <child>
+			    <widget class="GtkImageMenuItem" id="whole_rest">
+			      <property name="visible">True</property>
+			      <property name="label" translatable="yes">Whole rest</property>
+			      <property name="use_underline">True</property>
+			      <signal name="activate" handler="on_whole_rest_activate" last_modification_time="Sat, 19 Feb 2005 16:40:37 GMT"/>
+
+			      <child internal-child="image">
+				<widget class="GtkImage" id="image2399">
+				  <property name="visible">True</property>
+				  <property name="pixbuf">tb_wholerest.xpm</property>
+				  <property name="xalign">0.5</property>
+				  <property name="yalign">0.5</property>
+				  <property name="xpad">0</property>
+				  <property name="ypad">0</property>
+				</widget>
+			      </child>
+			    </widget>
+			  </child>
+
+			  <child>
+			    <widget class="GtkImageMenuItem" id="half_rest">
+			      <property name="visible">True</property>
+			      <property name="label" translatable="yes">Half rest</property>
+			      <property name="use_underline">True</property>
+			      <signal name="activate" handler="on_half_rest_activate" last_modification_time="Sat, 19 Feb 2005 16:40:37 GMT"/>
+
+			      <child internal-child="image">
+				<widget class="GtkImage" id="image2400">
+				  <property name="visible">True</property>
+				  <property name="pixbuf">tb_halfrest.xpm</property>
+				  <property name="xalign">0.5</property>
+				  <property name="yalign">0.5</property>
+				  <property name="xpad">0</property>
+				  <property name="ypad">0</property>
+				</widget>
+			      </child>
+			    </widget>
+			  </child>
+
+			  <child>
+			    <widget class="GtkImageMenuItem" id="quarter_rest">
+			      <property name="visible">True</property>
+			      <property name="label" translatable="yes">Quarter rest</property>
+			      <property name="use_underline">True</property>
+			      <signal name="activate" handler="on_quarter_rest_activate" last_modification_time="Sat, 19 Feb 2005 16:40:37 GMT"/>
+
+			      <child internal-child="image">
+				<widget class="GtkImage" id="image2401">
+				  <property name="visible">True</property>
+				  <property name="pixbuf">tb_quarterrest.xpm</property>
+				  <property name="xalign">0.5</property>
+				  <property name="yalign">0.5</property>
+				  <property name="xpad">0</property>
+				  <property name="ypad">0</property>
+				</widget>
+			      </child>
+			    </widget>
+			  </child>
+
+			  <child>
+			    <widget class="GtkImageMenuItem" id="eighth_rest">
+			      <property name="visible">True</property>
+			      <property name="label" translatable="yes">Eighth rest</property>
+			      <property name="use_underline">True</property>
+			      <signal name="activate" handler="on_eighth_rest_activate" last_modification_time="Sat, 19 Feb 2005 16:40:37 GMT"/>
+
+			      <child internal-child="image">
+				<widget class="GtkImage" id="image2402">
+				  <property name="visible">True</property>
+				  <property name="pixbuf">tb_eighthrest.xpm</property>
+				  <property name="xalign">0.5</property>
+				  <property name="yalign">0.5</property>
+				  <property name="xpad">0</property>
+				  <property name="ypad">0</property>
+				</widget>
+			      </child>
+			    </widget>
+			  </child>
+
+			  <child>
+			    <widget class="GtkImageMenuItem" id="sixteenth_rest">
+			      <property name="visible">True</property>
+			      <property name="label" translatable="yes">Sixteenth rest</property>
+			      <property name="use_underline">True</property>
+			      <signal name="activate" handler="on_sixteenth_rest_activate" last_modification_time="Sat, 19 Feb 2005 16:40:37 GMT"/>
+
+			      <child internal-child="image">
+				<widget class="GtkImage" id="image2403">
+				  <property name="visible">True</property>
+				  <property name="pixbuf">tb_sixteenthrest.xpm</property>
+				  <property name="xalign">0.5</property>
+				  <property name="yalign">0.5</property>
+				  <property name="xpad">0</property>
+				  <property name="ypad">0</property>
+				</widget>
+			      </child>
+			    </widget>
+			  </child>
+
+			  <child>
+			    <widget class="GtkImageMenuItem" id="thirtysecond_rest">
+			      <property name="visible">True</property>
+			      <property name="label" translatable="yes">Thirtysecond rest</property>
+			      <property name="use_underline">True</property>
+			      <signal name="activate" handler="on_thirtysecond_rest_activate" last_modification_time="Sat, 19 Feb 2005 16:40:37 GMT"/>
+
+			      <child internal-child="image">
+				<widget class="GtkImage" id="image2404">
+				  <property name="visible">True</property>
+				  <property name="pixbuf">tb_thirtysecondrest.xpm</property>
+				  <property name="xalign">0.5</property>
+				  <property name="yalign">0.5</property>
+				  <property name="xpad">0</property>
+				  <property name="ypad">0</property>
+				</widget>
+			      </child>
+			    </widget>
+			  </child>
+
+			  <child>
+			    <widget class="GtkImageMenuItem" id="sixtyfourth_rest">
+			      <property name="visible">True</property>
+			      <property name="label" translatable="yes">Sixtyfourth rest</property>
+			      <property name="use_underline">True</property>
+			      <signal name="activate" handler="on_sixtyfourth_rest_activate" last_modification_time="Sat, 19 Feb 2005 16:40:37 GMT"/>
+
+			      <child internal-child="image">
+				<widget class="GtkImage" id="image2405">
+				  <property name="visible">True</property>
+				  <property name="pixbuf">tb_sixtyfourthrest.xpm</property>
+				  <property name="xalign">0.5</property>
+				  <property name="yalign">0.5</property>
+				  <property name="xpad">0</property>
+				  <property name="ypad">0</property>
+				</widget>
+			      </child>
+			    </widget>
+			  </child>
+			</widget>
+		      </child>
+		    </widget>
+		  </child>
+
+		  <child>
+		    <widget class="GtkMenuItem" id="barline">
+		      <property name="visible">True</property>
+		      <property name="label" translatable="yes">Barline</property>
+		      <property name="use_underline">True</property>
+		      <signal name="activate" handler="on_barline_activate" last_modification_time="Sat, 19 Feb 2005 16:53:28 GMT"/>
+
+		      <child>
+			<widget class="GtkMenu" id="barline_menu">
+
+			  <child>
+			    <widget class="GtkImageMenuItem" id="single">
+			      <property name="visible">True</property>
+			      <property name="label" translatable="yes">Single</property>
+			      <property name="use_underline">True</property>
+			      <signal name="activate" handler="on_single_activate" last_modification_time="Sat, 19 Feb 2005 16:53:28 GMT"/>
+
+			      <child internal-child="image">
+				<widget class="GtkImage" id="image2406">
+				  <property name="visible">True</property>
+				  <property name="pixbuf">tb_barline_single.xpm</property>
+				  <property name="xalign">0.5</property>
+				  <property name="yalign">0.5</property>
+				  <property name="xpad">0</property>
+				  <property name="ypad">0</property>
+				</widget>
+			      </child>
+			    </widget>
+			  </child>
+
+			  <child>
+			    <widget class="GtkImageMenuItem" id="double">
+			      <property name="visible">True</property>
+			      <property name="label" translatable="yes">Double</property>
+			      <property name="use_underline">True</property>
+			      <signal name="activate" handler="on_double_activate" last_modification_time="Sat, 19 Feb 2005 16:53:28 GMT"/>
+
+			      <child internal-child="image">
+				<widget class="GtkImage" id="image2407">
+				  <property name="visible">True</property>
+				  <property name="pixbuf">tb_barline_double.xpm</property>
+				  <property name="xalign">0.5</property>
+				  <property name="yalign">0.5</property>
+				  <property name="xpad">0</property>
+				  <property name="ypad">0</property>
+				</widget>
+			      </child>
+			    </widget>
+			  </child>
+
+			  <child>
+			    <widget class="GtkImageMenuItem" id="open_repeat">
+			      <property name="visible">True</property>
+			      <property name="label" translatable="yes">Open repeat</property>
+			      <property name="use_underline">True</property>
+			      <signal name="activate" handler="on_open_repeat_activate" last_modification_time="Sat, 19 Feb 2005 16:53:28 GMT"/>
+
+			      <child internal-child="image">
+				<widget class="GtkImage" id="image2408">
+				  <property name="visible">True</property>
+				  <property name="pixbuf">tb_barline_openrepeat.xpm</property>
+				  <property name="xalign">0.5</property>
+				  <property name="yalign">0.5</property>
+				  <property name="xpad">0</property>
+				  <property name="ypad">0</property>
+				</widget>
+			      </child>
+			    </widget>
+			  </child>
+
+			  <child>
+			    <widget class="GtkImageMenuItem" id="close_repeat">
+			      <property name="visible">True</property>
+			      <property name="label" translatable="yes">Close repeat</property>
+			      <property name="use_underline">True</property>
+			      <signal name="activate" handler="on_close_repeat_activate" last_modification_time="Sat, 19 Feb 2005 16:53:28 GMT"/>
+
+			      <child internal-child="image">
+				<widget class="GtkImage" id="image2409">
+				  <property name="visible">True</property>
+				  <property name="pixbuf">tb_barline_closerepeat.xpm</property>
+				  <property name="xalign">0.5</property>
+				  <property name="yalign">0.5</property>
+				  <property name="xpad">0</property>
+				  <property name="ypad">0</property>
+				</widget>
+			      </child>
+			    </widget>
+			  </child>
+
+			  <child>
+			    <widget class="GtkImageMenuItem" id="open/close_repeat">
+			      <property name="visible">True</property>
+			      <property name="label" translatable="yes">Open/Close repeat</property>
+			      <property name="use_underline">True</property>
+			      <signal name="activate" handler="on_open/close_repeat_activate" last_modification_time="Sat, 19 Feb 2005 16:53:28 GMT"/>
+
+			      <child internal-child="image">
+				<widget class="GtkImage" id="image2410">
+				  <property name="visible">True</property>
+				  <property name="pixbuf">tb_barline_opencloserepeat.xpm</property>
+				  <property name="xalign">0.5</property>
+				  <property name="yalign">0.5</property>
+				  <property name="xpad">0</property>
+				  <property name="ypad">0</property>
+				</widget>
+			      </child>
+			    </widget>
+			  </child>
+
+			  <child>
+			    <widget class="GtkMenuItem" id="open">
+			      <property name="visible">True</property>
+			      <property name="label" translatable="yes">Open</property>
+			      <property name="use_underline">True</property>
+			      <signal name="activate" handler="on_open_activate" last_modification_time="Sat, 19 Feb 2005 16:53:28 GMT"/>
+			    </widget>
+			  </child>
+
+			  <child>
+			    <widget class="GtkMenuItem" id="close">
+			      <property name="visible">True</property>
+			      <property name="label" translatable="yes">Close</property>
+			      <property name="use_underline">True</property>
+			      <signal name="activate" handler="on_close_activate" last_modification_time="Sat, 19 Feb 2005 16:53:28 GMT"/>
+			    </widget>
+			  </child>
+			</widget>
+		      </child>
+		    </widget>
+		  </child>
+
+		  <child>
+		    <widget class="GtkMenuItem" id="dynamic">
+		      <property name="visible">True</property>
+		      <property name="label" translatable="yes">Dynamic</property>
+		      <property name="use_underline">True</property>
+		      <signal name="activate" handler="on_dynamic_activate" last_modification_time="Sat, 19 Feb 2005 17:33:37 GMT"/>
+
+		      <child>
+			<widget class="GtkMenu" id="dynamic_menu">
+
+			  <child>
+			    <widget class="GtkMenuItem" id="pianissississimo">
+			      <property name="visible">True</property>
+			      <property name="label" translatable="yes">Pianissississimo</property>
+			      <property name="use_underline">True</property>
+			      <signal name="activate" handler="on_pianissississimo_activate" last_modification_time="Sat, 19 Feb 2005 17:33:37 GMT"/>
+			    </widget>
+			  </child>
+
+			  <child>
+			    <widget class="GtkMenuItem" id="pianississimo">
+			      <property name="visible">True</property>
+			      <property name="label" translatable="yes">Pianississimo</property>
+			      <property name="use_underline">True</property>
+			      <signal name="activate" handler="on_pianississimo_activate" last_modification_time="Sat, 19 Feb 2005 17:33:37 GMT"/>
+			    </widget>
+			  </child>
+
+			  <child>
+			    <widget class="GtkMenuItem" id="pianissimo">
+			      <property name="visible">True</property>
+			      <property name="label" translatable="yes">Pianissimo</property>
+			      <property name="use_underline">True</property>
+			      <signal name="activate" handler="on_pianissimo_activate" last_modification_time="Sat, 19 Feb 2005 17:33:37 GMT"/>
+			    </widget>
+			  </child>
+
+			  <child>
+			    <widget class="GtkMenuItem" id="piano">
+			      <property name="visible">True</property>
+			      <property name="label" translatable="yes">Piano</property>
+			      <property name="use_underline">True</property>
+			      <signal name="activate" handler="on_piano_activate" last_modification_time="Sat, 19 Feb 2005 17:33:37 GMT"/>
+			    </widget>
+			  </child>
+
+			  <child>
+			    <widget class="GtkMenuItem" id="mezzo-piano">
+			      <property name="visible">True</property>
+			      <property name="label" translatable="yes">Mezzo-piano</property>
+			      <property name="use_underline">True</property>
+			      <signal name="activate" handler="on_mezzo-piano_activate" last_modification_time="Sat, 19 Feb 2005 17:33:37 GMT"/>
+			    </widget>
+			  </child>
+
+			  <child>
+			    <widget class="GtkMenuItem" id="mezzo-forte">
+			      <property name="visible">True</property>
+			      <property name="label" translatable="yes">Mezzo-forte</property>
+			      <property name="use_underline">True</property>
+			      <signal name="activate" handler="on_mezzo-forte_activate" last_modification_time="Sat, 19 Feb 2005 17:33:37 GMT"/>
+			    </widget>
+			  </child>
+
+			  <child>
+			    <widget class="GtkMenuItem" id="forte">
+			      <property name="visible">True</property>
+			      <property name="label" translatable="yes">Forte</property>
+			      <property name="use_underline">True</property>
+			      <signal name="activate" handler="on_forte_activate" last_modification_time="Sat, 19 Feb 2005 17:33:37 GMT"/>
+			    </widget>
+			  </child>
+
+			  <child>
+			    <widget class="GtkMenuItem" id="fortissimo">
+			      <property name="visible">True</property>
+			      <property name="label" translatable="yes">Fortissimo</property>
+			      <property name="use_underline">True</property>
+			      <signal name="activate" handler="on_fortissimo_activate" last_modification_time="Sat, 19 Feb 2005 17:33:37 GMT"/>
+			    </widget>
+			  </child>
+
+			  <child>
+			    <widget class="GtkMenuItem" id="fortississimo">
+			      <property name="visible">True</property>
+			      <property name="label" translatable="yes">Fortississimo</property>
+			      <property name="use_underline">True</property>
+			      <signal name="activate" handler="on_fortississimo_activate" last_modification_time="Sat, 19 Feb 2005 17:33:37 GMT"/>
+			    </widget>
+			  </child>
 			</widget>
 		      </child>
 		    </widget>
@@ -2503,6 +3378,7 @@
   <property name="skip_pager_hint">False</property>
   <property name="type_hint">GDK_WINDOW_TYPE_HINT_NORMAL</property>
   <property name="gravity">GDK_GRAVITY_NORTH_WEST</property>
+  <property name="focus_on_map">True</property>
 
   <child>
     <widget class="GtkVBox" id="ha_vbox1">
@@ -2541,6 +3417,10 @@ toady@gscore.org</property>
 	  <property name="yalign">0.5</property>
 	  <property name="xpad">0</property>
 	  <property name="ypad">0</property>
+	  <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+	  <property name="width_chars">-1</property>
+	  <property name="single_line_mode">False</property>
+	  <property name="angle">0</property>
 	</widget>
 	<packing>
 	  <property name="padding">0</property>
@@ -2578,6 +3458,10 @@ Alastair  Porter, alastair@linuxexperience.com
 	      <property name="yalign">0.5</property>
 	      <property name="xpad">0</property>
 	      <property name="ypad">0</property>
+	      <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+	      <property name="width_chars">-1</property>
+	      <property name="single_line_mode">False</property>
+	      <property name="angle">0</property>
 	    </widget>
 	  </child>
 
@@ -2594,6 +3478,10 @@ Alastair  Porter, alastair@linuxexperience.com
 	      <property name="yalign">0.5</property>
 	      <property name="xpad">0</property>
 	      <property name="ypad">0</property>
+	      <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+	      <property name="width_chars">-1</property>
+	      <property name="single_line_mode">False</property>
+	      <property name="angle">0</property>
 	    </widget>
 	    <packing>
 	      <property name="type">label_item</property>
@@ -2639,6 +3527,7 @@ Alastair  Porter, alastair@linuxexperience.com
   <property name="skip_pager_hint">False</property>
   <property name="type_hint">GDK_WINDOW_TYPE_HINT_NORMAL</property>
   <property name="gravity">GDK_GRAVITY_NORTH_WEST</property>
+  <property name="focus_on_map">True</property>
   <property name="has_separator">True</property>
 
   <child internal-child="vbox">
@@ -2731,6 +3620,10 @@ Alastair  Porter, alastair@linuxexperience.com
 		  <property name="yalign">0.5</property>
 		  <property name="xpad">0</property>
 		  <property name="ypad">0</property>
+		  <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+		  <property name="width_chars">-1</property>
+		  <property name="single_line_mode">False</property>
+		  <property name="angle">0</property>
 		</widget>
 		<packing>
 		  <property name="padding">0</property>
@@ -3021,6 +3914,10 @@ Alastair  Porter, alastair@linuxexperience.com
 		      <property name="yalign">0.5</property>
 		      <property name="xpad">0</property>
 		      <property name="ypad">0</property>
+		      <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+		      <property name="width_chars">-1</property>
+		      <property name="single_line_mode">False</property>
+		      <property name="angle">0</property>
 		    </widget>
 		    <packing>
 		      <property name="type">label_item</property>
@@ -3047,6 +3944,10 @@ Alastair  Porter, alastair@linuxexperience.com
 		  <property name="yalign">0.5</property>
 		  <property name="xpad">0</property>
 		  <property name="ypad">0</property>
+		  <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+		  <property name="width_chars">-1</property>
+		  <property name="single_line_mode">False</property>
+		  <property name="angle">0</property>
 		</widget>
 		<packing>
 		  <property name="padding">0</property>
@@ -3094,6 +3995,10 @@ Alastair  Porter, alastair@linuxexperience.com
 	      <property name="yalign">0.5</property>
 	      <property name="xpad">0</property>
 	      <property name="ypad">0</property>
+	      <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+	      <property name="width_chars">-1</property>
+	      <property name="single_line_mode">False</property>
+	      <property name="angle">0</property>
 	    </widget>
 	    <packing>
 	      <property name="padding">5</property>
@@ -3143,6 +4048,7 @@ Alastair  Porter, alastair@linuxexperience.com
   <property name="skip_pager_hint">False</property>
   <property name="type_hint">GDK_WINDOW_TYPE_HINT_NORMAL</property>
   <property name="gravity">GDK_GRAVITY_NORTH_WEST</property>
+  <property name="focus_on_map">True</property>
   <property name="has_separator">True</property>
 
   <child internal-child="vbox">
@@ -3235,6 +4141,10 @@ Alastair  Porter, alastair@linuxexperience.com
 		  <property name="yalign">0.5</property>
 		  <property name="xpad">0</property>
 		  <property name="ypad">0</property>
+		  <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+		  <property name="width_chars">-1</property>
+		  <property name="single_line_mode">False</property>
+		  <property name="angle">0</property>
 		</widget>
 		<packing>
 		  <property name="padding">0</property>
@@ -3463,6 +4373,10 @@ Alastair  Porter, alastair@linuxexperience.com
 		  <property name="yalign">0.5</property>
 		  <property name="xpad">0</property>
 		  <property name="ypad">0</property>
+		  <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+		  <property name="width_chars">-1</property>
+		  <property name="single_line_mode">False</property>
+		  <property name="angle">0</property>
 		</widget>
 		<packing>
 		  <property name="type">label_item</property>
@@ -3842,6 +4756,10 @@ Alastair  Porter, alastair@linuxexperience.com
 		  <property name="yalign">0.5</property>
 		  <property name="xpad">0</property>
 		  <property name="ypad">0</property>
+		  <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+		  <property name="width_chars">-1</property>
+		  <property name="single_line_mode">False</property>
+		  <property name="angle">0</property>
 		</widget>
 		<packing>
 		  <property name="type">label_item</property>
@@ -3877,6 +4795,7 @@ Alastair  Porter, alastair@linuxexperience.com
   <property name="skip_pager_hint">False</property>
   <property name="type_hint">GDK_WINDOW_TYPE_HINT_NORMAL</property>
   <property name="gravity">GDK_GRAVITY_NORTH_WEST</property>
+  <property name="focus_on_map">True</property>
   <property name="has_separator">True</property>
 
   <child internal-child="vbox">
@@ -3966,6 +4885,10 @@ Alastair  Porter, alastair@linuxexperience.com
 		  <property name="yalign">0.5</property>
 		  <property name="xpad">0</property>
 		  <property name="ypad">0</property>
+		  <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+		  <property name="width_chars">-1</property>
+		  <property name="single_line_mode">False</property>
+		  <property name="angle">0</property>
 		</widget>
 		<packing>
 		  <property name="padding">0</property>
@@ -4011,6 +4934,10 @@ Alastair  Porter, alastair@linuxexperience.com
 		  <property name="yalign">0.0399999991059</property>
 		  <property name="xpad">0</property>
 		  <property name="ypad">0</property>
+		  <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+		  <property name="width_chars">-1</property>
+		  <property name="single_line_mode">False</property>
+		  <property name="angle">0</property>
 		</widget>
 		<packing>
 		  <property name="padding">0</property>
@@ -4099,6 +5026,7 @@ Alastair  Porter, alastair@linuxexperience.com
   <property name="skip_pager_hint">False</property>
   <property name="type_hint">GDK_WINDOW_TYPE_HINT_NORMAL</property>
   <property name="gravity">GDK_GRAVITY_NORTH_WEST</property>
+  <property name="focus_on_map">True</property>
   <property name="has_separator">True</property>
 
   <child internal-child="vbox">
@@ -4192,6 +5120,10 @@ Alastair  Porter, alastair@linuxexperience.com
 		  <property name="yalign">0.5</property>
 		  <property name="xpad">0</property>
 		  <property name="ypad">0</property>
+		  <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+		  <property name="width_chars">-1</property>
+		  <property name="single_line_mode">False</property>
+		  <property name="angle">0</property>
 		</widget>
 		<packing>
 		  <property name="padding">0</property>
@@ -4337,6 +5269,10 @@ Alastair  Porter, alastair@linuxexperience.com
 			  <property name="yalign">0.5</property>
 			  <property name="xpad">0</property>
 			  <property name="ypad">0</property>
+			  <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+			  <property name="width_chars">-1</property>
+			  <property name="single_line_mode">False</property>
+			  <property name="angle">0</property>
 			</widget>
 			<packing>
 			  <property name="type">label_item</property>
@@ -4430,6 +5366,10 @@ Alastair  Porter, alastair@linuxexperience.com
 		  <property name="yalign">0.5</property>
 		  <property name="xpad">0</property>
 		  <property name="ypad">0</property>
+		  <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+		  <property name="width_chars">-1</property>
+		  <property name="single_line_mode">False</property>
+		  <property name="angle">0</property>
 		</widget>
 		<packing>
 		  <property name="type">label_item</property>
@@ -4465,6 +5405,7 @@ Alastair  Porter, alastair@linuxexperience.com
   <property name="skip_pager_hint">False</property>
   <property name="type_hint">GDK_WINDOW_TYPE_HINT_NORMAL</property>
   <property name="gravity">GDK_GRAVITY_NORTH_WEST</property>
+  <property name="focus_on_map">True</property>
   <property name="has_separator">True</property>
 
   <child internal-child="vbox">
@@ -4554,6 +5495,10 @@ Alastair  Porter, alastair@linuxexperience.com
 		  <property name="yalign">0.5</property>
 		  <property name="xpad">0</property>
 		  <property name="ypad">0</property>
+		  <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+		  <property name="width_chars">-1</property>
+		  <property name="single_line_mode">False</property>
+		  <property name="angle">0</property>
 		</widget>
 		<packing>
 		  <property name="padding">0</property>
@@ -4667,6 +5612,10 @@ Alastair  Porter, alastair@linuxexperience.com
 		  <property name="yalign">0.5</property>
 		  <property name="xpad">0</property>
 		  <property name="ypad">0</property>
+		  <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+		  <property name="width_chars">-1</property>
+		  <property name="single_line_mode">False</property>
+		  <property name="angle">0</property>
 		</widget>
 		<packing>
 		  <property name="type">label_item</property>
@@ -4703,6 +5652,7 @@ Alastair  Porter, alastair@linuxexperience.com
   <property name="skip_pager_hint">False</property>
   <property name="type_hint">GDK_WINDOW_TYPE_HINT_NORMAL</property>
   <property name="gravity">GDK_GRAVITY_NORTH_WEST</property>
+  <property name="focus_on_map">True</property>
   <property name="has_separator">True</property>
 
   <child internal-child="vbox">
@@ -4794,6 +5744,10 @@ Alastair  Porter, alastair@linuxexperience.com
 		  <property name="yalign">0.5</property>
 		  <property name="xpad">0</property>
 		  <property name="ypad">0</property>
+		  <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+		  <property name="width_chars">-1</property>
+		  <property name="single_line_mode">False</property>
+		  <property name="angle">0</property>
 		</widget>
 		<packing>
 		  <property name="padding">0</property>
@@ -4856,6 +5810,10 @@ Alastair  Porter, alastair@linuxexperience.com
 			  <property name="yalign">0.5</property>
 			  <property name="xpad">0</property>
 			  <property name="ypad">0</property>
+			  <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+			  <property name="width_chars">-1</property>
+			  <property name="single_line_mode">False</property>
+			  <property name="angle">0</property>
 			</widget>
 			<packing>
 			  <property name="padding">0</property>
@@ -4877,6 +5835,10 @@ Alastair  Porter, alastair@linuxexperience.com
 			  <property name="yalign">0.5</property>
 			  <property name="xpad">0</property>
 			  <property name="ypad">0</property>
+			  <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+			  <property name="width_chars">-1</property>
+			  <property name="single_line_mode">False</property>
+			  <property name="angle">0</property>
 			</widget>
 			<packing>
 			  <property name="padding">0</property>
@@ -4898,6 +5860,10 @@ Alastair  Porter, alastair@linuxexperience.com
 			  <property name="yalign">0.5</property>
 			  <property name="xpad">0</property>
 			  <property name="ypad">0</property>
+			  <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+			  <property name="width_chars">-1</property>
+			  <property name="single_line_mode">False</property>
+			  <property name="angle">0</property>
 			</widget>
 			<packing>
 			  <property name="padding">0</property>
@@ -5003,6 +5969,10 @@ Alastair  Porter, alastair@linuxexperience.com
 		  <property name="yalign">0.5</property>
 		  <property name="xpad">0</property>
 		  <property name="ypad">0</property>
+		  <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+		  <property name="width_chars">-1</property>
+		  <property name="single_line_mode">False</property>
+		  <property name="angle">0</property>
 		</widget>
 		<packing>
 		  <property name="type">tab</property>
@@ -5079,6 +6049,10 @@ Alastair  Porter, alastair@linuxexperience.com
 				      <property name="yalign">0.5</property>
 				      <property name="xpad">0</property>
 				      <property name="ypad">0</property>
+				      <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+				      <property name="width_chars">-1</property>
+				      <property name="single_line_mode">False</property>
+				      <property name="angle">0</property>
 				    </widget>
 				    <packing>
 				      <property name="padding">0</property>
@@ -5156,6 +6130,10 @@ Alastair  Porter, alastair@linuxexperience.com
 				      <property name="yalign">0.5</property>
 				      <property name="xpad">0</property>
 				      <property name="ypad">0</property>
+				      <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+				      <property name="width_chars">-1</property>
+				      <property name="single_line_mode">False</property>
+				      <property name="angle">0</property>
 				    </widget>
 				    <packing>
 				      <property name="padding">0</property>
@@ -5233,6 +6211,10 @@ Alastair  Porter, alastair@linuxexperience.com
 				      <property name="yalign">0.5</property>
 				      <property name="xpad">0</property>
 				      <property name="ypad">0</property>
+				      <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+				      <property name="width_chars">-1</property>
+				      <property name="single_line_mode">False</property>
+				      <property name="angle">0</property>
 				    </widget>
 				    <packing>
 				      <property name="padding">0</property>
@@ -5310,6 +6292,10 @@ Alastair  Porter, alastair@linuxexperience.com
 				      <property name="yalign">0.5</property>
 				      <property name="xpad">0</property>
 				      <property name="ypad">0</property>
+				      <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+				      <property name="width_chars">-1</property>
+				      <property name="single_line_mode">False</property>
+				      <property name="angle">0</property>
 				    </widget>
 				    <packing>
 				      <property name="padding">0</property>
@@ -5476,6 +6462,10 @@ Alastair  Porter, alastair@linuxexperience.com
 		  <property name="yalign">0.5</property>
 		  <property name="xpad">0</property>
 		  <property name="ypad">0</property>
+		  <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+		  <property name="width_chars">-1</property>
+		  <property name="single_line_mode">False</property>
+		  <property name="angle">0</property>
 		</widget>
 		<packing>
 		  <property name="type">tab</property>
@@ -5698,6 +6688,10 @@ Alastair  Porter, alastair@linuxexperience.com
 		  <property name="yalign">0.5</property>
 		  <property name="xpad">0</property>
 		  <property name="ypad">0</property>
+		  <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+		  <property name="width_chars">-1</property>
+		  <property name="single_line_mode">False</property>
+		  <property name="angle">0</property>
 		</widget>
 		<packing>
 		  <property name="type">tab</property>
@@ -5733,6 +6727,7 @@ Alastair  Porter, alastair@linuxexperience.com
   <property name="skip_pager_hint">False</property>
   <property name="type_hint">GDK_WINDOW_TYPE_HINT_NORMAL</property>
   <property name="gravity">GDK_GRAVITY_NORTH_WEST</property>
+  <property name="focus_on_map">True</property>
   <property name="has_separator">True</property>
 
   <child internal-child="vbox">
@@ -5824,6 +6819,10 @@ Alastair  Porter, alastair@linuxexperience.com
 		  <property name="yalign">0.5</property>
 		  <property name="xpad">0</property>
 		  <property name="ypad">0</property>
+		  <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+		  <property name="width_chars">-1</property>
+		  <property name="single_line_mode">False</property>
+		  <property name="angle">0</property>
 		</widget>
 		<packing>
 		  <property name="padding">0</property>
@@ -5863,6 +6862,10 @@ Alastair  Porter, alastair@linuxexperience.com
 	      <property name="yalign">0.5</property>
 	      <property name="xpad">0</property>
 	      <property name="ypad">0</property>
+	      <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+	      <property name="width_chars">-1</property>
+	      <property name="single_line_mode">False</property>
+	      <property name="angle">0</property>
 	    </widget>
 	    <packing>
 	      <property name="padding">0</property>
@@ -5926,6 +6929,7 @@ Alastair  Porter, alastair@linuxexperience.com
   <property name="skip_pager_hint">False</property>
   <property name="type_hint">GDK_WINDOW_TYPE_HINT_NORMAL</property>
   <property name="gravity">GDK_GRAVITY_NORTH_WEST</property>
+  <property name="focus_on_map">True</property>
   <signal name="destroy_event" handler="gtk_widget_hide" last_modification_time="Tue, 23 Mar 2004 18:52:57 GMT"/>
   <signal name="delete_event" handler="gtk_widget_hide" last_modification_time="Tue, 23 Mar 2004 18:53:09 GMT"/>
 
@@ -5983,6 +6987,10 @@ Alastair  Porter, alastair@linuxexperience.com
 	      <property name="yalign">0.5</property>
 	      <property name="xpad">0</property>
 	      <property name="ypad">0</property>
+	      <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+	      <property name="width_chars">-1</property>
+	      <property name="single_line_mode">False</property>
+	      <property name="angle">0</property>
 	    </widget>
 	    <packing>
 	      <property name="padding">0</property>
@@ -6047,6 +7055,10 @@ Alastair  Porter, alastair@linuxexperience.com
 			  <property name="yalign">0.5</property>
 			  <property name="xpad">0</property>
 			  <property name="ypad">0</property>
+			  <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+			  <property name="width_chars">-1</property>
+			  <property name="single_line_mode">False</property>
+			  <property name="angle">0</property>
 			</widget>
 			<packing>
 			  <property name="padding">0</property>
@@ -6128,6 +7140,10 @@ Alastair  Porter, alastair@linuxexperience.com
 			  <property name="yalign">0.5</property>
 			  <property name="xpad">0</property>
 			  <property name="ypad">0</property>
+			  <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+			  <property name="width_chars">-1</property>
+			  <property name="single_line_mode">False</property>
+			  <property name="angle">0</property>
 			</widget>
 			<packing>
 			  <property name="padding">0</property>
@@ -6197,6 +7213,10 @@ Alastair  Porter, alastair@linuxexperience.com
 		  <property name="yalign">0.5</property>
 		  <property name="xpad">0</property>
 		  <property name="ypad">0</property>
+		  <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+		  <property name="width_chars">-1</property>
+		  <property name="single_line_mode">False</property>
+		  <property name="angle">0</property>
 		</widget>
 		<packing>
 		  <property name="type">tab</property>
@@ -6230,6 +7250,10 @@ Alastair  Porter, alastair@linuxexperience.com
 			  <property name="yalign">0.5</property>
 			  <property name="xpad">0</property>
 			  <property name="ypad">0</property>
+			  <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+			  <property name="width_chars">-1</property>
+			  <property name="single_line_mode">False</property>
+			  <property name="angle">0</property>
 			</widget>
 			<packing>
 			  <property name="padding">0</property>
@@ -6311,6 +7335,10 @@ Alastair  Porter, alastair@linuxexperience.com
 			  <property name="yalign">0.5</property>
 			  <property name="xpad">0</property>
 			  <property name="ypad">0</property>
+			  <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+			  <property name="width_chars">-1</property>
+			  <property name="single_line_mode">False</property>
+			  <property name="angle">0</property>
 			</widget>
 			<packing>
 			  <property name="padding">0</property>
@@ -6392,6 +7420,10 @@ Alastair  Porter, alastair@linuxexperience.com
 			  <property name="yalign">0.5</property>
 			  <property name="xpad">0</property>
 			  <property name="ypad">0</property>
+			  <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+			  <property name="width_chars">-1</property>
+			  <property name="single_line_mode">False</property>
+			  <property name="angle">0</property>
 			</widget>
 			<packing>
 			  <property name="padding">0</property>
@@ -6461,6 +7493,10 @@ Alastair  Porter, alastair@linuxexperience.com
 		  <property name="yalign">0.5</property>
 		  <property name="xpad">0</property>
 		  <property name="ypad">0</property>
+		  <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+		  <property name="width_chars">-1</property>
+		  <property name="single_line_mode">False</property>
+		  <property name="angle">0</property>
 		</widget>
 		<packing>
 		  <property name="type">tab</property>
@@ -6500,6 +7536,10 @@ Alastair  Porter, alastair@linuxexperience.com
 			      <property name="yalign">0.5</property>
 			      <property name="xpad">0</property>
 			      <property name="ypad">0</property>
+			      <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+			      <property name="width_chars">-1</property>
+			      <property name="single_line_mode">False</property>
+			      <property name="angle">0</property>
 			    </widget>
 			    <packing>
 			      <property name="padding">0</property>
@@ -6581,6 +7621,10 @@ Alastair  Porter, alastair@linuxexperience.com
 			      <property name="yalign">0.5</property>
 			      <property name="xpad">0</property>
 			      <property name="ypad">0</property>
+			      <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+			      <property name="width_chars">-1</property>
+			      <property name="single_line_mode">False</property>
+			      <property name="angle">0</property>
 			    </widget>
 			    <packing>
 			      <property name="padding">0</property>
@@ -6662,6 +7706,10 @@ Alastair  Porter, alastair@linuxexperience.com
 			      <property name="yalign">0.5</property>
 			      <property name="xpad">0</property>
 			      <property name="ypad">0</property>
+			      <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+			      <property name="width_chars">-1</property>
+			      <property name="single_line_mode">False</property>
+			      <property name="angle">0</property>
 			    </widget>
 			    <packing>
 			      <property name="padding">0</property>
@@ -6743,6 +7791,10 @@ Alastair  Porter, alastair@linuxexperience.com
 			      <property name="yalign">0.5</property>
 			      <property name="xpad">0</property>
 			      <property name="ypad">0</property>
+			      <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+			      <property name="width_chars">-1</property>
+			      <property name="single_line_mode">False</property>
+			      <property name="angle">0</property>
 			    </widget>
 			    <packing>
 			      <property name="padding">0</property>
@@ -6824,6 +7876,10 @@ Alastair  Porter, alastair@linuxexperience.com
 			      <property name="yalign">0.5</property>
 			      <property name="xpad">0</property>
 			      <property name="ypad">0</property>
+			      <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+			      <property name="width_chars">-1</property>
+			      <property name="single_line_mode">False</property>
+			      <property name="angle">0</property>
 			    </widget>
 			    <packing>
 			      <property name="padding">0</property>
@@ -6905,6 +7961,10 @@ Alastair  Porter, alastair@linuxexperience.com
 			      <property name="yalign">0.5</property>
 			      <property name="xpad">0</property>
 			      <property name="ypad">0</property>
+			      <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+			      <property name="width_chars">-1</property>
+			      <property name="single_line_mode">False</property>
+			      <property name="angle">0</property>
 			    </widget>
 			    <packing>
 			      <property name="padding">0</property>
@@ -6986,6 +8046,10 @@ Alastair  Porter, alastair@linuxexperience.com
 			      <property name="yalign">0.5</property>
 			      <property name="xpad">0</property>
 			      <property name="ypad">0</property>
+			      <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+			      <property name="width_chars">-1</property>
+			      <property name="single_line_mode">False</property>
+			      <property name="angle">0</property>
 			    </widget>
 			    <packing>
 			      <property name="padding">0</property>
@@ -7062,6 +8126,10 @@ Alastair  Porter, alastair@linuxexperience.com
 		  <property name="yalign">0.5</property>
 		  <property name="xpad">0</property>
 		  <property name="ypad">0</property>
+		  <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+		  <property name="width_chars">-1</property>
+		  <property name="single_line_mode">False</property>
+		  <property name="angle">0</property>
 		</widget>
 		<packing>
 		  <property name="type">tab</property>
@@ -7095,6 +8163,10 @@ Alastair  Porter, alastair@linuxexperience.com
 			  <property name="yalign">0.5</property>
 			  <property name="xpad">0</property>
 			  <property name="ypad">0</property>
+			  <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+			  <property name="width_chars">-1</property>
+			  <property name="single_line_mode">False</property>
+			  <property name="angle">0</property>
 			</widget>
 			<packing>
 			  <property name="padding">0</property>
@@ -7164,6 +8236,10 @@ Alastair  Porter, alastair@linuxexperience.com
 		  <property name="yalign">0.5</property>
 		  <property name="xpad">0</property>
 		  <property name="ypad">0</property>
+		  <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+		  <property name="width_chars">-1</property>
+		  <property name="single_line_mode">False</property>
+		  <property name="angle">0</property>
 		</widget>
 		<packing>
 		  <property name="type">tab</property>
@@ -7197,6 +8273,10 @@ Alastair  Porter, alastair@linuxexperience.com
 			  <property name="yalign">0.5</property>
 			  <property name="xpad">0</property>
 			  <property name="ypad">0</property>
+			  <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+			  <property name="width_chars">-1</property>
+			  <property name="single_line_mode">False</property>
+			  <property name="angle">0</property>
 			</widget>
 			<packing>
 			  <property name="padding">0</property>
@@ -7278,6 +8358,10 @@ Alastair  Porter, alastair@linuxexperience.com
 			  <property name="yalign">0.5</property>
 			  <property name="xpad">0</property>
 			  <property name="ypad">0</property>
+			  <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+			  <property name="width_chars">-1</property>
+			  <property name="single_line_mode">False</property>
+			  <property name="angle">0</property>
 			</widget>
 			<packing>
 			  <property name="padding">0</property>
@@ -7347,6 +8431,10 @@ Alastair  Porter, alastair@linuxexperience.com
 		  <property name="yalign">0.5</property>
 		  <property name="xpad">0</property>
 		  <property name="ypad">0</property>
+		  <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+		  <property name="width_chars">-1</property>
+		  <property name="single_line_mode">False</property>
+		  <property name="angle">0</property>
 		</widget>
 		<packing>
 		  <property name="type">tab</property>
@@ -7379,6 +8467,10 @@ Alastair  Porter, alastair@linuxexperience.com
 			  <property name="yalign">0.5</property>
 			  <property name="xpad">0</property>
 			  <property name="ypad">0</property>
+			  <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+			  <property name="width_chars">-1</property>
+			  <property name="single_line_mode">False</property>
+			  <property name="angle">0</property>
 			</widget>
 			<packing>
 			  <property name="padding">0</property>
@@ -7443,6 +8535,10 @@ Alastair  Porter, alastair@linuxexperience.com
 			  <property name="yalign">0.5</property>
 			  <property name="xpad">0</property>
 			  <property name="ypad">0</property>
+			  <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+			  <property name="width_chars">-1</property>
+			  <property name="single_line_mode">False</property>
+			  <property name="angle">0</property>
 			</widget>
 			<packing>
 			  <property name="padding">0</property>
@@ -7507,6 +8603,10 @@ Alastair  Porter, alastair@linuxexperience.com
 			  <property name="yalign">0.5</property>
 			  <property name="xpad">0</property>
 			  <property name="ypad">0</property>
+			  <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+			  <property name="width_chars">-1</property>
+			  <property name="single_line_mode">False</property>
+			  <property name="angle">0</property>
 			</widget>
 			<packing>
 			  <property name="padding">0</property>
@@ -7571,6 +8671,10 @@ Alastair  Porter, alastair@linuxexperience.com
 		  <property name="yalign">0.5</property>
 		  <property name="xpad">0</property>
 		  <property name="ypad">0</property>
+		  <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+		  <property name="width_chars">-1</property>
+		  <property name="single_line_mode">False</property>
+		  <property name="angle">0</property>
 		</widget>
 		<packing>
 		  <property name="type">tab</property>
@@ -7603,6 +8707,10 @@ Alastair  Porter, alastair@linuxexperience.com
 			  <property name="yalign">0.5</property>
 			  <property name="xpad">0</property>
 			  <property name="ypad">0</property>
+			  <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+			  <property name="width_chars">-1</property>
+			  <property name="single_line_mode">False</property>
+			  <property name="angle">0</property>
 			</widget>
 			<packing>
 			  <property name="padding">0</property>
@@ -7684,6 +8792,10 @@ Alastair  Porter, alastair@linuxexperience.com
 			  <property name="yalign">0.5</property>
 			  <property name="xpad">0</property>
 			  <property name="ypad">0</property>
+			  <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+			  <property name="width_chars">-1</property>
+			  <property name="single_line_mode">False</property>
+			  <property name="angle">0</property>
 			</widget>
 			<packing>
 			  <property name="padding">0</property>
@@ -7753,6 +8865,10 @@ Alastair  Porter, alastair@linuxexperience.com
 		  <property name="yalign">0.5</property>
 		  <property name="xpad">0</property>
 		  <property name="ypad">0</property>
+		  <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+		  <property name="width_chars">-1</property>
+		  <property name="single_line_mode">False</property>
+		  <property name="angle">0</property>
 		</widget>
 		<packing>
 		  <property name="type">tab</property>
@@ -7785,6 +8901,10 @@ Alastair  Porter, alastair@linuxexperience.com
 			  <property name="yalign">0.5</property>
 			  <property name="xpad">0</property>
 			  <property name="ypad">0</property>
+			  <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+			  <property name="width_chars">-1</property>
+			  <property name="single_line_mode">False</property>
+			  <property name="angle">0</property>
 			</widget>
 			<packing>
 			  <property name="padding">0</property>
@@ -7866,6 +8986,10 @@ Alastair  Porter, alastair@linuxexperience.com
 			  <property name="yalign">0.5</property>
 			  <property name="xpad">0</property>
 			  <property name="ypad">0</property>
+			  <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+			  <property name="width_chars">-1</property>
+			  <property name="single_line_mode">False</property>
+			  <property name="angle">0</property>
 			</widget>
 			<packing>
 			  <property name="padding">0</property>
@@ -7947,6 +9071,10 @@ Alastair  Porter, alastair@linuxexperience.com
 			  <property name="yalign">0.5</property>
 			  <property name="xpad">0</property>
 			  <property name="ypad">0</property>
+			  <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+			  <property name="width_chars">-1</property>
+			  <property name="single_line_mode">False</property>
+			  <property name="angle">0</property>
 			</widget>
 			<packing>
 			  <property name="padding">0</property>
@@ -8016,6 +9144,10 @@ Alastair  Porter, alastair@linuxexperience.com
 		  <property name="yalign">0.5</property>
 		  <property name="xpad">0</property>
 		  <property name="ypad">0</property>
+		  <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+		  <property name="width_chars">-1</property>
+		  <property name="single_line_mode">False</property>
+		  <property name="angle">0</property>
 		</widget>
 		<packing>
 		  <property name="type">tab</property>
@@ -8908,6 +10040,10 @@ Alastair  Porter, alastair@linuxexperience.com
 			  <property name="yalign">0.5</property>
 			  <property name="xpad">0</property>
 			  <property name="ypad">0</property>
+			  <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+			  <property name="width_chars">-1</property>
+			  <property name="single_line_mode">False</property>
+			  <property name="angle">0</property>
 			</widget>
 			<packing>
 			  <property name="type">label_item</property>
@@ -8940,6 +10076,10 @@ Alastair  Porter, alastair@linuxexperience.com
 		  <property name="yalign">0.5</property>
 		  <property name="xpad">0</property>
 		  <property name="ypad">0</property>
+		  <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+		  <property name="width_chars">-1</property>
+		  <property name="single_line_mode">False</property>
+		  <property name="angle">0</property>
 		</widget>
 		<packing>
 		  <property name="type">tab</property>
@@ -8972,6 +10112,10 @@ Alastair  Porter, alastair@linuxexperience.com
 			  <property name="yalign">0.5</property>
 			  <property name="xpad">0</property>
 			  <property name="ypad">0</property>
+			  <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+			  <property name="width_chars">-1</property>
+			  <property name="single_line_mode">False</property>
+			  <property name="angle">0</property>
 			</widget>
 			<packing>
 			  <property name="padding">0</property>
@@ -9053,6 +10197,10 @@ Alastair  Porter, alastair@linuxexperience.com
 			  <property name="yalign">0.5</property>
 			  <property name="xpad">0</property>
 			  <property name="ypad">0</property>
+			  <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+			  <property name="width_chars">-1</property>
+			  <property name="single_line_mode">False</property>
+			  <property name="angle">0</property>
 			</widget>
 			<packing>
 			  <property name="padding">0</property>
@@ -9122,6 +10270,10 @@ Alastair  Porter, alastair@linuxexperience.com
 		  <property name="yalign">0.5</property>
 		  <property name="xpad">0</property>
 		  <property name="ypad">0</property>
+		  <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+		  <property name="width_chars">-1</property>
+		  <property name="single_line_mode">False</property>
+		  <property name="angle">0</property>
 		</widget>
 		<packing>
 		  <property name="type">tab</property>
@@ -9154,6 +10306,10 @@ Alastair  Porter, alastair@linuxexperience.com
 			  <property name="yalign">0.5</property>
 			  <property name="xpad">0</property>
 			  <property name="ypad">0</property>
+			  <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+			  <property name="width_chars">-1</property>
+			  <property name="single_line_mode">False</property>
+			  <property name="angle">0</property>
 			</widget>
 			<packing>
 			  <property name="padding">0</property>
@@ -9223,6 +10379,10 @@ Alastair  Porter, alastair@linuxexperience.com
 		  <property name="yalign">0.5</property>
 		  <property name="xpad">0</property>
 		  <property name="ypad">0</property>
+		  <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+		  <property name="width_chars">-1</property>
+		  <property name="single_line_mode">False</property>
+		  <property name="angle">0</property>
 		</widget>
 		<packing>
 		  <property name="type">tab</property>
@@ -9295,6 +10455,7 @@ Alastair  Porter, alastair@linuxexperience.com
   <property name="skip_pager_hint">False</property>
   <property name="type_hint">GDK_WINDOW_TYPE_HINT_NORMAL</property>
   <property name="gravity">GDK_GRAVITY_NORTH_WEST</property>
+  <property name="focus_on_map">True</property>
   <property name="show_fileops">True</property>
   <signal name="delete_event" handler="gtk_widget_hide" object="file_open" last_modification_time="Thu, 08 Apr 2004 06:36:43 GMT"/>
   <signal name="destroy_event" handler="gtk_widget_hide" object="file_open" last_modification_time="Thu, 08 Apr 2004 06:36:55 GMT"/>
@@ -9335,6 +10496,7 @@ Alastair  Porter, alastair@linuxexperience.com
   <property name="skip_pager_hint">False</property>
   <property name="type_hint">GDK_WINDOW_TYPE_HINT_NORMAL</property>
   <property name="gravity">GDK_GRAVITY_NORTH_WEST</property>
+  <property name="focus_on_map">True</property>
 
   <child>
     <widget class="GtkVBox" id="vbox52">
@@ -9371,6 +10533,10 @@ Alastair  Porter, alastair@linuxexperience.com
 	  <property name="yalign">0.5</property>
 	  <property name="xpad">0</property>
 	  <property name="ypad">0</property>
+	  <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+	  <property name="width_chars">-1</property>
+	  <property name="single_line_mode">False</property>
+	  <property name="angle">0</property>
 	</widget>
 	<packing>
 	  <property name="padding">15</property>
@@ -9392,6 +10558,10 @@ Alastair  Porter, alastair@linuxexperience.com
 	  <property name="yalign">0.5</property>
 	  <property name="xpad">0</property>
 	  <property name="ypad">0</property>
+	  <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+	  <property name="width_chars">-1</property>
+	  <property name="single_line_mode">False</property>
+	  <property name="angle">0</property>
 	</widget>
 	<packing>
 	  <property name="padding">5</property>
@@ -9413,6 +10583,10 @@ Alastair  Porter, alastair@linuxexperience.com
 	  <property name="yalign">0.5</property>
 	  <property name="xpad">0</property>
 	  <property name="ypad">0</property>
+	  <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+	  <property name="width_chars">-1</property>
+	  <property name="single_line_mode">False</property>
+	  <property name="angle">0</property>
 	</widget>
 	<packing>
 	  <property name="padding">5</property>
@@ -9427,6 +10601,7 @@ Alastair  Porter, alastair@linuxexperience.com
 	  <property name="orientation">GTK_PROGRESS_LEFT_TO_RIGHT</property>
 	  <property name="fraction">0</property>
 	  <property name="pulse_step">0.119999997318</property>
+	  <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
 	</widget>
 	<packing>
 	  <property name="padding">0</property>
@@ -9451,6 +10626,7 @@ Alastair  Porter, alastair@linuxexperience.com
   <property name="skip_pager_hint">False</property>
   <property name="type_hint">GDK_WINDOW_TYPE_HINT_NORMAL</property>
   <property name="gravity">GDK_GRAVITY_NORTH_WEST</property>
+  <property name="focus_on_map">True</property>
   <property name="show_fileops">True</property>
   <signal name="delete_event" handler="gtk_widget_hide" object="file_save_as" last_modification_time="Thu, 08 Apr 2004 06:36:43 GMT"/>
   <signal name="destroy_event" handler="gtk_widget_hide" object="file_save_as" last_modification_time="Thu, 08 Apr 2004 06:36:55 GMT"/>
@@ -9491,6 +10667,7 @@ Alastair  Porter, alastair@linuxexperience.com
   <property name="skip_pager_hint">False</property>
   <property name="type_hint">GDK_WINDOW_TYPE_HINT_NORMAL</property>
   <property name="gravity">GDK_GRAVITY_NORTH_WEST</property>
+  <property name="focus_on_map">True</property>
   <property name="has_separator">True</property>
 
   <child internal-child="vbox">
@@ -9583,6 +10760,10 @@ Alastair  Porter, alastair@linuxexperience.com
 		  <property name="yalign">0.5</property>
 		  <property name="xpad">0</property>
 		  <property name="ypad">0</property>
+		  <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+		  <property name="width_chars">-1</property>
+		  <property name="single_line_mode">False</property>
+		  <property name="angle">0</property>
 		</widget>
 		<packing>
 		  <property name="padding">0</property>
@@ -9634,6 +10815,10 @@ Alastair  Porter, alastair@linuxexperience.com
 		      <property name="yalign">0.5</property>
 		      <property name="xpad">0</property>
 		      <property name="ypad">0</property>
+		      <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+		      <property name="width_chars">-1</property>
+		      <property name="single_line_mode">False</property>
+		      <property name="angle">0</property>
 		    </widget>
 		    <packing>
 		      <property name="padding">10</property>
@@ -9732,6 +10917,10 @@ Alastair  Porter, alastair@linuxexperience.com
 			  <property name="yalign">0.5</property>
 			  <property name="xpad">0</property>
 			  <property name="ypad">0</property>
+			  <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+			  <property name="width_chars">-1</property>
+			  <property name="single_line_mode">False</property>
+			  <property name="angle">0</property>
 			</widget>
 			<packing>
 			  <property name="type">label_item</property>
@@ -9781,6 +10970,7 @@ Alastair  Porter, alastair@linuxexperience.com
   <property name="skip_pager_hint">False</property>
   <property name="type_hint">GDK_WINDOW_TYPE_HINT_NORMAL</property>
   <property name="gravity">GDK_GRAVITY_NORTH_WEST</property>
+  <property name="focus_on_map">True</property>
 
   <child>
     <widget class="GtkVBox" id="vbox64">
@@ -9808,6 +10998,10 @@ Alastair  Porter, alastair@linuxexperience.com
 	      <property name="yalign">0.5</property>
 	      <property name="xpad">0</property>
 	      <property name="ypad">0</property>
+	      <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+	      <property name="width_chars">-1</property>
+	      <property name="single_line_mode">False</property>
+	      <property name="angle">0</property>
 	    </widget>
 	    <packing>
 	      <property name="padding">0</property>
@@ -9862,6 +11056,10 @@ Alastair  Porter, alastair@linuxexperience.com
 	      <property name="yalign">0.5</property>
 	      <property name="xpad">0</property>
 	      <property name="ypad">0</property>
+	      <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+	      <property name="width_chars">-1</property>
+	      <property name="single_line_mode">False</property>
+	      <property name="angle">0</property>
 	    </widget>
 	    <packing>
 	      <property name="padding">0</property>
@@ -9916,6 +11114,10 @@ Alastair  Porter, alastair@linuxexperience.com
 	      <property name="yalign">0.5</property>
 	      <property name="xpad">0</property>
 	      <property name="ypad">0</property>
+	      <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+	      <property name="width_chars">-1</property>
+	      <property name="single_line_mode">False</property>
+	      <property name="angle">0</property>
 	    </widget>
 	    <packing>
 	      <property name="padding">0</property>
@@ -9970,6 +11172,10 @@ Alastair  Porter, alastair@linuxexperience.com
 	      <property name="yalign">0.5</property>
 	      <property name="xpad">0</property>
 	      <property name="ypad">0</property>
+	      <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+	      <property name="width_chars">-1</property>
+	      <property name="single_line_mode">False</property>
+	      <property name="angle">0</property>
 	    </widget>
 	    <packing>
 	      <property name="padding">0</property>
@@ -10070,6 +11276,7 @@ Alastair  Porter, alastair@linuxexperience.com
   <property name="skip_pager_hint">False</property>
   <property name="type_hint">GDK_WINDOW_TYPE_HINT_DIALOG</property>
   <property name="gravity">GDK_GRAVITY_NORTH_WEST</property>
+  <property name="focus_on_map">True</property>
   <property name="has_separator">True</property>
 
   <child internal-child="vbox">
@@ -10146,6 +11353,10 @@ Alastair  Porter, alastair@linuxexperience.com
 		  <property name="yalign">0.5</property>
 		  <property name="xpad">0</property>
 		  <property name="ypad">0</property>
+		  <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+		  <property name="width_chars">-1</property>
+		  <property name="single_line_mode">False</property>
+		  <property name="angle">0</property>
 		</widget>
 		<packing>
 		  <property name="padding">0</property>
@@ -10167,6 +11378,10 @@ Alastair  Porter, alastair@linuxexperience.com
 		  <property name="yalign">0.5</property>
 		  <property name="xpad">0</property>
 		  <property name="ypad">0</property>
+		  <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+		  <property name="width_chars">-1</property>
+		  <property name="single_line_mode">False</property>
+		  <property name="angle">0</property>
 		</widget>
 		<packing>
 		  <property name="padding">0</property>
@@ -10188,6 +11403,10 @@ Alastair  Porter, alastair@linuxexperience.com
 		  <property name="yalign">0.5</property>
 		  <property name="xpad">0</property>
 		  <property name="ypad">0</property>
+		  <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+		  <property name="width_chars">-1</property>
+		  <property name="single_line_mode">False</property>
+		  <property name="angle">0</property>
 		</widget>
 		<packing>
 		  <property name="padding">0</property>
@@ -10296,6 +11515,7 @@ Alastair  Porter, alastair@linuxexperience.com
   <property name="skip_pager_hint">False</property>
   <property name="type_hint">GDK_WINDOW_TYPE_HINT_DIALOG</property>
   <property name="gravity">GDK_GRAVITY_NORTH_WEST</property>
+  <property name="focus_on_map">True</property>
   <property name="has_separator">True</property>
 
   <child internal-child="vbox">
@@ -10382,6 +11602,10 @@ Alastair  Porter, alastair@linuxexperience.com
 			  <property name="yalign">0.5</property>
 			  <property name="xpad">0</property>
 			  <property name="ypad">0</property>
+			  <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+			  <property name="width_chars">-1</property>
+			  <property name="single_line_mode">False</property>
+			  <property name="angle">0</property>
 			</widget>
 			<packing>
 			  <property name="padding">0</property>
@@ -10456,6 +11680,10 @@ Alastair  Porter, alastair@linuxexperience.com
 		  <property name="yalign">0.5</property>
 		  <property name="xpad">0</property>
 		  <property name="ypad">0</property>
+		  <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+		  <property name="width_chars">-1</property>
+		  <property name="single_line_mode">False</property>
+		  <property name="angle">0</property>
 		</widget>
 		<packing>
 		  <property name="padding">10</property>
@@ -10534,6 +11762,10 @@ Alastair  Porter, alastair@linuxexperience.com
 			      <property name="yalign">0.5</property>
 			      <property name="xpad">0</property>
 			      <property name="ypad">0</property>
+			      <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+			      <property name="width_chars">-1</property>
+			      <property name="single_line_mode">False</property>
+			      <property name="angle">0</property>
 			    </widget>
 			    <packing>
 			      <property name="padding">0</property>
@@ -10611,6 +11843,10 @@ Alastair  Porter, alastair@linuxexperience.com
 			      <property name="yalign">0.5</property>
 			      <property name="xpad">0</property>
 			      <property name="ypad">0</property>
+			      <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+			      <property name="width_chars">-1</property>
+			      <property name="single_line_mode">False</property>
+			      <property name="angle">0</property>
 			    </widget>
 			    <packing>
 			      <property name="padding">0</property>
@@ -10688,6 +11924,10 @@ Alastair  Porter, alastair@linuxexperience.com
 			      <property name="yalign">0.5</property>
 			      <property name="xpad">0</property>
 			      <property name="ypad">0</property>
+			      <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+			      <property name="width_chars">-1</property>
+			      <property name="single_line_mode">False</property>
+			      <property name="angle">0</property>
 			    </widget>
 			    <packing>
 			      <property name="padding">0</property>
@@ -10765,6 +12005,10 @@ Alastair  Porter, alastair@linuxexperience.com
 			      <property name="yalign">0.5</property>
 			      <property name="xpad">0</property>
 			      <property name="ypad">0</property>
+			      <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+			      <property name="width_chars">-1</property>
+			      <property name="single_line_mode">False</property>
+			      <property name="angle">0</property>
 			    </widget>
 			    <packing>
 			      <property name="padding">0</property>
@@ -10813,6 +12057,7 @@ Alastair  Porter, alastair@linuxexperience.com
   <property name="skip_pager_hint">False</property>
   <property name="type_hint">GDK_WINDOW_TYPE_HINT_DIALOG</property>
   <property name="gravity">GDK_GRAVITY_NORTH_WEST</property>
+  <property name="focus_on_map">True</property>
   <property name="has_separator">True</property>
 
   <child internal-child="vbox">
@@ -10899,6 +12144,10 @@ Alastair  Porter, alastair@linuxexperience.com
 			  <property name="yalign">0.5</property>
 			  <property name="xpad">0</property>
 			  <property name="ypad">0</property>
+			  <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+			  <property name="width_chars">-1</property>
+			  <property name="single_line_mode">False</property>
+			  <property name="angle">0</property>
 			</widget>
 			<packing>
 			  <property name="padding">0</property>
@@ -10973,6 +12222,10 @@ Alastair  Porter, alastair@linuxexperience.com
 		  <property name="yalign">0.5</property>
 		  <property name="xpad">0</property>
 		  <property name="ypad">0</property>
+		  <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+		  <property name="width_chars">-1</property>
+		  <property name="single_line_mode">False</property>
+		  <property name="angle">0</property>
 		</widget>
 		<packing>
 		  <property name="padding">10</property>
@@ -11051,6 +12304,10 @@ Alastair  Porter, alastair@linuxexperience.com
 			      <property name="yalign">0.5</property>
 			      <property name="xpad">0</property>
 			      <property name="ypad">0</property>
+			      <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+			      <property name="width_chars">-1</property>
+			      <property name="single_line_mode">False</property>
+			      <property name="angle">0</property>
 			    </widget>
 			    <packing>
 			      <property name="padding">0</property>
@@ -11128,6 +12385,10 @@ Alastair  Porter, alastair@linuxexperience.com
 			      <property name="yalign">0.5</property>
 			      <property name="xpad">0</property>
 			      <property name="ypad">0</property>
+			      <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+			      <property name="width_chars">-1</property>
+			      <property name="single_line_mode">False</property>
+			      <property name="angle">0</property>
 			    </widget>
 			    <packing>
 			      <property name="padding">0</property>
@@ -11205,6 +12466,10 @@ Alastair  Porter, alastair@linuxexperience.com
 			      <property name="yalign">0.5</property>
 			      <property name="xpad">0</property>
 			      <property name="ypad">0</property>
+			      <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+			      <property name="width_chars">-1</property>
+			      <property name="single_line_mode">False</property>
+			      <property name="angle">0</property>
 			    </widget>
 			    <packing>
 			      <property name="padding">0</property>
@@ -11282,6 +12547,10 @@ Alastair  Porter, alastair@linuxexperience.com
 			      <property name="yalign">0.5</property>
 			      <property name="xpad">0</property>
 			      <property name="ypad">0</property>
+			      <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+			      <property name="width_chars">-1</property>
+			      <property name="single_line_mode">False</property>
+			      <property name="angle">0</property>
 			    </widget>
 			    <packing>
 			      <property name="padding">0</property>
@@ -11332,6 +12601,7 @@ Alastair  Porter, alastair@linuxexperience.com
   <property name="skip_pager_hint">False</property>
   <property name="type_hint">GDK_WINDOW_TYPE_HINT_NORMAL</property>
   <property name="gravity">GDK_GRAVITY_NORTH_WEST</property>
+  <property name="focus_on_map">True</property>
 
   <child>
     <widget class="GtkVBox" id="vbox72">
@@ -11358,6 +12628,10 @@ Alastair  Porter, alastair@linuxexperience.com
 	      <property name="yalign">0.5</property>
 	      <property name="xpad">0</property>
 	      <property name="ypad">0</property>
+	      <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+	      <property name="width_chars">-1</property>
+	      <property name="single_line_mode">False</property>
+	      <property name="angle">0</property>
 	    </widget>
 	    <packing>
 	      <property name="padding">20</property>
@@ -11422,6 +12696,10 @@ Alastair  Porter, alastair@linuxexperience.com
 	  <property name="yalign">0.5</property>
 	  <property name="xpad">0</property>
 	  <property name="ypad">0</property>
+	  <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+	  <property name="width_chars">-1</property>
+	  <property name="single_line_mode">False</property>
+	  <property name="angle">0</property>
 	</widget>
 	<packing>
 	  <property name="padding">10</property>
@@ -11510,6 +12788,10 @@ Alastair  Porter, alastair@linuxexperience.com
 			  <property name="yalign">0.5</property>
 			  <property name="xpad">0</property>
 			  <property name="ypad">0</property>
+			  <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+			  <property name="width_chars">-1</property>
+			  <property name="single_line_mode">False</property>
+			  <property name="angle">0</property>
 			</widget>
 			<packing>
 			  <property name="padding">0</property>
@@ -11597,6 +12879,10 @@ Alastair  Porter, alastair@linuxexperience.com
 			  <property name="yalign">0.5</property>
 			  <property name="xpad">0</property>
 			  <property name="ypad">0</property>
+			  <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+			  <property name="width_chars">-1</property>
+			  <property name="single_line_mode">False</property>
+			  <property name="angle">0</property>
 			</widget>
 			<packing>
 			  <property name="padding">0</property>
@@ -11671,6 +12957,10 @@ Alastair  Porter, alastair@linuxexperience.com
 			  <property name="yalign">0.5</property>
 			  <property name="xpad">0</property>
 			  <property name="ypad">0</property>
+			  <property name="ellipsize">PANGO_ELLIPSIZE_NONE</property>
+			  <property name="width_chars">-1</property>
+			  <property name="single_line_mode">False</property>
+			  <property name="angle">0</property>
 			</widget>
 			<packing>
 			  <property name="padding">0</property>

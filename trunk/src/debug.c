@@ -3,7 +3,7 @@
  * debug.c: function for debugging purpose
  * gscore - a musical score editor
  *
- * (C) Copyright 2001-2004 Sebastien Tricaud
+ * (C) Copyright 2001-2005 Sebastien Tricaud
  * e-mail : toady@gscore.og
  * URL    : http://www.gscore.org
  *
@@ -77,6 +77,7 @@ void print_staves_list(Score_t *score)
                         printf("Staff->time_signature[2] = %d\n", staff_data->time_signature[2]);
                         printf("Staff->extremity_begin_x = %f\n", staff_data->extremity_begin_x);
                         printf("Staff->extremity_begin_y = %f\n", staff_data->extremity_begin_y);
+                        printf("Staff->start_x = %d\n", staff_data->start_x);
                         printf("Staff->current_x = %d\n", staff_data->current_x);
                         printf("Staff->midi_instrument = %d\n", staff_data->midi_instrument);
 
@@ -114,4 +115,43 @@ void debug_msg(gchar *message)
 /* #ifdef DEBUG */
 /*                 g_print(g_strconcat("*** DEBUG INFORMATION: ", message, "\n", NULL)); */
 /* #endif */
+}
+
+static gboolean 
+kill_tooltip(gpointer *data)
+{
+
+        gtk_widget_destroy(GTK_WIDGET(data));
+
+        return FALSE;
+}
+
+void show_object_tooltip(Object_t *object)
+{
+        GtkWidget *tooltip_window;
+        GtkWidget *label;
+        GtkWidget *vbox;
+
+        if ( ! object ) return;
+
+        tooltip_window = gtk_window_new(GTK_WINDOW_POPUP);
+        gtk_window_set_position(GTK_WINDOW(tooltip_window), GTK_WIN_POS_CENTER);
+        
+        vbox = gtk_vbox_new(FALSE, 0);
+        gtk_container_add(GTK_CONTAINER(tooltip_window), vbox);
+
+        label = gtk_label_new(g_strdup_printf("id: %llu\n", object->id));
+        gtk_box_pack_start_defaults(GTK_BOX(vbox), label);
+        label = gtk_label_new(g_strdup_printf("type: %d\n", object->type));
+        gtk_box_pack_start_defaults(GTK_BOX(vbox), label);
+        label = gtk_label_new(g_strdup_printf("pitch: %d\n", object->pitch));
+        gtk_box_pack_start_defaults(GTK_BOX(vbox), label);
+        label = gtk_label_new(g_strdup_printf("group id: %llu\n", object->group_id));
+        gtk_box_pack_start_defaults(GTK_BOX(vbox), label);
+        label = gtk_label_new(g_strdup_printf("is selected: %d\n", object->is_selected));
+        gtk_box_pack_start_defaults(GTK_BOX(vbox), label);
+
+        g_timeout_add(3000, (GSourceFunc)kill_tooltip, tooltip_window);
+
+        gtk_widget_show_all(tooltip_window);
 }

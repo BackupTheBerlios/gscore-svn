@@ -1,8 +1,9 @@
+/* -*- mode:C; tab-width:8; c-default-style:linux; c-basic-offset:8; indent-tabs-mode:nil -*- */
 /*
  * staff.c
  * gscore - a musical score editor
  *
- * (C) Copyright 2001-2004 Sebastien Tricaud
+ * (C) Copyright 2001-2005 Sebastien Tricaud
  * e-mail : toady@gscore.org
  * URL    : http://www.gscore.org
  *
@@ -1686,4 +1687,17 @@ void staff_change_key_callback(void)
 /* 	gtk_widget_set_size_request(GTK_WIDGET(score->area), score->width, score->height); */
 
 /* 	refresh(area); */
+}
+
+Staff_t *staff_selected_get_from_score(Score_t *score)
+{
+        Staff_t *tmpstaff;
+
+        tmpstaff = (Staff_t *)
+                g_list_nth_data(score->Staff_list, 
+                                get_staff_selected(score));
+                                
+        if ( ! tmpstaff ) return NULL;
+
+        return tmpstaff;
 }

@@ -25,7 +25,13 @@
 #ifndef _NOTES_H_
 #define _NOTES_H_
 
+#include "gscore.h"
+
 gboolean is_note(gint type);
+
+gboolean is_chord(Object_t *object);
+
+gboolean is_barline(gint type);
 
 #endif
 

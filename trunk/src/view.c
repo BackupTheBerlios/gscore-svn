@@ -1,8 +1,9 @@
+/* -*- mode:C; tab-width:8; c-default-style:linux; c-basic-offset:8; indent-tabs-mode:nil -*- */
 /*
  * view.c
  * gscore - a musical score editor
  *
- * (C) Copyright 2001-2004 Sebastien Tricaud
+ * (C) Copyright 2001-2005 Sebastien Tricaud
  * e-mail : toady@gscore.org
  * URL    : http://www.gscore.org
  *

@@ -1,8 +1,9 @@
+/* -*- mode:C; tab-width:8; c-default-style:linux; c-basic-offset:8; indent-tabs-mode:nil -*- */
 /*
  * position.c
  * gscore - a musical score editor
  *
- * (C) Copyright 2001-2004 Sebastien Tricaud
+ * (C) Copyright 2001-2005 Sebastien Tricaud
  * e-mail : toady@gscore.org
  * URL    : http://www.gscore.org
  *
@@ -29,12 +30,7 @@
 #include "debug.h"
 #include "spacings.h"
 #include "position.h"
-
-static
-gint compare_x(Object_t *data1, Object_t *data2)
-{
-     return data1->x - data2->x;
-}
+#include "score.h"
 
 gint get_pitch_from_y(gint staff, gint y)
 {
@@ -100,19 +96,6 @@ gint get_position(gint key, gint staff, gint y)
 	return 0;
 
 }
-
-static
-gboolean around_zero(gint position)
-{
-
-/*      if (( position == -2 ) || ( position == -1 ) || ( position == 0 ) || ( position == 1 )) */
-/*           return TRUE; */
-/*      else */
-/*           return FALSE; */
-	return 0;
-
-}
-
 
 /* extern */
 /* gdouble get_y_from_position_no_key(guint16 space_btwn_lines, gint zero, gdouble staff_begin_y, gdouble height, gint position) */
@@ -279,15 +262,6 @@ gdouble get_y_from_position(gint key, gdouble staff_begin_y, gint position)
      return value;
 }
 
-static 
-gint sortx(gdouble c1, gdouble c2)
-{
-     if (c1 < c2)
-          return -1;
-     else
-          return 1;
-}
-
 extern gdouble
 get_spacing_for_object(gint type)
 {
@@ -416,8 +390,24 @@ gdouble get_x_pos(gint staff, gint x)
 
 }
 
-/* gint compare (gint a, gint b) */
-/* { */
-/*      return a - b; */
-/* } */
+/* Follow the adjustment according to the cursor */
+extern gboolean
+position_set_adjustment(GtkWidget *widget, KeyCursor_t *cursor)
+{
+        GtkAdjustment *adj = NULL;
+        GtkScrolledWindow *sw = NULL;
+
+        sw = score_get_scrolled_window_from_widget(widget);
+        adj = gtk_scrolled_window_get_hadjustment(GTK_SCROLLED_WINDOW(sw));
+
+        if ( ! GTK_IS_ADJUSTMENT(adj) )
+                return FALSE;
+
+        gtk_adjustment_set_value(adj, cursor->x_returned - 300);
+
+        gtk_scrolled_window_set_hadjustment(GTK_SCROLLED_WINDOW(sw), adj);
+
+        return TRUE;
+
+}
 

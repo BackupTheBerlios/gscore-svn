@@ -51,7 +51,6 @@
 #include "common.h"
 #include "score.h"
 
-GtkWidget *Window;
 GladeXML *gladexml;
 
 GList *plugins_list;
@@ -68,7 +67,8 @@ Spacings_t  Spacings;
 static void 
 print_gpl(void)
 {
-	g_print("\nGscore v %s, Copyright 2001-2005 Sebastien Y. Tricaud\n", g_strdup_printf("%s", VERSION));
+	g_print("\nGscore v %s, Copyright 2001-2005 Sebastien Y. Tricaud\n", 
+                g_strdup_printf("%s", VERSION));
 	g_print("Gscore comes with ABSOLUTELY NO WARRANTY and is provided AS IS;\n");
 	g_print("This is free software, and you are welcome to redistribute it\n");
 	g_print("under certain conditions;\n");
@@ -100,99 +100,67 @@ void gscore_init(void)
  *** Events on the drawing area
  ***/
 
-static gboolean
-drawing_area_events(GtkWidget *canvas, GdkEvent  *ev)
-{
-
-        GdkEventButton *event_btn;
-	Score_t *score = score_get_from_widget(canvas);
-
-	switch (ev->type)
-		{
-		
-		case GDK_MOTION_NOTIFY:
-/* 			return mouse_motion_event(canvas, (GdkEventMotion *)ev, NULL); */
-
-		case GDK_KEY_PRESS:
-			printf("Key press\n");
-			break;
-
-		case GDK_KEY_RELEASE:
-			printf("Key Realeased\n");
-			break;
-
-			/* 		return key_event(canvas, (GdkEventKey *)ev); */
-		
-		case GDK_BUTTON_PRESS:
-			switch(ev->button.button)
-				{
-				case 1:
-					/* Select the staff with which you want to work */
-					event_btn = (GdkEventButton *)ev;
-					printf("A2: %.0f\n", event_btn->y);
-					set_staff_selected(score, get_staff_id(score, event_btn->y));
-					/* For the selection */
-					return set_selection_origin(canvas, (GdkEventButton *)ev);
-				case 3:
-					/* 			return popup_action(canvas, (GdkEventButton *)ev); */
-					break;
-				}
-			break;
-		
-		case GDK_BUTTON_RELEASE:
-			switch(ev->button.button)
-				{
-				case 1:
-					return mouse_button_release_event(canvas, (GdkEventButton *)ev, NULL);
-				}
-			break;
-		
-		case GDK_EXPOSE:
-			return score_area_callback(canvas, (GdkEventExpose *)ev, NULL);
-
-		default:
-			return FALSE;
-		}
-
-	return FALSE;
-}
-
-void showda(void)
-{
-
-	g_print("EXPOSE EVENT\n");
-
-}
-
-/* extern */
-/* void glade_set_widgets(GladeXML *xml) */
+/* static gboolean */
+/* drawing_area_events(GtkWidget *canvas, GdkEvent  *ev) */
 /* { */
-/*   GtkWidget * area; */
-/*   Score_t *score; */
-/* /\* 	GtkWidget *objects_vbox, *buttons_vbox; *\/ */
-/* /\* 	GtkWidget *objects_hbox; *\/ */
-/* /\* 	GtkWidget *object_button; *\/ */
 
-/* 	area = glade_xml_get_widget (xml, "sw_score_da"); */
-/* 	score = score_get_from_widget(area); */
-	
-/* /\* 	gtk_widget_set_events(score->area, GDK_EXPOSURE_MASK *\/ */
-/* /\* 			      | GDK_LEAVE_NOTIFY_MASK *\/ */
-/* /\* 			      | GDK_BUTTON_PRESS_MASK *\/ */
-/* /\* 			      | GDK_BUTTON_MOTION_MASK *\/ */
-/* /\*                               | GDK_BUTTON1_MOTION_MASK *\/ */
-/* /\*                               | GDK_KEY_PRESS_MASK *\/ */
-/* /\*                               | GDK_KEY_RELEASE_MASK *\/ */
-/* /\* 			      | GDK_BUTTON_RELEASE_MASK *\/ */
-/* /\* 			      | GDK_POINTER_MOTION_MASK); *\/ */
+/*         GdkEventButton *event_btn; */
+/* 	Score_t *score = score_get_from_widget(canvas); */
 
+/* 	switch (ev->type) */
+/* 		{ */
+		
+/* 		case GDK_MOTION_NOTIFY: */
+/* /\* 			return mouse_motion_event(canvas, (GdkEventMotion *)ev, NULL); *\/ */
 
+/* 		case GDK_KEY_PRESS: */
+/* 			printf("Key press\n"); */
+/* 			break; */
+
+/* 		case GDK_KEY_RELEASE: */
+/* 			printf("Key Realeased\n"); */
+/* 			break; */
+
+/* 			/\* 		return key_event(canvas, (GdkEventKey *)ev); *\/ */
+		
+/* 		case GDK_BUTTON_PRESS: */
+/* 			switch(ev->button.button) */
+/* 				{ */
+/* 				case 1: */
+/* 					/\* Select the staff with which you want to work *\/ */
+/* 					event_btn = (GdkEventButton *)ev; */
+/* 					printf("A2: %.0f\n", event_btn->y); */
+/* 					set_staff_selected(score, get_staff_id(score, event_btn->y)); */
+/* 					/\* For the selection *\/ */
+/* 					return set_selection_origin(canvas, (GdkEventButton *)ev); */
+/* 				case 3: */
+/* 					/\* 			return popup_action(canvas, (GdkEventButton *)ev); *\/ */
+/* 					break; */
+/* 				} */
+/* 			break; */
+		
+/* 		case GDK_BUTTON_RELEASE: */
+/* 			switch(ev->button.button) */
+/* 				{ */
+/* 				case 1: */
+/* 					return mouse_button_release_event(canvas, (GdkEventButton *)ev, NULL); */
+/* 				} */
+/* 			break; */
+		
+/* 		case GDK_EXPOSE: */
+/* 			return score_area_callback(canvas, (GdkEventExpose *)ev, NULL); */
+
+/* 		default: */
+/* 			return FALSE; */
+/* 		} */
+
+/* 	return FALSE; */
 /* } */
 
 gboolean load_plugin_from_command_line(gchar *filename)
 {
-	GscorePlugin *plugin;
-	Score_t     *pi;
+	GscorePlugin * plugin;
+	Score_t      * pi;
 
         gchar *extension;
 
@@ -279,8 +247,11 @@ int main(int argc, char *argv[])
                 score_create_window(NULL);
 	}
 
+#ifdef DEBUG
 	g_log_set_fatal_mask("Gtk", G_LOG_LEVEL_CRITICAL);
 	g_log_set_fatal_mask("Gdk", G_LOG_LEVEL_CRITICAL);
+#endif
+
 	gtk_main();
   
 	return(0);

@@ -33,4 +33,6 @@ void print_note_list(gpointer *data, gpointer *user_data);
 
 void debug_msg(gchar *message);
 
+void show_object_tooltip(Object_t *object);
+
 #endif

@@ -1,8 +1,9 @@
+/* -*- mode:C; tab-width:8; c-default-style:linux; c-basic-offset:8; indent-tabs-mode:nil -*- */
 /*
  * file.c
  * gscore - a musical score editor
  *
- * (C) Copyright 2001-2004 Sebastien Tricaud
+ * (C) Copyright 2001-2005 Sebastien Tricaud
  * e-mail : toady@gscore.org
  * URL    : http://www.gscore.org
  *
@@ -31,7 +32,6 @@
 #include "common.h"
 #include "plugin.h"
 #include "constants.h"
-#include "create_score.h"
 #include "score.h"
 
 #include "gettext.h"
@@ -299,17 +299,15 @@ exit_gscore(gpointer callback_data, guint callback_action, GtkWidget *widget)
 {
   gtk_main_quit();
 
-  // just because it sucks when there's no score ;)
-  /*
-  GtkWidget *dialog;
+/*   GtkWidget *dialog; */
 
-  dialog = gtk_message_dialog_new(GTK_WINDOW(callback_data), GTK_DIALOG_MODAL,
-				  GTK_MESSAGE_QUESTION, GTK_BUTTONS_YES_NO,
-				  "This score isn't saved.\n"
-				    "Do you really want to quit now?");
-  gtk_window_set_position(GTK_WINDOW(dialog), GTK_WIN_POS_MOUSE);
-  if (gtk_dialog_run(GTK_DIALOG(dialog)) == GTK_RESPONSE_YES)
-    gtk_main_quit();
-  gtk_widget_destroy(dialog);
-  */
+/*   dialog = gtk_message_dialog_new(GTK_WINDOW(callback_data), GTK_DIALOG_MODAL, */
+/* 				  GTK_MESSAGE_QUESTION, GTK_BUTTONS_YES_NO, */
+/* 				  "This score isn't saved.\n" */
+/* 				    "Do you really want to quit now?"); */
+/*   gtk_window_set_position(GTK_WINDOW(dialog), GTK_WIN_POS_MOUSE); */
+/*   if (gtk_dialog_run(GTK_DIALOG(dialog)) == GTK_RESPONSE_YES) */
+/*     gtk_main_quit(); */
+/*   gtk_widget_destroy(dialog); */
+
 }

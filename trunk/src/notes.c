@@ -24,6 +24,7 @@
 
 #include <gtk/gtk.h>
 
+#include "gscore.h"
 #include "constants.h"
 
 /* Returns TRUE if the type is a note */
@@ -48,3 +49,33 @@ is_note(gint type)
         return FALSE;
 }
 
+extern gboolean
+is_chord(Object_t *object)
+{
+        if (object->group_id == 0)
+                return FALSE;
+        else
+                return TRUE; 
+}
+
+extern gboolean
+is_barline(gint type)
+{
+        switch(type) {
+
+        case BARLINE:
+        case BARLINE_SINGLE:
+        case BARLINE_DOUBLE:
+        case BARLINE_OPENREPEAT:
+        case BARLINE_CLOSEREPEAT:
+        case BARLINE_OPENCLOSEREPEAT:
+        case BARLINE_OPEN:
+        case BARLINE_CLOSE:
+                return TRUE;
+        default:
+                return FALSE;
+
+        }
+
+        return FALSE;
+}

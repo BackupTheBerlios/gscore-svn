@@ -3,7 +3,7 @@
  * beam.c: manage the notes selected to be beamed
  * gscore - a musical score editor
  *
- * (C) Copyright 2001-2004 Sebastien Tricaud
+ * (C) Copyright 2001-2005 Sebastien Tricaud
  * e-mail : toady@gscore.org
  * URL    : http://www.gscore.org
  *
@@ -30,13 +30,13 @@
 #include "staff.h"
 #include "debug.h"
 #include "spacings.h"
-#include "beam.h"
 #include "score.h"
+#include "beam.h"
 
-extern gint
-/* beam_notes_selected(void) */
-beam_notes_selected(gpointer callback_data, guint callback_action, GtkWidget *widget)
+extern void
+beam_notes_selected(GtkButton *widget, gpointer user_data)
 {
+
 	Staff_t *staff_data;
 	Score_t *score;
 	GtkWidget *area;
@@ -82,12 +82,13 @@ beam_notes_selected(gpointer callback_data, guint callback_action, GtkWidget *wi
 	g_list_free(listrunner_next);
 
 	refresh(area);
-	return 0;
+
 }
 
 extern void
 beam_draw_beam(GtkWidget *area, Staff_t *staff, Object_t *object, guint object_x, gint y, gint ynext)
 {
+
 	GdkGC *gc;
 
 	guint thickness = 0;
@@ -96,37 +97,37 @@ beam_draw_beam(GtkWidget *area, Staff_t *staff, Object_t *object, guint object_x
 	gc = gdk_gc_new(area->window);
 
 
-	switch (object->type)
-		{
-		case EIGHTH:
-			for ( thickness = 0; thickness < Spacings.Beams.bt; thickness++ ) {
-				gdk_draw_line(area->window, gc, 
-					      staff->start_x + object_x + 8, y - thickness,
-					      staff->start_x + object_x + Spacings.NotesRests.sa_quarter - 2, ynext - thickness);
-			}
+	switch ( object->type ) {
+        case EIGHTH:
+                for ( thickness = 0; thickness < Spacings.Beams.bt; thickness++ ) {
+                        gdk_draw_line(area->window, gc, 
+                                      staff->start_x + object_x + 8, y - thickness,
+                                      staff->start_x + object_x + Spacings.NotesRests.sa_quarter - 2, ynext - thickness);
+                }
 
-			break;
-		case SIXTEENTH:
-			for ( thickness = 0; thickness < Spacings.Beams.bt; thickness++ ) {
-				gdk_draw_line(area->window, gc, 
-					      staff->start_x + object_x + 8, y - 21 - thickness,
-					      staff->start_x + object_x + Spacings.NotesRests.sa_quarter - 2, ynext - 21 - thickness);
-			}
+                break;
+        case SIXTEENTH:
+                for ( thickness = 0; thickness < Spacings.Beams.bt; thickness++ ) {
+                        gdk_draw_line(area->window, gc, 
+                                      staff->start_x + object_x + 8, y - 21 - thickness,
+                                      staff->start_x + object_x + Spacings.NotesRests.sa_quarter - 2, ynext - 21 - thickness);
+                }
 
 
-			gdk_draw_line(area->window, gc, 
-				      staff->start_x + object_x + 8, y - 21,
-				      staff->start_x + object_x + 8, y - 25);
-			gdk_draw_line(area->window, gc, 
-				      staff->start_x + object_x + Spacings.NotesRests.sa_quarter - 2, y - 21,
-				      staff->start_x + object_x + Spacings.NotesRests.sa_quarter - 2, y - 25);
+                gdk_draw_line(area->window, gc, 
+                              staff->start_x + object_x + 8, y - 21,
+                              staff->start_x + object_x + 8, y - 25);
+                gdk_draw_line(area->window, gc, 
+                              staff->start_x + object_x + Spacings.NotesRests.sa_quarter - 2, y - 21,
+                              staff->start_x + object_x + Spacings.NotesRests.sa_quarter - 2, y - 25);
 
-			for ( thickness = 0; thickness < Spacings.Beams.bt; thickness++ ) {
-				gdk_draw_line(area->window, gc, 
-					      staff->start_x + object_x + 8, y - 25 - thickness,
-					      staff->start_x + object_x + Spacings.NotesRests.sa_quarter - 2, ynext - 25 - thickness);
-			}
+                for ( thickness = 0; thickness < Spacings.Beams.bt; thickness++ ) {
+                        gdk_draw_line(area->window, gc, 
+                                      staff->start_x + object_x + 8, y - 25 - thickness,
+                                      staff->start_x + object_x + Spacings.NotesRests.sa_quarter - 2, ynext - 25 - thickness);
+                }
 
-			break;
-		}
+                break;
+        }
+
 } 

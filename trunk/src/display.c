@@ -3,7 +3,7 @@
  * display.c
  * gscore - a musical score editor
  *
- * (C) Copyright 2001-2004 Sebastien Tricaud
+ * (C) Copyright 2001-2005 Sebastien Tricaud
  * e-mail : toady@gscore.org
  * URL    : http://www.gscore.org
  *
@@ -26,6 +26,33 @@
 
 #include "gscore.h"
 #include "display.h"
+
+/*
+ * FIXME: Should be backported to libgscore
+ * Creates a new display object
+ * @Returns the object
+ */
+Display_t *gscore_display_new(void)
+{
+        Display_t *display;
+
+        display = g_malloc(sizeof(Display_t));
+        
+        if ( ! display ) return NULL;
+
+        display->measure_number = TRUE;
+        display->instruments = FALSE;
+        display->clefs = TRUE;
+        display->score_expressions = TRUE;
+        display->barlines = TRUE;
+        display->ending_bar = TRUE;
+        display->key_signature = TRUE;
+        display->time_signature = TRUE;
+        display->tempo = TRUE;
+
+        return display;
+
+}
 
 void
 barnotes (gpointer callback_data, guint callback_action, GtkWidget *widget)

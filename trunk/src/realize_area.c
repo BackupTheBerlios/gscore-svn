@@ -1228,6 +1228,8 @@ gboolean score_area_callback(GtkWidget *widget, GdkEventExpose *event, gpointer 
 	GtkWidget *area = score_get_area_from_widget(widget);
 	Display_t * display = score_get_display_from_widget(widget);
 	KeyCursor_t *cursor = score_get_cursor_from_widget(widget);
+
+        if ( ! score ) return FALSE;
 	
 	draw_page_limit(area, score->staff_extremity_end_x);
 
@@ -1320,6 +1322,8 @@ gboolean score_area_callback(GtkWidget *widget, GdkEventExpose *event, gpointer 
 
 gboolean popup_action(GtkWidget *widget, GdkEventButton *event)
 {
+
+        return FALSE;
 
 /* 	gint staff; */
 

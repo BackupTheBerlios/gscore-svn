@@ -24,6 +24,8 @@
 #ifndef _DISPLAY_H_
 #define _DISPLAY_H_
 
+Display_t *gscore_display_new(void);
+
 void barre_notes (gpointer callback_data, guint callback_action, GtkWidget *widget);
 
 void display_measure_line_return(GtkWidget *area, gint measure);

@@ -1,8 +1,9 @@
+/* -*- mode:C; tab-width:8; c-default-style:linux; c-basic-offset:8; indent-tabs-mode:nil -*- */
 /*
  * position.h
  * gscore - a musical score editor
  *
- * (C) Copyright 2001-2004 Sebastien Tricaud
+ * (C) Copyright 2001-2005 Sebastien Tricaud
  * e-mail : toady@gscore.org
  * URL    : http://www.gscore.org
  *
@@ -24,6 +25,8 @@
 #ifndef _POSITION_H_
 #define _POSITION_H_
 
+#include "key_cursor.h"
+
 gint get_position(gint key, gint staff, gint y);
 
 gint get_pitch_from_y(gint staff, gint y);
@@ -41,5 +44,7 @@ gdouble set_x_pos(gint staff, gint x, gint type);
 gdouble get_x_pos(gint staff, gint x);
 
 gdouble get_y_from_position_no_key(guint16 space_btwn_lines, gint zero, gdouble staff_begin_y, gdouble height, gint position);
+
+gboolean position_set_adjustment(GtkWidget *widget, KeyCursor_t *cursor);
 
 #endif

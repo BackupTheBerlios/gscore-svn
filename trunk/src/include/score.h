@@ -26,6 +26,8 @@
 
 #include "key_cursor.h"
 
+Score_t *gscore_score_new(void);
+
 void set_tempo(void);
 
 void score_set_tempo (gpointer callback_data, guint callback_action,
@@ -52,6 +54,8 @@ void score_set_header_ok(void);
 
 Score_t *score_get_from_widget(GtkWidget *widget);
 
+gboolean score_set_to_widget(Score_t *score, GtkWidget *widget);
+
 GtkWidget *score_get_area_from_widget(GtkWidget *widget);
 
 Display_t *score_get_display_from_widget(GtkWidget *widget);
@@ -59,6 +63,8 @@ Display_t *score_get_display_from_widget(GtkWidget *widget);
 Score_selection_t *score_get_selection_from_widget(GtkWidget *widget);
 
 KeyCursor_t *score_get_cursor_from_widget(GtkWidget *widget);
+
+GtkScrolledWindow *score_get_scrolled_window_from_widget(GtkWidget *widget);
 
 void score_create_window(Score_t *score);
 

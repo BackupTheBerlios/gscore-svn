@@ -24,8 +24,7 @@
 #ifndef _BEAM_H_
 #define _BEAM_H_
 
-gint beam_notes_selected(gpointer callback_data, guint callback_action, GtkWidget *widget);
-/* void beam_notes_selected(void); */
+void beam_notes_selected(GtkButton *widget, gpointer user_data);
 
 void beam_draw_beam(GtkWidget *area, Staff_t *staff, Object_t *object, guint object_x, gint y, gint ynext);
 

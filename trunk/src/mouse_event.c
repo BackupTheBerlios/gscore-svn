@@ -1,3 +1,27 @@
+/* -*- mode:C; tab-width:8; c-default-style:linux; c-basic-offset:8; indent-tabs-mode:nil -*- */
+/*
+ * mouse_event.c
+ * gscore - a musical score editor
+ *
+ * (C) Copyright 2001-2005 Sebastien Tricaud
+ * e-mail : toady@gscore.og
+ * URL    : http://www.gscore.org
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+ */
+
 #include <gtk/gtk.h>
 
 #include "gscore.h"
@@ -25,13 +49,13 @@ gboolean set_max_y = FALSE;
 gboolean 
 mouse_button_release_event(GtkWidget *widget, GdkEventButton *event, gpointer user_data)
 {
-  Score_selection_t *selection = score_get_selection_from_widget(widget);
-  Score_t *score = score_get_from_widget(widget);
-  GtkWidget *area = score_get_area_from_widget(widget);
+        Score_selection_t *selection = score_get_selection_from_widget(widget);
+        Score_t *score = score_get_from_widget(widget);
+        GtkWidget *area = score_get_area_from_widget(widget);
   
-/* 	printf("selection->x_origin = %f, selection->y_origin = %f, selection->x = %f, selection->y = %f\n", */
-/* 	       selection->x_origin, selection->y_origin, selection->x, selection->y); */
-
+        /* 	printf("selection->x_origin = %f, selection->y_origin = %f, selection->x = %f, selection->y = %f\n", */
+        /* 	       selection->x_origin, selection->y_origin, selection->x, selection->y); */
+        
 	if ( Selection.object_type == CURSOR ) {
 
 		highlight_selection(score, selection->x_origin, selection->y_origin, 
@@ -61,17 +85,20 @@ mouse_button_release_event(GtkWidget *widget, GdkEventButton *event, gpointer us
 gboolean 
 mouse_button_press_event(GtkWidget *widget, GdkEventButton *event, gpointer user_data)
 {
-  Score_t *score = score_get_from_widget(widget);
+        Score_t *score = score_get_from_widget(widget);
+        Staff_t *staff = staff_selected_get_from_score(score);
+
+/*         show_object_tooltip(NULL); */
   
-	if ( Selection.object_type == CURSOR ) {
+        if ( Selection.object_type == CURSOR ) {
 
-		undo_selection(score);
+                undo_selection(score);
 
-		set_staff_unselect(score, get_staff_selected(score));
-		set_staff_selected(score, get_staff_id(score, event->y));
+                set_staff_unselect(score, get_staff_selected(score));
+                set_staff_selected(score, get_staff_id(score, event->y));
 
-		set_selection_origin(widget, (GdkEventButton *)event);
-	}
+                set_selection_origin(widget, (GdkEventButton *)event);
+        }
 
 	return FALSE;
 }
@@ -106,7 +133,7 @@ gboolean mouse_motion_event(GtkWidget *widget, GdkEventMotion *event, gpointer u
 /* 	g_print("mouse_motion_event : state = %d\n", event->state); */
 	
 	if(! (event->state & GDK_BUTTON1_MASK)) return TRUE;
-	g_print("mme : class = %s %s\n", G_OBJECT_CLASS_NAME(widget), G_OBJECT_CLASS_NAME(event));
+/* 	g_print("mme : class = %s %s\n", G_OBJECT_CLASS_NAME(widget), G_OBJECT_CLASS_NAME(event)); */
 	
 	Score_selection_t *selection = score_get_selection_from_widget(widget);
 	GtkWidget *area = score_get_area_from_widget(widget);

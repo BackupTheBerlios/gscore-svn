@@ -1,3 +1,4 @@
+/* -*- mode:C; tab-width:8; c-default-style:linux; c-basic-offset:8; indent-tabs-mode:nil -*- */
 /*
  * objects.h
  * gscore - a musical score editor
@@ -45,6 +46,9 @@ Object_t *object_get_next(Score_t *score, Object_t *object);
 Object_t *object_get_previous(Score_t *score, Object_t *object);
 
 Object_t *object_get_left(Staff_t *staff, gdouble x);
+
+gdouble object_get_x(Staff_t *staff, Object_t *object);
+/* gdouble object_get_left_x(Staff_t *staff, gdouble x); */
 
 Object_t *object_get_right(Staff_t *staff, gdouble x);
 

@@ -1,3 +1,7 @@
+2005-03-24 Toady <toady@gscore.org>
+
+	* src/objects.c, src/key_event.c: Full insertiong working
+	
 2005-02-08 Toady <toady@gscore.org>
 
 	* src/objects.c, src/key_event.c: Basic object insertion working

@@ -111,7 +111,7 @@ gint object_get_spacing(gint type)
         case BASS_KEY:
         case ALTO_KEY:
         case TENOR_KEY:
-                retval = STANDARD_KEY_SIZE;
+                retval = STANDARD_KEY_SIZE + Spacings.Clefs.sa;
                 break;
         default:
                 g_printf("Unknown value: %d\n", type);
@@ -210,7 +210,8 @@ object_insert(Score_t *score, Object_t *rightobj,
                 g_list_insert_before(staff_data->Object_list, node, staff_data->Object);
 
         if (group_id == 0) {
-                staff_set_current_x(score, staff, staff_get_current_x(score, staff) + object_get_spacing(type));
+                staff_set_current_x(score, staff, 
+                                    staff_get_current_x(score, staff) + object_get_spacing(type));
 
 		score->staff_extremity_end_x += object_get_spacing(type);
         }
@@ -387,6 +388,70 @@ Object_t *object_get_left(Staff_t *staff, gdouble x)
         return ret_object;
 }
 
+gdouble object_get_x(Staff_t *staff, Object_t *object)
+{
+
+        GList *listrunner_object;
+
+        Object_t *object_data;
+
+        gdouble retval = 0;
+
+        listrunner_object = g_list_first(staff->Object_list);
+
+        if ( ! listrunner_object ) return -1;
+
+        while ( listrunner_object ) {
+                object_data = (Object_t *)listrunner_object->data;
+                
+                if (object_data->id != object->id) {
+                        retval += object_get_spacing(object->type);
+                } else {
+                        retval += staff->start_x;
+                        return retval;
+                }
+                
+                listrunner_object = g_list_next(listrunner_object);
+        }  /* while ( listrunner_object )  */
+
+        return -1;
+}
+
+gdouble object_get_left_x(Staff_t *staff, gdouble x)
+{
+
+        GList *listrunner_object;
+
+        Object_t *object_data;
+        
+        gdouble retval = 0;
+
+        gint object_x = 0;
+
+        listrunner_object = g_list_first(staff->Object_list);
+        
+        if ( ! listrunner_object ) return -1;
+
+        while ( listrunner_object ) {
+
+                object_data = (Object_t *)listrunner_object->data;
+
+                object_x += object_get_spacing(object_data->type);
+                        
+                if ( ((staff->start_x + object_x) < x) && (object_data->group_id == 0) ) {
+/*                         printf("object_x = %d\n", object_x); */
+/*                         printf("x = %f\n", x); */
+                        retval = object_x;
+                }
+
+                listrunner_object = g_list_next(listrunner_object);
+        } /* while ( listrunner_object )  */
+
+        printf("retval = %f\n", retval);
+
+        return retval;
+}
+
 /* Returns the object closest to the right from the x position */
 Object_t *object_get_right(Staff_t *staff, gdouble x)
 {
@@ -405,26 +470,35 @@ Object_t *object_get_right(Staff_t *staff, gdouble x)
         while ( listrunner_object ) {
                 object_data = (Object_t *)listrunner_object->data;
 
-                object_x += object_get_spacing(object_data->type);
-                        
                 if ((staff->start_x + object_x) > x) {
-                        ret_object = (Object_t *)object_data;
+                        return (Object_t *)object_data;
 
                 } 
+
+                object_x += object_get_spacing(object_data->type);
+                        
 
                 listrunner_object = g_list_next(listrunner_object);
         } /* while ( listrunner_object )  */
 
 
-        if ( ! ret_object ) return NULL;
+        return NULL;
+}
 
-        return ret_object;
+
+Object_t *object_get_closest(Staff_t *staff, gdouble x)
+{
+        gdouble leftx;
+        gdouble rightx;
+
+/*         leftx = object_get_left_x( */
 }
 
 
 /* static gint  */
 /* compare_object_x(Object_t *data1, Object_t *data2) */
 /* { */
+
 /*         /\*** */
 /*          *** To be used with g_list_insert_sorted(list, object, (GCompareFunc)compare) */
 /*          ***\/ */
@@ -537,3 +611,4 @@ object_selected_pitch_down(Score_t *score)
 
         return something_selected;
 }
+
