@@ -24,6 +24,9 @@
 #ifndef _OBJECTS_H_
 #define _OBJECTS_H_
 
+
+gint object_get_spacing(gint type);
+
 gboolean add_object(gint staff, gint type, accidentals_e accidentals, object_e nature, gulong group_id, 
                     gint x, gint y, gint x2, gint y2, gint x3, gint y3, 
                     gint pitch, gint tab_number, gboolean is_selected);
@@ -38,7 +41,7 @@ Object_t *object_get_previous(Object_t *object);
 
 Object_t *object_get_left(Staff_t *staff, gdouble x);
 
-void get_object_properties(GtkWidget *event_box, GdkEventButton *event, gpointer data);
+/* void get_object_properties(GtkWidget *event_box, GdkEventButton *event, gpointer data); */
 
 void set_object(const gchar *image_filename, GCallback callback_handler, gboolean is_selected, gint x, gint y);
 

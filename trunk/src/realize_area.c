@@ -49,6 +49,7 @@
 #include "macros.h"
 #include "text.h"
 #include "spacings.h"
+#include "chords.h"
 
 
 guint timesignature_x = 0;
@@ -496,6 +497,9 @@ realize_object(Staff_t *staff, Object_t *object, gboolean display_barlines, gboo
 	gdouble extremity_end_y = 0;
 	gboolean is_selected = FALSE;
 
+	gboolean stemup = TRUE;
+	gboolean notehead_left = TRUE;
+
 	gint average = 0;
 
 	is_selected = object->is_selected;
@@ -514,12 +518,22 @@ realize_object(Staff_t *staff, Object_t *object, gboolean display_barlines, gboo
 	extremity_end_y =  staff->extremity_begin_y +(staff->nb_lines - 1) * staff->space_btw_lines + staff->nb_lines - 1;
 	average = (extremity_end_y - staff->extremity_begin_y) / 2;
 
+	printf("before, stemup = %d\n", stemup);
+
 	if (object->group_id != 0) {	/* it means it's a chord */
 
 		tmpx = object_x;
-		object_x = make_chord(staff, object->group_id, object->type, object_x);
+		object_x = make_chord(staff, object->group_id, object->pitch, &stemup, &notehead_left);
+		printf("ra stemup = %d\n", stemup);
 
+	} else {
+		if (y < staff->extremity_begin_y + average)
+			stemup = FALSE;
+		else
+			stemup = TRUE;
 	}
+
+	printf("before, stemup = %d\n", stemup);
 
 
 	switch(object->type) {
@@ -615,8 +629,7 @@ realize_object(Staff_t *staff, Object_t *object, gboolean display_barlines, gboo
 		if ( object->nature & O_DURATION )
 			draw_point(staff->start_x + object_x + 12, y);
 
-
-		if ( y < staff->extremity_begin_y + average ) {
+		if ( ! stemup ) {
 			/* The note has the stem down */
 			if ( object->nature & O_STACCATO )
 				draw_point(staff->start_x + object_x + 4, y - 8);
@@ -685,7 +698,7 @@ realize_object(Staff_t *staff, Object_t *object, gboolean display_barlines, gboo
 		if ( object->nature & O_DURATION )
 			draw_point(staff->start_x + object_x + 8 + Spacings.AugmentationDots.sbdan, y);
 		
-		if ( y < staff->extremity_begin_y + average ) {
+		if ( ! stemup ) {
 			/* The note has the stem down */
 			if ( object->nature & O_STACCATO )
 				draw_point(staff->start_x + object_x + 4, y - 8);
@@ -750,7 +763,7 @@ realize_object(Staff_t *staff, Object_t *object, gboolean display_barlines, gboo
 
 		if ( object->nature & O_BEAMED ) {
 			if ( object->nature & O_LAST_BEAMED ) {
-				if ( y < staff->extremity_begin_y + average ) {
+				if ( ! stemup ) {
 					if ( object->nature & O_STACCATO )
 						draw_point(staff->start_x + object_x + 4, y - 8);
 				
@@ -782,7 +795,7 @@ realize_object(Staff_t *staff, Object_t *object, gboolean display_barlines, gboo
 						  y - 21);
 				}
 			} else {
-				if ( y < staff->extremity_begin_y + average ) {
+				if ( ! stemup ) {
 					if ( object->nature & O_STACCATO )
 						draw_point(staff->start_x + object_x + 4, y - 8);
 				
@@ -820,7 +833,7 @@ realize_object(Staff_t *staff, Object_t *object, gboolean display_barlines, gboo
 			}
 		} else {
 
-			if ( y < staff->extremity_begin_y + average ) {
+			if ( ! stemup ) {
 				/* The note has the stem down */
 				if ( object->nature & O_STACCATO )
 					draw_point(staff->start_x + object_x + 4, y - 8);
@@ -871,7 +884,7 @@ realize_object(Staff_t *staff, Object_t *object, gboolean display_barlines, gboo
 
 		if ( object->nature & O_BEAMED ) {
 			if ( object->nature & O_LAST_BEAMED ) {
-				if ( y < staff->extremity_begin_y + average ) {
+				if ( ! stemup ) {
 					if ( object->nature & O_STACCATO )
 						draw_point(staff->start_x + object_x + 4, y - 8);
 				
@@ -903,7 +916,7 @@ realize_object(Staff_t *staff, Object_t *object, gboolean display_barlines, gboo
 						  y - 21);
 				}
 			} else {
-				if ( y < staff->extremity_begin_y + average ) {
+				if ( ! stemup ) {
 					if ( object->nature & O_STACCATO )
 						draw_point(staff->start_x + object_x + 4, y - 8);
 				
@@ -943,7 +956,7 @@ realize_object(Staff_t *staff, Object_t *object, gboolean display_barlines, gboo
 			}
 		} else {
 
-			if ( y < staff->extremity_begin_y + average ) {
+			if ( ! stemup ) {
 				/* The note has the stem down */
 				if ( object->nature & O_STACCATO )
 					draw_point(staff->start_x + object_x + 4, y - 8);

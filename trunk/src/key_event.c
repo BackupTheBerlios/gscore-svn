@@ -73,7 +73,7 @@ score_key_press_event(GtkWidget *widget, GdkEventKey *event)
 		case BARLINE_OPENREPEAT:
 		case BARLINE_CLOSEREPEAT:
 		case BARLINE_OPENCLOSEREPEAT:
-                        if (event->state & GDK_CONTROL_MASK) {
+                        if (event->state & GDK_CONTROL_MASK) { /* Make the chord */
                                 staffobj = (Staff_t *)g_list_nth_data(Score.Staff_list, get_staff_selected());
                                 tmpobj = (Object_t *)object_get_left(staffobj, KeyCursor.x_returned);
 

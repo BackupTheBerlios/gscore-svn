@@ -31,6 +31,7 @@
 #include "key_cursor.h"
 #include "spacings.h"
 #include "staff.h"
+#include "objects.h"
 
 gint object_get_spacing(gint type)
 {
@@ -159,60 +160,7 @@ add_object(gint staff, gint type, accidentals_e accidentals, object_e nature, gu
         if (group_id == 0) {
                 staff_set_current_x(staff, staff_get_current_x(staff) + object_get_spacing(type));
 
-                switch (type) {
-                case DOUBLEWHOLE:
-                        Score.staff_extremity_end_x += Spacings.NotesRests.sa_doublewhole;
-                        break;
-                case DOUBLEWHOLEREST:
-                        Score.staff_extremity_end_x += Spacings.NotesRests.sa_doublewholerest;
-                        break;
-                case WHOLE:
-                        Score.staff_extremity_end_x += Spacings.NotesRests.sa_whole;
-                        break;
-                case WHOLEREST:
-                        Score.staff_extremity_end_x += Spacings.NotesRests.sa_wholerest;
-                        break;
-                case HALF:
-                        Score.staff_extremity_end_x += Spacings.NotesRests.sa_half;
-                        break;
-                case HALFREST:
-                        Score.staff_extremity_end_x += Spacings.NotesRests.sa_halfrest;
-                        break;
-                case QUARTER:
-                        Score.staff_extremity_end_x += Spacings.NotesRests.sa_quarter;
-                        break;
-                case QUARTERREST:
-                        Score.staff_extremity_end_x += Spacings.NotesRests.sa_quarterrest;
-                        break;
-                case EIGHTH:
-                        Score.staff_extremity_end_x += Spacings.NotesRests.sa_eighth;
-                        break;
-                case EIGHTHREST:
-                        Score.staff_extremity_end_x += Spacings.NotesRests.sa_eighthrest;
-                        break;
-                case SIXTEENTH:
-                        Score.staff_extremity_end_x += Spacings.NotesRests.sa_sixteenth;
-                        break;
-                case SIXTEENTHREST:
-                        Score.staff_extremity_end_x += Spacings.NotesRests.sa_sixteenthrest;
-                        break;
-                case BARLINE_SINGLE:
-                case BARLINE_DOUBLE:
-                case BARLINE_OPENREPEAT:
-                case BARLINE_CLOSEREPEAT:
-                case BARLINE_OPENCLOSEREPEAT:
-                        Score.staff_extremity_end_x += Spacings.Barlines.sab;
-                        break;
-                case TREBLE_KEY:
-                case BASS_KEY:
-                case ALTO_KEY:
-                case TENOR_KEY:
-                        Score.staff_extremity_end_x += STANDARD_KEY_SIZE;
-                        break;
-                default:
-                        printf("(add_objects) Unknown object %d\n", type);
-                        break;
-                }
+		Score.staff_extremity_end_x += object_get_spacing(type);
         }
 
         return TRUE;
@@ -371,53 +319,7 @@ Object_t *object_get_left(Staff_t *staff, gdouble x)
         while ( listrunner_object ) {
                 object_data = (Object_t *)listrunner_object->data;
 
-                switch(object_data->type) {
-                case DOUBLEWHOLE:
-                        object_x += Spacings.NotesRests.sa_doublewhole;
-                        break;
-                case DOUBLEWHOLEREST:
-                        object_x += Spacings.NotesRests.sa_doublewholerest;
-                        break;
-                case WHOLE:
-                        object_x += Spacings.NotesRests.sa_whole;
-                        break;
-                case WHOLEREST:
-                        object_x += Spacings.NotesRests.sa_wholerest;
-                        break;
-                case HALF:
-                        object_x += Spacings.NotesRests.sa_half;
-                        break;
-                case HALFREST:
-                        object_x += Spacings.NotesRests.sa_halfrest;
-                        break;
-                case QUARTER:
-                        object_x += Spacings.NotesRests.sa_quarter;
-                        break;
-                case QUARTERREST:
-                        object_x += Spacings.NotesRests.sa_quarterrest;
-                        break;
-                case EIGHTH:
-                        object_x += Spacings.NotesRests.sa_eighth;
-                        break;
-                case EIGHTHREST:
-                        object_x += Spacings.NotesRests.sa_eighthrest;
-                        break;
-                case SIXTEENTH:
-                        object_x += Spacings.NotesRests.sa_sixteenth;
-                        break;
-                case SIXTEENTHREST:
-                        object_x += Spacings.NotesRests.sa_sixteenthrest;
-                        break;
-                case BARLINE_SINGLE:
-                case BARLINE_DOUBLE:
-                case BARLINE_OPENREPEAT:
-                case BARLINE_CLOSEREPEAT:
-                case BARLINE_OPENCLOSEREPEAT:
-                        object_x += Spacings.Barlines.sab;
-                        break;
-                default:
-                        break;
-                } /* switch(object_data->type) */
+		object_x += object_get_spacing(object_data->type);
                         
                 if ((staff->start_x + object_x) <= x) {
                         ret_object = (Object_t *)object_data;

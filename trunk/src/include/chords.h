@@ -25,6 +25,8 @@
 #define _CHORDS_H_
 
 /* Returns the x position where the note should be */
-guint make_chord(Staff_t *staff, gulong group_id, gint note_type, guint object_x);
+/* Gives the information if the base note has the stem up or down */
+/* And also, if the note must be drawn with the head oriented on the left or right (it happens of the pitch is just below/above) */
+guint make_chord(Staff_t *staff, gulong group_id, gint pitch, gboolean *stemup, gboolean *notehead_left);
 
 #endif

@@ -26,18 +26,48 @@
 #include "gscore.h"
 #include "position.h"
 #include "constants.h"
+#include "objects.h"
 
-guint make_chord(Staff_t *staff, gulong group_id, gint note_type, guint object_x)
+guint make_chord(Staff_t *staff, gulong group_id, gint pitch, gboolean *stemup, gboolean *notehead_left)
 {
+	GList *listrunner_object;
+	guint retval = 0;
+	guint xpos = 0;
+	gint y = 0;
 
-	if (note_type == DOUBLEWHOLE) object_x -= object_get_spacing(DOUBLEWHOLE);
-	if (note_type == WHOLE) object_x -= object_get_spacing(WHOLE);
-	if (note_type == HALF) object_x -= object_get_spacing(HALF);
-	if (note_type == QUARTER) object_x -= object_get_spacing(QUARTER);
-	if (note_type == EIGHTH) object_x -= object_get_spacing(EIGHTH);
-	if (note_type == SIXTEENTH) object_x -= object_get_spacing(SIXTEENTH);
 
-	return object_x;
+	gdouble extremity_end_y = 0;
+	gint average = 0;
+	
+
+	extremity_end_y =  staff->extremity_begin_y +(staff->nb_lines - 1) * staff->space_btw_lines + staff->nb_lines - 1;
+	average = (extremity_end_y - staff->extremity_begin_y) / 2;
+
+	listrunner_object = g_list_first(staff->Object_list);
+	while ( listrunner_object ) {
+		Object_t *object;
+		object = (Object_t *)listrunner_object->data;
+		
+		if (object) {
+			if (object->id == group_id) { /* Then, the chord is made with this note */
+				retval = xpos;
+				
+				if (y < staff->extremity_begin_y + average)
+					* stemup = FALSE;
+				else
+					* stemup = TRUE;
+			}
+
+			xpos += object_get_spacing(object->type);
+		}
+
+		
+		listrunner_object = g_list_next(listrunner_object);
+	}
+
+	printf("ch stemup = %d\n", stemup);
+
+	return retval;
 
 }
 
