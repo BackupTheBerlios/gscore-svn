@@ -1,35 +1,12 @@
-TODO Gscore 0.0.7 "bond" release
-
-[ ] TODO
-[x] Done
-
-* Fonts
-
-   - Use of lilypond fonts in ttf [ ]
-
-* Plugins
-
-   - Export in Lilypond 2.x [ ]
-
-TODO ... Later
-
-- Use of cairo
-- Import/Export NIFF
-- Export PostScript
-- Import Guitar Pro files
-- Export/Import Finale files
-- Import/Export denemo files
-- Import/Export noteedit files
-- Import/Export musictex files
-- Possibility to insert note in command line
-- Data structure for plugins out from gscore (Don't need GtkWidget)
-
-The version 1.0 of Gscore targets:
-- a fully working/tested musical notation software
-- tabs support
+- libgscore: functions such as gscore_new(), add_note(), add_staff(), remove_staff() must be there.
+- libgscore-ui: widgets used in gscore (ruler, notes...)
+- use of cairo: 
+- ruler widget
+- tons of filters
 - printing support
-- Linux/Windows versions
-- Plugins documentation
-- User documentation
-- Examples
+- windows port
+- tabs support
+- scripting language
+- NIFF
+- documentation
 
