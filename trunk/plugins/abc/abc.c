@@ -33,6 +33,7 @@
 #include "gscore.h"
 
 #include "export-abc.h"
+#include "import-abc.h"
 
 #define API_VERSION 1
 #define PLUGIN_TYPE GSCORE_PLUGIN_FILTER
@@ -41,7 +42,7 @@
 #define PLUGIN_VERSION "1"
 #define PLUGIN_SUMMARY "ABC"
 #define PLUGIN_DESCRIPTION "Import/Export ABC Music"
-#define PLUGIN_AUTHOR "Jerome Marrec <j.marrec@10pouces.homelinux.net>"
+#define PLUGIN_AUTHOR "Jerome Marrec <j.marrec@10pouces.org>"
 #define PLUGIN_HOMEPAGE GSCORE_HOMEPAGE
 
 
@@ -130,14 +131,14 @@ gboolean abc_filter_import (Score_t **score,
 	g_print("Loading %s\n", filename);
 
         /* The following sets the tempo for the score */
-        GSCORE_PLUGIN_INIT_STRUCT(spi);
+        GSCORE_PLUGIN_STRUCT_INIT(spi);
 
         spi->tempo = 10;
 
 
         /* We give the structure to the pointer */
         /* I believe it's cleaner this way. Now it's up to you */
-        GSCORE_PLUGIN_INIT_STRUCT(*score);
+        GSCORE_PLUGIN_STRUCT_INIT(*score);
         *score = spi;
 
 	return TRUE;
