@@ -353,6 +353,37 @@ undo_selection(Score_t *score)
         return -1;
 }
 
+extern gint
+undo_selection_widget(GtkWidget *widget, gpointer user_data)
+{
+
+	GList *listrunner;
+        Score_t *score = score_get_from_widget(widget);
+	Staff_t *staff;
+
+        staff = g_list_nth_data(score->Staff_list, get_staff_selected(score));
+
+        if (staff) {
+	/* Parsing Objects structure */
+	listrunner = g_list_first(staff->Object_list);
+	while ( listrunner ) {
+		Object_t *object;
+		object = (Object_t *)listrunner->data;
+
+		object->is_selected = FALSE;
+
+		listrunner = g_list_next(listrunner);
+	}
+
+	g_list_free(listrunner);
+
+	return 0;
+
+        }
+
+        return -1;
+}
+
 
 gint get_selection_object_type(gint x, gint y, gint staff)
 {

@@ -3,7 +3,7 @@
  * key_event.c
  * gscore - a musical score editor
  *
- * (C) Copyright 2001-2004 Sebastien Tricaud
+ * (C) Copyright 2001-2005 Sebastien Tricaud
  * e-mail : toady@gscore.org
  * URL    : http://www.gscore.org
  *
@@ -160,18 +160,18 @@ score_key_press_event(GtkWidget *widget, GdkEventKey *event)
         case GDK_Return:
                 score_set_to_widget(NULL, widget);
                 break;
-        case GDK_w:
-                printf("Save the score\n");
-                ur_score = (Score_t *)score_get_from_widget(widget);
-                score_set_to_widget(NULL, widget);
-                refresh(area);
-                break;
-        case GDK_x:
-                printf("Get the saved score\n");
-                score_set_to_widget(NULL, widget);
-                score_set_to_widget((Score_t*)ur_score, widget);
-                refresh(area);
-                break;
+/*         case GDK_w: */
+/*                 printf("Save the score\n"); */
+/*                 ur_score = (Score_t *)score_get_from_widget(widget); */
+/*                 score_set_to_widget(NULL, widget); */
+/*                 refresh(area); */
+/*                 break; */
+/*         case GDK_x: */
+/*                 printf("Get the saved score\n"); */
+/*                 score_set_to_widget(NULL, widget); */
+/*                 score_set_to_widget((Score_t*)ur_score, widget); */
+/*                 refresh(area); */
+/*                 break; */
         case GDK_Delete:
                 remove_object_selected(score);
                 refresh(area);

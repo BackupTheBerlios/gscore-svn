@@ -130,7 +130,7 @@
 		      <property name="visible">True</property>
 		      <property name="label" translatable="yes">_Score options...</property>
 		      <property name="use_underline">True</property>
-		      <signal name="activate" handler="on_score_options_activate" last_modification_time="Sat, 19 Feb 2005 16:22:47 GMT"/>
+		      <signal name="activate" handler="gtk_widget_show" object="document_options" last_modification_time="Fri, 25 Mar 2005 01:20:37 GMT"/>
 
 		      <child internal-child="image">
 			<widget class="GtkImage" id="image1746">
@@ -1635,7 +1635,7 @@
 		      <accelerator key="s" modifiers="GDK_CONTROL_MASK" signal="activate"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image2355">
+			<widget class="GtkImage" id="image2518">
 			  <property name="visible">True</property>
 			  <property name="stock">gtk-save</property>
 			  <property name="icon_size">1</property>
@@ -1657,7 +1657,7 @@
 		      <accelerator key="s" modifiers="GDK_CONTROL_MASK | GDK_SHIFT_MASK" signal="activate"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image2356">
+			<widget class="GtkImage" id="image2519">
 			  <property name="visible">True</property>
 			  <property name="stock">gtk-save-as</property>
 			  <property name="icon_size">1</property>
@@ -1681,10 +1681,10 @@
 		      <property name="visible">True</property>
 		      <property name="label" translatable="yes">Set _tempo</property>
 		      <property name="use_underline">True</property>
-		      <signal name="activate" handler="gtk_widget_show" last_modification_time="Thu, 03 Jun 2004 07:46:44 GMT"/>
+		      <signal name="activate" handler="gtk_widget_show" object="set_tempo" last_modification_time="Thu, 03 Jun 2004 07:46:44 GMT"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image2357">
+			<widget class="GtkImage" id="image2520">
 			  <property name="visible">True</property>
 			  <property name="pixbuf">stock-tempo.png</property>
 			  <property name="xalign">0.5</property>
@@ -1701,10 +1701,10 @@
 		      <property name="visible">True</property>
 		      <property name="label" translatable="yes">Set _headers</property>
 		      <property name="use_underline">True</property>
-		      <signal name="activate" handler="gtk_widget_show" last_modification_time="Fri, 29 Oct 2004 22:01:52 GMT"/>
+		      <signal name="activate" handler="gtk_widget_show" object="set_header" last_modification_time="Fri, 29 Oct 2004 22:01:52 GMT"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image2358">
+			<widget class="GtkImage" id="image2521">
 			  <property name="visible">True</property>
 			  <property name="stock">gtk-justify-center</property>
 			  <property name="icon_size">1</property>
@@ -1741,7 +1741,7 @@
 		      <accelerator key="p" modifiers="GDK_CONTROL_MASK | GDK_SHIFT_MASK" signal="activate"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image2359">
+			<widget class="GtkImage" id="image2522">
 			  <property name="visible">True</property>
 			  <property name="stock">gtk-print-preview</property>
 			  <property name="icon_size">1</property>
@@ -1763,7 +1763,7 @@
 		      <accelerator key="p" modifiers="GDK_CONTROL_MASK" signal="activate"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image2360">
+			<widget class="GtkImage" id="image2523">
 			  <property name="visible">True</property>
 			  <property name="stock">gtk-print</property>
 			  <property name="icon_size">1</property>
@@ -1787,11 +1787,11 @@
 		      <property name="visible">True</property>
 		      <property name="label" translatable="yes">_Close</property>
 		      <property name="use_underline">True</property>
-		      <signal name="activate" handler="on_close_activate" last_modification_time="Thu, 15 Jan 2004 03:56:29 GMT"/>
+		      <signal name="activate" handler="gtk_widget_hide" object="score_window" last_modification_time="Fri, 25 Mar 2005 01:28:10 GMT"/>
 		      <accelerator key="w" modifiers="GDK_CONTROL_MASK" signal="activate"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image2361">
+			<widget class="GtkImage" id="image2524">
 			  <property name="visible">True</property>
 			  <property name="stock">gtk-close</property>
 			  <property name="icon_size">1</property>
@@ -1819,56 +1819,6 @@
 		<widget class="GtkMenu" id="sw_edit_menuitem_menu">
 
 		  <child>
-		    <widget class="GtkImageMenuItem" id="sw_undo_menuitem">
-		      <property name="visible">True</property>
-		      <property name="label" translatable="yes">_Undo</property>
-		      <property name="use_underline">True</property>
-		      <signal name="activate" handler="plop" last_modification_time="Tue, 29 Jun 2004 06:03:52 GMT"/>
-		      <accelerator key="z" modifiers="GDK_CONTROL_MASK" signal="activate"/>
-
-		      <child internal-child="image">
-			<widget class="GtkImage" id="image2362">
-			  <property name="visible">True</property>
-			  <property name="stock">gtk-undo</property>
-			  <property name="icon_size">1</property>
-			  <property name="xalign">0.5</property>
-			  <property name="yalign">0.5</property>
-			  <property name="xpad">0</property>
-			  <property name="ypad">0</property>
-			</widget>
-		      </child>
-		    </widget>
-		  </child>
-
-		  <child>
-		    <widget class="GtkImageMenuItem" id="sw_redo_menuitem">
-		      <property name="visible">True</property>
-		      <property name="label" translatable="yes">_Redo</property>
-		      <property name="use_underline">True</property>
-		      <signal name="activate" handler="on_redo_activate" last_modification_time="Thu, 15 Jan 2004 03:56:29 GMT"/>
-		      <accelerator key="z" modifiers="GDK_CONTROL_MASK | GDK_SHIFT_MASK" signal="activate"/>
-
-		      <child internal-child="image">
-			<widget class="GtkImage" id="image2363">
-			  <property name="visible">True</property>
-			  <property name="stock">gtk-redo</property>
-			  <property name="icon_size">1</property>
-			  <property name="xalign">0.5</property>
-			  <property name="yalign">0.5</property>
-			  <property name="xpad">0</property>
-			  <property name="ypad">0</property>
-			</widget>
-		      </child>
-		    </widget>
-		  </child>
-
-		  <child>
-		    <widget class="GtkSeparatorMenuItem" id="separator2">
-		      <property name="visible">True</property>
-		    </widget>
-		  </child>
-
-		  <child>
 		    <widget class="GtkImageMenuItem" id="sw_cut_menuitem">
 		      <property name="visible">True</property>
 		      <property name="label" translatable="yes">Cu_t</property>
@@ -1877,7 +1827,7 @@
 		      <accelerator key="x" modifiers="GDK_CONTROL_MASK" signal="activate"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image2364">
+			<widget class="GtkImage" id="image2525">
 			  <property name="visible">True</property>
 			  <property name="stock">gtk-cut</property>
 			  <property name="icon_size">1</property>
@@ -1899,7 +1849,7 @@
 		      <accelerator key="c" modifiers="GDK_CONTROL_MASK" signal="activate"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image2365">
+			<widget class="GtkImage" id="image2526">
 			  <property name="visible">True</property>
 			  <property name="stock">gtk-copy</property>
 			  <property name="icon_size">1</property>
@@ -1921,7 +1871,7 @@
 		      <accelerator key="v" modifiers="GDK_CONTROL_MASK" signal="activate"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image2366">
+			<widget class="GtkImage" id="image2527">
 			  <property name="visible">True</property>
 			  <property name="stock">gtk-paste</property>
 			  <property name="icon_size">1</property>
@@ -1943,7 +1893,7 @@
 		      <accelerator key="Delete" modifiers="0" signal="activate"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image2367">
+			<widget class="GtkImage" id="image2528">
 			  <property name="visible">True</property>
 			  <property name="stock">gtk-delete</property>
 			  <property name="icon_size">1</property>
@@ -1971,7 +1921,7 @@
 		      <accelerator key="j" modifiers="GDK_CONTROL_MASK" signal="activate"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image2368">
+			<widget class="GtkImage" id="image2529">
 			  <property name="visible">True</property>
 			  <property name="stock">gtk-jump-to</property>
 			  <property name="icon_size">1</property>
@@ -2002,10 +1952,10 @@
 		      <property name="visible">True</property>
 		      <property name="label" translatable="yes">Undo</property>
 		      <property name="use_underline">True</property>
-		      <signal name="activate" handler="on_undo1_activate" last_modification_time="Sat, 19 Feb 2005 16:47:06 GMT"/>
+		      <signal name="activate" handler="undo_selection_widget" object="score_window" last_modification_time="Fri, 25 Mar 2005 01:39:45 GMT"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image2369">
+			<widget class="GtkImage" id="image2530">
 			  <property name="visible">True</property>
 			  <property name="stock">gtk-undo</property>
 			  <property name="icon_size">1</property>
@@ -2029,10 +1979,10 @@
 		      <property name="visible">True</property>
 		      <property name="label" translatable="yes">Beam</property>
 		      <property name="use_underline">True</property>
-		      <signal name="activate" handler="on_beam_activate" last_modification_time="Sat, 19 Feb 2005 16:47:06 GMT"/>
+		      <signal name="activate" handler="beam_notes_selected" object="score_window" last_modification_time="Fri, 25 Mar 2005 01:28:46 GMT"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image2370">
+			<widget class="GtkImage" id="image2531">
 			  <property name="visible">True</property>
 			  <property name="pixbuf">tb_beam.xpm</property>
 			  <property name="xalign">0.5</property>
@@ -2049,10 +1999,10 @@
 		      <property name="visible">True</property>
 		      <property name="label" translatable="yes">Tie/Slur</property>
 		      <property name="use_underline">True</property>
-		      <signal name="activate" handler="on_tie/slur_activate" last_modification_time="Sat, 19 Feb 2005 16:47:06 GMT"/>
+		      <signal name="activate" handler="tie_notes_selected" object="score_window" last_modification_time="Fri, 25 Mar 2005 01:29:15 GMT"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image2371">
+			<widget class="GtkImage" id="image2532">
 			  <property name="visible">True</property>
 			  <property name="pixbuf">tb_tie.xpm</property>
 			  <property name="xalign">0.5</property>
@@ -2069,10 +2019,10 @@
 		      <property name="visible">True</property>
 		      <property name="label" translatable="yes">Stem up</property>
 		      <property name="use_underline">True</property>
-		      <signal name="activate" handler="on_stem_up_activate" last_modification_time="Sat, 19 Feb 2005 16:47:06 GMT"/>
+		      <signal name="activate" handler="object_up_callback" last_modification_time="Fri, 25 Mar 2005 01:29:42 GMT"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image2372">
+			<widget class="GtkImage" id="image2533">
 			  <property name="visible">True</property>
 			  <property name="pixbuf">tb_stemup.xpm</property>
 			  <property name="xalign">0.5</property>
@@ -2089,10 +2039,10 @@
 		      <property name="visible">True</property>
 		      <property name="label" translatable="yes">Stem down</property>
 		      <property name="use_underline">True</property>
-		      <signal name="activate" handler="on_stem_down_activate" last_modification_time="Sat, 19 Feb 2005 16:47:06 GMT"/>
+		      <signal name="activate" handler="object_down_callback" last_modification_time="Fri, 25 Mar 2005 01:29:53 GMT"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image2373">
+			<widget class="GtkImage" id="image2534">
 			  <property name="visible">True</property>
 			  <property name="pixbuf">tb_stemdown.xpm</property>
 			  <property name="xalign">0.5</property>
@@ -2109,10 +2059,10 @@
 		      <property name="visible">True</property>
 		      <property name="label" translatable="yes">Add duration</property>
 		      <property name="use_underline">True</property>
-		      <signal name="activate" handler="on_add_duration_activate" last_modification_time="Sat, 19 Feb 2005 16:49:14 GMT"/>
+		      <signal name="activate" handler="object_duration_callback" last_modification_time="Fri, 25 Mar 2005 01:30:22 GMT"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image2374">
+			<widget class="GtkImage" id="image2535">
 			  <property name="visible">True</property>
 			  <property name="pixbuf">tb_augmentationdot.xpm</property>
 			  <property name="xalign">0.5</property>
@@ -2144,10 +2094,10 @@
 			      <property name="visible">True</property>
 			      <property name="label" translatable="yes">No articulation</property>
 			      <property name="use_underline">True</property>
-			      <signal name="activate" handler="on_no_articulation_activate" last_modification_time="Sat, 19 Feb 2005 16:47:06 GMT"/>
+			      <signal name="activate" handler="object_noarticulation_callback" last_modification_time="Fri, 25 Mar 2005 01:31:14 GMT"/>
 
 			      <child internal-child="image">
-				<widget class="GtkImage" id="image2375">
+				<widget class="GtkImage" id="image2536">
 				  <property name="visible">True</property>
 				  <property name="pixbuf">tb_quarter.xpm</property>
 				  <property name="xalign">0.5</property>
@@ -2164,10 +2114,10 @@
 			      <property name="visible">True</property>
 			      <property name="label" translatable="yes">Staccato</property>
 			      <property name="use_underline">True</property>
-			      <signal name="activate" handler="on_staccato_activate" last_modification_time="Sat, 19 Feb 2005 16:47:06 GMT"/>
+			      <signal name="activate" handler="object_staccato_callback" last_modification_time="Fri, 25 Mar 2005 01:31:33 GMT"/>
 
 			      <child internal-child="image">
-				<widget class="GtkImage" id="image2376">
+				<widget class="GtkImage" id="image2537">
 				  <property name="visible">True</property>
 				  <property name="pixbuf">tb_staccato.xpm</property>
 				  <property name="xalign">0.5</property>
@@ -2184,10 +2134,10 @@
 			      <property name="visible">True</property>
 			      <property name="label" translatable="yes">Staccatissimo</property>
 			      <property name="use_underline">True</property>
-			      <signal name="activate" handler="on_staccatissimo_activate" last_modification_time="Sat, 19 Feb 2005 16:47:06 GMT"/>
+			      <signal name="activate" handler="object_staccatissimo_callback" last_modification_time="Fri, 25 Mar 2005 01:31:49 GMT"/>
 
 			      <child internal-child="image">
-				<widget class="GtkImage" id="image2377">
+				<widget class="GtkImage" id="image2538">
 				  <property name="visible">True</property>
 				  <property name="pixbuf">tb_staccatissimo.xpm</property>
 				  <property name="xalign">0.5</property>
@@ -2204,10 +2154,10 @@
 			      <property name="visible">True</property>
 			      <property name="label" translatable="yes">Tenuto</property>
 			      <property name="use_underline">True</property>
-			      <signal name="activate" handler="on_tenuto_activate" last_modification_time="Sat, 19 Feb 2005 16:47:06 GMT"/>
+			      <signal name="activate" handler="object_tenuto_callback" last_modification_time="Fri, 25 Mar 2005 01:32:02 GMT"/>
 
 			      <child internal-child="image">
-				<widget class="GtkImage" id="image2378">
+				<widget class="GtkImage" id="image2539">
 				  <property name="visible">True</property>
 				  <property name="pixbuf">tb_tenuto.xpm</property>
 				  <property name="xalign">0.5</property>
@@ -2224,10 +2174,10 @@
 			      <property name="visible">True</property>
 			      <property name="label" translatable="yes">Accent</property>
 			      <property name="use_underline">True</property>
-			      <signal name="activate" handler="on_accent_activate" last_modification_time="Sat, 19 Feb 2005 16:47:06 GMT"/>
+			      <signal name="activate" handler="object_accent_callback" last_modification_time="Fri, 25 Mar 2005 01:32:18 GMT"/>
 
 			      <child internal-child="image">
-				<widget class="GtkImage" id="image2379">
+				<widget class="GtkImage" id="image2540">
 				  <property name="visible">True</property>
 				  <property name="pixbuf">tb_accent.xpm</property>
 				  <property name="xalign">0.5</property>
@@ -2244,10 +2194,10 @@
 			      <property name="visible">True</property>
 			      <property name="label" translatable="yes">Marcato up</property>
 			      <property name="use_underline">True</property>
-			      <signal name="activate" handler="on_marcato_up_activate" last_modification_time="Sat, 19 Feb 2005 16:47:06 GMT"/>
+			      <signal name="activate" handler="object_marcatoup_callback" last_modification_time="Fri, 25 Mar 2005 01:32:38 GMT"/>
 
 			      <child internal-child="image">
-				<widget class="GtkImage" id="image2380">
+				<widget class="GtkImage" id="image2541">
 				  <property name="visible">True</property>
 				  <property name="pixbuf">tb_marcato.xpm</property>
 				  <property name="xalign">0.5</property>
@@ -2264,10 +2214,10 @@
 			      <property name="visible">True</property>
 			      <property name="label" translatable="yes">Marcato down</property>
 			      <property name="use_underline">True</property>
-			      <signal name="activate" handler="on_marcato_down_activate" last_modification_time="Sat, 19 Feb 2005 16:47:06 GMT"/>
+			      <signal name="activate" handler="object_marcatodown_callback" last_modification_time="Fri, 25 Mar 2005 01:32:59 GMT"/>
 
 			      <child internal-child="image">
-				<widget class="GtkImage" id="image2381">
+				<widget class="GtkImage" id="image2542">
 				  <property name="visible">True</property>
 				  <property name="pixbuf">tb_marcato2.xpm</property>
 				  <property name="xalign">0.5</property>
@@ -2407,10 +2357,10 @@
 		      <property name="label" translatable="yes">Add/Remove staff</property>
 		      <property name="use_underline">True</property>
 		      <signal name="activate" handler="staff_add_remove_options" last_modification_time="Sat, 03 Jul 2004 06:18:14 GMT"/>
-		      <signal name="activate" handler="gtk_widget_show" last_modification_time="Fri, 09 Apr 2004 07:46:40 GMT"/>
+		      <signal name="activate" handler="gtk_widget_show" object="add_remove_staff" last_modification_time="Fri, 09 Apr 2004 07:46:40 GMT"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image2382">
+			<widget class="GtkImage" id="image2543">
 			  <property name="visible">True</property>
 			  <property name="stock">gtk-add</property>
 			  <property name="icon_size">1</property>
@@ -2449,10 +2399,10 @@
 		      <property name="visible">True</property>
 		      <property name="label" translatable="yes">Set/Change key</property>
 		      <property name="use_underline">True</property>
-		      <signal name="activate" handler="gtk_widget_show" last_modification_time="Fri, 09 Apr 2004 07:49:42 GMT"/>
+		      <signal name="activate" handler="gtk_widget_show" object="set_key" last_modification_time="Fri, 09 Apr 2004 07:49:42 GMT"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image2383">
+			<widget class="GtkImage" id="image2544">
 			  <property name="visible">True</property>
 			  <property name="pixbuf">stock-key.png</property>
 			  <property name="xalign">0.5</property>
@@ -2470,10 +2420,10 @@
 		      <property name="label" translatable="yes">Key signature</property>
 		      <property name="use_underline">True</property>
 		      <signal name="activate" handler="on_key_signature_activate" last_modification_time="Fri, 15 Oct 2004 13:24:06 GMT"/>
-		      <signal name="activate" handler="gtk_widget_show" last_modification_time="Fri, 09 Apr 2004 07:49:42 GMT"/>
+		      <signal name="activate" handler="gtk_widget_show" object="set_key_signature" last_modification_time="Fri, 09 Apr 2004 07:49:42 GMT"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image2384">
+			<widget class="GtkImage" id="image2545">
 			  <property name="visible">True</property>
 			  <property name="pixbuf">stock-key_signature.png</property>
 			  <property name="xalign">0.5</property>
@@ -2491,10 +2441,10 @@
 		      <property name="label" translatable="yes">Time signature</property>
 		      <property name="use_underline">True</property>
 		      <signal name="activate" handler="on_time_signature_activate" last_modification_time="Fri, 15 Oct 2004 13:24:34 GMT"/>
-		      <signal name="activate" handler="gtk_widget_show" last_modification_time="Tue, 29 Jun 2004 01:09:21 GMT"/>
+		      <signal name="activate" handler="gtk_widget_show" object="set_time" last_modification_time="Tue, 29 Jun 2004 01:09:21 GMT"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image2385">
+			<widget class="GtkImage" id="image2546">
 			  <property name="visible">True</property>
 			  <property name="pixbuf">stock-time_signature.png</property>
 			  <property name="xalign">0.5</property>
@@ -2561,10 +2511,10 @@
 		      <property name="visible">True</property>
 		      <property name="label" translatable="yes">Text</property>
 		      <property name="use_underline">True</property>
-		      <signal name="activate" handler="gtk_widget_show" last_modification_time="Mon, 06 Sep 2004 15:07:48 GMT"/>
+		      <signal name="activate" handler="gtk_widget_show" object="insert_text" last_modification_time="Mon, 06 Sep 2004 15:07:48 GMT"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image2386">
+			<widget class="GtkImage" id="image2547">
 			  <property name="visible">True</property>
 			  <property name="stock">gtk-select-font</property>
 			  <property name="icon_size">1</property>
@@ -2588,10 +2538,10 @@
 		      <property name="visible">True</property>
 		      <property name="label" translatable="yes">Key change</property>
 		      <property name="use_underline">True</property>
-		      <signal name="activate" handler="on_key_change_activate" last_modification_time="Mon, 28 Jun 2004 22:32:08 GMT"/>
+		      <signal name="activate" handler="gtk_widget_show" object="change_key" last_modification_time="Fri, 25 Mar 2005 01:46:02 GMT"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image2387">
+			<widget class="GtkImage" id="image2548">
 			  <property name="visible">True</property>
 			  <property name="pixbuf">stock-key_change.png</property>
 			  <property name="xalign">0.5</property>
@@ -2611,7 +2561,7 @@
 		      <signal name="activate" handler="on_signature_change_activate" last_modification_time="Mon, 28 Jun 2004 22:32:08 GMT"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image2388">
+			<widget class="GtkImage" id="image2549">
 			  <property name="visible">True</property>
 			  <property name="pixbuf">stock-key_signature_change.png</property>
 			  <property name="xalign">0.5</property>
@@ -2631,7 +2581,7 @@
 		      <signal name="activate" handler="on_time_change_activate" last_modification_time="Mon, 28 Jun 2004 22:32:08 GMT"/>
 
 		      <child internal-child="image">
-			<widget class="GtkImage" id="image2389">
+			<widget class="GtkImage" id="image2550">
 			  <property name="visible">True</property>
 			  <property name="pixbuf">stock-time_signature_change.png</property>
 			  <property name="xalign">0.5</property>
@@ -2663,10 +2613,10 @@
 			      <property name="visible">True</property>
 			      <property name="label" translatable="yes">Doublewhole</property>
 			      <property name="use_underline">True</property>
-			      <signal name="activate" handler="on_doublewhole_activate" last_modification_time="Sat, 19 Feb 2005 16:37:37 GMT"/>
+			      <signal name="activate" handler="object_doublewhole_callback" last_modification_time="Fri, 25 Mar 2005 01:47:23 GMT"/>
 
 			      <child internal-child="image">
-				<widget class="GtkImage" id="image2390">
+				<widget class="GtkImage" id="image2551">
 				  <property name="visible">True</property>
 				  <property name="pixbuf">tb_doublewhole.xpm</property>
 				  <property name="xalign">0.5</property>
@@ -2683,10 +2633,10 @@
 			      <property name="visible">True</property>
 			      <property name="label" translatable="yes">Whole</property>
 			      <property name="use_underline">True</property>
-			      <signal name="activate" handler="on_whole_activate" last_modification_time="Sat, 19 Feb 2005 16:40:37 GMT"/>
+			      <signal name="activate" handler="object_whole_callback" last_modification_time="Fri, 25 Mar 2005 01:47:34 GMT"/>
 
 			      <child internal-child="image">
-				<widget class="GtkImage" id="image2391">
+				<widget class="GtkImage" id="image2552">
 				  <property name="visible">True</property>
 				  <property name="pixbuf">tb_whole.xpm</property>
 				  <property name="xalign">0.5</property>
@@ -2703,10 +2653,10 @@
 			      <property name="visible">True</property>
 			      <property name="label" translatable="yes">Half</property>
 			      <property name="use_underline">True</property>
-			      <signal name="activate" handler="on_half_activate" last_modification_time="Sat, 19 Feb 2005 16:40:37 GMT"/>
+			      <signal name="activate" handler="object_half_callback" last_modification_time="Fri, 25 Mar 2005 01:47:52 GMT"/>
 
 			      <child internal-child="image">
-				<widget class="GtkImage" id="image2392">
+				<widget class="GtkImage" id="image2553">
 				  <property name="visible">True</property>
 				  <property name="pixbuf">tb_half.xpm</property>
 				  <property name="xalign">0.5</property>
@@ -2723,10 +2673,10 @@
 			      <property name="visible">True</property>
 			      <property name="label" translatable="yes">Quarter</property>
 			      <property name="use_underline">True</property>
-			      <signal name="activate" handler="on_quarter_activate" last_modification_time="Sat, 19 Feb 2005 16:40:37 GMT"/>
+			      <signal name="activate" handler="object_quarter_callback" last_modification_time="Fri, 25 Mar 2005 01:48:06 GMT"/>
 
 			      <child internal-child="image">
-				<widget class="GtkImage" id="image2393">
+				<widget class="GtkImage" id="image2554">
 				  <property name="visible">True</property>
 				  <property name="pixbuf">tb_quarter.xpm</property>
 				  <property name="xalign">0.5</property>
@@ -2743,10 +2693,10 @@
 			      <property name="visible">True</property>
 			      <property name="label" translatable="yes">Eighth</property>
 			      <property name="use_underline">True</property>
-			      <signal name="activate" handler="on_eighth_activate" last_modification_time="Sat, 19 Feb 2005 16:40:37 GMT"/>
+			      <signal name="activate" handler="object_eighth_callback" last_modification_time="Fri, 25 Mar 2005 01:48:18 GMT"/>
 
 			      <child internal-child="image">
-				<widget class="GtkImage" id="image2394">
+				<widget class="GtkImage" id="image2555">
 				  <property name="visible">True</property>
 				  <property name="pixbuf">tb_eighth.xpm</property>
 				  <property name="xalign">0.5</property>
@@ -2763,10 +2713,10 @@
 			      <property name="visible">True</property>
 			      <property name="label" translatable="yes">Sixteenth</property>
 			      <property name="use_underline">True</property>
-			      <signal name="activate" handler="on_sixteenth_activate" last_modification_time="Sat, 19 Feb 2005 16:40:37 GMT"/>
+			      <signal name="activate" handler="object_sixteenth_callback" last_modification_time="Fri, 25 Mar 2005 01:48:32 GMT"/>
 
 			      <child internal-child="image">
-				<widget class="GtkImage" id="image2395">
+				<widget class="GtkImage" id="image2556">
 				  <property name="visible">True</property>
 				  <property name="pixbuf">tb_sixteenth.xpm</property>
 				  <property name="xalign">0.5</property>
@@ -2786,7 +2736,7 @@
 			      <signal name="activate" handler="on_thirtysecond_activate" last_modification_time="Sat, 19 Feb 2005 16:40:37 GMT"/>
 
 			      <child internal-child="image">
-				<widget class="GtkImage" id="image2396">
+				<widget class="GtkImage" id="image2557">
 				  <property name="visible">True</property>
 				  <property name="pixbuf">tb_thirtysecond.xpm</property>
 				  <property name="xalign">0.5</property>
@@ -2806,7 +2756,7 @@
 			      <signal name="activate" handler="on_sixtyfourth_activate" last_modification_time="Sat, 19 Feb 2005 16:40:37 GMT"/>
 
 			      <child internal-child="image">
-				<widget class="GtkImage" id="image2397">
+				<widget class="GtkImage" id="image2558">
 				  <property name="visible">True</property>
 				  <property name="pixbuf">tb_sixtyfourth.xpm</property>
 				  <property name="xalign">0.5</property>
@@ -2836,10 +2786,10 @@
 			      <property name="visible">True</property>
 			      <property name="label" translatable="yes">Doublewhole rest</property>
 			      <property name="use_underline">True</property>
-			      <signal name="activate" handler="on_doublewhole_rest_activate" last_modification_time="Sat, 19 Feb 2005 16:40:37 GMT"/>
+			      <signal name="activate" handler="object_doublewholerest_callback" last_modification_time="Fri, 25 Mar 2005 01:49:30 GMT"/>
 
 			      <child internal-child="image">
-				<widget class="GtkImage" id="image2398">
+				<widget class="GtkImage" id="image2559">
 				  <property name="visible">True</property>
 				  <property name="pixbuf">tb_doublewholerest.xpm</property>
 				  <property name="xalign">0.5</property>
@@ -2856,10 +2806,10 @@
 			      <property name="visible">True</property>
 			      <property name="label" translatable="yes">Whole rest</property>
 			      <property name="use_underline">True</property>
-			      <signal name="activate" handler="on_whole_rest_activate" last_modification_time="Sat, 19 Feb 2005 16:40:37 GMT"/>
+			      <signal name="activate" handler="object_wholerest_callback" last_modification_time="Fri, 25 Mar 2005 01:49:46 GMT"/>
 
 			      <child internal-child="image">
-				<widget class="GtkImage" id="image2399">
+				<widget class="GtkImage" id="image2560">
 				  <property name="visible">True</property>
 				  <property name="pixbuf">tb_wholerest.xpm</property>
 				  <property name="xalign">0.5</property>
@@ -2876,10 +2826,10 @@
 			      <property name="visible">True</property>
 			      <property name="label" translatable="yes">Half rest</property>
 			      <property name="use_underline">True</property>
-			      <signal name="activate" handler="on_half_rest_activate" last_modification_time="Sat, 19 Feb 2005 16:40:37 GMT"/>
+			      <signal name="activate" handler="object_halfrest_callback" last_modification_time="Fri, 25 Mar 2005 01:50:00 GMT"/>
 
 			      <child internal-child="image">
-				<widget class="GtkImage" id="image2400">
+				<widget class="GtkImage" id="image2561">
 				  <property name="visible">True</property>
 				  <property name="pixbuf">tb_halfrest.xpm</property>
 				  <property name="xalign">0.5</property>
@@ -2896,10 +2846,10 @@
 			      <property name="visible">True</property>
 			      <property name="label" translatable="yes">Quarter rest</property>
 			      <property name="use_underline">True</property>
-			      <signal name="activate" handler="on_quarter_rest_activate" last_modification_time="Sat, 19 Feb 2005 16:40:37 GMT"/>
+			      <signal name="activate" handler="object_quarterrest_callback" last_modification_time="Fri, 25 Mar 2005 01:50:20 GMT"/>
 
 			      <child internal-child="image">
-				<widget class="GtkImage" id="image2401">
+				<widget class="GtkImage" id="image2562">
 				  <property name="visible">True</property>
 				  <property name="pixbuf">tb_quarterrest.xpm</property>
 				  <property name="xalign">0.5</property>
@@ -2916,10 +2866,10 @@
 			      <property name="visible">True</property>
 			      <property name="label" translatable="yes">Eighth rest</property>
 			      <property name="use_underline">True</property>
-			      <signal name="activate" handler="on_eighth_rest_activate" last_modification_time="Sat, 19 Feb 2005 16:40:37 GMT"/>
+			      <signal name="activate" handler="object_eighthrest_callback" last_modification_time="Fri, 25 Mar 2005 01:50:37 GMT"/>
 
 			      <child internal-child="image">
-				<widget class="GtkImage" id="image2402">
+				<widget class="GtkImage" id="image2563">
 				  <property name="visible">True</property>
 				  <property name="pixbuf">tb_eighthrest.xpm</property>
 				  <property name="xalign">0.5</property>
@@ -2936,10 +2886,10 @@
 			      <property name="visible">True</property>
 			      <property name="label" translatable="yes">Sixteenth rest</property>
 			      <property name="use_underline">True</property>
-			      <signal name="activate" handler="on_sixteenth_rest_activate" last_modification_time="Sat, 19 Feb 2005 16:40:37 GMT"/>
+			      <signal name="activate" handler="object_sixteenthrest_callback" last_modification_time="Fri, 25 Mar 2005 01:51:07 GMT"/>
 
 			      <child internal-child="image">
-				<widget class="GtkImage" id="image2403">
+				<widget class="GtkImage" id="image2564">
 				  <property name="visible">True</property>
 				  <property name="pixbuf">tb_sixteenthrest.xpm</property>
 				  <property name="xalign">0.5</property>
@@ -2959,7 +2909,7 @@
 			      <signal name="activate" handler="on_thirtysecond_rest_activate" last_modification_time="Sat, 19 Feb 2005 16:40:37 GMT"/>
 
 			      <child internal-child="image">
-				<widget class="GtkImage" id="image2404">
+				<widget class="GtkImage" id="image2565">
 				  <property name="visible">True</property>
 				  <property name="pixbuf">tb_thirtysecondrest.xpm</property>
 				  <property name="xalign">0.5</property>
@@ -2979,7 +2929,7 @@
 			      <signal name="activate" handler="on_sixtyfourth_rest_activate" last_modification_time="Sat, 19 Feb 2005 16:40:37 GMT"/>
 
 			      <child internal-child="image">
-				<widget class="GtkImage" id="image2405">
+				<widget class="GtkImage" id="image2566">
 				  <property name="visible">True</property>
 				  <property name="pixbuf">tb_sixtyfourthrest.xpm</property>
 				  <property name="xalign">0.5</property>
@@ -3010,10 +2960,10 @@
 			      <property name="visible">True</property>
 			      <property name="label" translatable="yes">Single</property>
 			      <property name="use_underline">True</property>
-			      <signal name="activate" handler="on_single_activate" last_modification_time="Sat, 19 Feb 2005 16:53:28 GMT"/>
+			      <signal name="activate" handler="object_barline_single_callback" last_modification_time="Fri, 25 Mar 2005 01:51:54 GMT"/>
 
 			      <child internal-child="image">
-				<widget class="GtkImage" id="image2406">
+				<widget class="GtkImage" id="image2567">
 				  <property name="visible">True</property>
 				  <property name="pixbuf">tb_barline_single.xpm</property>
 				  <property name="xalign">0.5</property>
@@ -3030,10 +2980,10 @@
 			      <property name="visible">True</property>
 			      <property name="label" translatable="yes">Double</property>
 			      <property name="use_underline">True</property>
-			      <signal name="activate" handler="on_double_activate" last_modification_time="Sat, 19 Feb 2005 16:53:28 GMT"/>
+			      <signal name="activate" handler="object_barline_double_callback" last_modification_time="Fri, 25 Mar 2005 01:52:07 GMT"/>
 
 			      <child internal-child="image">
-				<widget class="GtkImage" id="image2407">
+				<widget class="GtkImage" id="image2568">
 				  <property name="visible">True</property>
 				  <property name="pixbuf">tb_barline_double.xpm</property>
 				  <property name="xalign">0.5</property>
@@ -3050,10 +3000,10 @@
 			      <property name="visible">True</property>
 			      <property name="label" translatable="yes">Open repeat</property>
 			      <property name="use_underline">True</property>
-			      <signal name="activate" handler="on_open_repeat_activate" last_modification_time="Sat, 19 Feb 2005 16:53:28 GMT"/>
+			      <signal name="activate" handler="object_barline_openrepeat_callback" last_modification_time="Fri, 25 Mar 2005 01:52:23 GMT"/>
 
 			      <child internal-child="image">
-				<widget class="GtkImage" id="image2408">
+				<widget class="GtkImage" id="image2569">
 				  <property name="visible">True</property>
 				  <property name="pixbuf">tb_barline_openrepeat.xpm</property>
 				  <property name="xalign">0.5</property>
@@ -3070,10 +3020,10 @@
 			      <property name="visible">True</property>
 			      <property name="label" translatable="yes">Close repeat</property>
 			      <property name="use_underline">True</property>
-			      <signal name="activate" handler="on_close_repeat_activate" last_modification_time="Sat, 19 Feb 2005 16:53:28 GMT"/>
+			      <signal name="activate" handler="object_barline_closerepeat_callback" last_modification_time="Fri, 25 Mar 2005 01:52:39 GMT"/>
 
 			      <child internal-child="image">
-				<widget class="GtkImage" id="image2409">
+				<widget class="GtkImage" id="image2570">
 				  <property name="visible">True</property>
 				  <property name="pixbuf">tb_barline_closerepeat.xpm</property>
 				  <property name="xalign">0.5</property>
@@ -3090,10 +3040,10 @@
 			      <property name="visible">True</property>
 			      <property name="label" translatable="yes">Open/Close repeat</property>
 			      <property name="use_underline">True</property>
-			      <signal name="activate" handler="on_open/close_repeat_activate" last_modification_time="Sat, 19 Feb 2005 16:53:28 GMT"/>
+			      <signal name="activate" handler="object_barline_opencloserepeat_callback" last_modification_time="Fri, 25 Mar 2005 01:52:59 GMT"/>
 
 			      <child internal-child="image">
-				<widget class="GtkImage" id="image2410">
+				<widget class="GtkImage" id="image2571">
 				  <property name="visible">True</property>
 				  <property name="pixbuf">tb_barline_opencloserepeat.xpm</property>
 				  <property name="xalign">0.5</property>
@@ -3142,7 +3092,7 @@
 			      <property name="visible">True</property>
 			      <property name="label" translatable="yes">Pianissississimo</property>
 			      <property name="use_underline">True</property>
-			      <signal name="activate" handler="on_pianissississimo_activate" last_modification_time="Sat, 19 Feb 2005 17:33:37 GMT"/>
+			      <signal name="activate" handler="object_pppp_callback" last_modification_time="Fri, 25 Mar 2005 01:53:24 GMT"/>
 			    </widget>
 			  </child>
 
@@ -3151,7 +3101,7 @@
 			      <property name="visible">True</property>
 			      <property name="label" translatable="yes">Pianississimo</property>
 			      <property name="use_underline">True</property>
-			      <signal name="activate" handler="on_pianississimo_activate" last_modification_time="Sat, 19 Feb 2005 17:33:37 GMT"/>
+			      <signal name="activate" handler="object_ppp_callback" last_modification_time="Fri, 25 Mar 2005 01:53:58 GMT"/>
 			    </widget>
 			  </child>
 
@@ -3160,7 +3110,7 @@
 			      <property name="visible">True</property>
 			      <property name="label" translatable="yes">Pianissimo</property>
 			      <property name="use_underline">True</property>
-			      <signal name="activate" handler="on_pianissimo_activate" last_modification_time="Sat, 19 Feb 2005 17:33:37 GMT"/>
+			      <signal name="activate" handler="object_pp_callback" last_modification_time="Fri, 25 Mar 2005 01:54:08 GMT"/>
 			    </widget>
 			  </child>
 
@@ -3169,7 +3119,7 @@
 			      <property name="visible">True</property>
 			      <property name="label" translatable="yes">Piano</property>
 			      <property name="use_underline">True</property>
-			      <signal name="activate" handler="on_piano_activate" last_modification_time="Sat, 19 Feb 2005 17:33:37 GMT"/>
+			      <signal name="activate" handler="object_p_callback" last_modification_time="Fri, 25 Mar 2005 01:54:31 GMT"/>
 			    </widget>
 			  </child>
 
@@ -3178,7 +3128,7 @@
 			      <property name="visible">True</property>
 			      <property name="label" translatable="yes">Mezzo-piano</property>
 			      <property name="use_underline">True</property>
-			      <signal name="activate" handler="on_mezzo-piano_activate" last_modification_time="Sat, 19 Feb 2005 17:33:37 GMT"/>
+			      <signal name="activate" handler="object_mp_callback" last_modification_time="Fri, 25 Mar 2005 01:54:49 GMT"/>
 			    </widget>
 			  </child>
 
@@ -3187,7 +3137,7 @@
 			      <property name="visible">True</property>
 			      <property name="label" translatable="yes">Mezzo-forte</property>
 			      <property name="use_underline">True</property>
-			      <signal name="activate" handler="on_mezzo-forte_activate" last_modification_time="Sat, 19 Feb 2005 17:33:37 GMT"/>
+			      <signal name="activate" handler="object_mf_callback" last_modification_time="Fri, 25 Mar 2005 01:55:00 GMT"/>
 			    </widget>
 			  </child>
 
@@ -3196,7 +3146,7 @@
 			      <property name="visible">True</property>
 			      <property name="label" translatable="yes">Forte</property>
 			      <property name="use_underline">True</property>
-			      <signal name="activate" handler="on_forte_activate" last_modification_time="Sat, 19 Feb 2005 17:33:37 GMT"/>
+			      <signal name="activate" handler="object_f_callback" last_modification_time="Fri, 25 Mar 2005 01:55:15 GMT"/>
 			    </widget>
 			  </child>
 
@@ -3205,7 +3155,7 @@
 			      <property name="visible">True</property>
 			      <property name="label" translatable="yes">Fortissimo</property>
 			      <property name="use_underline">True</property>
-			      <signal name="activate" handler="on_fortissimo_activate" last_modification_time="Sat, 19 Feb 2005 17:33:37 GMT"/>
+			      <signal name="activate" handler="object_ff_callback" last_modification_time="Fri, 25 Mar 2005 01:55:30 GMT"/>
 			    </widget>
 			  </child>
 
@@ -3214,62 +3164,11 @@
 			      <property name="visible">True</property>
 			      <property name="label" translatable="yes">Fortississimo</property>
 			      <property name="use_underline">True</property>
-			      <signal name="activate" handler="on_fortississimo_activate" last_modification_time="Sat, 19 Feb 2005 17:33:37 GMT"/>
+			      <signal name="activate" handler="object_fff_callback" last_modification_time="Fri, 25 Mar 2005 01:55:43 GMT"/>
 			    </widget>
 			  </child>
 			</widget>
 		      </child>
-		    </widget>
-		  </child>
-		</widget>
-	      </child>
-	    </widget>
-	  </child>
-
-	  <child>
-	    <widget class="GtkMenuItem" id="sw_mode_menuitem">
-	      <property name="visible">True</property>
-	      <property name="label" translatable="yes">_Mode</property>
-	      <property name="use_underline">True</property>
-
-	      <child>
-		<widget class="GtkMenu" id="sw_mode_menuitem_menu">
-
-		  <child>
-		    <widget class="GtkRadioMenuItem" id="none1">
-		      <property name="visible">True</property>
-		      <property name="label" translatable="yes">None</property>
-		      <property name="use_underline">True</property>
-		      <property name="active">False</property>
-		      <signal name="toggled" handler="gtk_widget_hide" object="sw_mode_sw" last_modification_time="Fri, 09 Apr 2004 07:43:40 GMT"/>
-		    </widget>
-		  </child>
-
-		  <child>
-		    <widget class="GtkSeparatorMenuItem" id="separator7">
-		      <property name="visible">True</property>
-		    </widget>
-		  </child>
-
-		  <child>
-		    <widget class="GtkRadioMenuItem" id="abc1">
-		      <property name="visible">True</property>
-		      <property name="label" translatable="yes">ABC</property>
-		      <property name="use_underline">True</property>
-		      <property name="active">False</property>
-		      <property name="group">none1</property>
-		      <signal name="toggled" handler="gtk_widget_show" object="sw_mode_sw" last_modification_time="Fri, 09 Apr 2004 07:43:14 GMT"/>
-		    </widget>
-		  </child>
-
-		  <child>
-		    <widget class="GtkRadioMenuItem" id="lilypond1">
-		      <property name="visible">True</property>
-		      <property name="label" translatable="yes">Lilypond</property>
-		      <property name="use_underline">True</property>
-		      <property name="active">True</property>
-		      <property name="group">none1</property>
-		      <signal name="toggled" handler="gtk_widget_show" object="sw_mode_sw" last_modification_time="Fri, 09 Apr 2004 07:43:04 GMT"/>
 		    </widget>
 		  </child>
 		</widget>
@@ -3552,21 +3451,6 @@ Alastair  Porter, alastair@linuxexperience.com
 	      <property name="focus_on_click">True</property>
 	      <property name="response_id">-6</property>
 	      <signal name="clicked" handler="gtk_widget_hide" object="set_tempo" last_modification_time="Thu, 03 Jun 2004 07:43:26 GMT"/>
-	    </widget>
-	  </child>
-
-	  <child>
-	    <widget class="GtkButton" id="stempo_ok">
-	      <property name="visible">True</property>
-	      <property name="can_default">True</property>
-	      <property name="can_focus">True</property>
-	      <property name="label">gtk-ok</property>
-	      <property name="use_stock">True</property>
-	      <property name="relief">GTK_RELIEF_NORMAL</property>
-	      <property name="focus_on_click">True</property>
-	      <property name="response_id">-5</property>
-	      <signal name="clicked" handler="set_tempo" last_modification_time="Thu, 03 Jun 2004 07:45:01 GMT"/>
-	      <signal name="clicked" handler="gtk_widget_hide" object="set_tempo" last_modification_time="Thu, 03 Jun 2004 07:45:16 GMT"/>
 	    </widget>
 	  </child>
 	</widget>

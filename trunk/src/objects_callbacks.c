@@ -253,6 +253,13 @@ void object_sixtyfourthrest_callback(GtkWidget *widget, GdkEventExpose *event)
 
 void object_sharp_callback(GtkWidget *widget, GdkEventExpose *event)
 {
+
+	Staff_t *staff_data;
+	Score_t *score;
+	GtkWidget *area;
+	
+	GList *listrunner;
+
 	GtkWidget *btnw;
 
 	btnw = glade_xml_get_widget(gladexml, "mw_sharp_tb");
@@ -262,9 +269,50 @@ void object_sharp_callback(GtkWidget *widget, GdkEventExpose *event)
 	else
 		Selection.accidentals -= A_SHARP;
 
+	score = score_get_from_widget(widget);
+	area = score_get_area_from_widget(widget);
+
+	staff_data = (Staff_t *) g_list_nth_data(score->Staff_list,
+						 get_staff_selected(score));
+
+	listrunner = g_list_first(staff_data->Object_list);
+
+	while (listrunner) {
+
+                Object_t *note;
+
+                note = (Object_t *)listrunner->data;
+
+                note->accidentals &= A_NONE;
+                note->accidentals &= A_SHARP;
+                note->accidentals &= A_DOUBLESHARP;
+                note->accidentals &= A_FLAT;
+                note->accidentals &= A_DOUBLEFLAT;
+                note->accidentals &= A_NATURAL;
+                note->accidentals &= A_PARENTHESIS;
+                
+                if ((note->is_selected) && (gtk_toggle_tool_button_get_active(GTK_TOGGLE_TOOL_BUTTON(btnw))))
+                        note->accidentals |= A_SHARP;
+                                  
+                listrunner = g_list_next(listrunner);
+
+        }
+
+	g_list_free(listrunner);
+
+	refresh(area);
+
+
 }
 void object_doublesharp_callback(GtkWidget *widget, GdkEventExpose *event)
 {
+
+	Staff_t *staff_data;
+	Score_t *score;
+	GtkWidget *area;
+	
+	GList *listrunner;
+
 	GtkWidget *btnw;
 
 	btnw = glade_xml_get_widget(gladexml, "mw_doublesharp_tb");
@@ -274,10 +322,50 @@ void object_doublesharp_callback(GtkWidget *widget, GdkEventExpose *event)
 	else
 		Selection.accidentals -= A_DOUBLESHARP;
 
+	score = score_get_from_widget(widget);
+	area = score_get_area_from_widget(widget);
+
+	staff_data = (Staff_t *) g_list_nth_data(score->Staff_list,
+						 get_staff_selected(score));
+
+	listrunner = g_list_first(staff_data->Object_list);
+
+	while (listrunner) {
+
+                Object_t *note;
+
+                note = (Object_t *)listrunner->data;
+
+                note->accidentals &= A_NONE;
+                note->accidentals &= A_SHARP;
+                note->accidentals &= A_DOUBLESHARP;
+                note->accidentals &= A_FLAT;
+                note->accidentals &= A_DOUBLEFLAT;
+                note->accidentals &= A_NATURAL;
+                note->accidentals &= A_PARENTHESIS;
+                
+                if ((note->is_selected) && (gtk_toggle_tool_button_get_active(GTK_TOGGLE_TOOL_BUTTON(btnw))))
+                        note->accidentals |= A_DOUBLESHARP;
+                                  
+                listrunner = g_list_next(listrunner);
+
+        }
+
+	g_list_free(listrunner);
+
+	refresh(area);
+
 }
 
 void object_flat_callback(GtkWidget *widget, GdkEventExpose *event)
 {
+
+	Staff_t *staff_data;
+	Score_t *score;
+	GtkWidget *area;
+	
+	GList *listrunner;
+
 	GtkWidget *btnw;
 
 	btnw = glade_xml_get_widget(gladexml, "mw_flat_tb");
@@ -287,10 +375,50 @@ void object_flat_callback(GtkWidget *widget, GdkEventExpose *event)
 	else
 		Selection.accidentals -= A_FLAT;
 
+	score = score_get_from_widget(widget);
+	area = score_get_area_from_widget(widget);
+
+	staff_data = (Staff_t *) g_list_nth_data(score->Staff_list,
+						 get_staff_selected(score));
+
+	listrunner = g_list_first(staff_data->Object_list);
+
+	while (listrunner) {
+
+                Object_t *note;
+
+                note = (Object_t *)listrunner->data;
+
+                note->accidentals &= A_NONE;
+                note->accidentals &= A_SHARP;
+                note->accidentals &= A_DOUBLESHARP;
+                note->accidentals &= A_FLAT;
+                note->accidentals &= A_DOUBLEFLAT;
+                note->accidentals &= A_NATURAL;
+                note->accidentals &= A_PARENTHESIS;
+                
+                if ((note->is_selected) && (gtk_toggle_tool_button_get_active(GTK_TOGGLE_TOOL_BUTTON(btnw))))
+                        note->accidentals |= A_FLAT;
+                                  
+                listrunner = g_list_next(listrunner);
+
+        }
+
+	g_list_free(listrunner);
+
+	refresh(area);
+
 }
 
 void object_doubleflat_callback(GtkWidget *widget, GdkEventExpose *event)
 {
+
+	Staff_t *staff_data;
+	Score_t *score;
+	GtkWidget *area;
+	
+	GList *listrunner;
+
 	GtkWidget *btnw;
 
 	btnw = glade_xml_get_widget(gladexml, "mw_doubleflat_tb");
@@ -300,10 +428,50 @@ void object_doubleflat_callback(GtkWidget *widget, GdkEventExpose *event)
 	else
 		Selection.accidentals -= A_DOUBLEFLAT;
 
+	score = score_get_from_widget(widget);
+	area = score_get_area_from_widget(widget);
+
+	staff_data = (Staff_t *) g_list_nth_data(score->Staff_list,
+						 get_staff_selected(score));
+
+	listrunner = g_list_first(staff_data->Object_list);
+
+	while (listrunner) {
+
+                Object_t *note;
+
+                note = (Object_t *)listrunner->data;
+
+                note->accidentals &= A_NONE;
+                note->accidentals &= A_SHARP;
+                note->accidentals &= A_DOUBLESHARP;
+                note->accidentals &= A_FLAT;
+                note->accidentals &= A_DOUBLEFLAT;
+                note->accidentals &= A_NATURAL;
+                note->accidentals &= A_PARENTHESIS;
+                
+                if ((note->is_selected) && (gtk_toggle_tool_button_get_active(GTK_TOGGLE_TOOL_BUTTON(btnw))))
+                        note->accidentals |= A_DOUBLEFLAT;
+                                  
+                listrunner = g_list_next(listrunner);
+
+        }
+
+	g_list_free(listrunner);
+
+	refresh(area);
+
 }
 
 void object_natural_callback(GtkWidget *widget, GdkEventExpose *event)
 {
+
+	Staff_t *staff_data;
+	Score_t *score;
+	GtkWidget *area;
+	
+	GList *listrunner;
+
 	GtkWidget *btnw;
 
 	btnw = glade_xml_get_widget(gladexml, "mw_natural_tb");
@@ -312,6 +480,39 @@ void object_natural_callback(GtkWidget *widget, GdkEventExpose *event)
 		Selection.accidentals |= A_NATURAL;
 	else
 		Selection.accidentals -= A_NATURAL;
+
+	score = score_get_from_widget(widget);
+	area = score_get_area_from_widget(widget);
+
+	staff_data = (Staff_t *) g_list_nth_data(score->Staff_list,
+						 get_staff_selected(score));
+
+	listrunner = g_list_first(staff_data->Object_list);
+
+	while (listrunner) {
+
+                Object_t *note;
+
+                note = (Object_t *)listrunner->data;
+
+                note->accidentals &= A_NONE;
+                note->accidentals &= A_SHARP;
+                note->accidentals &= A_DOUBLESHARP;
+                note->accidentals &= A_FLAT;
+                note->accidentals &= A_DOUBLEFLAT;
+                note->accidentals &= A_NATURAL;
+                note->accidentals &= A_PARENTHESIS;
+                
+                if ((note->is_selected) && (gtk_toggle_tool_button_get_active(GTK_TOGGLE_TOOL_BUTTON(btnw))))
+                        note->accidentals |= A_NATURAL;
+                                  
+                listrunner = g_list_next(listrunner);
+
+        }
+
+	g_list_free(listrunner);
+
+	refresh(area);
 
 }
 
@@ -358,19 +559,79 @@ void object_autoupdown_callback(GtkWidget *widget, GdkEventExpose *event)
 void object_up_callback(GtkWidget *widget, GdkEventExpose *event)
 {
 
-/*      Selection.up = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget)); */
-/*      update_statusbar("toolbar","Steam up"); */
+	Staff_t *staff_data;
+	Score_t *score;
+	GtkWidget *area;
+	
+	GList *listrunner;
 
-/*      clean_statusbar(); */
+	score = score_get_from_widget(widget);
+	area = score_get_area_from_widget(widget);
+
+	staff_data = (Staff_t *) g_list_nth_data(score->Staff_list,
+						 get_staff_selected(score));
+
+	listrunner = g_list_first(staff_data->Object_list);
+
+	while (listrunner) {
+
+                Object_t *note;
+
+                note = (Object_t *)listrunner->data;
+
+                note->nature &= O_STEMUP;
+                note->nature &= O_STEMDOWN;
+
+                if (note->is_selected)
+                        note->nature |= O_STEMUP;
+                                  
+                listrunner = g_list_next(listrunner);
+
+        }
+
+	g_list_free(listrunner);
+
+	refresh(area);
+
 }
 
 void object_down_callback(GtkWidget *widget, GdkEventExpose *event)
 {
 
-/*      Selection.down = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget)); */
-/*      update_statusbar("toolbar","Steam down"); */
+	Staff_t *staff_data;
+	Score_t *score;
+	GtkWidget *area;
+	
+	GList *listrunner;
 
-/*      clean_statusbar(); */
+	score = score_get_from_widget(widget);
+	area = score_get_area_from_widget(widget);
+
+	staff_data = (Staff_t *) g_list_nth_data(score->Staff_list,
+						 get_staff_selected(score));
+
+	listrunner = g_list_first(staff_data->Object_list);
+
+	while (listrunner) {
+
+                Object_t *note;
+
+                note = (Object_t *)listrunner->data;
+
+                note->nature &= O_STEMUP;
+                note->nature &= O_STEMDOWN;
+
+                if (note->is_selected)
+                        note->nature |= O_STEMDOWN;
+                                  
+                listrunner = g_list_next(listrunner);
+
+        }
+
+	g_list_free(listrunner);
+
+	refresh(area);
+
 }
 
 void object_duration_callback(GtkWidget *widget, GdkEventExpose *event)

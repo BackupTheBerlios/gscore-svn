@@ -533,10 +533,13 @@ realize_object(GtkWidget *area, Staff_t *staff, Object_t *object, gboolean displ
 /*                 printf("id = %d, notehead_left = %d\n", object->id, notehead_left); */
 
 	} else {
-		if (y < staff->extremity_begin_y + average)
+		if ( (y < staff->extremity_begin_y + average) || object->nature & O_STEMDOWN )
 			stemup = FALSE;
 		else
 			stemup = TRUE;
+
+                if ( object->nature & O_STEMUP )
+                        stemup = TRUE;
 	}
 
 

@@ -1,3 +1,7 @@
+2005-03-25 Toady <toady@gscore.org>
+
+	* src/objects_callbacks.c: Sets/Uset stuff on objects selected
+	
 2005-03-24 Toady <toady@gscore.org>
 
 	* src/objects.c, src/key_event.c: Full insertiong working

@@ -33,6 +33,8 @@ gint highlight_selection(Score_t *score, gdouble x_origin, gdouble y_origin, gdo
 
 gint undo_selection(Score_t *score);
 
+gint undo_selection_widget(GtkWidget *widget, gpointer user_data);
+
 gint get_selection_object_type(gint x, gint y, gint staff);
 
 gint get_selection_id(gint x, gint y, gint staff);

@@ -352,7 +352,9 @@ gboolean staff_set_key(Score_t *score, gint staff, gint key)
 {
         Staff_t *staff_data;
 
-        staff_data = g_list_nth_data(score->Staff_list, staff);
+        g_print("KEY=%d\n", key);
+
+        staff_data = (Staff_t *)g_list_nth_data(score->Staff_list, staff);
         
         if ( staff_data ) {
                 staff_data->key = key;
@@ -372,12 +374,16 @@ void staff_set_key_callback(void)
 	score = score_get_from_widget(widget);
 	area = score_get_area_from_widget(widget);
 	
-	if ( gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget)) )
+	if ( gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget)) ) {
+                g_printf("TREBLE\n");
 		staff_set_key(score, get_staff_selected(score), TREBLE_KEY);
+        }
 
         widget = glade_xml_get_widget(gladexml, "setkey_bass_rb");
-	if ( gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget)) )
+	if ( gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget)) ) {
+                g_printf("BASS\n");
 		staff_set_key(score, get_staff_selected(score), BASS_KEY);
+        }
 
         widget = glade_xml_get_widget(gladexml, "setkey_alto_rb");
 	if ( gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget)) )
@@ -526,12 +532,12 @@ void on_key_signature_activate(GtkWidget *widget)
 
 	gint value_adj = 0;
 
-/* 	old_key_signature = score->Staff[get_staff_selected()].time_signature; */
 
         /* The adjustment */
 /*         switch (score->Staff[get_staff_selected()].key_signature) */
 	switch(staff_get_key_signature(score, get_staff_selected(score))) {
 	case KEY_SIGNATURE_TREBLE_EMPTY:
+                g_print("KEY EMPTY!\n");
 		widget = glade_xml_get_widget (gladexml, "sks_clef_label");
 		gtk_label_set_text(GTK_LABEL(widget), "C Major or A minor");
 
