@@ -117,10 +117,12 @@ score_key_press_event(GtkWidget *widget, GdkEventKey *event)
                                         return FALSE;
                                 }
 
-                                add_object(score, get_staff_selected(score), 
-                                           Selection.object_type, 
-                                           Selection.accidentals, Selection.nature, tmpobj->id, 
-                                           0, 0, 0, 0, 0, 0, cursor->position, 0, FALSE);
+                                if (is_note(tmpobj->type)) {
+                                        add_object(score, get_staff_selected(score), 
+                                                   Selection.object_type, 
+                                                   Selection.accidentals, Selection.nature, tmpobj->id, 
+                                                   0, 0, 0, 0, 0, 0, cursor->position, 0, FALSE);
+                                }
                         } else { /* If we don't make a chord */
                                 tmpobj = (Object_t *) 
                                         object_get_right((Staff_t *)
