@@ -518,13 +518,12 @@ realize_object(Staff_t *staff, Object_t *object, gboolean display_barlines, gboo
 	extremity_end_y =  staff->extremity_begin_y +(staff->nb_lines - 1) * staff->space_btw_lines + staff->nb_lines - 1;
 	average = (extremity_end_y - staff->extremity_begin_y) / 2;
 
-	printf("before, stemup = %d\n", stemup);
 
 	if (object->group_id != 0) {	/* it means it's a chord */
 
 		tmpx = object_x;
-		object_x = make_chord(staff, object->group_id, object->pitch, &stemup, &notehead_left);
-		printf("ra stemup = %d\n", stemup);
+		object_x = make_chord(staff, object->id, object->group_id, object->pitch, &stemup, &notehead_left);
+/*                 printf("id = %d, notehead_left = %d\n", object->id, notehead_left); */
 
 	} else {
 		if (y < staff->extremity_begin_y + average)
@@ -532,8 +531,6 @@ realize_object(Staff_t *staff, Object_t *object, gboolean display_barlines, gboo
 		else
 			stemup = TRUE;
 	}
-
-	printf("after, stemup = %d\n", stemup);
 
 
 	switch(object->type) {
@@ -669,9 +666,6 @@ realize_object(Staff_t *staff, Object_t *object, gboolean display_barlines, gboo
 		break;
 	case QUARTER:
 		debug_msg("QUARTER REALIZE CALLBACK\n");
-
-                printf("RA: s + ox = %d\n", staff->start_x + object_x);
-                printf("start_x = %d\n", staff->start_x);
 
 		draw_staff_extension(staff, object->pitch, staff->start_x + object_x);
 

@@ -130,3 +130,19 @@ void on_help_contents_activate(void)
 {
 }
 
+void on_print_activate(void)
+{
+}
+
+void on_print_preview_activate(void)
+{
+}
+
+void on_preferences_activate(void)
+{
+}
+
+void on_page_setup_activate(void)
+{
+}
+

@@ -114,8 +114,6 @@ gint draw_note(gchar *file, gboolean selected, gint x, gint y, gint line_x1, gin
         scrolled_window = glade_xml_get_widget(gladexml, "sw_score_sw");
         adj = gtk_scrolled_window_get_hadjustment(GTK_SCROLLED_WINDOW(scrolled_window));
 
-        printf("object_x = %d, adjvalue = %f\n", x, adj->value);
-
         if (x < adj->value - 50) return; /* -50 is a dummy stuff */
         if (x > adj->value + 2000) return; /* +2000 too */
 

@@ -28,7 +28,9 @@
 #include "constants.h"
 #include "objects.h"
 
-guint make_chord(Staff_t *staff, gulong group_id, gint pitch, gboolean *stemup, gboolean *notehead_left)
+guint make_chord(Staff_t *staff, 
+                 gulong objectid, gulong group_id, gint pitch, 
+                 gboolean *stemup, gboolean *notehead_left)
 {
 	GList *listrunner_object;
 	guint retval = 0;
@@ -39,6 +41,7 @@ guint make_chord(Staff_t *staff, gulong group_id, gint pitch, gboolean *stemup, 
 	gint average = 0;
 
 	* stemup = TRUE;
+        * notehead_left = TRUE;
 	
 	extremity_end_y =  staff->extremity_begin_y +(staff->nb_lines - 1) * staff->space_btw_lines + staff->nb_lines - 1;
 	average = (extremity_end_y - staff->extremity_begin_y) / 2;
@@ -53,13 +56,22 @@ guint make_chord(Staff_t *staff, gulong group_id, gint pitch, gboolean *stemup, 
 				retval = xpos;
 				
 				y = get_y_from_position(staff->key, staff->extremity_begin_y, object->pitch);
+                                
+				if (y < staff->extremity_begin_y + average) {
+					* stemup = FALSE;
+				} else {
+					* stemup = TRUE;
+				}
+			} else {
+                                /* FIXME: this doesn't handle the case where the main object->id has been deleted */
+                        }
 
-/* 				if (y < staff->extremity_begin_y + average) { */
-/* 					* stemup = FALSE; */
-/* 				} else { */
-/* 					* stemup = TRUE; */
-/* 				} */
-			}
+                        if (object->id != objectid) {
+                                if ( ( ++pitch == object->pitch ) || ( --pitch == object->pitch ) )
+                                        {
+                                                * notehead_left = FALSE; 
+                                        }
+                        }
 
 			xpos += object_get_spacing(object->type);
 		}
@@ -68,7 +80,6 @@ guint make_chord(Staff_t *staff, gulong group_id, gint pitch, gboolean *stemup, 
 		listrunner_object = g_list_next(listrunner_object);
 	}
 
-/* 	printf("ch stemup = %d\n", *stemup); */
 
 	return retval;
 
