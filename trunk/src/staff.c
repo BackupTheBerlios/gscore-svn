@@ -393,7 +393,11 @@ gdouble get_staff_extremity_begin_x(gint staff)
 
         staff_data = g_list_nth_data(Score.Staff_list, staff);
 
-        return staff_data->extremity_begin_x;
+	if(staff_data) {
+	  return staff_data->extremity_begin_x;
+	} else {
+	  return 0;
+	}
 }
 
 gdouble get_staff_extremity_begin_y(gint staff)
@@ -402,7 +406,11 @@ gdouble get_staff_extremity_begin_y(gint staff)
 
         staff_data = g_list_nth_data(Score.Staff_list, staff);
 
-        return staff_data->extremity_begin_y;
+	if(staff_data) {
+	  return staff_data->extremity_begin_y;
+	} else {
+	  return 0;
+	}
 }
 
 
