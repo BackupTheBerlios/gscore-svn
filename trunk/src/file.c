@@ -32,6 +32,8 @@
 #include "constants.h"
 #include "create_score.h"
 
+#include "gettext.h"
+
 static void
 open_set_extension(GtkObject *item)
 {
@@ -113,10 +115,13 @@ import_score(GtkButton *button, gpointer user_data)
 
 	filename = gtk_entry_get_text(GTK_ENTRY(GTK_FILE_SELECTION(filechooser)
 						->selection_entry));
+
+	printf("File choosen:%s\n", filename);
+
 	extension = strrchr(filename, '.');
 
 	if ( ! extension ) {
-		gw_message_error("The file has no extension,\n unable to guess which plugin to use");
+		gw_message_error(_("The file has no extension,\n unable to guess which plugin to use"));
 		return;
 	}
 
@@ -125,7 +130,7 @@ import_score(GtkButton *button, gpointer user_data)
 	plugin = gscore_plugin_get_from_extension(extension);
 
 	if ( ! plugin ) {
-	    gw_message_error("No plugin available for this file,\nfeel free to write one.\n\nVisit www.gscore.org/wiki for more informations");
+	    gw_message_error(_("No plugin available for this file,\nfeel free to write one.\n\nVisit www.gscore.org/wiki for more informations"));
 	    return;
 	  }
 
