@@ -206,7 +206,7 @@ score_key_press_event(GtkWidget *widget, GdkEventKey *event)
                         return FALSE;
                 }
 
-                printf("OBJECT ID = %lu\n", tmpobj->id);
+/*                 printf("OBJECT ID = %lu\n", tmpobj->id); */
 
                 staffobj = (Staff_t *)
                         g_list_nth_data(score->Staff_list, 

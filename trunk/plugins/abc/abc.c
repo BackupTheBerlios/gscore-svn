@@ -131,15 +131,17 @@ gboolean abc_filter_import (Score_t **score,
 	g_print("Loading %s\n", filename);
 
         /* The following sets the tempo for the score */
-        GSCORE_PLUGIN_STRUCT_INIT(spi);
+/*         GSCORE_PLUGIN_STRUCT_INIT(spi); */
 
-        spi->staff_selected = 0;
+/*         spi->staff_selected = 0; */
 
 
         /* We give the structure to the pointer */
         /* I believe it's cleaner this way. Now it's up to you */
 /*         GSCORE_PLUGIN_STRUCT_INIT(*score); */
-        *score = spi;
+/*         *score = spi; */
+
+        GSCORE_PLUGIN_STRUCT_INIT(*score);
 
 	return abc_load_file(filename,*score);
 }

@@ -1,3 +1,3 @@
-SUBDIRS = plugins src glade
+SUBDIRS = plugins src glade pixmaps
 
 
