@@ -120,6 +120,8 @@ struct _GscorePlugin
 #define GSCORE_PLUGIN_STRUCT_INIT(plugin)		\
            {						\
 	     plugin = g_malloc(sizeof(Score_t));	\
+             (plugin)->Identity = g_malloc(sizeof(Identity_t)); \
+             (plugin)->Display = g_malloc(sizeof(Display_t)); \
            }
 
 #ifdef __cplusplus
