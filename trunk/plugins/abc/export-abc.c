@@ -233,7 +233,7 @@ static gchar *get_char_from_chord(Staff_t *staff, Object_t *object)
                         if (object->id == object_data->group_id) {
                                 retstr = g_strconcat(retstr,
                                                      get_char_from_pitch(0, staff->key, object_data->type, object_data->pitch),
-                                                     get_char_for_duration(object_data->type),
+                                                     get_char_for_duration(object_data->type), 
                                                      NULL);
                         }
                         
@@ -283,8 +283,15 @@ static void abc_print_object(gpointer data, gpointer user_data)
                 if ( is_chord(staff, object) ) {
                         char_from_object = get_char_from_chord(staff, object);
                 } else {
-                        char_from_object = get_char_from_pitch(object->group_id, staff->key, object->type, object->pitch);
-                        g_strconcat(char_from_object, get_char_for_duration(object->type), NULL);
+                        if ( object->group_id == 0 ) {
+                                char_from_object = g_strconcat(get_char_from_pitch(object->group_id, 
+                                                                                   staff->key, 
+                                                                                   object->type, 
+                                                                                   object->pitch), 
+                                                               get_char_for_duration(object->type), NULL);
+                        } else {
+                                char_from_object = "";
+                        }
                 }
 
                 g_print("%s%s%s%s",
