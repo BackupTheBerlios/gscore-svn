@@ -53,7 +53,6 @@
 
 guint timesignature_x = 0;
 guint object_x = 0;
-gboolean make_chord = FALSE;
 guint measure_number = 1;
 
 static void 
@@ -491,6 +490,7 @@ realize_object(Staff_t *staff, Object_t *object, gboolean display_barlines, gboo
 
         Object_t *object_next;
 /* 	Object_t *object_previous; */
+	guint tmpx = 0;
 	gint y = 0;
 	gint ynext = 0;
 	gdouble extremity_end_y = 0;
@@ -516,20 +516,8 @@ realize_object(Staff_t *staff, Object_t *object, gboolean display_barlines, gboo
 
 	if (object->group_id != 0) {	/* it means it's a chord */
 
-                if (object->type == DOUBLEWHOLE) object_x -= Spacings.NotesRests.sa_doublewhole;
-                if (object->type == WHOLE) object_x -= Spacings.NotesRests.sa_whole;
-                if (object->type == HALF) object_x -= Spacings.NotesRests.sa_half;
-                if (object->type == QUARTER) object_x -= Spacings.NotesRests.sa_quarter;
-                if (object->type == EIGHTH) object_x -= Spacings.NotesRests.sa_eighth;
-                if (object->type == SIXTEENTH) object_x -= Spacings.NotesRests.sa_sixteenth;
-
-/*                 make_chord = TRUE; */
-/*                 tmpstaff = (Staff_t *)g_list_nth_data(Score.Staff_list, get_staff_selected()); */
-/*                 tmpobj = (Object_t *)object_get_left(tmpstaff, object_x); */
-
-/*                 if (tmpobj->type == QUARTER) { */
-/*                         object_x -= Spacings.NotesRests.sa_quarter;  */
-/*                 } */
+		tmpx = object_x;
+		object_x = make_chord(staff, object->group_id, object->type, object_x);
 
 	}
 
@@ -1206,6 +1194,12 @@ realize_object(Staff_t *staff, Object_t *object, gboolean display_barlines, gboo
 
 		break;
 		
+	}
+
+	if (object->group_id != 0) {	/* it means it's a chord */
+
+		object_x = tmpx;
+
 	}
 
 	return FALSE;

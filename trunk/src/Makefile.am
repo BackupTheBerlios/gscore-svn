@@ -14,6 +14,7 @@ gscore_SOURCES = 	\
 	beam.c \
 	common.c \
 	create_score.c \
+	chords.c \
 	debug.c \
 	display.c \
 	draw_barline.c \
