@@ -116,9 +116,10 @@ score_key_press_event(GtkWidget *widget, GdkEventKey *event)
 		refresh();
 		break;
 	case GDK_Left:
-		tmpobj = object_get_left(KeyCursor.x_returned);
+		tmpobj = (Object_t *)object_get_left(KeyCursor.x_returned);
 
-		printf("left id = %d\n", tmpobj);
+		printf("left id = %d\n", tmpobj->id);
+
 /* 		printf("Object id = %d\n", object->id); */
 		break;
 	case GDK_Right:
