@@ -3,6 +3,8 @@
 #include <glib.h>
 #include <gmodule.h>
 
+#include <string.h>
+
 #include "debug.h"
 #include "plugin.h"
 #include "common.h"
@@ -67,22 +69,26 @@ gscore_plugins_load(GList **plugins_list)
 
 	/* Register all shared plugins (data_dir) */
 
-	plugins_dir = g_dir_open(get_plugins_path(), 0, &error);
+	plugins_dir = g_dir_open(PLUGINS_DIR, 0, &error);
 	if ( plugins_dir == NULL ) {
-		g_message("Could not open `%s'\n`%s'", get_plugins_path(), error->message);
+		g_message("Could not open `%s'\n`%s'", PLUGINS_DIR, error->message);
 		g_error_free (error);
 		return -1;
 	}
 	
 	while ( (filename = g_dir_read_name(plugins_dir)) != NULL ) {
-		full_filename = g_strconcat(get_plugins_path(), G_DIR_SEPARATOR_S, filename, NULL);
+		full_filename = g_strconcat(PLUGINS_DIR, G_DIR_SEPARATOR_S, filename, NULL);
 		is_dir = g_file_test(full_filename, G_FILE_TEST_IS_DIR);
-		
-		if (( ! is_dir ) || ( g_ascii_strncasecmp( filename, ".sconsign", 9))) {
+
+/* 		printf("filename: %s\n",filename); */
+/* 		printf("strrchr: %s\n", strrchr(filename, '.')); */
+/* 		printf("cmpval: %d\n", strcmp(strrchr(filename, '.'), ".so")); */
+/* 		&& ( strcmp(strrchr(filename, "."), ".so"))) {		 */
+		if (( ! is_dir ) && ( strcmp(strrchr(filename, '.'), ".so") == 0 )) {
 			nb_files++;
 			
 			ppnf = g_malloc(sizeof(plugin_pnf));
-			ppnf->path = g_strdup(get_plugins_path()); 
+			ppnf->path = g_strdup(PLUGINS_DIR); 
 			ppnf->filename = g_strdup(filename);
 
  			debug_msg(g_strdup_printf("path = %s\nfilename = %s\n", ppnf->path, ppnf->filename));

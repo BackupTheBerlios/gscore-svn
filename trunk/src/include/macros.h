@@ -25,8 +25,8 @@
 #include "gscore.h"
 
 
-#define get_file_from_data_dir(file) g_strconcat(DATA_DIR, G_DIR_SEPARATOR_S, "share", G_DIR_SEPARATOR_S, "gscore", G_DIR_SEPARATOR_S, file, NULL)
+#define get_file_from_data_dir(file) g_strconcat(DATA_DIR, G_DIR_SEPARATOR_S, "gscore", G_DIR_SEPARATOR_S, file, NULL)
 
-#define get_plugins_path() g_strconcat(DATA_DIR, G_DIR_SEPARATOR_S, "share", G_DIR_SEPARATOR_S, "gscore", G_DIR_SEPARATOR_S, "plugins", NULL)
+/* #define get_plugins_path() g_strconcat(DATA_DIR, G_DIR_SEPARATOR_S, "share", G_DIR_SEPARATOR_S, "gscore", G_DIR_SEPARATOR_S, "plugins", NULL) */
 
 #define for_all_staves(count) for ( count = 0; count < Score.nb_staves; count++ )

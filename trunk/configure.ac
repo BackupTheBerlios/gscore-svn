@@ -103,6 +103,8 @@ plugins/abc/Makefile
 
 src/Makefile
 
+glade/Makefile
+
 ])
 
 
@@ -110,9 +112,10 @@ echo
 echo "*** Dumping configuration ***"
 echo "    - Compiler               : ${CC}"
 echo "    - Generate documentation : $enable_gtk_doc"
-echo "    - Glib version           : ${GLIB2_VERSION}"
-echo "    - GTK+ version           : ${GTK2_VERSION}"
-echo "    - Libglade version       : ${LIBGLADE2_VERSION}"
+echo "    - Prefix                 : $prefix"
+echo "    - Exec prefix            : $exec_prefix"
+echo "    - Data dir               : $datadir"
+echo "    - Plugins dir            : $plugins_dir"
 echo
 echo "    You can now run 'make' to compile gscore"
 echo

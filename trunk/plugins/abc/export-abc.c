@@ -3,9 +3,9 @@
 #include <glib.h>
 #include <stdio.h>
 
-#include "../../src/include/plugin.h"
-#include "../../src/include/gscore.h"
-#include "../../src/include/constants.h"
+#include "plugin.h"
+#include "gscore.h"
+#include "constants.h"
 
 /* ACCIDENTALS */
 #define ABC_SHARP "^"

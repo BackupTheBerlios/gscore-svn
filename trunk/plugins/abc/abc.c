@@ -29,8 +29,8 @@
 
 #include <glib.h>
 
-#include "../../src/include/plugin.h"
-#include "../../src/include/gscore.h"
+#include "plugin.h"
+#include "gscore.h"
 
 #include "export-abc.h"
 

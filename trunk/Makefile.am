@@ -1,2 +1,3 @@
-SUBDIRS = src plugins
+SUBDIRS = plugins src glade
+
 
