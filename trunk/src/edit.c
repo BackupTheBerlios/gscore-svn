@@ -29,9 +29,13 @@
 #include "common.h"
 #include "gscore.h"
 #include "position.h"
+#include "score.h"
+#include "staff.h"
+#include "objects.h"
+#include "position.h"
 
-
-extern Object_t *measure_get_object(Staff_t *staff, guint measure_nb)
+extern Object_t *
+measure_get_object(Staff_t *staff, guint measure_nb)
 {
         Object_t *object_data;
 
@@ -48,7 +52,7 @@ extern Object_t *measure_get_object(Staff_t *staff, guint measure_nb)
 
                 if ( ! object_data ) {
                         g_warning("Gscore: no object can be retrieved");
-                        return;
+                        return NULL;
                 }
 
                 switch(object_data->type) {
@@ -61,10 +65,8 @@ extern Object_t *measure_get_object(Staff_t *staff, guint measure_nb)
                 case BARLINE_OPEN:
                 case BARLINE_CLOSE:
                         if (count_measure == measure_nb) {
-/*                                 g_print("=====================\n"); */
                                 return object_data;
                         } else {
-/*                                 g_print("count_measure = %d\n", count_measure); */
                                 count_measure++;
                         }
                         break;
@@ -75,15 +77,13 @@ extern Object_t *measure_get_object(Staff_t *staff, guint measure_nb)
                 objectrunner = g_list_next(objectrunner);
         }
 
-/*         g_print("I AM GOING TO BE NULL!\n"); */
-
         return NULL;
 }
 
 extern void 
 edit_jump_to_measure_widget(GtkButton *widget, gpointer user_data)
 {
-        Score_t *score = score_get_from_widget(widget);
+        Score_t *score = score_get_from_widget(GTK_WIDGET(widget));
         Staff_t *staff_data;
         Object_t *object_data;
 
@@ -152,7 +152,7 @@ edit_jump_to_measure_widget(GtkButton *widget, gpointer user_data)
         label = gtk_label_new("Jump to measure: ");
         gtk_box_pack_start_defaults(GTK_BOX(hbox), label);
 
-        spinbutton = gtk_spin_button_new_with_range(0, nb_measures, 1);
+        spinbutton = gtk_spin_button_new_with_range(1, nb_measures+1, 1);
         gtk_box_pack_start_defaults(GTK_BOX(hbox), spinbutton);
 
         gtk_widget_show_all(dialog);
@@ -161,17 +161,20 @@ edit_jump_to_measure_widget(GtkButton *widget, gpointer user_data)
 
         if (response == GTK_RESPONSE_ACCEPT) {
 
-                MO = measure_get_object(staff_data, gtk_spin_button_get_value_as_int(spinbutton));
+                MO = measure_get_object(staff_data, gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(spinbutton)) - 2);
 
                 if ( ! MO ) {
-                        g_warning("Gscore: Cannot get the measure object");
+                        g_warning("Gscore: Cannot get the measure object.");
+                        position_set_adjustment_x(GTK_WIDGET(widget), staff_data->extremity_begin_x);
                 } else {
                         x = object_get_x(staff_data, MO);
                         if ( x < 0 )
                                 printf("Error getting the x position of the object");
                         else
-                                position_set_adjustment_x(widget, x);
+                                position_set_adjustment_x(GTK_WIDGET(widget), x);
                 }
+
+                refresh(score_get_area_from_widget(GTK_WIDGET(widget)));
 
         }
 

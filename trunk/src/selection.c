@@ -152,19 +152,21 @@ highlight_selection(Score_t *score, gdouble x_origin, gdouble y_origin, gdouble 
 {
 
 	GList *listrunner;
-	Staff_t *staff;
+	Staff_t *staff = NULL;
 
 	gdouble start_x = 0;
 	gdouble object_x = 0;
 
         staff = g_list_nth_data(score->Staff_list, get_staff_selected(score));
 
+        if ( ! staff ) return -1;
+
 	/* Parsing Objects structure */
 	listrunner = g_list_first(staff->Object_list);
 	while ( listrunner ) {
 		Object_t *object;
 		object = (Object_t *)listrunner->data;
-
+               
 		start_x = staff->extremity_begin_x + Spacings.Clefs.sb + STANDARD_KEY_SIZE + Spacings.Clefs.sa;
 
 		switch (staff->key_signature) {

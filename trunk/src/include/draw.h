@@ -34,7 +34,7 @@ gint print_objects(GList *list);
 gint draw_note(GtkWidget *area, gchar *file, gboolean selected, gint x, gint y, gint line_x1, gint line_y1,
                gint line_x2, gint line_y2);
 
-gint draw_pixmap(GdkWindow *window, gchar *file, gdouble x, gdouble y);
+gint draw_pixmap(GdkWindow *window, gchar *file, gboolean is_selected, gdouble x, gdouble y);
 
 gint draw_point(GtkWidget *area, gint x, gint y);
 

@@ -62,25 +62,32 @@ guint measure_number = 1;
 static void 
 realize_key(GtkWidget *area, Staff_t *staff)
 {
+
+        gboolean is_selected = FALSE;
+
 	switch ( staff->key )
 		{
 		case TREBLE_KEY:
 			draw_pixmap(area->window, CLEF_G,
+                                    is_selected,
 				    staff->extremity_begin_x + Spacings.Clefs.sb,
 				    staff->extremity_begin_y - 8);
 			break;
 		case BASS_KEY:
 			draw_pixmap(area->window, CLEF_F,
+                                    is_selected,
 				    staff->extremity_begin_x + Spacings.Clefs.sb,
 				    staff->extremity_begin_y + 1);
 			break;
 		case ALTO_KEY:
 			draw_pixmap(area->window, CLEF_C,
+                                    is_selected,
 				    staff->extremity_begin_x + Spacings.Clefs.sb,
 				    staff->extremity_begin_y + 5);
 			break;
 		case TAB_KEY:
 			draw_pixmap(area->window, CLEF_TAB,
+                                    is_selected,
 				    staff->extremity_begin_x + Spacings.Clefs.sb,
 				    staff->extremity_begin_y + 7);
 			break;
@@ -95,6 +102,8 @@ realize_key_signature(GtkWidget *area, Staff_t *staff)
   
 	guint keysignature_x = staff->extremity_begin_x + Spacings.Clefs.sb + STANDARD_KEY_SIZE + Spacings.Clefs.sa;
 
+        gboolean is_selected = FALSE;
+
 	/* Key Signature */
 	/* There're a few issues here. Actualy, the hard coded numbers, like: */
 	/* staff->extremity_begin_y + 4 is really bad! it only works for TREBLE_KEY and with the pixmaps */
@@ -106,22 +115,27 @@ realize_key_signature(GtkWidget *area, Staff_t *staff)
 	case KEY_SIGNATURE_TREBLE_A_SHARP:
 		draw_pixmap(area->window,
 			    ACCIDENTAL_SHARP,
+                            is_selected,
 			    keysignature_x,
 			    staff->extremity_begin_y - 10);
 		draw_pixmap(area->window,
 			    ACCIDENTAL_SHARP,
+                            is_selected,
 			    keysignature_x + Spacings.KeySignatures.sbksa,
 			    staff->extremity_begin_y + 4);
 		draw_pixmap(area->window,
 			    ACCIDENTAL_SHARP,
+                            is_selected,
 			    keysignature_x + ( 2 * Spacings.KeySignatures.sbksa ),
 			    staff->extremity_begin_y - 13);
 		draw_pixmap(area->window,
 			    ACCIDENTAL_SHARP,
+                            is_selected,
 			    keysignature_x + ( 3 * Spacings.KeySignatures.sbksa ),
 			    staff->extremity_begin_y - 1);
 		draw_pixmap(area->window,
 			    ACCIDENTAL_SHARP,
+                            is_selected,
 			    keysignature_x + ( 4 * Spacings.KeySignatures.sbksa ),
 			    staff->extremity_begin_y + 13);
 		
@@ -135,14 +149,17 @@ realize_key_signature(GtkWidget *area, Staff_t *staff)
 	case KEY_SIGNATURE_TREBLE_A_FLAT:
 		draw_pixmap(area->window,
 			    ACCIDENTAL_FLAT,
+                            is_selected,
 			    keysignature_x,
 			    staff->extremity_begin_y + 5);
 		draw_pixmap(area->window,
 			    ACCIDENTAL_FLAT,
+                            is_selected,
 			    keysignature_x + Spacings.KeySignatures.sbksa,
 			    staff->extremity_begin_y - 9);
 		draw_pixmap(area->window,
 			    ACCIDENTAL_FLAT,
+                            is_selected,
 			    keysignature_x + ( 2 * Spacings.KeySignatures.sbksa ),
 			    staff->extremity_begin_y + 9);
 		
@@ -156,30 +173,37 @@ realize_key_signature(GtkWidget *area, Staff_t *staff)
 	case KEY_SIGNATURE_TREBLE_B_SHARP:
 		draw_pixmap(area->window,
 			    ACCIDENTAL_SHARP,
+                            is_selected,
 			    keysignature_x,
 			    staff->extremity_begin_y - 10);
 		draw_pixmap(area->window,
 			    ACCIDENTAL_SHARP,
+                            is_selected,
 			    keysignature_x + Spacings.KeySignatures.sbksa,
 			    staff->extremity_begin_y + 4);
 		draw_pixmap(area->window,
 			    ACCIDENTAL_SHARP,
+                            is_selected,
 			    keysignature_x + ( 2 * Spacings.KeySignatures.sbksa ),
 			    staff->extremity_begin_y - 13);
 		draw_pixmap(area->window,
 			    ACCIDENTAL_SHARP,
+                            is_selected,
 			    keysignature_x + ( 3 * Spacings.KeySignatures.sbksa ),
 			    staff->extremity_begin_y - 1);
 		draw_pixmap(area->window,
 			    ACCIDENTAL_SHARP,
+                            is_selected,
 			    keysignature_x + ( 4 * Spacings.KeySignatures.sbksa ),
 			    staff->extremity_begin_y + 13);
 		draw_pixmap(area->window,
 			    ACCIDENTAL_SHARP,
+                            is_selected,
 			    keysignature_x + ( 5 * Spacings.KeySignatures.sbksa),
 			    staff->extremity_begin_y - 5);
 		draw_pixmap(area->window,
 			    ACCIDENTAL_SHARP,
+                            is_selected,
 			    keysignature_x + ( 6 * Spacings.KeySignatures.sbksa ),
 			    staff->extremity_begin_y + Spacings.KeySignatures.sbksa); /* Weird!!! ? but it works! I did that ? I dunno! */
 		
@@ -193,6 +217,7 @@ realize_key_signature(GtkWidget *area, Staff_t *staff)
 	case KEY_SIGNATURE_TREBLE_B_FLAT:
 		draw_pixmap(area->window,
 			    ACCIDENTAL_FLAT,
+                            is_selected,
 			    keysignature_x,
 			    staff->extremity_begin_y + 5);
 
@@ -205,10 +230,12 @@ realize_key_signature(GtkWidget *area, Staff_t *staff)
 	case KEY_SIGNATURE_TREBLE_C_SHARP:
 		draw_pixmap(area->window,
 			    ACCIDENTAL_SHARP,
+                            is_selected,
 			    keysignature_x,
 			    staff->extremity_begin_y - 10);
 		draw_pixmap(area->window,
 			    ACCIDENTAL_SHARP,
+                            is_selected,
 			    keysignature_x + Spacings.KeySignatures.sbksa,
 			    staff->extremity_begin_y + 4);
 		
@@ -222,26 +249,32 @@ realize_key_signature(GtkWidget *area, Staff_t *staff)
 	case KEY_SIGNATURE_TREBLE_C_FLAT:
 		draw_pixmap(area->window,
 			    ACCIDENTAL_FLAT,
+                            is_selected,
 			    keysignature_x,
 			    staff->extremity_begin_y + 5);
 		draw_pixmap(area->window,
 			    ACCIDENTAL_FLAT,
+                            is_selected,
 			    keysignature_x + Spacings.KeySignatures.sbksa,
 			    staff->extremity_begin_y - 9);
 		draw_pixmap(area->window,
 			    ACCIDENTAL_FLAT,
+                            is_selected,
 			    keysignature_x + ( 2 * Spacings.KeySignatures.sbksa ),
 			    staff->extremity_begin_y + 9);
 		draw_pixmap(area->window,
 			    ACCIDENTAL_FLAT,
+                            is_selected,
 			    keysignature_x + ( 3 * Spacings.KeySignatures.sbksa ),
 			    staff->extremity_begin_y - 4);
 		draw_pixmap(area->window,
 			    ACCIDENTAL_FLAT,
+                            is_selected,
 			    keysignature_x + ( 4 * Spacings.KeySignatures.sbksa ),
 			    staff->extremity_begin_y + 14);
 		draw_pixmap(area->window,
 			    ACCIDENTAL_FLAT,
+                            is_selected,
 			    keysignature_x + ( 5 * Spacings.KeySignatures.sbksa),
 			    staff->extremity_begin_y);
 		
@@ -255,18 +288,22 @@ realize_key_signature(GtkWidget *area, Staff_t *staff)
 	case KEY_SIGNATURE_TREBLE_D_SHARP:
 		draw_pixmap(area->window,
 			    ACCIDENTAL_SHARP,
+                            is_selected,
 			    keysignature_x,
 			    staff->extremity_begin_y - 10);
 		draw_pixmap(area->window,
 			    ACCIDENTAL_SHARP,
+                            is_selected,
 			    keysignature_x + Spacings.KeySignatures.sbksa,
 			    staff->extremity_begin_y + 4);
 		draw_pixmap(area->window,
 			    ACCIDENTAL_SHARP,
+                            is_selected,
 			    keysignature_x + ( 2 * Spacings.KeySignatures.sbksa ),
 			    staff->extremity_begin_y - 13);
 		draw_pixmap(area->window,
 			    ACCIDENTAL_SHARP,
+                            is_selected,
 			    keysignature_x + ( 3 * Spacings.KeySignatures.sbksa ),
 			    staff->extremity_begin_y - 1);
 		
@@ -280,18 +317,22 @@ realize_key_signature(GtkWidget *area, Staff_t *staff)
 	case KEY_SIGNATURE_TREBLE_D_FLAT:
 		draw_pixmap(area->window,
 			    ACCIDENTAL_FLAT,
+                            is_selected,
 			    keysignature_x,
 			    staff->extremity_begin_y + 5);
 		draw_pixmap(area->window,
 			    ACCIDENTAL_FLAT,
+                            is_selected,
 			    keysignature_x + Spacings.KeySignatures.sbksa,
 			    staff->extremity_begin_y - 9);
 		draw_pixmap(area->window,
 			    ACCIDENTAL_FLAT,
+                            is_selected,
 			    keysignature_x + ( 2 * Spacings.KeySignatures.sbksa ),
 			    staff->extremity_begin_y + 9);
 		draw_pixmap(area->window,
 			    ACCIDENTAL_FLAT,
+                            is_selected,
 			    keysignature_x + ( 3 * Spacings.KeySignatures.sbksa),
 			    staff->extremity_begin_y - 4);
 
@@ -305,26 +346,32 @@ realize_key_signature(GtkWidget *area, Staff_t *staff)
 	case KEY_SIGNATURE_TREBLE_E_SHARP:
 		draw_pixmap(area->window,
 			    ACCIDENTAL_SHARP,
+                            is_selected,
 			    keysignature_x,
 			    staff->extremity_begin_y - 10);
 		draw_pixmap(area->window,
 			    ACCIDENTAL_SHARP,
+                            is_selected,
 			    keysignature_x + Spacings.KeySignatures.sbksa,
 			    staff->extremity_begin_y + 4);
 		draw_pixmap(area->window,
 			    ACCIDENTAL_SHARP,
+                            is_selected,
 			    keysignature_x + ( 2 * Spacings.KeySignatures.sbksa ),
 			    staff->extremity_begin_y - 13);
 		draw_pixmap(area->window,
 			    ACCIDENTAL_SHARP,
+                            is_selected,
 			    keysignature_x + ( 3 * Spacings.KeySignatures.sbksa),
 			    staff->extremity_begin_y - 1);
 		draw_pixmap(area->window,
 			    ACCIDENTAL_SHARP,
+                            is_selected,
 			    keysignature_x + ( 4 * Spacings.KeySignatures.sbksa),
 			    staff->extremity_begin_y + 13);
 		draw_pixmap(area->window,
 			    ACCIDENTAL_SHARP,
+                            is_selected,
 			    keysignature_x + ( 5 * Spacings.KeySignatures.sbksa ),
 			    staff->extremity_begin_y - 5);
 		
@@ -338,10 +385,12 @@ realize_key_signature(GtkWidget *area, Staff_t *staff)
 	case KEY_SIGNATURE_TREBLE_E_FLAT:
 		draw_pixmap(area->window,
 			    ACCIDENTAL_FLAT,
+                            is_selected,
 			    keysignature_x,
 			    staff->extremity_begin_y + 5);
 		draw_pixmap(area->window,
 			    ACCIDENTAL_FLAT,
+                            is_selected,
 			    keysignature_x + Spacings.KeySignatures.sbksa,
 			    staff->extremity_begin_y - 9);
 		
@@ -355,6 +404,7 @@ realize_key_signature(GtkWidget *area, Staff_t *staff)
 	case KEY_SIGNATURE_TREBLE_F_SHARP:
 		draw_pixmap(area->window,
 			    ACCIDENTAL_SHARP,
+                            is_selected,
 			    keysignature_x,
 			    staff->extremity_begin_y - 10);
 
@@ -367,30 +417,37 @@ realize_key_signature(GtkWidget *area, Staff_t *staff)
 	case KEY_SIGNATURE_TREBLE_F_FLAT:
 		draw_pixmap(area->window,
 			    ACCIDENTAL_FLAT,
+                            is_selected,
 			    keysignature_x,
 			    staff->extremity_begin_y + 5);
 		draw_pixmap(area->window,
 			    ACCIDENTAL_FLAT,
+                            is_selected,
 			    keysignature_x + Spacings.KeySignatures.sbksa,
 			    staff->extremity_begin_y - 9);
 		draw_pixmap(area->window,
 			    ACCIDENTAL_FLAT,
+                            is_selected,
 			    keysignature_x + ( 2 * Spacings.KeySignatures.sbksa ),
 			    staff->extremity_begin_y + 9);
 		draw_pixmap(area->window,
 			    ACCIDENTAL_FLAT,
+                            is_selected,
 			    keysignature_x + ( 3 * Spacings.KeySignatures.sbksa ),
 			    staff->extremity_begin_y - 4);
 		draw_pixmap(area->window,
 			    ACCIDENTAL_FLAT,
+                            is_selected,
 			    keysignature_x + ( 4 * Spacings.KeySignatures.sbksa ),
 			    staff->extremity_begin_y + 14);
 		draw_pixmap(area->window,
 			    ACCIDENTAL_FLAT,
+                            is_selected,
 			    keysignature_x + ( 5 * Spacings.KeySignatures.sbksa ),
 			    staff->extremity_begin_y);
 		draw_pixmap(area->window,
 			    ACCIDENTAL_FLAT,
+                            is_selected,
 			    keysignature_x + ( 6 * Spacings.KeySignatures.sbksa),
 			    staff->extremity_begin_y + 18);
 		
@@ -404,14 +461,17 @@ realize_key_signature(GtkWidget *area, Staff_t *staff)
 	case KEY_SIGNATURE_TREBLE_G_SHARP:
 		draw_pixmap(area->window,
 			    ACCIDENTAL_SHARP,
+                            is_selected,
 			    keysignature_x,
 			    staff->extremity_begin_y - 10);
 		draw_pixmap(area->window,
 			    ACCIDENTAL_SHARP,
+                            is_selected,
 			    keysignature_x + Spacings.KeySignatures.sbksa,
 			    staff->extremity_begin_y + 4);
 		draw_pixmap(area->window,
 			    ACCIDENTAL_SHARP,
+                            is_selected,
 			    keysignature_x + ( 2 * Spacings.KeySignatures.sbksa),
 			    staff->extremity_begin_y - 13);
 		
@@ -425,22 +485,27 @@ realize_key_signature(GtkWidget *area, Staff_t *staff)
 	case KEY_SIGNATURE_TREBLE_G_FLAT:
 		draw_pixmap(area->window,
 			    ACCIDENTAL_FLAT,
+                            is_selected,
 			    keysignature_x,
 			    staff->extremity_begin_y + 5);
 		draw_pixmap(area->window,
 			    ACCIDENTAL_FLAT,
+                            is_selected,
 			    keysignature_x + Spacings.KeySignatures.sbksa,
 			    staff->extremity_begin_y - 9);
 		draw_pixmap(area->window,
 			    ACCIDENTAL_FLAT,
+                            is_selected,
 			    keysignature_x + ( 2 * Spacings.KeySignatures.sbksa ),
 			    staff->extremity_begin_y + 9);
 		draw_pixmap(area->window,
 			    ACCIDENTAL_FLAT,
+                            is_selected,
 			    keysignature_x + ( 3 * Spacings.KeySignatures.sbksa ),
 			    staff->extremity_begin_y - 4);
 		draw_pixmap(area->window,
 			    ACCIDENTAL_FLAT,
+                            is_selected,
 			    keysignature_x + ( 4 * Spacings.KeySignatures.sbksa ),
 			    staff->extremity_begin_y + 14);
 		
@@ -465,10 +530,13 @@ static gdouble
 realize_timesignature(GtkWidget *area, Staff_t *staff)
 {
 
+        gboolean is_selected = FALSE;
+
 	switch (staff->time_signature[0])
 		{
 		case TIME_SIGNATURE_COMMON_TIME:
 			draw_pixmap(area->window, TIME_SIG_CT,
+                                    is_selected,
 				    timesignature_x,
 				    staff->extremity_begin_y + 9);
 
@@ -476,6 +544,7 @@ realize_timesignature(GtkWidget *area, Staff_t *staff)
 			break;
 		case TIME_SIGNATURE_ALLA_BREVE:
 			draw_pixmap(area->window, TIME_SIG_AB,
+                                    is_selected,
 				    timesignature_x,
 				    staff->extremity_begin_y + 6);
 
@@ -992,7 +1061,8 @@ realize_object(GtkWidget *area, Staff_t *staff, Object_t *object, gboolean displ
 		if ( object->nature & O_DURATION )
 			draw_point(area, staff->start_x + object_x + 12, y);
 
-		draw_pixmap(area->window, DOUBLEWHOLE_REST,
+		draw_pixmap(area->window, DOUBLEWHOLE_REST, 
+                            is_selected,
 			    staff->start_x + object_x, y); 
 
 		object_x += Spacings.NotesRests.sa_doublewholerest;
@@ -1005,6 +1075,7 @@ realize_object(GtkWidget *area, Staff_t *staff, Object_t *object, gboolean displ
 			draw_point(area, staff->start_x + object_x + 12, y);
 
 		draw_pixmap(area->window, WHOLE_REST,
+                            is_selected,
 			    staff->start_x + object_x, y); 
 
 		object_x += Spacings.NotesRests.sa_wholerest;
@@ -1017,6 +1088,7 @@ realize_object(GtkWidget *area, Staff_t *staff, Object_t *object, gboolean displ
 			draw_point(area, staff->start_x + object_x + 12, y);
 
 		draw_pixmap(area->window, HALF_REST,
+                            is_selected,
 			    staff->start_x + object_x, y); 
 
 		object_x += Spacings.NotesRests.sa_halfrest;
@@ -1029,6 +1101,7 @@ realize_object(GtkWidget *area, Staff_t *staff, Object_t *object, gboolean displ
 			draw_point(area, staff->start_x + object_x + 12, y);
 
 		draw_pixmap(area->window, QUARTER_REST,
+                            is_selected,
 			    staff->start_x + object_x, staff->extremity_begin_y + 8); 
 
 		object_x += Spacings.NotesRests.sa_quarterrest;
@@ -1041,6 +1114,7 @@ realize_object(GtkWidget *area, Staff_t *staff, Object_t *object, gboolean displ
 			draw_point(area, staff->start_x + object_x + 12, y);
 
 		draw_pixmap(area->window, EIGHTH_REST,
+                            is_selected,
 			    staff->start_x + object_x, y); 
 
 		object_x += Spacings.NotesRests.sa_eighthrest;
@@ -1053,6 +1127,7 @@ realize_object(GtkWidget *area, Staff_t *staff, Object_t *object, gboolean displ
 			draw_point(area, staff->start_x + object_x + 12, y);
 
 		draw_pixmap(area->window, SIXTEENTH_REST,
+                            is_selected,
 			    staff->start_x + object_x, y); 
 
 		object_x += Spacings.NotesRests.sa_sixteenthrest;
@@ -1179,6 +1254,7 @@ realize_object(GtkWidget *area, Staff_t *staff, Object_t *object, gboolean displ
 		/* CHANGE KEY */
 	case TREBLE_KEY:
 		draw_pixmap(area->window, CLEF_G,
+                            is_selected,
 			    staff->start_x + object_x,
 			    staff->extremity_begin_y - 8);
 
@@ -1187,6 +1263,7 @@ realize_object(GtkWidget *area, Staff_t *staff, Object_t *object, gboolean displ
 		break;
 	case BASS_KEY:
 		draw_pixmap(area->window, CLEF_F,
+                            is_selected,
 			    staff->start_x + object_x,
 			    staff->extremity_begin_y + 1);
 
@@ -1195,6 +1272,7 @@ realize_object(GtkWidget *area, Staff_t *staff, Object_t *object, gboolean displ
 		break;
 	case ALTO_KEY:
 		draw_pixmap(area->window, CLEF_C,
+                            is_selected,
 			    staff->start_x + object_x,
 			    staff->extremity_begin_y + 5);
 
@@ -1203,6 +1281,7 @@ realize_object(GtkWidget *area, Staff_t *staff, Object_t *object, gboolean displ
 		break;
 	case TAB_KEY:
 		draw_pixmap(area->window, CLEF_TAB,
+                            is_selected,
 			    staff->start_x + object_x,
 			    staff->extremity_begin_y + 7);
 
@@ -1242,6 +1321,7 @@ gboolean score_area_callback(GtkWidget *widget, GdkEventExpose *event, gpointer 
 	/* BEGIN: Display the Tempo */
 	if (display->tempo) {
 		draw_pixmap(area->window, "pixmaps/tb_quarter.xpm",
+                            FALSE,
 			    get_staff_extremity_begin_x(score,0) + Spacings.Tempo.xpfm,
 			    get_staff_extremity_begin_y(score, 0) - Spacings.Tempo.ypfm);
 

@@ -152,7 +152,7 @@ gint draw_note(GtkWidget *area, gchar *file, gboolean selected, gint x, gint y, 
 	return 0;
 }
 
-gint draw_pixmap(GdkWindow *window, gchar *file, gdouble x, gdouble y)
+gint draw_pixmap(GdkWindow *window, gchar *file, gboolean is_selected, gdouble x, gdouble y)
 {
 	GdkPixbuf *pixbuf;
 	GdkBitmap *mask = NULL;
@@ -169,6 +169,9 @@ gint draw_pixmap(GdkWindow *window, gchar *file, gdouble x, gdouble y)
 	/* x and y must be int but the prototype gets double from the drawing area */
 	/* There might be a bug here someday: try setting gint x, gint y, instead of gdouble */
 	gdk_gc_set_clip_origin(gc, x, y);
+
+        if ( is_selected )
+                gdk_pixbuf_fill(pixbuf, 0xff000fff);
 
 	gdk_draw_pixbuf(window, NULL,
 			pixbuf,
