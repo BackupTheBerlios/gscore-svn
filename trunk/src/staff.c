@@ -194,11 +194,20 @@ gint staff_get_y_for_next(const Score_t *score)
 {
         Staff_t *staff_data;
         gint retval = 0;
+	gint selected;
 
-        staff_data = g_list_nth_data(score->Staff_list, get_staff_selected(score));
+	selected = get_staff_selected(score);
+	if(selected == -1) {
+	  staff_data = g_list_last(score->Staff_list)->data;
+	} else {
+	  staff_data = g_list_nth_data(score->Staff_list, selected);
+	}
 
-        retval += staff_data->extremity_begin_y;
-        retval += (staff_data->nb_lines - 1) * staff_data->space_btw_lines + staff_data->nb_lines;
+	if(staff_data) {
+	  retval += staff_data->extremity_begin_y;
+	  retval += (staff_data->nb_lines - 1) * staff_data->space_btw_lines + staff_data->nb_lines;
+	}
+	
         retval += Spacings.Measures.slbm;
 
         return retval;
