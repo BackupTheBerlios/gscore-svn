@@ -1,6 +1,7 @@
 2005-04-02 Toady <toady@gscore.org>
 
 	* src/score.c: Replace "set header" glade widget with custom to make the release in 2005 and stop fighting with glade for MDI stuff
+	* src/edit.c: Jump to measure working
 	
 2005-04-01 Toady <toady@gscore.org>
 

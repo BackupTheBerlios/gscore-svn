@@ -405,6 +405,8 @@ gdouble object_get_x(Staff_t *staff, Object_t *object)
         while ( listrunner_object ) {
                 object_data = (Object_t *)listrunner_object->data;
                 
+                if ( ! object_data ) return -1;
+
                 if ( object_data->group_id == 0 ) {
                         if (object_data->id != object->id) {
                                 retval += object_get_spacing(object->type);

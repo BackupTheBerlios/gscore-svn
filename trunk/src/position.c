@@ -411,3 +411,23 @@ position_set_adjustment(GtkWidget *widget, KeyCursor_t *cursor)
 
 }
 
+extern gboolean
+position_set_adjustment_x(GtkWidget *widget, gdouble x)
+{
+        GtkAdjustment *adj = NULL;
+        GtkScrolledWindow *sw = NULL;
+
+        sw = score_get_scrolled_window_from_widget(widget);
+        adj = gtk_scrolled_window_get_hadjustment(GTK_SCROLLED_WINDOW(sw));
+
+        if ( ! GTK_IS_ADJUSTMENT(adj) )
+                return FALSE;
+
+        gtk_adjustment_set_value(adj, x);
+
+        gtk_scrolled_window_set_hadjustment(GTK_SCROLLED_WINDOW(sw), adj);
+
+        return TRUE;
+
+}
+

@@ -47,4 +47,6 @@ gdouble get_y_from_position_no_key(guint16 space_btwn_lines, gint zero, gdouble 
 
 gboolean position_set_adjustment(GtkWidget *widget, KeyCursor_t *cursor);
 
+gboolean position_set_adjustment_x(GtkWidget *widget, gdouble x);
+
 #endif
