@@ -66,7 +66,6 @@
 		      <property name="label" translatable="yes">_Open score...</property>
 		      <property name="use_underline">True</property>
 		      <signal name="activate" handler="file_open" last_modification_time="Thu, 20 May 2004 00:36:58 GMT"/>
-
 		      <accelerator key="o" modifiers="GDK_CONTROL_MASK" signal="activate"/>
 
 		      <child internal-child="image">
@@ -1652,7 +1651,7 @@
 		      <property name="visible">True</property>
 		      <property name="label" translatable="yes">Set tempo</property>
 		      <property name="use_underline">True</property>
-		      <signal name="activate" handler="gtk_widget_show" last_modification_time="Thu, 03 Jun 2004 07:46:44 GMT"/>
+		      <signal name="activate" handler="gtk_widget_show" object="set_tempo" last_modification_time="Thu, 03 Jun 2004 07:46:44 GMT"/>
 
 		      <child internal-child="image">
 			<widget class="GtkImage" id="image1700">
@@ -1672,8 +1671,7 @@
 		      <property name="visible">True</property>
 		      <property name="label" translatable="yes">Headers</property>
 		      <property name="use_underline">True</property>
-		      <signal name="activate" handler="gtk_widget_show" last_modification_time="Fri, 29 Oct 2004 22:01:52 GMT"/>
-		      <signal name="activate" handler="on_set_header_activate_default" last_modification_time="Fri, 29 Oct 2004 22:02:24 GMT"/>
+		      <signal name="activate" handler="gtk_widget_show" object="set_headers" last_modification_time="Fri, 29 Oct 2004 22:01:52 GMT"/>
 
 		      <child internal-child="image">
 			<widget class="GtkImage" id="image1701">
@@ -1694,7 +1692,7 @@
 		      <property name="visible">True</property>
 		      <property name="label" translatable="yes">Score _Options...</property>
 		      <property name="use_underline">True</property>
-		      <signal name="activate" handler="gtk_widget_show" last_modification_time="Mon, 12 Apr 2004 03:37:36 GMT"/>
+		      <signal name="activate" handler="gtk_widget_show" object="document_options" last_modification_time="Mon, 12 Apr 2004 03:37:36 GMT"/>
 
 		      <child internal-child="image">
 			<widget class="GtkImage" id="image1702">
@@ -2155,8 +2153,7 @@
 		      <property name="visible">True</property>
 		      <property name="label" translatable="yes">Set key</property>
 		      <property name="use_underline">True</property>
-		      <signal name="activate" handler="on_set_key_activate" last_modification_time="Fri, 15 Oct 2004 13:24:06 GMT"/>
-		      <signal name="activate" handler="gtk_widget_show" last_modification_time="Fri, 09 Apr 2004 07:49:42 GMT"/>
+		      <signal name="activate" handler="gtk_widget_show" object="set_key_signature" last_modification_time="Fri, 09 Apr 2004 07:49:42 GMT"/>
 
 		      <child internal-child="image">
 			<widget class="GtkImage" id="image1715">
