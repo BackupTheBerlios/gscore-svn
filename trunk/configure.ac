@@ -84,8 +84,10 @@ PKG_CHECK_MODULES(LIBGLADE2,[libglade-2.0 >= $LIBGLADE2_VERSION])
 AC_PROG_CC
 AC_PROG_INSTALL
 
-CFLAGS="$CFLAGS -Wall -Wstrict-prototypes -Wmissing-prototypes -Wmissing-declarations \
--Wbad-function-cast -Wcast-qual -Wcast-align -Wnested-externs -Wunused"
+dnl CFLAGS="$CFLAGS -Wall -Wstrict-prototypes -Wmissing-declarations \
+dnl -Wbad-function-cast -Wcast-qual -Wcast-align -Wnested-externs -Wunused"
+
+CFLAGS="$CFLAGS -Wall"
 
 AC_SUBST(LDFLAGS)
 AC_SUBST(CFLAGS)
@@ -95,6 +97,9 @@ AC_SUBST(LIBGLADE2_LIBS)
 AC_OUTPUT([
 
 Makefile
+
+plugins/Makefile
+plugins/abc/Makefile
 
 src/Makefile
 

@@ -2,7 +2,7 @@ SUBDIRS =
 
 DEFS = -I$(top_srcdir)/ -I$(srcdir)/include/ \
 	-DPLUGINS_DIR=\"$(plugins_dir)\" \
-	-DDATA_DIR=\"/usr/local\" \
+	-DDATA_DIR=\"$(datadir)\" \
 	$(LIBGLADE2_CFLAGS)
 
 bin_PROGRAMS = gscore
