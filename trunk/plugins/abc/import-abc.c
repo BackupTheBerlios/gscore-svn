@@ -123,6 +123,8 @@ static int event_note(char *s)
   if(is_rest) {
     type += (DOUBLEWHOLEREST-DOUBLEWHOLE);
   }
+
+/*   g_printf("Type : %d\n", type); */
   
   /* TODO: Handle dotted notes */
   
@@ -134,46 +136,66 @@ static int event_note(char *s)
   return 0;
 }
 
-static int event_field(const char *x, const char *s)
+static int event_field(char x, const char *s)
 {
-  if(strcmp(x, "S_FIELD_X")==0) {
-    numTitle = 0;
-    numStaff = -1;
-  } else if(strcmp(x,"S_FIELD_T")==0) {
-    switch(numTitle) 
-      {
-      case 0:
-	theScore->Identity->title = g_string_new((gchar*) s);
-	++numTitle;
-	theScore->windows_title = g_strdup((gchar*)s);
+  g_print("Field : %c '%s'\n", x, s);
+  
+  switch(x)
+    {
+    case 'X':
+      numTitle = 0;
+      numStaff = -1;
+      break;
+    case 'T':
+      switch(numTitle) 
+	{
+	case 0:
+	  theScore->Identity->title = g_string_new((gchar*) s);
+	  ++numTitle;
+	  theScore->windows_title = g_strdup((gchar*)s);
 	    
 /* 	g_printf("Title : %s\n", s); */
-	break;
-      case 1:
-	theScore->Identity->subtitle = g_string_new((gchar*) s);
-	++numTitle;
+	  break;
+	case 1:
+	  theScore->Identity->subtitle = g_string_new((gchar*) s);
+	  ++numTitle;
 /* 	g_printf("Subtitle %s\n", s); */
-	break;
-      default:
-	theScore->Identity->subtitle = 
-	  g_string_append(theScore->Identity->subtitle,"\n");
-	theScore->Identity->subtitle = 
-	  g_string_append(theScore->Identity->subtitle,s);
-	    
-      }
-  } else if(strcmp(x, "S_FIELD_C")==0) {
-    theScore->Identity->composer = g_string_new((gchar *) s);
-/*     g_printf("Composer : %s\n", s); */
-  } else if(strcmp(x,"S_FIELD_V")==0) {
-    create_staff(theScore, 5, 8, 35,
-		 staff_get_y_for_next(theScore));
+	  break;
+	default:
+	  theScore->Identity->subtitle = 
+	    g_string_append(theScore->Identity->subtitle,"\n");
+	  theScore->Identity->subtitle = 
+	    g_string_append(theScore->Identity->subtitle,s);
+	  
+	}
+      break;
+    case 'C':
 
-    ++numStaff;
-/*     g_printf("Voice: %s\n", s); */
-  } else {
-/*     g_printf("Other field : %s\n",x); */
-  }
+      theScore->Identity->composer = g_string_new((gchar *) s);
+/*     g_printf("Composer : %s\n", s); */
+      break;
       
+    case 'V':
+      create_staff(theScore, 5, 8, 35,
+		   staff_get_y_for_next(theScore));
+
+      ++numStaff;
+      staff_set_key(theScore, numStaff, TREBLE_KEY);
+/*     g_printf("Voice: %s\n", s); */
+      break;
+    case 'Q':
+/*       theScore->tempo_text= g_string_new(s); */
+      theScore->tempo = atoi(s);
+      break;
+    case 'L':
+      base_note.nomin = atoi(s);
+      base_note.denom = atoi(strchr(s,'/')+1);
+      break;
+    default:
+      g_printf("Other field : %c\n",x);
+      break;
+    }
+
   return 0;
 }
 
@@ -197,7 +219,7 @@ static int event_bar(char *s)
     type = BARLINE_OPENCLOSEREPEAT;
   } else if(strcmp(s, "[|") == 0) {
     type = BARLINE_OPEN;
-  } else if(strcmp(s, "|]")==0) {
+  } else if(strcmp(s, "|]") == 0) {
     type = BARLINE_CLOSE;
   }
   add_object(theScore, numStaff,
@@ -216,22 +238,22 @@ int my_handler(abcHandle h)
   int t;
   char *s;
 /*   char *f; */
-  USHORT l;
-  USHORT c;
+/*   USHORT l; */
+/*   USHORT c; */
   char *x;
 /*   char*y; */
   
   t=abcToken(scan);
   s= (char*) abcString(scan);
 /*   f=abcFilename(scan); */
-  l=abcLine(scan);
-  c=abcColumn(scan);
+/*   l=abcLine(scan); */
+/*   c=abcColumn(scan); */
   x= (char*) abcStateName(abcState(scan));
 
   switch(t)
     {
     case T_FIELDB:
-      return event_field(x,s);
+      return event_field(x[strlen(x)-1],s);
       break;
       
     case T_NOTE:
