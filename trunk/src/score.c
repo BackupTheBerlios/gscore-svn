@@ -263,6 +263,22 @@ GtkWidget *score_get_sks_hbox_from_widget(GtkWidget *widget)
         return (GtkWidget *) g_object_get_data(G_OBJECT(parent), "sks_hbox");
 }
 
+GtkWidget *score_get_tempo_spinbutton_from_widget(GtkWidget *widget)
+{
+        GtkWidget *parent;
+        parent = get_toplevel(widget);
+        if(parent == NULL) return NULL;
+        return (GtkWidget *) g_object_get_data(G_OBJECT(parent), "tempo_spinbutton");
+}
+
+GtkWidget *score_get_tempo_entry_from_widget(GtkWidget *widget)
+{
+        GtkWidget *parent;
+        parent = get_toplevel(widget);
+        if(parent == NULL) return NULL;
+        return (GtkWidget *) g_object_get_data(G_OBJECT(parent), "tempo_entry");
+}
+
 
 void score_create_window(Score_t *score)
 {
@@ -281,6 +297,9 @@ void score_create_window(Score_t *score)
         GtkWidget *sks_clef_label;
         GtkWidget *sks_image;
         GtkWidget *sks_hbox;
+
+        GtkWidget *tempo_spinbutton;
+        GtkWidget *tempo_entry;
         /* End of the Ugliest stuff I've done */
 
         GtkScrolledWindow *scrolled_window;
@@ -330,20 +349,28 @@ void score_create_window(Score_t *score)
         sks_image      = glade_xml_get_widget(xml, "sks_image"); 
         sks_hbox       = glade_xml_get_widget(xml, "sks_hbox");
 
+        tempo_spinbutton = glade_xml_get_widget(xml, "tempo_spinbutton");
+        tempo_entry = glade_xml_get_widget(xml, "tempo_entry");
+        
+
         g_object_set_data(G_OBJECT(window), "score", score);
         g_object_set_data(G_OBJECT(window), "area", area);
         g_object_set_data(G_OBJECT(window), "selection", selection);
         g_object_set_data(G_OBJECT(window), "cursor", KeyCursor);
         g_object_set_data(G_OBJECT(window), "display", Display);
         g_object_set_data(G_OBJECT(window), "scrolledwindow", scrolled_window);
+
         g_object_set_data(G_OBJECT(window), "setkey_treble_rb", setkey_treble_rb);
         g_object_set_data(G_OBJECT(window), "setkey_bass_rb", setkey_bass_rb);
         g_object_set_data(G_OBJECT(window), "setkey_alto_rb", setkey_alto_rb);
         g_object_set_data(G_OBJECT(window), "setkey_tenor_rb", setkey_tenor_rb);
+
         g_object_set_data(G_OBJECT(window), "sks_clef_label", sks_clef_label);
         g_object_set_data(G_OBJECT(window), "sks_image", sks_image);
         g_object_set_data(G_OBJECT(window), "sks_hbox", sks_hbox);
 
+        g_object_set_data(G_OBJECT(window), "tempo_spinbutton", tempo_spinbutton);
+        g_object_set_data(G_OBJECT(window), "tempo_entry", tempo_entry);
 
         /*   glade_set_widgets(xml); */
         score->height = 500;

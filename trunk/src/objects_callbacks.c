@@ -261,6 +261,8 @@ void object_sharp_callback(GtkWidget *widget, GdkEventExpose *event)
 	GList *listrunner;
 
 	GtkWidget *btnw;
+        gboolean something_selected = FALSE;
+
 
 	btnw = glade_xml_get_widget(gladexml, "mw_sharp_tb");
 
@@ -283,25 +285,22 @@ void object_sharp_callback(GtkWidget *widget, GdkEventExpose *event)
 
                 note = (Object_t *)listrunner->data;
 
-                note->accidentals &= A_NONE;
-                note->accidentals &= A_SHARP;
-                note->accidentals &= A_DOUBLESHARP;
-                note->accidentals &= A_FLAT;
-                note->accidentals &= A_DOUBLEFLAT;
-                note->accidentals &= A_NATURAL;
-                note->accidentals &= A_PARENTHESIS;
-                
-                if ((note->is_selected) && (gtk_toggle_tool_button_get_active(GTK_TOGGLE_TOOL_BUTTON(btnw))))
+                if ((note->is_selected) && (gtk_toggle_tool_button_get_active(GTK_TOGGLE_TOOL_BUTTON(btnw)))) {
+                        note->accidentals = 0;
                         note->accidentals |= A_SHARP;
-                                  
+
+                        something_selected = TRUE;
+                }
+
                 listrunner = g_list_next(listrunner);
 
         }
 
 	g_list_free(listrunner);
 
-	refresh(area);
+        if (something_selected) gtk_toggle_tool_button_set_active(GTK_TOGGLE_TOOL_BUTTON(btnw), FALSE);
 
+	refresh(area);
 
 }
 void object_doublesharp_callback(GtkWidget *widget, GdkEventExpose *event)
@@ -314,6 +313,8 @@ void object_doublesharp_callback(GtkWidget *widget, GdkEventExpose *event)
 	GList *listrunner;
 
 	GtkWidget *btnw;
+        gboolean something_selected = FALSE;
+
 
 	btnw = glade_xml_get_widget(gladexml, "mw_doublesharp_tb");
 
@@ -335,23 +336,21 @@ void object_doublesharp_callback(GtkWidget *widget, GdkEventExpose *event)
                 Object_t *note;
 
                 note = (Object_t *)listrunner->data;
-
-                note->accidentals &= A_NONE;
-                note->accidentals &= A_SHARP;
-                note->accidentals &= A_DOUBLESHARP;
-                note->accidentals &= A_FLAT;
-                note->accidentals &= A_DOUBLEFLAT;
-                note->accidentals &= A_NATURAL;
-                note->accidentals &= A_PARENTHESIS;
                 
-                if ((note->is_selected) && (gtk_toggle_tool_button_get_active(GTK_TOGGLE_TOOL_BUTTON(btnw))))
+                if ((note->is_selected) && (gtk_toggle_tool_button_get_active(GTK_TOGGLE_TOOL_BUTTON(btnw)))) {
+                        note->accidentals = 0;
                         note->accidentals |= A_DOUBLESHARP;
+
+                        something_selected = TRUE;
+                }
                                   
                 listrunner = g_list_next(listrunner);
 
         }
 
 	g_list_free(listrunner);
+
+        if (something_selected) gtk_toggle_tool_button_set_active(GTK_TOGGLE_TOOL_BUTTON(btnw), FALSE);
 
 	refresh(area);
 
@@ -367,6 +366,7 @@ void object_flat_callback(GtkWidget *widget, GdkEventExpose *event)
 	GList *listrunner;
 
 	GtkWidget *btnw;
+        gboolean something_selected = FALSE;
 
 	btnw = glade_xml_get_widget(gladexml, "mw_flat_tb");
 
@@ -388,23 +388,21 @@ void object_flat_callback(GtkWidget *widget, GdkEventExpose *event)
                 Object_t *note;
 
                 note = (Object_t *)listrunner->data;
-
-                note->accidentals &= A_NONE;
-                note->accidentals &= A_SHARP;
-                note->accidentals &= A_DOUBLESHARP;
-                note->accidentals &= A_FLAT;
-                note->accidentals &= A_DOUBLEFLAT;
-                note->accidentals &= A_NATURAL;
-                note->accidentals &= A_PARENTHESIS;
                 
-                if ((note->is_selected) && (gtk_toggle_tool_button_get_active(GTK_TOGGLE_TOOL_BUTTON(btnw))))
+                if ((note->is_selected) && (gtk_toggle_tool_button_get_active(GTK_TOGGLE_TOOL_BUTTON(btnw)))) {
+                        note->accidentals = 0;
                         note->accidentals |= A_FLAT;
+
+                        something_selected = TRUE;
+                }
                                   
                 listrunner = g_list_next(listrunner);
 
         }
 
 	g_list_free(listrunner);
+
+        if (something_selected) gtk_toggle_tool_button_set_active(GTK_TOGGLE_TOOL_BUTTON(btnw), FALSE);
 
 	refresh(area);
 
@@ -420,6 +418,8 @@ void object_doubleflat_callback(GtkWidget *widget, GdkEventExpose *event)
 	GList *listrunner;
 
 	GtkWidget *btnw;
+        gboolean something_selected = FALSE;
+
 
 	btnw = glade_xml_get_widget(gladexml, "mw_doubleflat_tb");
 
@@ -442,22 +442,20 @@ void object_doubleflat_callback(GtkWidget *widget, GdkEventExpose *event)
 
                 note = (Object_t *)listrunner->data;
 
-                note->accidentals &= A_NONE;
-                note->accidentals &= A_SHARP;
-                note->accidentals &= A_DOUBLESHARP;
-                note->accidentals &= A_FLAT;
-                note->accidentals &= A_DOUBLEFLAT;
-                note->accidentals &= A_NATURAL;
-                note->accidentals &= A_PARENTHESIS;
-                
-                if ((note->is_selected) && (gtk_toggle_tool_button_get_active(GTK_TOGGLE_TOOL_BUTTON(btnw))))
+                if ((note->is_selected) && (gtk_toggle_tool_button_get_active(GTK_TOGGLE_TOOL_BUTTON(btnw)))) {
+                        note->accidentals = 0;
                         note->accidentals |= A_DOUBLEFLAT;
+
+                        something_selected = TRUE;
+                }
                                   
                 listrunner = g_list_next(listrunner);
 
         }
 
 	g_list_free(listrunner);
+
+        if (something_selected) gtk_toggle_tool_button_set_active(GTK_TOGGLE_TOOL_BUTTON(btnw), FALSE);
 
 	refresh(area);
 
@@ -473,6 +471,7 @@ void object_natural_callback(GtkWidget *widget, GdkEventExpose *event)
 	GList *listrunner;
 
 	GtkWidget *btnw;
+        gboolean something_selected = FALSE;
 
 	btnw = glade_xml_get_widget(gladexml, "mw_natural_tb");
 
@@ -494,23 +493,21 @@ void object_natural_callback(GtkWidget *widget, GdkEventExpose *event)
                 Object_t *note;
 
                 note = (Object_t *)listrunner->data;
-
-                note->accidentals &= A_NONE;
-                note->accidentals &= A_SHARP;
-                note->accidentals &= A_DOUBLESHARP;
-                note->accidentals &= A_FLAT;
-                note->accidentals &= A_DOUBLEFLAT;
-                note->accidentals &= A_NATURAL;
-                note->accidentals &= A_PARENTHESIS;
                 
-                if ((note->is_selected) && (gtk_toggle_tool_button_get_active(GTK_TOGGLE_TOOL_BUTTON(btnw))))
+                if ((note->is_selected) && (gtk_toggle_tool_button_get_active(GTK_TOGGLE_TOOL_BUTTON(btnw)))) {
+                        note->accidentals = 0;
                         note->accidentals |= A_NATURAL;
+
+                        something_selected = TRUE;
+                }
                                   
                 listrunner = g_list_next(listrunner);
 
         }
 
 	g_list_free(listrunner);
+
+        if (something_selected) gtk_toggle_tool_button_set_active(GTK_TOGGLE_TOOL_BUTTON(btnw), FALSE);
 
 	refresh(area);
 

@@ -206,7 +206,7 @@ int main(int argc, char *argv[])
                 ppnf = g_list_nth_data(plugins_list, i);
                 full_filename = g_strconcat(ppnf->path, G_DIR_SEPARATOR_S, ppnf->filename, NULL);
 
-                g_print("filename: %s\n", full_filename);
+                g_print("Loading plugin: %s\n", full_filename);
                 GSCORE_PLUGIN_INIT(plugin);
                 plugin = gscore_plugin_get(full_filename);
 

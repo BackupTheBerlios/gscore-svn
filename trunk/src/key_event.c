@@ -98,7 +98,7 @@ score_key_press_event(GtkWidget *widget, GdkEventKey *event)
                                 staffobj = (Staff_t *)
                                         g_list_nth_data(score->Staff_list, 
                                                         get_staff_selected(score));
-                                
+
                                 if ( ! staffobj ) return FALSE;
 
                                 tmpobj = (Object_t *)

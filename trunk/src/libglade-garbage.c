@@ -150,3 +150,13 @@ void on_page_setup_activate(void)
 {
 }
 
+
+void on_dynamic_activate(void) {}
+void on_sixtyfourth_activate(void) {}
+void on_sixtyfourth_rest_activate(void) {}
+void on_thirtysecond_rest_activate(void) {}
+void on_thirtysecond_activate(void) {}
+void on_set_instrument_activate(void) {}
+void on_barline_activate(void) {}
+void on_open_activate(void) {}
+void on_parameters1_activate(void) {}
