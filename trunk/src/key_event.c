@@ -46,7 +46,7 @@ static gboolean debug_mode = FALSE;
 static Score_t *ur_score = NULL;
 
 extern gboolean
-score_key_press_event(GtkWidget *widget, GdkEventKey *event)
+score_key_press_event(GtkWidget *widget, GdkEventKey *event)h
 {
         Score_t *score = NULL;
         Staff_t *staffobj = NULL;
