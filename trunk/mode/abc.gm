@@ -1,0 +1,79 @@
+#
+# Gscore ABC Mode
+#
+# This makes gscore able to write score using abc syntax from keyboard
+#
+
+#
+# The standard use as input is GUIDO
+#
+
+#
+# Duration
+#
+/2 = "2"
+/4 = ""
+/8 = "/"
+/16 = "/4"
+
+#
+# Notes
+#
+# GUIDO = ABC_NOTE
+#
+c-1 = "C,,"
+d-1 = "D,,"
+e-1 = "E,,"
+f-1 = "F,,"
+g-1 = "G,,"
+a0  = "A,,"
+b0  = "B,,"
+c0  = "C,"
+d0  = "D,"
+e0  = "E,"
+f0  = "F,"
+g0  = "G,"
+a1  = "A"
+b1  = "B"
+c1  = "C"
+d1  = "D"
+e1  = "E"
+f1  = "F"
+g1  = "G"
+a2  = "A"
+b2  = "B"
+c2  = "c"
+d2  = "d"
+e2  = "e"
+f2  = "f"
+g2  = "g"
+a3  = "a"
+b3  = "b"
+c3  = "c'"
+d3  = "d'"
+e3  = "e'" 
+f3  = "f'"
+g3  = "g'"
+a4  = "a'"
+b4  = "b'"
+c4  = "c''"
+d4  = "d''"
+e4  = "e''" 
+f4  = "f''"
+g4  = "g''"
+
+#
+# Rests
+#
+_ = "z"
+
+#
+# Chords
+# 
+# '{' = Starts Chord
+# '}' = End Chord
+# (Remember, the reference is GUIDO Notation)
+#
+
+{ = '['
+} = ']'
