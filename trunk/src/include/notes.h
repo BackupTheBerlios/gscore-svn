@@ -29,8 +29,6 @@
 
 gboolean is_note(gint type);
 
-gboolean is_chord(Object_t *object);
-
 gboolean is_barline(gint type);
 
 #endif

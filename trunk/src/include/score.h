@@ -28,11 +28,6 @@
 
 Score_t *gscore_score_new(void);
 
-void set_tempo(void);
-
-void score_set_tempo (gpointer callback_data, guint callback_action,
-                      GtkWidget * widget);
-
 gint score_add_tab (gpointer callback_data, guint callback_action,
                     GtkWidget * widget);
 
@@ -47,10 +42,6 @@ void properties (gpointer callback_data, guint callback_action,
 
 void score_midi_play (gpointer callback_data, guint callback_action,
                       GtkWidget * widget);
-
-void on_set_header_activate_default(void);
-
-void score_set_header_ok(void);
 
 Score_t *score_get_from_widget(GtkWidget *widget);
 
@@ -79,6 +70,16 @@ GtkWidget *score_get_sks_clef_label_from_widget(GtkWidget *widget);
 GtkWidget *score_get_sks_image_from_widget(GtkWidget *widget);
 
 GtkWidget *score_get_sks_hbox_from_widget(GtkWidget *widget);
+
+GtkWidget *score_get_tempo_spinbutton_from_widget(GtkWidget *widget);
+
+GtkWidget *score_get_tempo_entry_from_widget(GtkWidget *widget);
+
+GtkWidget *score_get_title_entry_from_widget(GtkWidget *widget);
+
+GtkWidget *score_get_subtitle_entry_from_widget(GtkWidget *widget);
+
+GtkWidget *score_get_composer_entry_from_widget(GtkWidget *widget);
 
 void score_create_window(Score_t *score);
 

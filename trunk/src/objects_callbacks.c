@@ -576,11 +576,12 @@ void object_up_callback(GtkWidget *widget, GdkEventExpose *event)
 
                 note = (Object_t *)listrunner->data;
 
-                note->nature &= O_STEMUP;
-                note->nature &= O_STEMDOWN;
+                if (note->is_selected) {
+                        note->nature &= O_STEMUP;
+                        note->nature &= O_STEMDOWN;
 
-                if (note->is_selected)
                         note->nature |= O_STEMUP;
+                }
                                   
                 listrunner = g_list_next(listrunner);
 
@@ -615,11 +616,12 @@ void object_down_callback(GtkWidget *widget, GdkEventExpose *event)
 
                 note = (Object_t *)listrunner->data;
 
-                note->nature &= O_STEMUP;
-                note->nature &= O_STEMDOWN;
+                if (note->is_selected) {
+                        note->nature &= O_STEMUP;
+                        note->nature &= O_STEMDOWN;
 
-                if (note->is_selected)
                         note->nature |= O_STEMDOWN;
+                }
                                   
                 listrunner = g_list_next(listrunner);
 

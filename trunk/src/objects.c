@@ -470,7 +470,7 @@ Object_t *object_get_right(Staff_t *staff, gdouble x)
         while ( listrunner_object ) {
                 object_data = (Object_t *)listrunner_object->data;
 
-                if ((staff->start_x + object_x) > x) {
+                if ((staff->start_x + object_x + 10) > x) {
                         return (Object_t *)object_data;
 
                 } 

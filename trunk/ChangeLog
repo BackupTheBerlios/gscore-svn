@@ -2,6 +2,7 @@
 
 	* src/objects_callbacks.c: Sets/Uset stuff on objects selected
 	* src/staff.c, src/score.c: Make dialog boxes work using gobjects
+	* plugins/abc/export-abc.c: Chords support
 	
 2005-03-24 Toady <toady@gscore.org>
 

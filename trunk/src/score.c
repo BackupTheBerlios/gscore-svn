@@ -279,6 +279,30 @@ GtkWidget *score_get_tempo_entry_from_widget(GtkWidget *widget)
         return (GtkWidget *) g_object_get_data(G_OBJECT(parent), "tempo_entry");
 }
 
+GtkWidget *score_get_title_entry_from_widget(GtkWidget *widget)
+{
+        GtkWidget *parent;
+        parent = get_toplevel(widget);
+        if(parent == NULL) return NULL;
+        return (GtkWidget *) g_object_get_data(G_OBJECT(parent), "title_entry");
+}
+
+GtkWidget *score_get_subtitle_entry_from_widget(GtkWidget *widget)
+{
+        GtkWidget *parent;
+        parent = get_toplevel(widget);
+        if(parent == NULL) return NULL;
+        return (GtkWidget *) g_object_get_data(G_OBJECT(parent), "subtitle_entry");
+}
+
+GtkWidget *score_get_composer_entry_from_widget(GtkWidget *widget)
+{
+        GtkWidget *parent;
+        parent = get_toplevel(widget);
+        if(parent == NULL) return NULL;
+        return (GtkWidget *) g_object_get_data(G_OBJECT(parent), "composer_entry");
+}
+
 
 void score_create_window(Score_t *score)
 {
@@ -300,7 +324,11 @@ void score_create_window(Score_t *score)
 
         GtkWidget *tempo_spinbutton;
         GtkWidget *tempo_entry;
-        /* End of the Ugliest stuff I've done */
+
+        GtkWidget *title_entry;
+        GtkWidget *subtitle_entry;
+        GtkWidget *composer_entry;
+        /* End of the Ugliest stuff I've ever done */
 
         GtkScrolledWindow *scrolled_window;
   
@@ -352,6 +380,9 @@ void score_create_window(Score_t *score)
         tempo_spinbutton = glade_xml_get_widget(xml, "tempo_spinbutton");
         tempo_entry = glade_xml_get_widget(xml, "tempo_entry");
         
+	title_entry = glade_xml_get_widget(gladexml, "title_entry");
+	subtitle_entry = glade_xml_get_widget(gladexml, "subtitle_entry");
+	composer_entry = glade_xml_get_widget(gladexml, "composer_entry");
 
         g_object_set_data(G_OBJECT(window), "score", score);
         g_object_set_data(G_OBJECT(window), "area", area);
@@ -371,6 +402,11 @@ void score_create_window(Score_t *score)
 
         g_object_set_data(G_OBJECT(window), "tempo_spinbutton", tempo_spinbutton);
         g_object_set_data(G_OBJECT(window), "tempo_entry", tempo_entry);
+
+        g_object_set_data(G_OBJECT(window), "title_entry", title_entry);
+        g_object_set_data(G_OBJECT(window), "subtitle_entry", subtitle_entry);
+        g_object_set_data(G_OBJECT(window), "composer_entry", composer_entry);
+
 
         /*   glade_set_widgets(xml); */
         score->height = 500;

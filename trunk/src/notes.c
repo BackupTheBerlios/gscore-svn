@@ -50,15 +50,6 @@ is_note(gint type)
 }
 
 extern gboolean
-is_chord(Object_t *object)
-{
-        if (object->group_id == 0)
-                return FALSE;
-        else
-                return TRUE; 
-}
-
-extern gboolean
 is_barline(gint type)
 {
         switch(type) {

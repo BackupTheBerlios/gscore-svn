@@ -24,6 +24,8 @@
 #ifndef _CHORDS_H_
 #define _CHORDS_H_
 
+gboolean is_chord(Staff_t *staff, Object_t *object);
+
 /* Returns the x position where the note should be */
 /* Gives the information if the base note has the stem up or down */
 /* And also, if the note must be drawn with the head oriented on the left or right (it happens of the pitch is just below/above) */

@@ -30,6 +30,29 @@
 #include "objects.h"
 #include "chords.h"
 
+
+gboolean is_chord(Staff_t *staff, Object_t *object)
+{
+        Object_t *object_data;
+	GList *listrunner_object;
+        
+
+	listrunner_object = g_list_first(staff->Object_list);
+	while ( listrunner_object ) {
+		object_data = (Object_t *)listrunner_object->data;
+		
+		if (object_data) {
+                        if (object->id == object_data->group_id)
+                                return TRUE;
+		}
+		
+		listrunner_object = g_list_next(listrunner_object);
+	}
+
+        return FALSE;
+
+}
+
 guint make_chord(Staff_t *staff, 
                  gulong objectid, gulong group_id, gint pitch, 
                  gboolean *stemup, gboolean *notehead_left)
