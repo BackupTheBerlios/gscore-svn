@@ -33,7 +33,7 @@ static note_t *parse_note(char *string)
   int i;
 
   /* Determine the note pitch */
-  pitch = strchr(pitch_string, string[0]) - pitch_string;
+  pitch = strchr(pitch_string, string[0]) - pitch_string -4;
   for(i=1; string[i] == '\''; ++i){
     pitch+=8;
   }
@@ -110,7 +110,8 @@ int my_handler(abcHandle h)
 	theScore->Identity->composer = g_string_new((gchar *) s);
 	g_printf("Composer : %s\n", s);
       } else if(strcmp(x,"S_FIELD_V")==0) {
-	create_staff(theScore, 5, 8, 0, 0);
+	create_staff(theScore, 5, 8, 35,
+		     staff_get_y_for_next(theScore));
 	/* Copy/Paste from staff.c */
 	/* FIXME: we should find a better way to create objects */
 /* 	theScore->Staff = g_malloc(sizeof(Staff_t)); */
