@@ -3,14 +3,17 @@
 
 #include <staff.h>
 #include <objects.h>
+#include <common.h>
 
 #include "import-abc.h"
 
 #include "abcp.h"
 
 static Score_t *theScore;
+static gint numStaff;
+static gint numTitle;
 
-static const char *pitch_string = "CDEFGABcdefgab";
+static const char *pitch_string = "CDEFGABcdefgab',";
 
 typedef struct 
 {
@@ -26,11 +29,14 @@ typedef struct
   duration_t duration;
 } note_t;
 
-static note_t *parse_note(char *string)
+static note_t *parse_note(const char *string)
 {
   static note_t the_note;
   int pitch;
   int i;
+  char *pos;
+  int nomin=0;
+  int denom=0;
 
   /* Determine the note pitch */
   pitch = strchr(pitch_string, string[0]) - pitch_string -4;
@@ -41,13 +47,165 @@ static note_t *parse_note(char *string)
     pitch-=8;
   }
   /* Determine the note duration */
+  for(pos= (char*) string;
+      (pos[0] &&
+       strchr(pitch_string, pos[0])) ;
+      ++pos);
+/*   g_printf("Duration : '%s'\n", pos); */
+
+  nomin = atoi(pos);
+/*   g_printf("Nominator : %d\n", nomin); */
+  pos = strchr(pos, '/');
+  if(pos) {
+    denom = atoi(pos+1);
+    if(denom==0) denom = 2;
+/*     g_printf("Denominator : %d\n", denom); */
+  }
 
   /* Return result */
   the_note.pitch = pitch;
-  the_note.duration.nomin = 1;	/* FIXME */
-  the_note.duration.denom = 1;	/* FIXME */
+  if(nomin) {
+    the_note.duration.nomin = nomin;
+  } else {
+    the_note.duration.nomin = 1;
+  }
+
+  if(denom) {
+    the_note.duration.denom = denom;
+  } else {
+    the_note.duration.denom = 1;
+  }
 
   return &the_note;
+}
+
+static int event_note(char *s) 
+{
+  note_t *the_note;
+  int ticks;			/* Duration expressed in ticks
+				   (1 thick = 1/64th whole) */
+  int num0 = 0;
+  int num1 = 0;
+  int type;
+/*   int accidents; */
+  gboolean is_rest = FALSE;
+  
+/*   g_print("Note: %s\n", s); */
+  the_note = parse_note(s);
+  is_rest = (gboolean) strchr("Zz", s[0]);
+
+  /* Convert nomin/denom to WHOLE/HALF... */
+  ticks = the_note->duration.nomin * base_note.nomin * 64;
+  ticks /= (the_note->duration.denom * base_note.denom);
+/*   g_printf("Ticks : %d\n", ticks); */
+  while(ticks) {
+    if(is_even(ticks)) {
+      ++num1;
+    } else {
+      ++num0;
+    }
+    ticks = ticks >> 1;
+  }
+
+/*   switch(nom0+num1) */
+/*     { */
+/*     case 1: */
+/*       type = SIXTYFOURTH; */
+/*       break; */
+/*     case 2: */
+/*       type = THIRTYSECOND; */
+/*       break; */
+/*     case 3: */
+      
+/*     } */
+  /* !!! This code supposes that constants are well ordered */
+  type = SIXTYFOURTH + 1 -num0 -num1;
+  if(is_rest) {
+    type += (DOUBLEWHOLEREST-DOUBLEWHOLE);
+  }
+  
+  /* TODO: Handle dotted notes */
+  
+  add_object(theScore, numStaff,
+	     type,
+	     0, 0, 0,0,0,0,0,0,0,
+	     the_note->pitch,0,FALSE);
+  
+  return 0;
+}
+
+static int event_field(const char *x, const char *s)
+{
+  if(strcmp(x, "S_FIELD_X")==0) {
+    numTitle = 0;
+    numStaff = -1;
+  } else if(strcmp(x,"S_FIELD_T")==0) {
+    switch(numTitle) 
+      {
+      case 0:
+	theScore->Identity->title = g_string_new((gchar*) s);
+	++numTitle;
+	theScore->windows_title = g_strdup((gchar*)s);
+	    
+/* 	g_printf("Title : %s\n", s); */
+	break;
+      case 1:
+	theScore->Identity->subtitle = g_string_new((gchar*) s);
+	++numTitle;
+/* 	g_printf("Subtitle %s\n", s); */
+	break;
+      default:
+	theScore->Identity->subtitle = 
+	  g_string_append(theScore->Identity->subtitle,"\n");
+	theScore->Identity->subtitle = 
+	  g_string_append(theScore->Identity->subtitle,s);
+	    
+      }
+  } else if(strcmp(x, "S_FIELD_C")==0) {
+    theScore->Identity->composer = g_string_new((gchar *) s);
+/*     g_printf("Composer : %s\n", s); */
+  } else if(strcmp(x,"S_FIELD_V")==0) {
+    create_staff(theScore, 5, 8, 35,
+		 staff_get_y_for_next(theScore));
+
+    ++numStaff;
+/*     g_printf("Voice: %s\n", s); */
+  } else {
+/*     g_printf("Other field : %s\n",x); */
+  }
+      
+  return 0;
+}
+
+static int event_bar(char *s)
+{
+  int type;
+  
+/*   g_printf("Bar : '%s'\n", s); */
+
+  type = BARLINE;
+  
+  if(strcmp(s, "|")==0) {
+    type = BARLINE_SINGLE;
+  } else if(strcmp(s, "||")==0) {
+    type = BARLINE_DOUBLE;
+  } else if(strcmp(s, "|:")==0) {
+    type = BARLINE_OPENREPEAT;
+  } else if(strcmp(s, ":|") ==0) {
+    type = BARLINE_CLOSEREPEAT;
+  } else if(strcmp(s, "::")==0) {
+    type = BARLINE_OPENCLOSEREPEAT;
+  } else if(strcmp(s, "[|") == 0) {
+    type = BARLINE_OPEN;
+  } else if(strcmp(s, "|]")==0) {
+    type = BARLINE_CLOSE;
+  }
+  add_object(theScore, numStaff,
+	     type,
+	     0, 0, 0,0,0,0,0,0,0,
+	     0, 0,FALSE);
+  
+  return 0;
 }
 
 
@@ -61,10 +219,7 @@ int my_handler(abcHandle h)
   USHORT l;
   USHORT c;
   char *x;
-  char*y;
-  static gint numStaff;
-  static gint numTitle;
-  note_t *the_note;
+/*   char*y; */
   
   t=abcToken(scan);
   s= (char*) abcString(scan);
@@ -76,94 +231,17 @@ int my_handler(abcHandle h)
   switch(t)
     {
     case T_FIELDB:
-/*     case T_TEXT: */
-/*       g_printf("Field: '%s'\n", abcString(h)); */
-/*       g_printf("String : '%s'\n", s); */
-/*       g_printf("State : '%s'\n", x); */
-
-      if(strcmp(x, "S_FIELD_X")==0) {
-	numTitle = 0;
-	numStaff = -1;
-      }else if(strcmp(x,"S_FIELD_T")==0) {
-	switch(numTitle) 
-	  {
-	  case 0:
-	    theScore->Identity->title = g_string_new((gchar*) s);
-	    ++numTitle;
-	    theScore->windows_title = g_strdup((gchar*)s);
-	    
-	    g_printf("Title : %s\n", s);
-	    break;
-	  case 1:
-	    theScore->Identity->subtitle = g_string_new((gchar*) s);
-	    ++numTitle;
-	    g_printf("Subtitle %s\n", s);
-	    break;
-	  default:
-	    theScore->Identity->subtitle = 
-	      g_string_append(theScore->Identity->subtitle,"\n");
-	    theScore->Identity->subtitle = 
-	      g_string_append(theScore->Identity->subtitle,s);
-	    
-	  }
-      } else if(strcmp(x, "S_FIELD_C")==0) {
-	theScore->Identity->composer = g_string_new((gchar *) s);
-	g_printf("Composer : %s\n", s);
-      } else if(strcmp(x,"S_FIELD_V")==0) {
-	create_staff(theScore, 5, 8, 35,
-		     staff_get_y_for_next(theScore));
-	/* Copy/Paste from staff.c */
-	/* FIXME: we should find a better way to create objects */
-/* 	theScore->Staff = g_malloc(sizeof(Staff_t)); */
-/* 	theScore->Staff->nb_lines= 5; */
-/* 	theScore->Staff->space_btw_lines = 0; */
-/*         theScore->Staff->is_selected = FALSE; */
-/*         theScore->Staff->key = NO_KEY; */
-/*         theScore->Staff->key_signature = KEY_SIGNATURE_EMPTY; */
-/*         theScore->Staff->time_signature[0] = TIME_SIGNATURE_NORMAL; */
-/*         theScore->Staff->time_signature[1] = 4; */
-/*         theScore->Staff->time_signature[2] = 4; */
-/*         theScore->Staff->measure_number = 1; */
-/*         theScore->Staff->total_measures = theScore->Staff->measure_number; */
-/*         theScore->Staff->extremity_begin_x = 0; */
-/*         theScore->Staff->extremity_begin_y = 0; */
-/*         theScore->Staff->midi_instrument = MIDI_GRAND_PIANO; */
-/*         theScore->Staff->Object_list = NULL; */
-
-/* 	theScore->Staff_list = g_list_append(theScore->Staff_list, */
-/* 					     theScore->Staff); */
-
-	g_printf("Voice: %s\n", s);
-	++numStaff;
-      } else {
-	g_printf("Other field : %s\n",x);
-      }
-      
-      y=abcParsedString(h);
-      if (*y && *y != '?') printf("%s\n",y); 
+      return event_field(x,s);
       break;
+      
     case T_NOTE:
-      the_note = parse_note(s);
-      add_object(theScore, numStaff,HALF, 0, 0, 0,0,0,0,0,0,0,the_note->pitch,0,FALSE);
-      /* FIXME: Use generic function when one is available */
-/*       theScore->Staff->Object = g_malloc(sizeof(Object_t)); */
-/*       theScore->Staff->Object->id= ++theScore->object_id; */
-/*       theScore->Staff->Object->type = HALF; /\* TODO: Calculate the real value *\/ */
-/*       theScore->Staff->Object->nature = 0; */
-/*       theScore->Staff->Object->accidentals = 0; */
-/*       theScore->Staff->Object->group_id = 0; */
-/*       theScore->Staff->Object->is_selected = FALSE; */
-
-/*       theScore->Staff->Object_list = g_list_append(theScore->Staff->Object_list, */
-/* 						   theScore->Staff->Object); */
-/*       theScore->staff_extremity_end_x += object_get_spacing(HALF); */
+      return event_note(s);
       
-      
-      g_print("Note: %s\n", s);
-      break;
-      
+/*       break; */
+    case T_BAR:
+      return event_bar(s);
     default:
-      g_printf("%s ", abcTokenName(t));
+/*       g_printf("%s ", abcTokenName(t)); */
       break;
     }
 
@@ -175,21 +253,21 @@ int my_handler(abcHandle h)
 extern gboolean abc_load_file(const gchar *filename,
 			  Score_t *score)
 {
-  g_printf("Calling abc_load_file('%s')\n", filename);
+/*   g_printf("Calling abc_load_file('%s')\n", filename); */
   
 
   theScore = score;
   base_note.nomin = 1;
   base_note.denom = 8;
   
-  g_printf("Before abcScanFile\n");
+/*   g_printf("Before abcScanFile\n"); */
   theScore->Identity->filename = g_string_new((gchar *) filename);
   theScore->Staff_list = NULL;
   theScore->tempo_text = g_string_new("");
   theScore->nb_staves = 0;
   
   abcScanFile((char *) filename, my_handler);
-  g_printf("After abcScanFile\n");
+/*   g_printf("After abcScanFile\n"); */
   
   return TRUE;
 }
