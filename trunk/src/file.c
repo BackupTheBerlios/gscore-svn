@@ -136,7 +136,9 @@ import_score(GtkButton *button, gpointer user_data)
 
 	plugin->filter->import(&pi, filename, NULL);
 
-	g_print("Test: %d\n", pi->tempo);
+        Score = *pi;
+
+	g_print("Test: %d\n", Score.tempo);
 
 }
 

@@ -4,6 +4,7 @@
 
 #include "plugin.h"
 #include "gscore.h"
+#include "macros.h"
 
 #define API_VERSION 1
 #define PLUGIN_TYPE GSCORE_PLUGIN_FILTER
@@ -134,13 +135,21 @@ gboolean simple_filter_import (Score_t **score,
 			       void *user_data)
 {
         Score_t *spi;
+        GladeXML *gladexml;
 
         g_print("Import function called for %s\n", PLUGIN_NAME);
 	g_print("Loading %s\n", filename);
 
+
+	gladexml = glade_xml_new(get_file_from_data_dir("glade/gscore.glade"), NULL, NULL);
+
+
         /* The following sets the tempo for the score */
         GSCORE_PLUGIN_STRUCT_INIT(spi);
 
+        spi->area = glade_xml_get_widget (gladexml, "sw_score_da");
+        spi->Staff_list = NULL;
+        spi->staff_extremity_end_x = 0;
         spi->tempo = 10;
 
         /* We give the structure to the pointer */
