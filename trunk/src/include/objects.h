@@ -24,6 +24,7 @@
 #ifndef _OBJECTS_H_
 #define _OBJECTS_H_
 
+#include <gscore.h>
 
 gint object_get_spacing(gint type);
 
