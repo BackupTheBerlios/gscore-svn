@@ -357,6 +357,7 @@ Object_t *object_get_previous(Score_t *score, Object_t *object)
 /* Returns the object closest to the left from the x position */
 Object_t *object_get_left(Staff_t *staff, gdouble x)
 {
+        /* *FIXME* This is not as nice as it should be */
 
         GList *listrunner_object;
 
@@ -374,17 +375,16 @@ Object_t *object_get_left(Staff_t *staff, gdouble x)
 
                 if ( object_data->group_id == 0 ) {
                         object_x += object_get_spacing(object_data->type);
-                        
-                        if (((staff->start_x + object_x) <= x)) {
+
+                        if (((staff->start_x + object_x) <= x )) {
                                 ret_object = (Object_t *)object_data;
                         } 
+
                 }
 
                 listrunner_object = g_list_next(listrunner_object);
         } /* while ( listrunner_object )  */
 
-
-        if ( ! ret_object ) return NULL;
 
         return ret_object;
 }
@@ -405,11 +405,13 @@ gdouble object_get_x(Staff_t *staff, Object_t *object)
         while ( listrunner_object ) {
                 object_data = (Object_t *)listrunner_object->data;
                 
-                if (object_data->id != object->id) {
-                        retval += object_get_spacing(object->type);
-                } else {
-                        retval += staff->start_x;
-                        return retval;
+                if ( object_data->group_id == 0 ) {
+                        if (object_data->id != object->id) {
+                                retval += object_get_spacing(object->type);
+                        } else {
+                                retval += staff->start_x;
+                                return retval;
+                        }
                 }
                 
                 listrunner_object = g_list_next(listrunner_object);
@@ -436,8 +438,8 @@ Object_t *object_get_right(Staff_t *staff, gdouble x)
         while ( listrunner_object ) {
                 object_data = (Object_t *)listrunner_object->data;
 
-                if ( object_data == 0 ) {
-                        if ((staff->start_x + object_x + 10) > x) {
+                if ( object_data->group_id == 0 ) {
+                        if ((staff->start_x + object_x) > x) {
                                 return (Object_t *)object_data;
 
                         } 

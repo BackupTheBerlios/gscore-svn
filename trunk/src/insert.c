@@ -35,10 +35,31 @@
 #include "draw_barline.h"
 #include "staff.h"
 #include "common.h"
+#include "macros.h"
+#include "score.h"
 
 void on_set_key_activate(void)
 {
 
+}
+
+extern void 
+insert_text_callback(GtkButton *widget, gpointer user_data)
+{
+        GtkWidget *entry;
+        const gchar *data;
+/*         Score_t *score = score_get_from_widget(widget); */
+
+/*         GtkWidget *entry = score_get_insert_text_entry_from_widget(widget); */
+/*         GtkWidget *font = score_get_insert_text_font_from_widget(widget); */
+/*         GtkWidget *color = score_get_insert_text_color_from_widget(widget); */
+
+        entry = glade_xml_get_widget(gladexml, "insert_text_entry");
+        data = gtk_entry_get_text(entry);
+        g_print("Text we got: %s\n", data);
+        entry = score_get_insert_text_entry_from_widget(widget);
+        data = gtk_entry_get_text(entry);
+        g_print("Text we got: %s\n", data);
 }
 
 /* globals vars */

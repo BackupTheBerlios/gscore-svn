@@ -98,7 +98,8 @@ guint make_chord(Staff_t *staff,
                                         }
                         }
 
-			xpos += object_get_spacing(object->type);
+                        if (object->group_id == 0)
+                                xpos += object_get_spacing(object->type);
 		}
 
 		

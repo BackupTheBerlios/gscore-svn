@@ -41,7 +41,8 @@ void print_objects_staff(Score_t *score, gint staff)
 
                         object_data = (Object_t *)listrunner->data;
 
-                        printf("Object->id = %ul\n", object_data->id);
+                        printf("Object->id = %lu\n", object_data->id);
+                        printf("Object->group_id = %lu\n", object_data->group_id);
                         printf("Object->type = %d\n", object_data->type);
                         printf("Object->nature = %d\n", object_data->nature);
                         printf("Object->accidentals = %d\n", object_data->accidentals);
@@ -53,6 +54,21 @@ void print_objects_staff(Score_t *score, gint staff)
                 }
 
         g_list_free(listrunner);
+
+}
+
+void print_object(Object_t *object)
+{
+
+        printf("\n*** Object:\n");
+        printf("Object->id = %lu\n", object->id);
+        printf("Object->group_id = %lu\n", object->group_id);
+        printf("Object->type = %d\n", object->type);
+        printf("Object->nature = %d\n", object->nature);
+        printf("Object->accidentals = %d\n", object->accidentals);
+        printf("Object->pitch = %d\n", object->pitch);
+        printf("Object->tab_number = %d\n", object->tab_number);
+        printf("Object->is_selected = %d\n", object->is_selected);
 
 }
 

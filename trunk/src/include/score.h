@@ -81,6 +81,12 @@ GtkWidget *score_get_subtitle_entry_from_widget(GtkWidget *widget);
 
 GtkWidget *score_get_composer_entry_from_widget(GtkWidget *widget);
 
+GtkWidget *score_get_insert_text_entry_from_widget(GtkWidget *widget);
+
+GtkWidget *score_get_insert_text_font_from_widget(GtkWidget *widget);
+
+GtkWidget *score_get_insert_text_color_from_widget(GtkWidget *widget);
+
 void score_create_window(Score_t *score);
 
 /*

@@ -44,8 +44,8 @@ beam_notes_selected(GtkButton *widget, gpointer user_data)
 	GList *listrunner;
 	GList *listrunner_next;
 
-	score = score_get_from_widget(widget);
-	area = score_get_area_from_widget(widget);
+	score = score_get_from_widget(GTK_WIDGET(widget));
+	area = score_get_area_from_widget(GTK_WIDGET(widget));
 
 	staff_data = (Staff_t *) g_list_nth_data(score->Staff_list,
 						 get_staff_selected(score));
@@ -54,29 +54,26 @@ beam_notes_selected(GtkButton *widget, gpointer user_data)
 
 	listrunner_next = g_list_next(listrunner);
 
-	while (listrunner)
-		{
-			Object_t *note;
-			Object_t *next_note;
+	while (listrunner) {
+                Object_t *note;
+                Object_t *next_note = NULL;
 
-			note = (Object_t *)listrunner->data;
-			if (listrunner_next)
-				next_note = (Object_t *)listrunner_next->data;
+                note = (Object_t *)listrunner->data;
+                if (listrunner_next)
+                        next_note = (Object_t *)listrunner_next->data;
 
-			if (note->is_selected)
-				{
-					note->nature |= O_BEAMED;
-					if (( ! next_note->is_selected ) || ( ! listrunner_next))
-						{
-							note->nature |= O_LAST_BEAMED;
-						}
-				}
+                if (note->is_selected) {
+                        note->nature |= O_BEAMED;
+                        if (( ! next_note->is_selected ) || ( ! listrunner_next)) {
+                                note->nature |= O_LAST_BEAMED;
+                        }
+                }
                                   
-			listrunner = g_list_next(listrunner);
+                listrunner = g_list_next(listrunner);
 
-			if (listrunner_next)
-				listrunner_next = g_list_next(listrunner);
-		}
+                if (listrunner_next)
+                        listrunner_next = g_list_next(listrunner);
+        }
 
 	g_list_free(listrunner);
 	g_list_free(listrunner_next);

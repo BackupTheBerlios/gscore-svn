@@ -303,6 +303,30 @@ GtkWidget *score_get_composer_entry_from_widget(GtkWidget *widget)
         return (GtkWidget *) g_object_get_data(G_OBJECT(parent), "composer_entry");
 }
 
+GtkWidget *score_get_insert_text_entry_from_widget(GtkWidget *widget)
+{
+        GtkWidget *parent;
+        parent = get_toplevel(widget);
+        if(parent == NULL) return NULL;
+        return (GtkWidget *) g_object_get_data(G_OBJECT(parent), "insert_text_entry");
+}
+
+GtkWidget *score_get_insert_text_font_from_widget(GtkWidget *widget)
+{
+        GtkWidget *parent;
+        parent = get_toplevel(widget);
+        if(parent == NULL) return NULL;
+        return (GtkWidget *) g_object_get_data(G_OBJECT(parent), "insert_text_font");
+}
+
+GtkWidget *score_get_insert_text_color_from_widget(GtkWidget *widget)
+{
+        GtkWidget *parent;
+        parent = get_toplevel(widget);
+        if(parent == NULL) return NULL;
+        return (GtkWidget *) g_object_get_data(G_OBJECT(parent), "insert_text_color");
+}
+
 
 void score_create_window(Score_t *score)
 {
@@ -328,6 +352,10 @@ void score_create_window(Score_t *score)
         GtkWidget *title_entry;
         GtkWidget *subtitle_entry;
         GtkWidget *composer_entry;
+
+        GtkWidget *insert_text_entry;
+        GtkWidget *insert_text_font;
+        GtkWidget *insert_text_color;
         /* End of the Ugliest stuff I've ever done */
 
         GtkScrolledWindow *scrolled_window;
@@ -384,6 +412,11 @@ void score_create_window(Score_t *score)
 	subtitle_entry = glade_xml_get_widget(gladexml, "subtitle_entry");
 	composer_entry = glade_xml_get_widget(gladexml, "composer_entry");
 
+        insert_text_entry = glade_xml_get_widget(gladexml, "insert_text_entry");
+        insert_text_font = glade_xml_get_widget(gladexml, "insert_text_font");
+        insert_text_color = glade_xml_get_widget(gladexml, "insert_text_color");
+
+
         g_object_set_data(G_OBJECT(window), "score", score);
         g_object_set_data(G_OBJECT(window), "area", area);
         g_object_set_data(G_OBJECT(window), "selection", selection);
@@ -407,6 +440,9 @@ void score_create_window(Score_t *score)
         g_object_set_data(G_OBJECT(window), "subtitle_entry", subtitle_entry);
         g_object_set_data(G_OBJECT(window), "composer_entry", composer_entry);
 
+        g_object_set_data(G_OBJECT(window), "insert_text_entry", insert_text_entry);
+        g_object_set_data(G_OBJECT(window), "insert_text_font", insert_text_font);
+        g_object_set_data(G_OBJECT(window), "insert_text_color", insert_text_color);
 
         /*   glade_set_widgets(xml); */
         score->height = 500;

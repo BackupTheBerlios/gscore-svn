@@ -99,12 +99,18 @@ score_key_press_event(GtkWidget *widget, GdkEventKey *event)
                                         g_list_nth_data(score->Staff_list, 
                                                         get_staff_selected(score));
 
-                                if ( ! staffobj ) return FALSE;
+                                if ( ! staffobj ) {
+                                        g_warning("There is no staff object!");
+                                        return FALSE;
+                                }
 
                                 tmpobj = (Object_t *)
-                                        object_get_left(staffobj, cursor->x_returned);
+                                        object_get_left(staffobj, cursor->x_returned + 20);
 
-                                if ( ! tmpobj ) return FALSE;
+                                if ( ! tmpobj ) {
+                                        g_warning("There is no object!");
+                                        return FALSE;
+                                }
 
                                 if (tmpobj->pitch == cursor->position) {
                                         gw_message_error("You cannot make a chord with the same pitch.");
@@ -293,8 +299,37 @@ score_key_press_event(GtkWidget *widget, GdkEventKey *event)
                         printf("\n");
                 } else {
                 }
-
                 break;
+        case GDK_l:
+                tmpobj = (Object_t *)
+                        object_get_left((Staff_t *)
+                                        g_list_nth_data(score->Staff_list, 
+                                                        get_staff_selected(score)), 
+                                        cursor->x_returned);
+
+                if ( ! tmpobj ) { 
+                        printf("There's no note on the left!\n");
+                        return FALSE;
+                }
+
+                print_object(tmpobj);
+                break;
+        case GDK_r:
+                tmpobj = (Object_t *)
+                        object_get_right((Staff_t *)
+                                         g_list_nth_data(score->Staff_list, 
+                                                         get_staff_selected(score)), 
+                                         cursor->x_returned);
+                
+                if ( ! tmpobj ) { 
+                        printf("There's no note on the right!\n");
+                        return FALSE;
+                }
+
+                print_object(tmpobj);
+                break;
+
+                
         }
 
 

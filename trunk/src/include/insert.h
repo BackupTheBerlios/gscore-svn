@@ -26,6 +26,8 @@
 
 void insert_key_callback(GtkWidget * widget);
 
+void insert_text_callback(GtkButton *widget, gpointer user_data);
+
 gint insert_barline(gpointer callback_data, guint callback_action, GtkWidget *widget);
 
 gint insert_barline_choose(gpointer callback_data, guint callback_action, GtkWidget *widget);

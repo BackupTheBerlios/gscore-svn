@@ -27,6 +27,8 @@
 
 void print_objects_staff(Score_t *score, gint staff);
 
+void print_object(Object_t *object);
+
 void print_staves_list(Score_t *score);
 
 void print_note_list(gpointer *data, gpointer *user_data);
