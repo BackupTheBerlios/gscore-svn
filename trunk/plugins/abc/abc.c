@@ -133,7 +133,7 @@ gboolean abc_filter_import (Score_t **score,
         /* The following sets the tempo for the score */
         GSCORE_PLUGIN_STRUCT_INIT(spi);
 
-        spi->tempo = 10;
+        spi->staff_selected = 0;
 
 
         /* We give the structure to the pointer */

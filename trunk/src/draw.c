@@ -296,7 +296,10 @@ gint draw_staff(GtkWidget *area, guint16 nb_lines, gdouble space_btwn_line, gdou
 
 	gc = gdk_gc_new(area->window);
 
-	debug_msg(g_strdup_printf("|draw.c| draw_staff(nb_lines = %d, space_btwn_line = %f, x1 = %f, y1 = %f, x2 = %f, line = %d, selected = %d)\n", nb_lines, space_btwn_line, x1, y1, x2, line, selected));
+/*         x2 = 300; */
+
+/* 	g_print("|draw.c| draw_staff(nb_lines = %d, space_btwn_line = %f, x1 = %f, y1 = %f, x2 = %f, line = %d, selected = %d)\n", nb_lines, space_btwn_line, x1, y1, x2, line, selected); */
+/* 	debug_msg(g_strdup_printf("|draw.c| draw_staff(nb_lines = %d, space_btwn_line = %f, x1 = %f, y1 = %f, x2 = %f, line = %d, selected = %d)\n", nb_lines, space_btwn_line, x1, y1, x2, line, selected)); */
 
 	if ( selected ) {
 		color.red   = 0;

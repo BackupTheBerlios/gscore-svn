@@ -456,7 +456,7 @@ void score_create_window(Score_t *score)
   
         if(score == NULL) {
                 score = gscore_score_new();
-        }
+        } 
 
         KeyCursor = g_malloc(sizeof(KeyCursor_t));
   
@@ -535,6 +535,8 @@ void score_create_window(Score_t *score)
         /*   glade_set_widgets(xml); */
         score->height = 500;
         score->width = 500;
+
+        g_print("**** staff_selected = %d\n", score->staff_selected);
   
         g_signal_connect(GTK_OBJECT(area), "expose_event",
                          G_CALLBACK(score_area_callback), NULL);
@@ -557,5 +559,12 @@ void score_create_window(Score_t *score)
         } else {
                 colorize_drawingarea(area, 65535, 65535, 65535);
         }
+}
+
+gboolean score_set_staff_extremity_end_x(Score_t *score, gdouble extremity_end_x)
+{
+        score->staff_extremity_end_x = extremity_end_x;
+
+	return TRUE;
 }
 

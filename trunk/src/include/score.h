@@ -89,6 +89,8 @@ GtkWidget *score_get_insert_text_color_from_widget(GtkWidget *widget);
 
 void score_create_window(Score_t *score);
 
+gboolean score_set_staff_extremity_end_x(Score_t *score, gdouble extremity_end_x);
+
 /*
 void keybindings (gpointer callback_data,
 		  guint callback_action, GtkWidget * widget);

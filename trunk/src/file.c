@@ -148,7 +148,7 @@ import_score(GtkButton *button, gpointer user_data)
 /* 	Score.area = area_save; */
 	score_create_window(pi);
 	
-	g_print("Test: %d\n", pi->tempo);
+/* 	g_print("Test: %d\n", pi->tempo); */
 
 }
 

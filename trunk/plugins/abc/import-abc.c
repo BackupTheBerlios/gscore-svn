@@ -203,7 +203,10 @@ static int event_field(char x, const char *s, int state)
 		   staff_get_y_for_next(theScore));
 
       ++numStaff;
+      theScore->staff_startx = 50;
       staff_set_key(theScore, numStaff, TREBLE_KEY);
+      score_set_staff_extremity_end_x(theScore, 300);
+      staff_set_key_signature(theScore, numStaff, KEY_SIGNATURE_TREBLE_EMPTY);
 /*     g_printf("Voice: %s\n", s); */
       break;
     case 'Q':
@@ -220,7 +223,10 @@ static int event_field(char x, const char *s, int state)
 		     staff_get_y_for_next(theScore));
 
 	++numStaff;
+        theScore->staff_startx = 50;
 	staff_set_key(theScore, numStaff, TREBLE_KEY);
+        score_set_staff_extremity_end_x(theScore, 300);
+        staff_set_key_signature(theScore, numStaff, KEY_SIGNATURE_TREBLE_EMPTY);
       }
       
     default:
@@ -324,6 +330,8 @@ extern gboolean abc_load_file(const gchar *filename,
   
   abcScanFile((char *) filename, my_handler);
 /*   g_printf("After abcScanFile\n"); */
+  set_staff_selected(theScore, 0);
+
   
   return TRUE;
 }
