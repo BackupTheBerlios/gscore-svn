@@ -87,11 +87,21 @@ dnl checking for gtk+
 dnl *******************************
 PKG_CHECK_MODULES(GKT2,[gtk+-2.0 >= $GTK2_VERSION])
 
-
 dnl *******************************
 dnl checking for libglade
 dnl *******************************
 PKG_CHECK_MODULES(LIBGLADE2,[libglade-2.0 >= $LIBGLADE2_VERSION])
+
+dnl *******************************
+dnl checking for libabcp
+dnl *******************************
+AC_CHECK_LIB(abcp, abcScanFile, [], [
+        echo "*****************************************************"
+        echo "Error! You need to have libabcp installed."
+	echo "You can download it from http://abcp.sourceforge.net/"
+        echo "*****************************************************"
+        exit -1
+        ])
 
 AC_PROG_INSTALL
 
