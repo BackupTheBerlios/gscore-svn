@@ -1,3 +1,4 @@
+/* -*- mode:C; tab-width:8; c-default-style:linux; c-basic-offset:8; indent-tabs-mode:nil -*- */
 /*
  * objects.c
  * gscore - a musical score editor
@@ -320,12 +321,10 @@ Object_t *object_get_left(Staff_t *staff, gdouble x)
         while ( listrunner_object ) {
                 object_data = (Object_t *)listrunner_object->data;
 
-		object_x += object_get_spacing(object_data->type);
+                object_x += object_get_spacing(object_data->type);
                         
                 if ((staff->start_x + object_x) <= x) {
                         ret_object = (Object_t *)object_data;
-/*                         printf("object_data->id = %lu\n", object_data->id); */
-/*                         printf("ret_object->id = %lu\n", ret_object->id); */
 
                 } 
 
@@ -338,15 +337,50 @@ Object_t *object_get_left(Staff_t *staff, gdouble x)
         return ret_object;
 }
 
-static gint 
-compare_object_x(Object_t *data1, Object_t *data2)
+/* Returns the object closest to the right from the x position */
+Object_t *object_get_right(Staff_t *staff, gdouble x)
 {
-        /***
-         *** To be used with g_list_insert_sorted(list, object, (GCompareFunc)compare)
-         ***/
+
+        GList *listrunner_object;
+
+        Object_t *object_data;
+        Object_t *ret_object = NULL;   /* The object to return */
+
+        gdouble object_x = 0;
+
+        listrunner_object = g_list_first(staff->Object_list);
         
-        return data1->x - data2->x;
+        if ( ! listrunner_object ) return NULL;
+
+        while ( listrunner_object ) {
+                object_data = (Object_t *)listrunner_object->data;
+
+                object_x += object_get_spacing(object_data->type);
+                        
+                if ((staff->start_x + object_x) > x) {
+                        ret_object = (Object_t *)object_data;
+
+                } 
+
+                listrunner_object = g_list_next(listrunner_object);
+        } /* while ( listrunner_object )  */
+
+
+        if ( ! ret_object ) return NULL;
+
+        return ret_object;
 }
+
+
+/* static gint  */
+/* compare_object_x(Object_t *data1, Object_t *data2) */
+/* { */
+/*         /\*** */
+/*          *** To be used with g_list_insert_sorted(list, object, (GCompareFunc)compare) */
+/*          ***\/ */
+        
+/*         return data1->x - data2->x; */
+/* } */
 
 extern gint 
 get_object_properties (GtkWidget      *event_box,  

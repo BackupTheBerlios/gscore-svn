@@ -44,6 +44,8 @@ Object_t *object_get_previous(Score_t *score, Object_t *object);
 
 Object_t *object_get_left(Staff_t *staff, gdouble x);
 
+Object_t *object_get_right(Staff_t *staff, gdouble x);
+
 /* void get_object_properties(GtkWidget *event_box, GdkEventButton *event, gpointer data); */
 
 void set_object(const gchar *image_filename, GCallback callback_handler, gboolean is_selected, gint x, gint y);
