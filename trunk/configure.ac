@@ -93,7 +93,6 @@ dnl checking for libglade
 dnl *******************************
 PKG_CHECK_MODULES(LIBGLADE2,[libglade-2.0 >= $LIBGLADE2_VERSION])
 
-AC_PROG_CC
 AC_PROG_INSTALL
 
 dnl CFLAGS="$CFLAGS -Wall -Wstrict-prototypes -Wmissing-declarations \
