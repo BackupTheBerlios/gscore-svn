@@ -8,6 +8,8 @@
 #include "selection.h"
 #include "key_cursor.h"
 #include "common.h"
+#include "score.h"
+#include "mouse_event.h"
 
 gint max_x = 0;
 gint max_y = 0;
@@ -23,19 +25,22 @@ gboolean set_max_y = FALSE;
 gboolean 
 mouse_button_release_event(GtkWidget *widget, GdkEventButton *event, gpointer user_data)
 {
-
-/* 	printf("Selection.x_origin = %f, Selection.y_origin = %f, Selection.x = %f, Selection.y = %f\n", */
-/* 	       Selection.x_origin, Selection.y_origin, Selection.x, Selection.y); */
+  Score_selection_t *selection = score_get_selection_from_widget(widget);
+  Score_t *score = score_get_from_widget(widget);
+  GtkWidget *area = score_get_area_from_widget(widget);
+  
+/* 	printf("selection->x_origin = %f, selection->y_origin = %f, selection->x = %f, selection->y = %f\n", */
+/* 	       selection->x_origin, selection->y_origin, selection->x, selection->y); */
 
 	if ( Selection.object_type == CURSOR ) {
 
-		highlight_selection(Selection.x_origin, Selection.y_origin, 
-				    Selection.x, Selection.y);
+		highlight_selection(score, selection->x_origin, selection->y_origin, 
+				    selection->x, selection->y);
 
 	}
 
-        Selection.x_origin = 0;
-        Selection.y_origin = 0;
+        selection->x_origin = 0;
+        selection->y_origin = 0;
 
         max_x = 0;
         max_y = 0;
@@ -47,7 +52,7 @@ mouse_button_release_event(GtkWidget *widget, GdkEventButton *event, gpointer us
         set_max_x = FALSE;
         set_max_y = FALSE;
 
-        refresh();
+        refresh(area);
 
 	return FALSE;
 }
@@ -56,13 +61,14 @@ mouse_button_release_event(GtkWidget *widget, GdkEventButton *event, gpointer us
 gboolean 
 mouse_button_press_event(GtkWidget *widget, GdkEventButton *event, gpointer user_data)
 {
-
+  Score_t *score = score_get_from_widget(widget);
+  
 	if ( Selection.object_type == CURSOR ) {
 
-		undo_selection();
+		undo_selection(score);
 
-		set_staff_unselect(&Score, get_staff_selected(&Score));
-		set_staff_selected(&Score, get_staff_id(event->y));
+		set_staff_unselect(score, get_staff_selected(score));
+		set_staff_selected(score, get_staff_id(score, event->y));
 
 		set_selection_origin(widget, (GdkEventButton *)event);
 	}
@@ -97,55 +103,63 @@ gboolean mouse_motion_event(GtkWidget *widget, GdkEventMotion *event, gpointer u
         gdouble x;
         gdouble y;
 
+/* 	g_print("mouse_motion_event : state = %d\n", event->state); */
+	
+	if(! (event->state & GDK_BUTTON1_MASK)) return TRUE;
+	g_print("mme : class = %s %s\n", G_OBJECT_CLASS_NAME(widget), G_OBJECT_CLASS_NAME(event));
+	
+	Score_selection_t *selection = score_get_selection_from_widget(widget);
+	GtkWidget *area = score_get_area_from_widget(widget);
+	
         x = event->x;
         y = event->y;
 
-        Selection.x = x;
-        Selection.y = y;
+        selection->x = x;
+        selection->y = y;
 
-        if ((Selection.x_origin != 0) && (Selection.y_origin != 0))
+        if ((selection->x_origin != 0) && (selection->y_origin != 0))
                 {
-                        draw_line(65535, 0, 0, Selection.x_origin, Selection.y_origin, Selection.x_origin, Selection.y);
-                        draw_line(65535, 0, 0, Selection.x_origin, Selection.y_origin, Selection.x, Selection.y_origin);
-                        draw_line(65535, 0, 0, Selection.x_origin, Selection.y, Selection.x, Selection.y);
-                        draw_line(65535, 0, 0, Selection.x, Selection.y_origin, Selection.x, Selection.y);
+                        draw_line(area, 65535, 0, 0, selection->x_origin, selection->y_origin, selection->x_origin, selection->y);
+                        draw_line(area, 65535, 0, 0, selection->x_origin, selection->y_origin, selection->x, selection->y_origin);
+                        draw_line(area, 65535, 0, 0, selection->x_origin, selection->y, selection->x, selection->y);
+                        draw_line(area, 65535, 0, 0, selection->x, selection->y_origin, selection->x, selection->y);
 
                         
 
-                        if ((Selection.x >= Selection.x_origin) && (Selection.y >= Selection.y_origin))
+                        if ((selection->x >= selection->x_origin) && (selection->y >= selection->y_origin))
                                 {
                                         /*    |    */
                                         /* ------- */
                                         /*    | X  */
 
-                                        if (Selection.x > max_x)
+                                        if (selection->x > max_x)
                                                 {
-                                                        max_x = Selection.x;
+                                                        max_x = selection->x;
                                                 }
                                         
-                                        if (Selection.y > max_y)
+                                        if (selection->y > max_y)
                                                 {
-                                                        max_y = Selection.y;
+                                                        max_y = selection->y;
                                                 }
 
 					/*                                         printf("bottom/right\n"); */
 
                                         /* Clean inside the square */
-                                        gtk_widget_queue_draw_area(Score.area, Selection.x_origin + 1, Selection.y_origin + 1,
-                                                                   Selection.x - Selection.x_origin - 1, 
-                                                                   Selection.y - Selection.y_origin - 1);
+                                        gtk_widget_queue_draw_area(area, selection->x_origin + 1, selection->y_origin + 1,
+                                                                   selection->x - selection->x_origin - 1,
+                                                                   selection->y - selection->y_origin - 1);
                                         
                                         /* Clean around */
                                         /* (Right) */
-                                        gtk_widget_queue_draw_area(Score.area, Selection.x + 1, Selection.y_origin,
-                                                                   max_x - Selection.x_origin, max_y - Selection.y_origin + 1);
+                                        gtk_widget_queue_draw_area(area, selection->x + 1, selection->y_origin,
+                                                                   max_x - selection->x_origin, max_y - selection->y_origin + 1);
                                         /* (Bottom) */
-                                        gtk_widget_queue_draw_area(Score.area, Selection.x_origin, Selection.y + 1,
-                                                                   max_x - Selection.x_origin, max_y - Selection.y + 1);
+                                        gtk_widget_queue_draw_area(area, selection->x_origin, selection->y + 1,
+                                                                   max_x - selection->x_origin, max_y - selection->y + 1);
 
                                 }
 
-                        if ((Selection.x < Selection.x_origin) && (Selection.y < Selection.y_origin))
+                        if ((selection->x < selection->x_origin) && (selection->y < selection->y_origin))
                                 {
                                         /*  X |    */
                                         /* ------- */
@@ -154,42 +168,42 @@ gboolean mouse_motion_event(GtkWidget *widget, GdkEventMotion *event, gpointer u
 					/*                                         printf("top/left\n"); */
 
                                         if (!set_min_y) {
-						min_y = Selection.y;
+						min_y = selection->y;
 						set_min_y = TRUE;
 					}
 					
-                                        if (Selection.y < min_y) {
-						min_y = Selection.y;
+                                        if (selection->y < min_y) {
+						min_y = selection->y;
 					}
 					
                                         if (!set_min_x) {
-						min_x = Selection.x;
+						min_x = selection->x;
 						set_min_x = TRUE;
 					}
                                         
-                                        if (Selection.x < min_x) {
-						min_x = Selection.x;
+                                        if (selection->x < min_x) {
+						min_x = selection->x;
 					}
 
                                         /* Clean inside the square */
-                                        gtk_widget_queue_draw_area(Score.area, Selection.x + 1, Selection.y + 1,
-                                                                   Selection.x_origin - Selection.x - 1, 
-                                                                   Selection.y_origin - Selection.y - 1);
+                                        gtk_widget_queue_draw_area(area, selection->x + 1, selection->y + 1,
+                                                                   selection->x_origin - selection->x - 1,
+                                                                   selection->y_origin - selection->y - 1);
 
                                         /* Clean around */
                                         if (min_x < 0) min_x = 0;
                                         if (min_y < 0) min_y = 0;
                                         /* (Left) */
-                                        gtk_widget_queue_draw_area(Score.area, min_x, min_y,
-                                                                   Selection.x - min_x, 
-                                                                   Selection.y_origin + 1);
+                                        gtk_widget_queue_draw_area(area, min_x, min_y,
+                                                                   selection->x - min_x,
+                                                                   selection->y_origin + 1);
                                         /* (Top) */
-                                        gtk_widget_queue_draw_area(Score.area, min_x, min_y,
-                                                                   Selection.x_origin - min_x + 1, Selection.y - min_y);
+                                        gtk_widget_queue_draw_area(area, min_x, min_y,
+                                                                   selection->x_origin - min_x + 1, selection->y - min_y);
 
                                 }
 
-                        if ((Selection.x <= Selection.x_origin) && (Selection.y > Selection.y_origin))
+                        if ((selection->x <= selection->x_origin) && (selection->y > selection->y_origin))
                                 {
                                         /*    |    */
                                         /* ------- */
@@ -200,42 +214,42 @@ gboolean mouse_motion_event(GtkWidget *widget, GdkEventMotion *event, gpointer u
 
                                         if (!set_min_x)
                                                 {
-                                                        min_x = Selection.x;
+                                                        min_x = selection->x;
                                                         set_min_x = TRUE;
                                                 }
                                         
-                                        if (Selection.x < min_x)
+                                        if (selection->x < min_x)
                                                 {
-                                                        min_x = Selection.x;
+                                                        min_x = selection->x;
                                                 }
 
-                                        if (Selection.y > max_y)
+                                        if (selection->y > max_y)
                                                 {
-                                                        max_y = Selection.y;
+                                                        max_y = selection->y;
                                                 }
 
 
                                         /* Clean inside the square */
-                                        gtk_widget_queue_draw_area(Score.area, Selection.x + 1, Selection.y_origin + 1,
-                                                                   Selection.x_origin - Selection.x - 1, 
-                                                                   Selection.y - Selection.y_origin - 1);
+                                        gtk_widget_queue_draw_area(area, selection->x + 1, selection->y_origin + 1,
+                                                                   selection->x_origin - selection->x - 1,
+                                                                   selection->y - selection->y_origin - 1);
 
 
                                         /* Clean around */
                                         if (min_x < 0) min_x = 0;
                                         /* (Left) */
-                                        gtk_widget_queue_draw_area(Score.area, min_x, Selection.y_origin,
-                                                                   Selection.x - min_x, 
-                                                                   max_y - Selection.y_origin + 1);
+                                        gtk_widget_queue_draw_area(area, min_x, selection->y_origin,
+                                                                   selection->x - min_x,
+                                                                   max_y - selection->y_origin + 1);
                                         /* (Bottom) */
-                                        gtk_widget_queue_draw_area(Score.area, Selection.x, Selection.y + 1,
-                                                                   Selection.x_origin - min_x, 
-                                                                   max_y - Selection.y);
+                                        gtk_widget_queue_draw_area(area, selection->x, selection->y + 1,
+                                                                   selection->x_origin - min_x,
+                                                                   max_y - selection->y);
                                 }
                         
                 }
 
-	if ((Selection.x > Selection.x_origin) && (Selection.y <= Selection.y_origin))
+	if ((selection->x > selection->x_origin) && (selection->y <= selection->y_origin))
 		{
 			/*    | X  */
 			/* ------- */
@@ -245,37 +259,37 @@ gboolean mouse_motion_event(GtkWidget *widget, GdkEventMotion *event, gpointer u
 
 			if (!set_min_y)
 				{
-					min_y = Selection.y;
+					min_y = selection->y;
 					set_min_y = TRUE;
 				}
 
-			if (Selection.y < min_y)
+			if (selection->y < min_y)
 				{
-					min_y = Selection.y;
+					min_y = selection->y;
 				}
 
-			if (Selection.x > max_x)
+			if (selection->x > max_x)
 				{
-					max_x = Selection.x;
+					max_x = selection->x;
 				}
 
 
 			/* Clean inside the square */
-			gtk_widget_queue_draw_area(Score.area, Selection.x_origin + 1, Selection.y + 1,
-						   Selection.x - Selection.x_origin - 1, 
-						   Selection.y_origin - Selection.y - 1);
+			gtk_widget_queue_draw_area(area, selection->x_origin + 1, selection->y + 1,
+						   selection->x - selection->x_origin - 1,
+						   selection->y_origin - selection->y - 1);
 
 
 			/* Clean around */
 			if (min_y < 0) min_y = 0;
 			/* (Right) */
-			gtk_widget_queue_draw_area(Score.area, Selection.x + 1, min_y,
-						   max_x - Selection.x + 1, 
-						   Selection.y_origin - min_y + 1);
+			gtk_widget_queue_draw_area(area, selection->x + 1, min_y,
+						   max_x - selection->x + 1,
+						   selection->y_origin - min_y + 1);
 			/* (Top) */
-			gtk_widget_queue_draw_area(Score.area, Selection.x_origin, min_y,
-						   max_x - Selection.x_origin,
-						   Selection.y - min_y);
+			gtk_widget_queue_draw_area(area, selection->x_origin, min_y,
+						   max_x - selection->x_origin,
+						   selection->y - min_y);
 		}
 
 	return FALSE;

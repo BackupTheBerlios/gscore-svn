@@ -25,9 +25,9 @@
 #include <pango/pango.h>
 
 #include "gscore.h"
+#include "text.h"
 
-
-void set_text(gchar *text, gint x, gint y)
+void set_text(GtkWidget *area, gchar *text, gint x, gint y)
 {
 
 	GdkGC *gc;
@@ -35,19 +35,19 @@ void set_text(gchar *text, gint x, gint y)
 	PangoLayout *layout;
 
 
-	layout = gtk_widget_create_pango_layout (GTK_WIDGET (Score.area), text);
+	layout = gtk_widget_create_pango_layout (area, text);
 
 
-	gc = gdk_gc_new(Score.area->window);
+	gc = gdk_gc_new(area->window);
 
-	gdk_draw_layout(Score.area->window, gc,
+	gdk_draw_layout(area->window, gc,
 			x, y, layout);
 
 	g_object_unref(layout);
 
 }
 
-void set_dynamic_text(gchar *text, gint x, gint y)
+void set_dynamic_text(GtkWidget *area, gchar *text, gint x, gint y)
 {
 
 	GdkGC *gc;
@@ -55,7 +55,7 @@ void set_dynamic_text(gchar *text, gint x, gint y)
 	PangoLayout *layout;
 	PangoFontDescription *desc;
 
-	layout = gtk_widget_create_pango_layout (GTK_WIDGET (Score.area), text);
+	layout = gtk_widget_create_pango_layout (GTK_WIDGET (area), text);
 
 	desc = pango_font_description_new();
 	pango_font_description_set_weight(desc, PANGO_WEIGHT_BOLD);
@@ -63,9 +63,9 @@ void set_dynamic_text(gchar *text, gint x, gint y)
 
 	pango_layout_set_font_description(layout, desc);
 
-	gc = gdk_gc_new(Score.area->window);
+	gc = gdk_gc_new(area->window);
 
-	gdk_draw_layout(Score.area->window, gc,
+	gdk_draw_layout(area->window, gc,
 			x, y, layout);
 
 	g_object_unref(layout);

@@ -43,7 +43,7 @@ extern GladeXML *gladexml;
 extern GList    *plugins_list;
 extern gint      nb_plugins;
 
-extern struct Score_t         Score;
+/* extern struct Score_t         Score; */
 extern struct Staff_t         Staff;
 extern struct Object_t        Object;
 extern struct Selection_t     Selection;
@@ -107,15 +107,21 @@ typedef struct Display_t
 typedef struct Selection_t
 {
 
-        /** Returns the mice x position */
-        gdouble        x; 
-        /** Returns the mice y position */
-        gdouble        y;
 
 	accidentals_e  accidentals;
 	object_e       nature;
 
 	gint           object_type;
+
+        
+} Selection_t;
+
+typedef struct 
+{
+        /** Returns the mice x position */
+        gdouble        x; 
+        /** Returns the mice y position */
+        gdouble        y;
 
         /** Used to draw the selection */
         gdouble           x_origin;
@@ -125,8 +131,8 @@ typedef struct Selection_t
         gdouble           staff_selected_begin;
         /** Used to draw the selection */
         gdouble           staff_selected_end;
-        
-} Selection_t;
+} Score_selection_t;
+
 
 typedef struct Object_t
 {
@@ -225,7 +231,7 @@ typedef struct Score_t
 	/** The title of the window: <Untitled score> by default */
 	gchar       * windows_title;
         /** Drawing area widget */
-        GtkWidget   * area;       
+/*         GtkWidget   * area;        */
 	/** Tempo of the score */
         gint          tempo;             
 	/** The note refered by the tempo: 0->doublewhole, 1->whole, 2->half, 4->quarter, 8->eighth ... */
@@ -249,7 +255,7 @@ typedef struct Score_t
 	/** Where we start to put the notes */
         gdouble       staff_startx;
         struct Identity_t  * Identity; /* Useful informations */
-        struct Display_t   * Display;
+/*         struct Display_t   * Display; */
 
         /** Staves tracked in a list, to have many staves as your memory allow you to have */
         GList       * Staff_list;

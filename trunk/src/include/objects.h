@@ -34,13 +34,13 @@ gboolean add_object(Score_t *score, gint staff, gint type,
 		    gint x3, gint y3, gint pitch, gint tab_number,
 		    gboolean is_selected);
 
-gboolean remove_object(gulong id);
+gboolean remove_object(Score_t *score, gulong id);
 
-gboolean remove_object_selected(void);
+gboolean remove_object_selected(Score_t *score);
 
-Object_t *object_get_next(Object_t *object);
+Object_t *object_get_next(Score_t *score, Object_t *object);
 
-Object_t *object_get_previous(Object_t *object);
+Object_t *object_get_previous(Score_t *score, Object_t *object);
 
 Object_t *object_get_left(Staff_t *staff, gdouble x);
 

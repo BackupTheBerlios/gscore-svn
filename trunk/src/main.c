@@ -29,6 +29,7 @@
 #include <gtk/gtk.h>
 #include <stdio.h>
 #include <unistd.h>
+#include <string.h>
 
 #include "gettext.h"
 
@@ -47,6 +48,7 @@
 #include "mouse_event.h"
 #include "staff.h"
 #include "common.h"
+#include "score.h"
 
 GtkWidget *Window;
 GladeXML *gladexml;
@@ -55,11 +57,11 @@ GList *plugins_list;
 gint nb_plugins;
 
 
-Score_t     Score;
+/* Score_t     Score; */
 
 Selection_t Selection;
 Clipboard_t Clipboard;
-KeyCursor_t KeyCursor;
+/* KeyCursor_t KeyCursor; */
 Spacings_t  Spacings;
 
 static void 
@@ -89,54 +91,8 @@ void gscore_init(void)
 	set_values_spacings_spinbuttons();
 
 	/* What we display in the score */
-	Score.Display = g_malloc(sizeof(Display_t));
-	Score.Display->measure_number = TRUE;
-	Score.Display->instruments = FALSE;
-	Score.Display->clefs = TRUE;
-	Score.Display->score_expressions = TRUE;
-	Score.Display->barlines = TRUE;
-	Score.Display->ending_bar = TRUE;
-	Score.Display->key_signature = TRUE;
-	Score.Display->time_signature = TRUE;
-	Score.Display->tempo = TRUE;
-
-	Score.Staff_list = NULL;   /* Staff list */
-
-	Score.tempo = 60;
-	Score.tempo_text = g_string_new("");
-
-	Score.Identity = g_malloc(sizeof(Identity_t));
-	Score.Identity->title = g_string_new(_("My Score"));
-	Score.Identity->subtitle = g_string_new(_("made with gscore"));
-	Score.Identity->composer = g_string_new(_("gscore's user"));
-
-	Score.staff_extremity_end_x = 100; /* Just a value to start, nothing really important */
-	Score.staff_startx = Spacings.Clefs.sb + STANDARD_KEY_SIZE + Spacings.Clefs.sa + 
-		get_key_signature_spacing(KEY_SIGNATURE_TREBLE_EMPTY) + Spacings.KeySignatures.saks +
-		STANDARD_TIME_SIGNATURE_SIZE + Spacings.TimeSignatures.sats;
-
-	Selection.object_type = CURSOR;
-	Selection.x_origin = 0;
-	Selection.y_origin = 0;
-	Selection.x = 0;
-	Selection.y = 0;
 	Selection.accidentals |= A_NONE;
-
-	/* Create a Staff, to have something when we start the software */
-
-	if( ! create_staff(&Score, 5, 8, Spacings.Measures.xpsfm, Spacings.Measures.ypsfm))
-		printf("ERROR CREATING STAFF");
-
-	set_staff_selected(&Score, 0);
-
-	staff_set_key(&Score, get_staff_selected(&Score), TREBLE_KEY);
-
-	staff_set_key_signature(&Score, get_staff_selected(&Score), KEY_SIGNATURE_TREBLE_EMPTY);
-
-/* 	set_staff_unselect(get_staff_selected()); */
-/* 	set_staff_selected(1); */
-
-	KeyCursor.position = 0;
+	Selection.object_type = CURSOR;
 }
 
 /*** 
@@ -148,12 +104,13 @@ drawing_area_events(GtkWidget *canvas, GdkEvent  *ev)
 {
 
         GdkEventButton *event_btn;
+	Score_t *score = score_get_from_widget(canvas);
 
 	switch (ev->type)
 		{
 		
 		case GDK_MOTION_NOTIFY:
-			return mouse_motion_event(canvas, (GdkEventMotion *)ev, NULL);
+/* 			return mouse_motion_event(canvas, (GdkEventMotion *)ev, NULL); */
 
 		case GDK_KEY_PRESS:
 			printf("Key press\n");
@@ -172,7 +129,7 @@ drawing_area_events(GtkWidget *canvas, GdkEvent  *ev)
 					/* Select the staff with which you want to work */
 					event_btn = (GdkEventButton *)ev;
 					printf("A2: %.0f\n", event_btn->y);
-					set_staff_selected(&Score, get_staff_id(event_btn->y));
+					set_staff_selected(score, get_staff_id(score, event_btn->y));
 					/* For the selection */
 					return set_selection_origin(canvas, (GdkEventButton *)ev);
 				case 3:
@@ -190,7 +147,7 @@ drawing_area_events(GtkWidget *canvas, GdkEvent  *ev)
 			break;
 		
 		case GDK_EXPOSE:
-			return score_area_callback(canvas, (GdkEventExpose *)ev);
+			return score_area_callback(canvas, (GdkEventExpose *)ev, NULL);
 
 		default:
 			return FALSE;
@@ -206,52 +163,44 @@ void showda(void)
 
 }
 
-static
-void glade_set_widgets(void)
-{
-/* 	GtkWidget *objects_vbox, *buttons_vbox; */
-/* 	GtkWidget *objects_hbox; */
-/* 	GtkWidget *object_button; */
+/* extern */
+/* void glade_set_widgets(GladeXML *xml) */
+/* { */
+/*   GtkWidget * area; */
+/*   Score_t *score; */
+/* /\* 	GtkWidget *objects_vbox, *buttons_vbox; *\/ */
+/* /\* 	GtkWidget *objects_hbox; *\/ */
+/* /\* 	GtkWidget *object_button; *\/ */
 
-	Score.area = glade_xml_get_widget (gladexml, "sw_score_da");
+/* 	area = glade_xml_get_widget (xml, "sw_score_da"); */
+/* 	score = score_get_from_widget(area); */
+	
+/* /\* 	gtk_widget_set_events(score->area, GDK_EXPOSURE_MASK *\/ */
+/* /\* 			      | GDK_LEAVE_NOTIFY_MASK *\/ */
+/* /\* 			      | GDK_BUTTON_PRESS_MASK *\/ */
+/* /\* 			      | GDK_BUTTON_MOTION_MASK *\/ */
+/* /\*                               | GDK_BUTTON1_MOTION_MASK *\/ */
+/* /\*                               | GDK_KEY_PRESS_MASK *\/ */
+/* /\*                               | GDK_KEY_RELEASE_MASK *\/ */
+/* /\* 			      | GDK_BUTTON_RELEASE_MASK *\/ */
+/* /\* 			      | GDK_POINTER_MOTION_MASK); *\/ */
 
-/* 	gtk_widget_set_events(Score.area, GDK_EXPOSURE_MASK */
-/* 			      | GDK_LEAVE_NOTIFY_MASK */
-/* 			      | GDK_BUTTON_PRESS_MASK */
-/* 			      | GDK_BUTTON_MOTION_MASK */
-/*                               | GDK_BUTTON1_MOTION_MASK */
-/*                               | GDK_KEY_PRESS_MASK */
-/*                               | GDK_KEY_RELEASE_MASK */
-/* 			      | GDK_BUTTON_RELEASE_MASK */
-/* 			      | GDK_POINTER_MOTION_MASK); */
 
-	Score.height = 500;
-	Score.width = 500;
-
-	g_signal_connect(GTK_OBJECT(Score.area), "expose_event",
-			 G_CALLBACK(score_area_callback), NULL);
-	g_signal_connect(GTK_OBJECT(Score.area), "button_press_event",
-			 G_CALLBACK(mouse_button_press_event), NULL);
-	g_signal_connect(GTK_OBJECT(Score.area), "button_release_event",
-			 G_CALLBACK(mouse_button_release_event), NULL);
-	g_signal_connect(GTK_OBJECT(Score.area), "motion_notify_event",
-			 G_CALLBACK(mouse_motion_event), NULL);
-
-}
+/* } */
 
 gboolean load_plugin_from_command_line(gchar *filename)
 {
 	GscorePlugin *plugin;
 	Score_t     *pi;
 
-	Display_t *display_save;
-	GtkWidget *area_save;
+/* 	Display_t *display_save; */
+/* 	GtkWidget *area_save; */
 
         gchar *extension;
 
 
-	display_save = Score.Display;
-	area_save = Score.area;
+/* 	display_save = score->Display; */
+/* 	area_save = score->area; */
 
         extension = strrchr(filename, '.');
 
@@ -268,9 +217,10 @@ gboolean load_plugin_from_command_line(gchar *filename)
 
         plugin->filter->import(&pi, filename, NULL);
 
-        Score = *pi;
-	Score.Display = display_save;
-	Score.area = area_save;
+/*         Score = *pi; */
+/* 	score->Display = display_save; */
+/* 	score->area = area_save; */
+	score_create_window(pi);
 
         return TRUE;
 
@@ -278,7 +228,7 @@ gboolean load_plugin_from_command_line(gchar *filename)
 
 int main(int argc, char *argv[]) 
 {
-	GtkWidget *widget;
+/* 	GtkWidget *widget; */
 
 	gint i = 0;
 	gchar *full_filename;
@@ -326,28 +276,16 @@ int main(int argc, char *argv[])
 
 	glade_xml_signal_autoconnect(gladexml);
 
-	glade_set_widgets();
-
 	gscore_init();
+/* 	glade_set_widgets(gladexml); */
+
 
 	
 
-	widget = glade_xml_get_widget (gladexml, "score_window");
-	gtk_widget_show(widget);
-	g_signal_connect(GTK_OBJECT(widget), "key_press_event",
-			 G_CALLBACK(score_key_press_event), NULL);
+/* 	widget = glade_xml_get_widget (gladexml, "score_window"); */
 
 
-        staff_update_statusbar();
 
-	/* Set the white color to the drawing area */
-	/* We want the score to be white */
-	if ( ! Score.area ) {
-		printf(_("Error: The score layout cannot be drawn\n"));
-		return -1;
-	} else {
-		colorize_drawingarea(Score.area, 65535, 65535, 65535);
-	}
 
 	fp = fopen(g_strconcat(g_get_home_dir(), "/.gscore", NULL), "r");
 	if ( ! fp ) { 		/* The file doesn't exist, gscore is launched for the first time! */
@@ -358,10 +296,14 @@ int main(int argc, char *argv[])
 	fclose(fp);
 
         /* Open a file from the command line */
-        if (argc > 1)
-                load_plugin_from_command_line(argv[1]);
+        if (argc > 1) {
+	  load_plugin_from_command_line(argv[1]);
+	} else {
+	  score_create_window(NULL);
+	}
 
-
+	g_log_set_fatal_mask("Gtk", G_LOG_LEVEL_CRITICAL);
+	g_log_set_fatal_mask("Gdk", G_LOG_LEVEL_CRITICAL);
 	gtk_main();
   
 	return(0);

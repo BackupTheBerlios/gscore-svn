@@ -26,7 +26,7 @@
 
 void barre_notes (gpointer callback_data, guint callback_action, GtkWidget *widget);
 
-void display_measure_line_return(gint measure);
+void display_measure_line_return(GtkWidget *area, gint measure);
 
 #endif
 

@@ -27,6 +27,7 @@
 #include "common.h"
 #include "constants.h"
 #include "macros.h"
+#include "create_score.h"
 
 extern void
 new_score(void)

@@ -1,3 +1,10 @@
+2005-02-06  Cheyenne  <j.marrec@10pouces.org>
+
+	*  score.[ch]: new  functions  to retrieve  data  from the  active
+	widget
+	* *.c: suppressed global variables to enable multiple document interface
+	(see http://www.gscore.org/pipermail/gscore-devel/2005-February/000019.html)
+
 2005-01-20 toady <toady@gscore.org>
 
 	* src/draw.c: don't render notes which are not displayed on screen (yadh)

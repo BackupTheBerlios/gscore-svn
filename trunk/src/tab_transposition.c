@@ -25,6 +25,7 @@
 
 #include "gscore.h"
 #include "draw.h"
+#include "tab_transposition.h"
 
 /*
  * This is a very basic score to tab transposition.

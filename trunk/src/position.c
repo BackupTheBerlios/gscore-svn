@@ -28,6 +28,7 @@
 #include "common.h"
 #include "debug.h"
 #include "spacings.h"
+#include "position.h"
 
 static
 gint compare_x(Object_t *data1, Object_t *data2)
@@ -237,7 +238,7 @@ gdouble get_y_from_position_no_key(guint16 space_btwn_lines, gint zero, gdouble 
                }
                
                if ( i == -2 ) {
-                    (height / 2) + 1;
+                    value += (height / 2) + 1;
                }
 
                if ( ! is_even(i) ) {
@@ -267,7 +268,7 @@ gdouble get_y_from_position(gint key, gdouble staff_begin_y, gint position)
 	     value = get_y_from_position_no_key(8, 4, staff_begin_y, 8, position);
 	     break;
      default:
-	     printf("Gscore Warning: No Key!\n");
+/* 	     printf("Gscore Warning: No Key!\n"); */
 	     value = get_y_from_position_no_key(8, 4, staff_begin_y, 8, position);
      }
 

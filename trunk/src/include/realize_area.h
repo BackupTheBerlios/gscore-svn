@@ -36,6 +36,6 @@ gboolean add_piece_of_staf(void);
 
 gboolean draw_end_bar(void);
 
-gboolean score_area_callback(GtkWidget *widget, GdkEventExpose *event);
+gboolean score_area_callback(GtkWidget *widget, GdkEventExpose *event, gpointer data);
 
 #endif

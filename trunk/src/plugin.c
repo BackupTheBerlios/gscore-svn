@@ -2,6 +2,8 @@
 
 #include <glib.h>
 #include <gmodule.h>
+#include <glib/gprintf.h>
+#include <stdlib.h>
 
 #include <string.h>
 

@@ -20,11 +20,17 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
+#ifndef _DEBUG_H_
+#define _DEBUG_H_
 
-void print_objects_staff(gint staff);
+#include "gscore.h"
 
-void print_staves_list(void);
+void print_objects_staff(Score_t *score, gint staff);
+
+void print_staves_list(Score_t *score);
 
 void print_note_list(gpointer *data, gpointer *user_data);
 
 void debug_msg(gchar *message);
+
+#endif

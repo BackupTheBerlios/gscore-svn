@@ -21,6 +21,11 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 */
 
-void set_text(gchar *text, gint x, gint y);
+#ifndef _TEXT_H_
+#define _TEXT_H_
 
-void set_dynamic_text(gchar *text, gint x, gint y);
+void set_text(GtkWidget *area, gchar *text, gint x, gint y);
+
+void set_dynamic_text(GtkWidget *area, gchar *text, gint x, gint y);
+
+#endif

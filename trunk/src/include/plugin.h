@@ -121,7 +121,6 @@ struct _GscorePlugin
            {						\
 	     plugin = g_malloc(sizeof(Score_t));	\
              (plugin)->Identity = g_malloc(sizeof(Identity_t)); \
-             (plugin)->Display = g_malloc(sizeof(Display_t)); \
            }
 
 #ifdef __cplusplus

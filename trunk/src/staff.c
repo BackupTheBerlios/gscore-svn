@@ -38,6 +38,7 @@
 #include "spacings.h"
 #include "objects.h"
 #include "staff.h"
+#include "score.h"
 
 /* GtkWidget * vbox; */
 /* GtkWidget * key_signature_pixmap; */
@@ -223,11 +224,14 @@ void staff_add_remove_options(void)
 {
 
         GtkWidget *widget;
+	Score_t *score;
 
         widget = glade_xml_get_widget(gladexml, "sb_extremityxbegin");
         gtk_spin_button_set_value(GTK_SPIN_BUTTON(widget), Spacings.Measures.xpsfm);
         widget = glade_xml_get_widget(gladexml, "sb_extremityybegin");
-        gtk_spin_button_set_value(GTK_SPIN_BUTTON(widget), staff_get_y_for_next(&Score));
+	score = score_get_from_widget(widget);
+	
+        gtk_spin_button_set_value(GTK_SPIN_BUTTON(widget), staff_get_y_for_next(score));
 
 }
 
@@ -235,6 +239,9 @@ void staff_add_remove_ok(void)
 {
 
         GtkWidget *widget;
+	Score_t *score;
+	GtkWidget *area;
+	
 
         guint numberoflines;
         guint spacebetweenlines;
@@ -252,26 +259,33 @@ void staff_add_remove_ok(void)
         extremityybegin = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(widget));
 
         widget = glade_xml_get_widget(gladexml, "staff_insert_below");
+	score = score_get_from_widget(widget);
+	area = score_get_area_from_widget(widget);
 
         if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget))) {
                         /* Add a staff below ;) */
-                        create_staff(&Score, numberoflines, spacebetweenlines,
+                        create_staff(score, numberoflines, spacebetweenlines,
                                      extremityxbegin, extremityybegin);
                 }
 
-        refresh();
+        refresh(area);
 
 }
 
 void on_settime_ok_clicked(void)
 {
         GtkWidget *widget;
-
+	Score_t *score;
+	GtkWidget *area;
+	
         widget = glade_xml_get_widget(gladexml, "stime_radio_common");
+	score = score_get_from_widget(widget);
+	area = score_get_area_from_widget(widget);
+	
 	if ( gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget)) ) {
-		staff_set_time_signature(&Score, get_staff_selected(&Score), TIME_SIGNATURE_COMMON_TIME, 4, 4);
+		staff_set_time_signature(score, get_staff_selected(score), TIME_SIGNATURE_COMMON_TIME, 4, 4);
 
-		Score.staff_extremity_end_x += STANDARD_TIME_SIGNATURE_SIZE;
+		score->staff_extremity_end_x += STANDARD_TIME_SIGNATURE_SIZE;
 /* 		staff_set_current_x(get_staff_selected(),  */
 /* 				    staff_get_current_x(get_staff_selected()) + STANDARD_TIME_SIGNATURE_SIZE + Spacings.TimeSignatures.sats); */
 /* 		staff_set_start_x(get_staff_selected(), offset); */
@@ -279,26 +293,28 @@ void on_settime_ok_clicked(void)
 
         widget = glade_xml_get_widget(gladexml, "stime_radio_cut");
 	if ( gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget)) ) {
-		staff_set_time_signature(&Score, get_staff_selected(&Score), TIME_SIGNATURE_ALLA_BREVE, 2, 2);
+		staff_set_time_signature(score, get_staff_selected(score), TIME_SIGNATURE_ALLA_BREVE, 2, 2);
 	}
 
-	refresh();
+	refresh(area);
 
 }
 
-gboolean staff_update_statusbar(void)
+gboolean staff_update_statusbar(GladeXML *xml)
 {
         GtkWidget *widget;
+	Score_t *score;
 
         guint cid;              /* Context ID */
 
-        widget = glade_xml_get_widget(gladexml, "statusbar");
+        widget = glade_xml_get_widget(xml, "statusbar");
+	score = score_get_from_widget(widget);
 
         cid = gtk_statusbar_get_context_id(GTK_STATUSBAR(widget), "staff");
 
 /*         printf("staff_selected= %d\n", get_staff_selected()); */
 
-        cid = gtk_statusbar_push(GTK_STATUSBAR(widget), cid, g_strdup_printf("Staff: %d", get_staff_selected(&Score)));
+        cid = gtk_statusbar_push(GTK_STATUSBAR(widget), cid, g_strdup_printf("Staff: %d", get_staff_selected(score)));
 
 
 	return TRUE;
@@ -323,7 +339,7 @@ gboolean staff_set_start_x(Score_t *score, gint staff, gint start_x)
 /*         Staff_t *staff_data; */
 
 
-/*         staff_data = g_list_nth_data(Score.Staff_list, staff); */
+/*         staff_data = g_list_nth_data(score->Staff_list, staff); */
 
 /* 	if ( staff_data ) */
 /* 		return staff_data->start_x; */
@@ -348,24 +364,29 @@ gboolean staff_set_key(Score_t *score, gint staff, gint key)
 void staff_set_key_callback(void)
 {
         GtkWidget *widget;
+	Score_t *score;
+	GtkWidget *area;
 
         widget = glade_xml_get_widget(gladexml, "setkey_treble_rb");
+	score = score_get_from_widget(widget);
+	area = score_get_area_from_widget(widget);
+	
 	if ( gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget)) )
-		staff_set_key(&Score, get_staff_selected(&Score), TREBLE_KEY);
+		staff_set_key(score, get_staff_selected(score), TREBLE_KEY);
 
         widget = glade_xml_get_widget(gladexml, "setkey_bass_rb");
 	if ( gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget)) )
-		staff_set_key(&Score, get_staff_selected(&Score), BASS_KEY);
+		staff_set_key(score, get_staff_selected(score), BASS_KEY);
 
         widget = glade_xml_get_widget(gladexml, "setkey_alto_rb");
 	if ( gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget)) )
-		staff_set_key(&Score, get_staff_selected(&Score), ALTO_KEY);
+		staff_set_key(score, get_staff_selected(score), ALTO_KEY);
 
         widget = glade_xml_get_widget(gladexml, "setkey_tenor_rb");
 	if ( gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget)) )
-		staff_set_key(&Score, get_staff_selected(&Score), TENOR_KEY);
+		staff_set_key(score, get_staff_selected(score), TENOR_KEY);
 
-	refresh();
+	refresh(area);
 
 }
 
@@ -500,14 +521,15 @@ void on_key_signature_activate(GtkWidget *widget)
 {
 	GtkWidget *hscale;
 	GtkAdjustment *adj;
+	Score_t *score = score_get_from_widget(widget);
 
 	gint value_adj = 0;
 
-/* 	old_key_signature = Score.Staff[get_staff_selected()].time_signature; */
+/* 	old_key_signature = score->Staff[get_staff_selected()].time_signature; */
 
         /* The adjustment */
-/*         switch (Score.Staff[get_staff_selected()].key_signature) */
-	switch(staff_get_key_signature(&Score, get_staff_selected(&Score))) {
+/*         switch (score->Staff[get_staff_selected()].key_signature) */
+	switch(staff_get_key_signature(score, get_staff_selected(score))) {
 	case KEY_SIGNATURE_TREBLE_EMPTY:
 		widget = glade_xml_get_widget (gladexml, "sks_clef_label");
 		gtk_label_set_text(GTK_LABEL(widget), "C Major or A minor");
@@ -680,7 +702,7 @@ void on_key_signature_value_changed(void)
 /* 	switch (i) */
 /* 	{ */
 /* 	case -1: */
-/* 		Score.Staff[get_staff_selected()].key_signature = */
+/* 		score->Staff[get_staff_selected()].key_signature = */
 /* 			KEY_SIGNATURE_TREBLE_B_FLAT; */
 		
 /* 		widget = glade_xml_get_widget (gladexml, "sks_clef_label"); */
@@ -707,7 +729,7 @@ void ValueOfRange (GtkAdjustment *adj)
 	switch (i) {
 		
 	case -1:
-		/* 		Score.Staff[get_staff_selected()].key_signature = */
+		/* 		score->Staff[get_staff_selected()].key_signature = */
 		key_signature = KEY_SIGNATURE_TREBLE_B_FLAT;
 		
 		widget = glade_xml_get_widget (gladexml, "sks_clef_label");
@@ -880,7 +902,7 @@ void staff_key_signature(gpointer callback_data, guint callback_action, GtkWidge
 /*           gtk_widget_show(vbox); */
 
 /*           /\* The adjustment *\/ */
-/*           switch (Score.Staff[get_staff_selected()].key_signature) */
+/*           switch (score->Staff[get_staff_selected()].key_signature) */
 /*           { */
 /*           case KEY_SIGNATURE_TREBLE_EMPTY: */
 /*                pixmap_wid = gtk_image_new_from_file(get_file_from_data_dir("pixmaps/treble_empty.xpm")); */
@@ -999,7 +1021,7 @@ void staff_time_signature(gpointer callback_data, guint callback_action, GtkWidg
 /*      static GtkWidget * time_signature_dialog = NULL; */
 
      
-/*      old_key_signature = Score.Staff[get_staff_selected()].time_signature; */
+/*      old_key_signature = score->Staff[get_staff_selected()].time_signature; */
 
 /*      if (time_signature_dialog) */
 /*      { */
@@ -1112,27 +1134,27 @@ void staff_time_signature(gpointer callback_data, guint callback_action, GtkWidg
 /*           if (gtk_dialog_run(GTK_DIALOG(time_signature_dialog))==GTK_RESPONSE_ACCEPT) */
 /*           { */
 /*                if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(radio_24))) */
-/*                     Score.Staff[get_staff_selected()].time_signature = TIME_SIGNATURE_24; */
+/*                     score->Staff[get_staff_selected()].time_signature = TIME_SIGNATURE_24; */
 
 /*                if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(radio_68))) */
-/*                     Score.Staff[get_staff_selected()].time_signature = TIME_SIGNATURE_68; */
+/*                     score->Staff[get_staff_selected()].time_signature = TIME_SIGNATURE_68; */
 
 /*                if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(radio_common_time))) */
-/*                     Score.Staff[get_staff_selected()].time_signature = TIME_SIGNATURE_COMMON_TIME; */
+/*                     score->Staff[get_staff_selected()].time_signature = TIME_SIGNATURE_COMMON_TIME; */
 
 /*                if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(radio_alla_breve))) */
-/*                     Score.Staff[get_staff_selected()].time_signature = TIME_SIGNATURE_ALLA_BREVE; */
+/*                     score->Staff[get_staff_selected()].time_signature = TIME_SIGNATURE_ALLA_BREVE; */
 
 /*                if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(radio_custom))) */
 /*                { */
 /*                     g_message("custom"); */
 /*                } */
 
-/*                Score.Staff[get_staff_selected()].startx += 10; */
+/*                score->Staff[get_staff_selected()].startx += 10; */
 
 /*           } else */
 /*           { */
-/*                Score.Staff[get_staff_selected()].time_signature = old_key_signature; */
+/*                score->Staff[get_staff_selected()].time_signature = old_key_signature; */
 /*           } */
 /*           gtk_widget_destroy(time_signature_dialog); */
 /*      } */
@@ -1213,7 +1235,7 @@ gdouble get_staff_extremity_end_y(const Score_t *score, gint staff_id)
 }
 
 /* Accordingly to the y position of the cursor, this function returns the staff number */
-gint get_staff_id(gdouble y)
+gint get_staff_id(Score_t *score, gdouble y)
 {
         GList * listrunner;
         
@@ -1222,18 +1244,18 @@ gint get_staff_id(gdouble y)
 
         guint staff_id = 0;
  
-        listrunner = g_list_first(Score.Staff_list);
+        listrunner = g_list_first(score->Staff_list);
 
         while (listrunner) {
 
 		staff_data = (Staff_t *)listrunner->data;
 
 		if ( ! staff_data ) {
-			debug_msg("|staff.c| get_staff_id(). Unable to browse Score.Staff_list. Memory Exhausted ?\n");
+			debug_msg("|staff.c| get_staff_id(). Unable to browse score->Staff_list. Memory Exhausted ?\n");
 		}
 
 		if ( y >= staff_data->extremity_begin_y ) {
-			if ( y <= get_staff_extremity_end_y(&Score, staff_counter) ) {
+			if ( y <= get_staff_extremity_end_y(score, staff_counter) ) {
 				staff_id = staff_counter;
 			}
 		}
@@ -1254,9 +1276,9 @@ void deselect_all_staffs(void)
 {
 /*      gint i = 0; */
 
-/*      for ( i = 0; i < Score.nb_staves; i++ ) */
+/*      for ( i = 0; i < score->nb_staves; i++ ) */
 /*      { */
-/*           Score.Staff[i].is_selected = FALSE; */
+/*           score->Staff[i].is_selected = FALSE; */
 /*      } */
 
 }
@@ -1268,31 +1290,31 @@ staff_remove_staff(gpointer callback_data, guint callback_action, GtkWidget *wid
 
 /*      gint staff_number = get_staff_selected(); */
 
-/*      Score.nb_staves--; */
+/*      score->nb_staves--; */
 
-/*      for ( i = 0; i < Score.nb_staves; i++) */
+/*      for ( i = 0; i < score->nb_staves; i++) */
 /*      { */
 /*           if (i >= staff_number) */
 /*           { */
-/*                Score.Staff[i].nb_lines = Score.Staff[i+1].nb_lines; */
-/*                Score.Staff[i].space_btw_lines = Score.Staff[i+1].space_btw_lines; */
-/*                Score.Staff[i].is_selected = Score.Staff[i].is_selected; */
-/*                Score.Staff[i].key = Score.Staff[i+1].key; */
-/*                Score.Staff[i].key_signature = Score.Staff[i+1].key_signature; */
-/*                Score.Staff[i].time_signature = Score.Staff[i+1].time_signature; */
-/*                Score.Staff[i].time_signature_x = Score.Staff[i+1].time_signature_x; */
-/*                Score.Staff[i].endbar = Score.Staff[i+1].endbar; */
-/*                Score.Staff[i].extremity_begin_x = Score.Staff[i+1].extremity_begin_x; */
-/*                Score.Staff[i].extremity_end_x = Score.Staff[i+1].extremity_end_x; */
-/*                Score.Staff[i].extremity_begin_y = Score.Staff[i].extremity_begin_y; */
-/*                Score.Staff[i].extremity_end_y = Score.Staff[i].extremity_begin_y - 1 +  */
-/*                     (Score.Staff[i].nb_lines + ((Score.Staff[i].nb_lines - 1) * Score.Staff[i].space_btw_lines)); */
-/*                Score.Staff[i].space_with_staff_up = Score.Staff[i+1].space_with_staff_up; */
-/* /\*                Score.Staff[i].middle = Score.Staff[i+1].extremity_begin_y + 17; *\/ */
-/*                Score.Staff[i].total_measures = Score.Staff[i+1].total_measures; */
-/*                Score.Staff[i].startx = Score.Staff[i+1].startx; */
+/*                score->Staff[i].nb_lines = score->Staff[i+1].nb_lines; */
+/*                score->Staff[i].space_btw_lines = score->Staff[i+1].space_btw_lines; */
+/*                score->Staff[i].is_selected = score->Staff[i].is_selected; */
+/*                score->Staff[i].key = score->Staff[i+1].key; */
+/*                score->Staff[i].key_signature = score->Staff[i+1].key_signature; */
+/*                score->Staff[i].time_signature = score->Staff[i+1].time_signature; */
+/*                score->Staff[i].time_signature_x = score->Staff[i+1].time_signature_x; */
+/*                score->Staff[i].endbar = score->Staff[i+1].endbar; */
+/*                score->Staff[i].extremity_begin_x = score->Staff[i+1].extremity_begin_x; */
+/*                score->Staff[i].extremity_end_x = score->Staff[i+1].extremity_end_x; */
+/*                score->Staff[i].extremity_begin_y = score->Staff[i].extremity_begin_y; */
+/*                score->Staff[i].extremity_end_y = score->Staff[i].extremity_begin_y - 1 +  */
+/*                     (score->Staff[i].nb_lines + ((score->Staff[i].nb_lines - 1) * score->Staff[i].space_btw_lines)); */
+/*                score->Staff[i].space_with_staff_up = score->Staff[i+1].space_with_staff_up; */
+/* /\*                score->Staff[i].middle = score->Staff[i+1].extremity_begin_y + 17; *\/ */
+/*                score->Staff[i].total_measures = score->Staff[i+1].total_measures; */
+/*                score->Staff[i].startx = score->Staff[i+1].startx; */
 
-/*                Score.Staff[i].Object_list = g_list_copy(Score.Staff[i+1].Object_list); */
+/*                score->Staff[i].Object_list = g_list_copy(score->Staff[i+1].Object_list); */
 
 /*           } */
 /*      } */
@@ -1309,8 +1331,8 @@ get_staff_key(const Score_t *score, gint staff)
 /*      gint staff_type = -1; */
 /*      gint i; */
 
-/*      for ( i = 0; i < Score.nb_staves; i++ ) */
-/*           staff_type = Score.Staff[staff].key; */
+/*      for ( i = 0; i < score->nb_staves; i++ ) */
+/*           staff_type = score->Staff[staff].key; */
 
 /*      return staff_type; */
 
@@ -1357,7 +1379,7 @@ get_staff_key(const Score_t *score, gint staff)
 /*           gtk_widget_show(label); */
 
 
-/*           adj = GTK_ADJUSTMENT(gtk_adjustment_new(Score.Staff[get_staff_selected()].midi_instrument, */
+/*           adj = GTK_ADJUSTMENT(gtk_adjustment_new(score->Staff[get_staff_selected()].midi_instrument, */
 /*                                                   1, 128, */
 /*                                                   1.0, 10.0, 10.0 )); */
 
@@ -1368,7 +1390,7 @@ get_staff_key(const Score_t *score, gint staff)
 /*           if (gtk_dialog_run(GTK_DIALOG(dialog))==GTK_RESPONSE_ACCEPT) */
 /*           { */
 
-/*                Score.Staff[get_staff_selected()].midi_instrument = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(spinbutton)); */
+/*                score->Staff[get_staff_selected()].midi_instrument = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(spinbutton)); */
 
 /*           } */
 /*           gtk_widget_destroy(dialog); */
@@ -1470,80 +1492,80 @@ staff_add_staff (gpointer callback_data, guint callback_action, GtkWidget *widge
 
 /*                if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(radio_treble))) { */
 
-/*                     Score.Staff[Score.nb_staves].endbar = TRUE; */
-/*                     Score.Staff[Score.nb_staves].is_selected = FALSE; */
-/*                     Score.Staff[Score.nb_staves].nb_lines = 5; */
-/*                     Score.Staff[Score.nb_staves].space_btw_lines = 8; */
-/*                     Score.Staff[Score.nb_staves].space_with_staff_up = 50; */
-/*                     Score.Staff[Score.nb_staves].key = TREBLE_KEY; */
-/*                     Score.Staff[Score.nb_staves].extremity_begin_x = Score.Staff[Score.nb_staves-1].extremity_begin_x; */
-/*                     Score.Staff[Score.nb_staves].extremity_begin_y = Score.Staff[Score.nb_staves-1].extremity_end_y + Score.Staff[Score.nb_staves].space_with_staff_up; */
-/*                     Score.Staff[Score.nb_staves].extremity_end_y   = Score.Staff[Score.nb_staves].extremity_begin_y+36; */
-/* /\*                     Score.Staff[Score.nb_staves].middle = Score.Staff[Score.nb_staves].extremity_begin_y+17; *\/ */
-/*                     Score.Staff[Score.nb_staves].extremity_end_x = Score.Staff[Score.nb_staves-1].extremity_end_x; */
-/*                     Score.Staff[Score.nb_staves].key_signature = KEY_SIGNATURE_TREBLE_EMPTY; */
-/*                     Score.Staff[Score.nb_staves].startx = 100; */
-/*                     Score.Staff[Score.nb_staves].time_signature_x = 70; */
+/*                     score->Staff[score->nb_staves].endbar = TRUE; */
+/*                     score->Staff[score->nb_staves].is_selected = FALSE; */
+/*                     score->Staff[score->nb_staves].nb_lines = 5; */
+/*                     score->Staff[score->nb_staves].space_btw_lines = 8; */
+/*                     score->Staff[score->nb_staves].space_with_staff_up = 50; */
+/*                     score->Staff[score->nb_staves].key = TREBLE_KEY; */
+/*                     score->Staff[score->nb_staves].extremity_begin_x = score->Staff[score->nb_staves-1].extremity_begin_x; */
+/*                     score->Staff[score->nb_staves].extremity_begin_y = score->Staff[score->nb_staves-1].extremity_end_y + score->Staff[score->nb_staves].space_with_staff_up; */
+/*                     score->Staff[score->nb_staves].extremity_end_y   = score->Staff[score->nb_staves].extremity_begin_y+36; */
+/* /\*                     score->Staff[score->nb_staves].middle = score->Staff[score->nb_staves].extremity_begin_y+17; *\/ */
+/*                     score->Staff[score->nb_staves].extremity_end_x = score->Staff[score->nb_staves-1].extremity_end_x; */
+/*                     score->Staff[score->nb_staves].key_signature = KEY_SIGNATURE_TREBLE_EMPTY; */
+/*                     score->Staff[score->nb_staves].startx = 100; */
+/*                     score->Staff[score->nb_staves].time_signature_x = 70; */
 
-/*                     Score.Staff[Score.nb_staves].Object_list = NULL; */
+/*                     score->Staff[score->nb_staves].Object_list = NULL; */
 
-/*                     Score.height = Score.Staff[Score.nb_staves].extremity_end_y + 100; */
+/*                     score->height = score->Staff[score->nb_staves].extremity_end_y + 100; */
 
 /*                     deselect_all_staffs(); */
-/*                     Score.Staff[Score.nb_staves].is_selected = TRUE; */
+/*                     score->Staff[score->nb_staves].is_selected = TRUE; */
 /*                     score_new_size();  */
                     
-/*                     Score.nb_staves++; */
+/*                     score->nb_staves++; */
 
 /*                } */
 
 /*                if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(radio_bass))) { */
 
-/*                     Score.Staff[Score.nb_staves].endbar = TRUE; */
-/*                     Score.Staff[Score.nb_staves].is_selected = FALSE; */
-/*                     Score.Staff[Score.nb_staves].nb_lines = 5; */
-/*                     Score.Staff[Score.nb_staves].space_btw_lines = 8; */
-/*                     Score.Staff[Score.nb_staves].space_with_staff_up = 50; */
-/*                     Score.Staff[Score.nb_staves].key = BASS_KEY; */
-/*                     Score.Staff[Score.nb_staves].extremity_begin_x = Score.Staff[Score.nb_staves-1].extremity_begin_x; */
-/*                     Score.Staff[Score.nb_staves].extremity_begin_y = Score.Staff[Score.nb_staves-1].extremity_end_y + Score.Staff[Score.nb_staves].space_with_staff_up; */
-/*                     Score.Staff[Score.nb_staves].extremity_end_y   = Score.Staff[Score.nb_staves].extremity_begin_y+36; */
-/* /\*                     Score.Staff[Score.nb_staves].middle = Score.Staff[Score.nb_staves].extremity_begin_y+17; *\/ */
-/*                     Score.Staff[Score.nb_staves].extremity_end_x = Score.Staff[Score.nb_staves-1].extremity_end_x; */
-/*                     Score.Staff[Score.nb_staves].key_signature = KEY_SIGNATURE_TREBLE_EMPTY; */
-/*                     Score.Staff[Score.nb_staves].startx = 100; */
-/*                     Score.Staff[Score.nb_staves].time_signature_x = 70; */
+/*                     score->Staff[score->nb_staves].endbar = TRUE; */
+/*                     score->Staff[score->nb_staves].is_selected = FALSE; */
+/*                     score->Staff[score->nb_staves].nb_lines = 5; */
+/*                     score->Staff[score->nb_staves].space_btw_lines = 8; */
+/*                     score->Staff[score->nb_staves].space_with_staff_up = 50; */
+/*                     score->Staff[score->nb_staves].key = BASS_KEY; */
+/*                     score->Staff[score->nb_staves].extremity_begin_x = score->Staff[score->nb_staves-1].extremity_begin_x; */
+/*                     score->Staff[score->nb_staves].extremity_begin_y = score->Staff[score->nb_staves-1].extremity_end_y + score->Staff[score->nb_staves].space_with_staff_up; */
+/*                     score->Staff[score->nb_staves].extremity_end_y   = score->Staff[score->nb_staves].extremity_begin_y+36; */
+/* /\*                     score->Staff[score->nb_staves].middle = score->Staff[score->nb_staves].extremity_begin_y+17; *\/ */
+/*                     score->Staff[score->nb_staves].extremity_end_x = score->Staff[score->nb_staves-1].extremity_end_x; */
+/*                     score->Staff[score->nb_staves].key_signature = KEY_SIGNATURE_TREBLE_EMPTY; */
+/*                     score->Staff[score->nb_staves].startx = 100; */
+/*                     score->Staff[score->nb_staves].time_signature_x = 70; */
 
-/*                     Score.Staff[Score.nb_staves].Object_list = NULL; */
+/*                     score->Staff[score->nb_staves].Object_list = NULL; */
 
-/*                     Score.height = Score.Staff[Score.nb_staves].extremity_end_y + 100; */
+/*                     score->height = score->Staff[score->nb_staves].extremity_end_y + 100; */
                     
-/*                     Score.nb_staves++; */
+/*                     score->nb_staves++; */
 
 /*                } */
 
 /*                if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(radio_alto))) { */
 
-/*                     Score.Staff[Score.nb_staves].endbar = TRUE; */
-/*                     Score.Staff[Score.nb_staves].is_selected = FALSE; */
-/*                     Score.Staff[Score.nb_staves].nb_lines = 5; */
-/*                     Score.Staff[Score.nb_staves].space_btw_lines = 8; */
-/*                     Score.Staff[Score.nb_staves].space_with_staff_up = 50; */
-/*                     Score.Staff[Score.nb_staves].key = ALTO_KEY; */
-/*                     Score.Staff[Score.nb_staves].extremity_begin_x = Score.Staff[Score.nb_staves-1].extremity_begin_x; */
-/*                     Score.Staff[Score.nb_staves].extremity_begin_y = Score.Staff[Score.nb_staves-1].extremity_end_y + Score.Staff[Score.nb_staves].space_with_staff_up; */
-/*                     Score.Staff[Score.nb_staves].extremity_end_y   = Score.Staff[Score.nb_staves].extremity_begin_y+36; */
-/* /\*                     Score.Staff[Score.nb_staves].middle = Score.Staff[Score.nb_staves].extremity_begin_y+17; *\/ */
-/*                     Score.Staff[Score.nb_staves].extremity_end_x = Score.Staff[Score.nb_staves-1].extremity_end_x; */
-/*                     Score.Staff[Score.nb_staves].key_signature = KEY_SIGNATURE_TREBLE_EMPTY; */
-/*                     Score.Staff[Score.nb_staves].startx = 100; */
-/*                     Score.Staff[Score.nb_staves].time_signature_x = 70; */
+/*                     score->Staff[score->nb_staves].endbar = TRUE; */
+/*                     score->Staff[score->nb_staves].is_selected = FALSE; */
+/*                     score->Staff[score->nb_staves].nb_lines = 5; */
+/*                     score->Staff[score->nb_staves].space_btw_lines = 8; */
+/*                     score->Staff[score->nb_staves].space_with_staff_up = 50; */
+/*                     score->Staff[score->nb_staves].key = ALTO_KEY; */
+/*                     score->Staff[score->nb_staves].extremity_begin_x = score->Staff[score->nb_staves-1].extremity_begin_x; */
+/*                     score->Staff[score->nb_staves].extremity_begin_y = score->Staff[score->nb_staves-1].extremity_end_y + score->Staff[score->nb_staves].space_with_staff_up; */
+/*                     score->Staff[score->nb_staves].extremity_end_y   = score->Staff[score->nb_staves].extremity_begin_y+36; */
+/* /\*                     score->Staff[score->nb_staves].middle = score->Staff[score->nb_staves].extremity_begin_y+17; *\/ */
+/*                     score->Staff[score->nb_staves].extremity_end_x = score->Staff[score->nb_staves-1].extremity_end_x; */
+/*                     score->Staff[score->nb_staves].key_signature = KEY_SIGNATURE_TREBLE_EMPTY; */
+/*                     score->Staff[score->nb_staves].startx = 100; */
+/*                     score->Staff[score->nb_staves].time_signature_x = 70; */
 
-/*                     Score.Staff[Score.nb_staves].Object_list = NULL; */
+/*                     score->Staff[score->nb_staves].Object_list = NULL; */
 
-/*                     Score.height = Score.Staff[Score.nb_staves].extremity_end_y + 100; */
+/*                     score->height = score->Staff[score->nb_staves].extremity_end_y + 100; */
                     
-/*                     Score.nb_staves++; */
+/*                     score->nb_staves++; */
                     
 /*                } */
                
@@ -1564,6 +1586,7 @@ void update_key_signature(Score_t *score)
 {
 
         Staff_t *staff_data;
+/* 	GtkWidget *area; */
 
 	gint offset = 0;
 
@@ -1627,7 +1650,8 @@ void update_key_signature(Score_t *score)
 			    staff_get_current_x(score, get_staff_selected(score)) + offset);
 	staff_set_start_x(score, get_staff_selected(score), offset);
 
-	refresh();
+	/* TODO: find a way to refresh ALL drawing areas displaying score */
+/* 	refresh(area); */
 }
 
 extern
@@ -1659,7 +1683,7 @@ void staff_change_key_callback(void)
 /* 			   TENOR_KEY, NULL, NULL, 0, */
 /* 			   NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, FALSE); */
 
-/* 	gtk_widget_set_size_request(GTK_WIDGET(Score.area), Score.width, Score.height); */
+/* 	gtk_widget_set_size_request(GTK_WIDGET(score->area), score->width, score->height); */
 
-	refresh();
+/* 	refresh(area); */
 }

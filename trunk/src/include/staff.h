@@ -60,7 +60,7 @@ gboolean staff_set_midi_instrument(Score_t *score, gint staff, gint midi_instrum
 
 gint staff_get_y_for_next(const Score_t *score);
 
-gboolean staff_update_statusbar(void);
+gboolean staff_update_statusbar(GladeXML *xml);
 
 gboolean staff_set_start_x(Score_t *score, gint staff, gint start_x);
 
@@ -74,7 +74,7 @@ void staff_time_signature(gpointer callback_data, guint callback_action, GtkWidg
 
 void staff_display_measures_numbers(gpointer callback_data, guint callback_action, GtkWidget *widget);
 
-gint get_staff_id(gdouble y);
+gint get_staff_id(Score_t *score, gdouble y);
 
 void deselect_all_staffs(void);
 

@@ -1,3 +1,7 @@
+
+#include "libglade-garbage.h"
+
+
 void on_time_signature_activate(void)
 {
 }

@@ -28,6 +28,7 @@
 #include "constants.h"
 #include "staff.h"
 #include "debug.h"
+#include "articulation.h"
 
 void
 staccato_notes_selected(void)
@@ -54,7 +55,7 @@ staccato_notes_selected(void)
 }
 
 extern void
-articulation_draw_staccato(gint staff, gboolean up, gdouble x, gdouble y)
+articulation_draw_staccato(gint staff, gboolean up, gint x, gint y)
 {
 /*      GdkGC *gc; */
 

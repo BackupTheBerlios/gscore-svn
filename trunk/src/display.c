@@ -37,14 +37,14 @@ void display_new_page(gint measure)
 
 }
 
-void display_measure_line_return(gint measure)
+void display_measure_line_return(GtkWidget *area, gint measure)
 {
           GdkGC *gc;
           gint j = 0;
 
-          gc = gdk_gc_new(Score.area->window);
+          gc = gdk_gc_new(area->window);
 
-          gdk_draw_line(Score.area->window, gc,
+          gdk_draw_line(area->window, gc,
                         20,j, 20, j+20);
 
 }

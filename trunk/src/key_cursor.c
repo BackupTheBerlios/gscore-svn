@@ -32,40 +32,42 @@
 #include "position.h"
 #include "common.h"
 #include "key_cursor.h"
+#include "score.h"
 
 extern 
-void draw_key_cursor(gint position, gdouble current_x, gdouble extremity_begin_y)
+void draw_key_cursor(GtkWidget *area, gint position, gdouble current_x, gdouble extremity_begin_y)
 {
 
 	  GdkGC * gc;
 	  GdkColor color;
+	  KeyCursor_t *cursor = score_get_cursor_from_widget(area);
 
 	  gdouble y = 0;
 
-	  gc = gdk_gc_new(Score.area->window);
+	  gc = gdk_gc_new(area->window);
 
 	  color.red   = 20000;
 	  color.green = 20000;
 	  color.blue  = 20000;
 
-	  gdk_colormap_alloc_color(gtk_widget_get_colormap(Score.area), &color, TRUE, TRUE);
+	  gdk_colormap_alloc_color(gtk_widget_get_colormap(area), &color, TRUE, TRUE);
 	  gdk_gc_set_foreground(gc, &color);
 
 
 	  y = get_y_from_position_no_key(8, 4, extremity_begin_y, 8, position) + 1;
 
-	  gdk_draw_rectangle(Score.area->window, gc,
+	  gdk_draw_rectangle(area->window, gc,
 	                     TRUE, current_x, y, 10, 6);
 
-	  KeyCursor.x_returned = current_x;
-	  KeyCursor.y_returned = y - 1; /* - 1 because of the fact that it returns a x value to draw the object */
+	  cursor->x_returned = current_x;
+	  cursor->y_returned = y - 1; /* - 1 because of the fact that it returns a x value to draw the object */
 
 }
 
 extern 
-gint get_key_cursor_position(void)
+gint get_key_cursor_position(KeyCursor_t *cursor)
 {
-	return KeyCursor.position;
+	return cursor->position;
 }
 
 extern 

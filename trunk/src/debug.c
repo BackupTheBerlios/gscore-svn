@@ -24,14 +24,15 @@
 #include <gtk/gtk.h>
 
 #include "gscore.h"
+#include "debug.h"
 
-void print_objects_staff(gint staff)
+void print_objects_staff(Score_t *score, gint staff)
 {
         Staff_t *staff_data;
         GList *listrunner;
 
 
-        staff_data = g_list_nth_data(Score.Staff_list, staff);
+        staff_data = g_list_nth_data(score->Staff_list, staff);
 
         listrunner = g_list_first(staff_data->Object_list);
         while (listrunner) {
@@ -54,11 +55,11 @@ void print_objects_staff(gint staff)
 
 }
 
-void print_staves_list(void)
+void print_staves_list(Score_t *score)
 {
         GList *listrunner;
 
-        listrunner = g_list_first(Score.Staff_list);
+        listrunner = g_list_first(score->Staff_list);
         while (listrunner)
                 {
                         Staff_t *staff_data;

@@ -21,6 +21,6 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 */
 
-void tie_notes_selected(void);
+void tie_notes_selected(GtkWidget *widget, GdkEventExpose *event);
 
-void tie_draw_tie(Staff_t *staff, Object_t *object, guint object_x, gint y, gint ynext);
+void tie_draw_tie(GtkWidget *area, Staff_t *staff, Object_t *object, guint object_x, gint y, gint ynext);

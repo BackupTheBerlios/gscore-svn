@@ -168,7 +168,7 @@ add_object(Score_t *score, gint staff, gint type, accidentals_e accidentals, obj
 }
 
 extern gboolean 
-remove_object(gulong id)
+remove_object(Score_t *score,gulong id)
 {
         GList *listrunner_staff;
         GList *listrunner_object;
@@ -176,7 +176,7 @@ remove_object(gulong id)
 
         Staff_t *staff;
 
-        listrunner_staff = g_list_first(Score.Staff_list);
+        listrunner_staff = g_list_first(score->Staff_list);
 
         while ( listrunner_staff ) {
                 staff = (Staff_t *)listrunner_staff->data;
@@ -201,7 +201,7 @@ remove_object(gulong id)
 }
 
 extern gboolean 
-remove_object_selected(void)
+remove_object_selected(Score_t *score)
 {
         GList *listrunner_staff;
         GList *listrunner_object;
@@ -211,7 +211,7 @@ remove_object_selected(void)
 
 /*      g_return_if_fail( object != NULL ); */
 
-        listrunner_staff = g_list_first(Score.Staff_list);
+        listrunner_staff = g_list_first(score->Staff_list);
 
         while ( listrunner_staff ) {
                 staff = (Staff_t *)listrunner_staff->data;
@@ -235,7 +235,7 @@ remove_object_selected(void)
         return TRUE;
 }
 
-Object_t *object_get_next(Object_t *object)
+Object_t *object_get_next(Score_t *score, Object_t *object)
 {
         GList *listrunner_staff;
         GList *listrunner_object;
@@ -244,7 +244,7 @@ Object_t *object_get_next(Object_t *object)
         Staff_t *staff_data;
         Object_t *object_data;
 
-        listrunner_staff = g_list_first(Score.Staff_list);
+        listrunner_staff = g_list_first(score->Staff_list);
 
         while ( listrunner_staff ) {
                 staff_data = (Staff_t *)listrunner_staff->data;
@@ -269,7 +269,7 @@ Object_t *object_get_next(Object_t *object)
 }
 
 /* Returns the object before the one provided as parameter */
-Object_t *object_get_previous(Object_t *object)
+Object_t *object_get_previous(Score_t *score, Object_t *object)
 {
         GList *listrunner_staff;
         GList *listrunner_object;
@@ -278,7 +278,7 @@ Object_t *object_get_previous(Object_t *object)
         Staff_t *staff_data;
         Object_t *object_data;
 
-        listrunner_staff = g_list_first(Score.Staff_list);
+        listrunner_staff = g_list_first(score->Staff_list);
 
         while ( listrunner_staff ) {
                 staff_data = (Staff_t *)listrunner_staff->data;

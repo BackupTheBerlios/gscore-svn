@@ -26,8 +26,9 @@
 #include "gscore.h"
 #include "common.h"
 #include "spacings.h"
+#include "draw_barline.h"
 
-gint draw_barline_single(Staff_t *staff, gint x)
+gint draw_barline_single(GtkWidget *area, Staff_t *staff, gint x)
 {
 	GdkGC * gc;
 
@@ -36,10 +37,10 @@ gint draw_barline_single(Staff_t *staff, gint x)
 
 	extremity_end_y =  staff->extremity_begin_y +(staff->nb_lines - 1) * staff->space_btw_lines + staff->nb_lines - 1;
 
-	gc = gdk_gc_new(Score.area->window);
+	gc = gdk_gc_new(area->window);
 
 	for ( thickness = 0; thickness < Spacings.Barlines.tlt; thickness++ ) {
-		gdk_draw_line(Score.area->window, gc,
+		gdk_draw_line(area->window, gc,
 			      x + thickness, 
 			      staff->extremity_begin_y, 
 			      x + thickness, 
@@ -49,7 +50,7 @@ gint draw_barline_single(Staff_t *staff, gint x)
 	return 0;
 }
 
-gint draw_barline_double(Staff_t *staff, gint x)
+gint draw_barline_double(GtkWidget *area, Staff_t *staff, gint x)
 {
 	GdkGC * gc;
      
@@ -59,16 +60,16 @@ gint draw_barline_double(Staff_t *staff, gint x)
 	extremity_end_y =  staff->extremity_begin_y +(staff->nb_lines - 1) * staff->space_btw_lines + staff->nb_lines - 1;
 
 
-	gc = gdk_gc_new(Score.area->window);
+	gc = gdk_gc_new(area->window);
 
      
 	for ( thickness = 0; thickness < Spacings.Barlines.tlt; thickness++ ) {
 
-		gdk_draw_line(Score.area->window, gc,
+		gdk_draw_line(area->window, gc,
 			      x + thickness, staff->extremity_begin_y,
 			      x + thickness, extremity_end_y);
 
-		gdk_draw_line(Score.area->window, gc,
+		gdk_draw_line(area->window, gc,
 			      x + Spacings.Barlines.swdb + thickness, staff->extremity_begin_y,
 			      x + Spacings.Barlines.swdb + thickness, extremity_end_y);
 
@@ -77,7 +78,7 @@ gint draw_barline_double(Staff_t *staff, gint x)
 	return 0;
 }
 
-gint draw_barline_openrepeat(Staff_t *staff, gint x)
+gint draw_barline_openrepeat(GtkWidget *area, Staff_t *staff, gint x)
 {
 	GdkGC * gc;
 
@@ -91,10 +92,10 @@ gint draw_barline_openrepeat(Staff_t *staff, gint x)
 	extremity_end_y =  staff->extremity_begin_y +(staff->nb_lines - 1) * staff->space_btw_lines + staff->nb_lines - 1;
 
 
-	gc = gdk_gc_new(Score.area->window);
+	gc = gdk_gc_new(area->window);
 
 	for ( thickness = 0; thickness < Spacings.Barlines.hlt; thickness++ ) {
-		gdk_draw_line(Score.area->window, gc,
+		gdk_draw_line(area->window, gc,
 			      x + thickness, staff->extremity_begin_y,
 			      x + thickness, extremity_end_y);
 	}
@@ -103,7 +104,7 @@ gint draw_barline_openrepeat(Staff_t *staff, gint x)
 	new_x += Spacings.Barlines.hlt;
 
 	for ( thickness = 0; thickness < Spacings.Barlines.tlt; thickness++ ) {
-		gdk_draw_line(Score.area->window, gc,
+		gdk_draw_line(area->window, gc,
 			      new_x + Spacings.Barlines.sbhatl + thickness, staff->extremity_begin_y,
 			      new_x + Spacings.Barlines.sbhatl + thickness, extremity_end_y);
 
@@ -115,29 +116,29 @@ gint draw_barline_openrepeat(Staff_t *staff, gint x)
 
 	average = (extremity_end_y - staff->extremity_begin_y) / 2;
 
-	gdk_draw_point (Score.area->window, gc, 
+	gdk_draw_point (area->window, gc, 
 			new_x - 1, staff->extremity_begin_y + average - Spacings.Barlines.sbd);
-	gdk_draw_point (Score.area->window, gc, 
+	gdk_draw_point (area->window, gc, 
 			new_x - 1, staff->extremity_begin_y + average - (Spacings.Barlines.sbd + 1));
-	gdk_draw_point (Score.area->window, gc, 
+	gdk_draw_point (area->window, gc, 
 			new_x, staff->extremity_begin_y + average - Spacings.Barlines.sbd);
-	gdk_draw_point (Score.area->window, gc, 
+	gdk_draw_point (area->window, gc, 
 			new_x, staff->extremity_begin_y + average - (Spacings.Barlines.sbd + 1));
 
-	gdk_draw_point (Score.area->window, gc, 
+	gdk_draw_point (area->window, gc, 
 			new_x - 1, staff->extremity_begin_y + average + Spacings.Barlines.sbd);
-	gdk_draw_point (Score.area->window, gc, 
+	gdk_draw_point (area->window, gc, 
 			new_x - 1, staff->extremity_begin_y + average + (Spacings.Barlines.sbd + 1));
-	gdk_draw_point (Score.area->window, gc, 
+	gdk_draw_point (area->window, gc, 
 			new_x, staff->extremity_begin_y + average + Spacings.Barlines.sbd);
-	gdk_draw_point (Score.area->window, gc, 
+	gdk_draw_point (area->window, gc, 
 			new_x, staff->extremity_begin_y + average + (Spacings.Barlines.sbd + 1));
 
 	return 0;
 
 }
 
-gint draw_barline_closerepeat(Staff_t *staff, gint x)
+gint draw_barline_closerepeat(GtkWidget *area, Staff_t *staff, gint x)
 {
 	GdkGC * gc;
 	gint average = 0;
@@ -150,25 +151,25 @@ gint draw_barline_closerepeat(Staff_t *staff, gint x)
 	extremity_end_y =  staff->extremity_begin_y +(staff->nb_lines - 1) * staff->space_btw_lines + staff->nb_lines - 1;
 
 
-	gc = gdk_gc_new(Score.area->window);
+	gc = gdk_gc_new(area->window);
 
 
 	average = (extremity_end_y - staff->extremity_begin_y)/2;
 
-	gdk_draw_point (Score.area->window, gc, x, staff->extremity_begin_y + average - Spacings.Barlines.sbd);
-	gdk_draw_point (Score.area->window, gc, x, staff->extremity_begin_y + average - (Spacings.Barlines.sbd + 1));
-	gdk_draw_point (Score.area->window, gc, x + 1, staff->extremity_begin_y + average - Spacings.Barlines.sbd);
-	gdk_draw_point (Score.area->window, gc, x + 1, staff->extremity_begin_y + average - (Spacings.Barlines.sbd + 1));
+	gdk_draw_point (area->window, gc, x, staff->extremity_begin_y + average - Spacings.Barlines.sbd);
+	gdk_draw_point (area->window, gc, x, staff->extremity_begin_y + average - (Spacings.Barlines.sbd + 1));
+	gdk_draw_point (area->window, gc, x + 1, staff->extremity_begin_y + average - Spacings.Barlines.sbd);
+	gdk_draw_point (area->window, gc, x + 1, staff->extremity_begin_y + average - (Spacings.Barlines.sbd + 1));
 
-	gdk_draw_point (Score.area->window, gc, x, staff->extremity_begin_y + average + Spacings.Barlines.sbd);
-	gdk_draw_point (Score.area->window, gc, x, staff->extremity_begin_y + average + (Spacings.Barlines.sbd + 1));
-	gdk_draw_point (Score.area->window, gc, x + 1, staff->extremity_begin_y + average + Spacings.Barlines.sbd);
-	gdk_draw_point (Score.area->window, gc, x + 1, staff->extremity_begin_y + average + (Spacings.Barlines.sbd + 1));
+	gdk_draw_point (area->window, gc, x, staff->extremity_begin_y + average + Spacings.Barlines.sbd);
+	gdk_draw_point (area->window, gc, x, staff->extremity_begin_y + average + (Spacings.Barlines.sbd + 1));
+	gdk_draw_point (area->window, gc, x + 1, staff->extremity_begin_y + average + Spacings.Barlines.sbd);
+	gdk_draw_point (area->window, gc, x + 1, staff->extremity_begin_y + average + (Spacings.Barlines.sbd + 1));
 
 	new_x += x + 1;
 
 	for ( thickness = 0;  thickness < Spacings.Barlines.tlt; thickness++ ) {
-		gdk_draw_line(Score.area->window, gc,
+		gdk_draw_line(area->window, gc,
 			      new_x + Spacings.Barlines.sblad + thickness, staff->extremity_begin_y,
 			      new_x + Spacings.Barlines.sblad + thickness, extremity_end_y);
 	}
@@ -177,7 +178,7 @@ gint draw_barline_closerepeat(Staff_t *staff, gint x)
 	new_x += Spacings.Barlines.sblad;
 
 	for ( thickness = 0; thickness < Spacings.Barlines.hlt; thickness++ ) {
-		gdk_draw_line(Score.area->window, gc,
+		gdk_draw_line(area->window, gc,
 			      new_x + Spacings.Barlines.sbhatl + thickness, staff->extremity_begin_y,
 			      new_x + Spacings.Barlines.sbhatl + thickness, extremity_end_y);
 	}
@@ -187,7 +188,7 @@ gint draw_barline_closerepeat(Staff_t *staff, gint x)
 
 }
 
-gint draw_barline_opencloserepeat(Staff_t *staff, gint x)
+gint draw_barline_opencloserepeat(GtkWidget *area, Staff_t *staff, gint x)
 {
 	GdkGC * gc;
 	gint average = 0;
@@ -200,25 +201,25 @@ gint draw_barline_opencloserepeat(Staff_t *staff, gint x)
 	extremity_end_y =  staff->extremity_begin_y +(staff->nb_lines - 1) * staff->space_btw_lines + staff->nb_lines - 1;
 
 
-	gc = gdk_gc_new(Score.area->window);
+	gc = gdk_gc_new(area->window);
 
 
 	average = (extremity_end_y - staff->extremity_begin_y)/2;
 
-	gdk_draw_point (Score.area->window, gc, x, staff->extremity_begin_y + average - Spacings.Barlines.sbd);
-	gdk_draw_point (Score.area->window, gc, x, staff->extremity_begin_y + average - (Spacings.Barlines.sbd + 1));
-	gdk_draw_point (Score.area->window, gc, x + 1, staff->extremity_begin_y + average - Spacings.Barlines.sbd);
-	gdk_draw_point (Score.area->window, gc, x + 1, staff->extremity_begin_y + average - (Spacings.Barlines.sbd + 1));
+	gdk_draw_point (area->window, gc, x, staff->extremity_begin_y + average - Spacings.Barlines.sbd);
+	gdk_draw_point (area->window, gc, x, staff->extremity_begin_y + average - (Spacings.Barlines.sbd + 1));
+	gdk_draw_point (area->window, gc, x + 1, staff->extremity_begin_y + average - Spacings.Barlines.sbd);
+	gdk_draw_point (area->window, gc, x + 1, staff->extremity_begin_y + average - (Spacings.Barlines.sbd + 1));
 
-	gdk_draw_point (Score.area->window, gc, x, staff->extremity_begin_y + average + Spacings.Barlines.sbd);
-	gdk_draw_point (Score.area->window, gc, x, staff->extremity_begin_y + average + (Spacings.Barlines.sbd + 1));
-	gdk_draw_point (Score.area->window, gc, x + 1, staff->extremity_begin_y + average + Spacings.Barlines.sbd);
-	gdk_draw_point (Score.area->window, gc, x + 1, staff->extremity_begin_y + average + (Spacings.Barlines.sbd + 1));
+	gdk_draw_point (area->window, gc, x, staff->extremity_begin_y + average + Spacings.Barlines.sbd);
+	gdk_draw_point (area->window, gc, x, staff->extremity_begin_y + average + (Spacings.Barlines.sbd + 1));
+	gdk_draw_point (area->window, gc, x + 1, staff->extremity_begin_y + average + Spacings.Barlines.sbd);
+	gdk_draw_point (area->window, gc, x + 1, staff->extremity_begin_y + average + (Spacings.Barlines.sbd + 1));
 
 	new_x += x + 1;
 
 	for ( thickness = 0;  thickness < Spacings.Barlines.tlt; thickness++ ) {
-		gdk_draw_line(Score.area->window, gc,
+		gdk_draw_line(area->window, gc,
 			      new_x + Spacings.Barlines.sblad + thickness, staff->extremity_begin_y,
 			      new_x + Spacings.Barlines.sblad + thickness, extremity_end_y);
 	}
@@ -227,7 +228,7 @@ gint draw_barline_opencloserepeat(Staff_t *staff, gint x)
 	new_x += Spacings.Barlines.sblad;
 
 	for ( thickness = 0; thickness < Spacings.Barlines.hlt; thickness++ ) {
-		gdk_draw_line(Score.area->window, gc,
+		gdk_draw_line(area->window, gc,
 			      new_x + Spacings.Barlines.sbhatl + thickness, staff->extremity_begin_y,
 			      new_x + Spacings.Barlines.sbhatl + thickness, extremity_end_y);
 	}
@@ -237,7 +238,7 @@ gint draw_barline_opencloserepeat(Staff_t *staff, gint x)
 	new_x += Spacings.Barlines.sbhatl;
 
 	for ( thickness = 0;  thickness < Spacings.Barlines.tlt; thickness++ ) {
-		gdk_draw_line(Score.area->window, gc,
+		gdk_draw_line(area->window, gc,
 			      new_x + thickness, staff->extremity_begin_y,
 			      new_x + thickness, extremity_end_y);
 	}
@@ -245,21 +246,21 @@ gint draw_barline_opencloserepeat(Staff_t *staff, gint x)
 	new_x += Spacings.Barlines.tlt;
 	new_x += Spacings.Barlines.sblad;
 
-	gdk_draw_point (Score.area->window, gc, new_x, staff->extremity_begin_y + average - Spacings.Barlines.sbd);
-	gdk_draw_point (Score.area->window, gc, new_x, staff->extremity_begin_y + average - (Spacings.Barlines.sbd + 1));
-	gdk_draw_point (Score.area->window, gc, new_x + 1, staff->extremity_begin_y + average - Spacings.Barlines.sbd);
-	gdk_draw_point (Score.area->window, gc, new_x + 1, staff->extremity_begin_y + average - (Spacings.Barlines.sbd + 1));
+	gdk_draw_point (area->window, gc, new_x, staff->extremity_begin_y + average - Spacings.Barlines.sbd);
+	gdk_draw_point (area->window, gc, new_x, staff->extremity_begin_y + average - (Spacings.Barlines.sbd + 1));
+	gdk_draw_point (area->window, gc, new_x + 1, staff->extremity_begin_y + average - Spacings.Barlines.sbd);
+	gdk_draw_point (area->window, gc, new_x + 1, staff->extremity_begin_y + average - (Spacings.Barlines.sbd + 1));
 
-	gdk_draw_point (Score.area->window, gc, new_x, staff->extremity_begin_y + average + Spacings.Barlines.sbd);
-	gdk_draw_point (Score.area->window, gc, new_x, staff->extremity_begin_y + average + (Spacings.Barlines.sbd + 1));
-	gdk_draw_point (Score.area->window, gc, new_x + 1, staff->extremity_begin_y + average + Spacings.Barlines.sbd);
-	gdk_draw_point (Score.area->window, gc, new_x + 1, staff->extremity_begin_y + average + (Spacings.Barlines.sbd + 1));
+	gdk_draw_point (area->window, gc, new_x, staff->extremity_begin_y + average + Spacings.Barlines.sbd);
+	gdk_draw_point (area->window, gc, new_x, staff->extremity_begin_y + average + (Spacings.Barlines.sbd + 1));
+	gdk_draw_point (area->window, gc, new_x + 1, staff->extremity_begin_y + average + Spacings.Barlines.sbd);
+	gdk_draw_point (area->window, gc, new_x + 1, staff->extremity_begin_y + average + (Spacings.Barlines.sbd + 1));
 
 	return 0;
 
 }
 
-gint draw_barline_endstaff(Staff_t *staff)
+gint draw_barline_endstaff(GtkWidget *area, Staff_t *staff)
 {
 /* 	GList * listrunner; */
 /* 	GdkGC * gc; */
@@ -271,19 +272,19 @@ gint draw_barline_endstaff(Staff_t *staff)
 
 
 
-/* 	gc = gdk_gc_new(Score.area->window); */
+/* 	gc = gdk_gc_new(area->window); */
      
 
-/* 	gdk_draw_line(Score.area->window, gc, */
+/* 	gdk_draw_line(area->window, gc, */
 /* 		      Score.staff_extremity_end_x - 5, staff->extremity_begin_y, */
 /* 		      Score.staff_extremity_end_x - 5, extremity_end_y - 1); */
-/* 	gdk_draw_line(Score.area->window, gc, */
+/* 	gdk_draw_line(area->window, gc, */
 /* 		      Score.staff_extremity_end_x - 2, staff->extremity_begin_y, */
 /* 		      Score.staff_extremity_end_x - 2, extremity_end_y - 1); */
-/* 	gdk_draw_line(Score.area->window, gc, */
+/* 	gdk_draw_line(area->window, gc, */
 /* 		      Score.staff_extremity_end_x - 1, staff->extremity_begin_y, */
 /* 		      Score.staff_extremity_end_x - 1, extremity_end_y - 1); */
-/* 	gdk_draw_line(Score.area->window, gc, */
+/* 	gdk_draw_line(area->window, gc, */
 /* 		      Score.staff_extremity_end_x, staff->extremity_begin_y, */
 /* 		      Score.staff_extremity_end_x, extremity_end_y - 1); */
 

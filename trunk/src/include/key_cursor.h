@@ -21,10 +21,10 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 */
 
-extern struct KeyCursor_t KeyCursor;
+#ifndef _KEY_CURSOR_H_
+#define _KEY_CURSOR_H_
+/* extern struct KeyCursor_t KeyCursor; */
 
-void draw_key_cursor(gint position, gdouble current_x, gdouble extremity_begin_y);
-gint get_key_cursor_position(void);
 
 typedef struct KeyCursor_t
 {
@@ -38,3 +38,8 @@ typedef struct KeyCursor_t
 
 } KeyCursor_t;
 
+void draw_key_cursor(GtkWidget *area, gint position, gdouble current_x, gdouble extremity_begin_y);
+gint get_key_cursor_position(KeyCursor_t *cursor);
+
+
+#endif

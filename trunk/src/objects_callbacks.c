@@ -28,13 +28,17 @@
 #include "common.h"
 #include "draw.h"
 #include "objects.h"
+#include "score.h"
+#include "objects_callbacks.h"
 
 #include "cursors.h"
 
 
 void object_cursor_callback(GtkWidget *widget, GdkEventExpose *event)
 {
-	draw_cursor(mouse_bits, mouse_mask_bits, 32, 32);
+  GtkWidget *area= score_get_area_from_widget(widget);
+  
+	draw_cursor(area, mouse_bits, mouse_mask_bits, 32, 32);
 
 	Selection.object_type = CURSOR;
 
@@ -44,11 +48,13 @@ void object_cursor_callback(GtkWidget *widget, GdkEventExpose *event)
 
 void object_doublewhole_callback(GtkWidget *widget, GdkEventExpose *event)
 {
-
-	if ( object_selected_change_type(&Score, DOUBLEWHOLE) ) {
-		refresh();
+  Score_t *score = score_get_from_widget(widget);
+  GtkWidget *area = score_get_area_from_widget(widget);
+  
+	if ( object_selected_change_type(score, DOUBLEWHOLE) ) {
+		refresh(area);
 	} else {
-		draw_cursor(cursor_doublewhole_bits, cursor_doublewhole_mask_bits, 16, 8);
+		draw_cursor(area, cursor_doublewhole_bits, cursor_doublewhole_mask_bits, 16, 8);
 		Selection.object_type = DOUBLEWHOLE;
 	}
 
@@ -56,11 +62,13 @@ void object_doublewhole_callback(GtkWidget *widget, GdkEventExpose *event)
 
 void object_whole_callback(GtkWidget *widget, GdkEventExpose *event)
 {
+  Score_t *score = score_get_from_widget(widget);
+  GtkWidget *area = score_get_area_from_widget(widget);
 
-	if ( object_selected_change_type(&Score, WHOLE) ) {
-		refresh();
+	if ( object_selected_change_type(score, WHOLE) ) {
+		refresh(area);
 	} else {
-		draw_cursor(cursor_whole_bits, cursor_whole_mask_bits, 14, 8);
+		draw_cursor(area, cursor_whole_bits, cursor_whole_mask_bits, 14, 8);
 		Selection.object_type = WHOLE;
 	}
 
@@ -68,11 +76,13 @@ void object_whole_callback(GtkWidget *widget, GdkEventExpose *event)
 
 void object_half_callback(GtkWidget *widget, GdkEventExpose *event)
 {
-
-	if ( object_selected_change_type(&Score, HALF) ) {
-		refresh();
+  Score_t *score = score_get_from_widget(widget);
+  GtkWidget *area = score_get_area_from_widget(widget);
+  
+	if ( object_selected_change_type(score, HALF) ) {
+		refresh(area);
 	} else {
-		draw_cursor(cursor_half_bits, cursor_half_bits, 10, 29);
+		draw_cursor(area, cursor_half_bits, cursor_half_bits, 10, 29);
 		Selection.object_type = HALF;
 	}
   
@@ -80,11 +90,13 @@ void object_half_callback(GtkWidget *widget, GdkEventExpose *event)
 
 void object_quarter_callback(GtkWidget *widget, GdkEventExpose *event)
 {
+  Score_t *score = score_get_from_widget(widget);
+  GtkWidget *area = score_get_area_from_widget(widget);
 
-	if ( object_selected_change_type(&Score, QUARTER) ) {
-		refresh();
+	if ( object_selected_change_type(score, QUARTER) ) {
+		refresh(area);
 	} else {
-        draw_cursor(cursor_quarter_bits, cursor_quarter_mask_bits, 9, 29);
+        draw_cursor(area, cursor_quarter_bits, cursor_quarter_mask_bits, 9, 29);
 	Selection.object_type = QUARTER;
 	}
 
@@ -93,11 +105,13 @@ void object_quarter_callback(GtkWidget *widget, GdkEventExpose *event)
 
 void object_eighth_callback(GtkWidget *widget, GdkEventExpose *event)
 {
+  Score_t *score = score_get_from_widget(widget);
+  GtkWidget *area = score_get_area_from_widget(widget);
 
-	if ( object_selected_change_type(&Score, EIGHTH) ) {
-		refresh();
+	if ( object_selected_change_type(score, EIGHTH) ) {
+		refresh(area);
 	} else {
-		draw_cursor(cursor_eighth_bits, cursor_eighth_mask_bits, 15, 29);
+		draw_cursor(area, cursor_eighth_bits, cursor_eighth_mask_bits, 15, 29);
 		Selection.object_type = EIGHTH;
 	}
 
@@ -105,11 +119,13 @@ void object_eighth_callback(GtkWidget *widget, GdkEventExpose *event)
 
 void object_sixteenth_callback(GtkWidget *widget, GdkEventExpose *event)
 {
+  Score_t *score = score_get_from_widget(widget);
+  GtkWidget *area = score_get_area_from_widget(widget);
 
-	if ( object_selected_change_type(&Score, SIXTEENTH) ) {
-		refresh();
+	if ( object_selected_change_type(score, SIXTEENTH) ) {
+		refresh(area);
 	} else {
-		draw_cursor(cursor_sixteenth_bits, cursor_sixteenth_mask_bits, 15, 29);
+		draw_cursor(area, cursor_sixteenth_bits, cursor_sixteenth_mask_bits, 15, 29);
 		Selection.object_type = SIXTEENTH;
 	}
 
@@ -117,8 +133,9 @@ void object_sixteenth_callback(GtkWidget *widget, GdkEventExpose *event)
 
 void object_thirtysecond_callback(GtkWidget *widget, GdkEventExpose *event)
 {
+  GtkWidget *area = score_get_area_from_widget(widget);
 
-	draw_cursor(ic_thirtysecond_bits, ic_thirtysecond_mask_bits, 22, 22);
+	draw_cursor(area, ic_thirtysecond_bits, ic_thirtysecond_mask_bits, 22, 22);
 
 	/*      Selection.object = THIRTYSECOND; */
 	/*      Selection.object_type = THIRTYSECOND; */
@@ -128,7 +145,8 @@ void object_thirtysecond_callback(GtkWidget *widget, GdkEventExpose *event)
 
 void object_sixtyfourth_callback(GtkWidget *widget, GdkEventExpose *event)
 {
-	draw_cursor(ic_sixtyfourth_bits, ic_sixtyfourth_mask_bits, 22, 22);
+  GtkWidget *area = score_get_area_from_widget(widget);
+	draw_cursor(area, ic_sixtyfourth_bits, ic_sixtyfourth_mask_bits, 22, 22);
 
 	/*      Selection.object = SIXTYFOURTH; */
 	/*      Selection.object_type = SIXTYFOURTH; */
@@ -138,7 +156,9 @@ void object_sixtyfourth_callback(GtkWidget *widget, GdkEventExpose *event)
 
 void object_doublewholerest_callback(GtkWidget *widget, GdkEventExpose *event)
 {
-	draw_cursor(cursor_doublewholerest_bits, cursor_doublewholerest_mask_bits, 20, 10);
+  GtkWidget *area = score_get_area_from_widget(widget);
+
+	draw_cursor(area, cursor_doublewholerest_bits, cursor_doublewholerest_mask_bits, 20, 10);
 
 	/*      Selection.object = DOUBLEWHOLEREST; */
 	Selection.object_type = DOUBLEWHOLEREST;
@@ -148,7 +168,9 @@ void object_doublewholerest_callback(GtkWidget *widget, GdkEventExpose *event)
 
 void object_wholerest_callback(GtkWidget *widget, GdkEventExpose *event)
 {
-	draw_cursor(cursor_wholerest_bits, cursor_wholerest_mask_bits, 20, 6);
+  GtkWidget *area = score_get_area_from_widget(widget);
+
+	draw_cursor(area, cursor_wholerest_bits, cursor_wholerest_mask_bits, 20, 6);
 
 	/*      Selection.object = WHOLEREST; */
 	Selection.object_type = WHOLEREST;
@@ -158,7 +180,9 @@ void object_wholerest_callback(GtkWidget *widget, GdkEventExpose *event)
 
 void object_halfrest_callback(GtkWidget *widget, GdkEventExpose *event)
 {
-	draw_cursor(cursor_halfrest_bits, cursor_halfrest_mask_bits, 20, 6);
+  GtkWidget *area = score_get_area_from_widget(widget);
+
+	draw_cursor(area, cursor_halfrest_bits, cursor_halfrest_mask_bits, 20, 6);
 	
 	Selection.object_type = HALFREST;
 	
@@ -167,8 +191,9 @@ void object_halfrest_callback(GtkWidget *widget, GdkEventExpose *event)
 
 void object_quarterrest_callback(GtkWidget *widget, GdkEventExpose *event)
 {
+  GtkWidget *area = score_get_area_from_widget(widget);
 
-	draw_cursor(cursor_quarterrest_bits, cursor_quarterrest_mask_bits, 8, 20);
+	draw_cursor(area, cursor_quarterrest_bits, cursor_quarterrest_mask_bits, 8, 20);
 
 	Selection.object_type = QUARTERREST;
 	
@@ -180,8 +205,9 @@ void object_quarterrest_callback(GtkWidget *widget, GdkEventExpose *event)
 
 void object_eighthrest_callback(GtkWidget *widget, GdkEventExpose *event)
 {
+  GtkWidget *area = score_get_area_from_widget(widget);
 
-	draw_cursor(cursor_eighthrest_bits, cursor_eighthrest_mask_bits, 7, 13);
+	draw_cursor(area, cursor_eighthrest_bits, cursor_eighthrest_mask_bits, 7, 13);
 	
 	Selection.object_type = EIGHTHREST;
 	
@@ -190,8 +216,9 @@ void object_eighthrest_callback(GtkWidget *widget, GdkEventExpose *event)
 
 void object_sixteenthrest_callback(GtkWidget *widget, GdkEventExpose *event)
 {
+  GtkWidget *area = score_get_area_from_widget(widget);
 
-	draw_cursor(cursor_sixteenthrest_bits, cursor_sixteenthrest_mask_bits, 10, 20);
+	draw_cursor(area, cursor_sixteenthrest_bits, cursor_sixteenthrest_mask_bits, 10, 20);
 
 	Selection.object_type = SIXTEENTHREST;
 
@@ -200,8 +227,9 @@ void object_sixteenthrest_callback(GtkWidget *widget, GdkEventExpose *event)
 
 void object_thirtysecondrest_callback(GtkWidget *widget, GdkEventExpose *event)
 {
+  GtkWidget *area = score_get_area_from_widget(widget);
 
-     draw_cursor(cursor_thirty_secondrest_bits, cursor_thirty_secondrest_mask_bits, 11, 27);
+     draw_cursor(area, cursor_thirty_secondrest_bits, cursor_thirty_secondrest_mask_bits, 11, 27);
 
 /*      Selection.object_type = THIRTYSECONDREST; */
 
@@ -211,8 +239,9 @@ void object_thirtysecondrest_callback(GtkWidget *widget, GdkEventExpose *event)
 
 void object_sixtyfourthrest_callback(GtkWidget *widget, GdkEventExpose *event)
 {
+  GtkWidget *area = score_get_area_from_widget(widget);
 
-     draw_cursor(cursor_sixtyfourthrest_bits, cursor_sixtyfourthrest_mask_bits, 12, 34);
+     draw_cursor(area, cursor_sixtyfourthrest_bits, cursor_sixtyfourthrest_mask_bits, 12, 34);
 
 /*      Selection.object_type = SIXTYFOURTHREST; */
 
@@ -401,7 +430,9 @@ void object_staccato_op_callback(GtkWidget *widget, GdkEventExpose *event)
 
 void object_barline_single_callback(GtkWidget *widget, GdkEventExpose *event)
 {
-	draw_cursor(mouse_bits, mouse_mask_bits, 32, 32);
+  GtkWidget *area = score_get_area_from_widget(widget);
+
+	draw_cursor(area, mouse_bits, mouse_mask_bits, 32, 32);
 
 	Selection.object_type = BARLINE_SINGLE;
 
@@ -409,8 +440,9 @@ void object_barline_single_callback(GtkWidget *widget, GdkEventExpose *event)
 
 void object_barline_double_callback(GtkWidget *widget, GdkEventExpose *event)
 {
+  GtkWidget *area = score_get_area_from_widget(widget);
 
-	draw_cursor(mouse_bits, mouse_mask_bits, 32, 32);
+	draw_cursor(area, mouse_bits, mouse_mask_bits, 32, 32);
 
 	Selection.object_type = BARLINE_DOUBLE;
 
@@ -418,8 +450,9 @@ void object_barline_double_callback(GtkWidget *widget, GdkEventExpose *event)
 
 void object_barline_openrepeat_callback(GtkWidget *widget, GdkEventExpose *event)
 {
+  GtkWidget *area = score_get_area_from_widget(widget);
 
-	draw_cursor(mouse_bits, mouse_mask_bits, 32, 32);
+	draw_cursor(area, mouse_bits, mouse_mask_bits, 32, 32);
 
 	Selection.object_type = BARLINE_OPENREPEAT;
 
@@ -427,8 +460,9 @@ void object_barline_openrepeat_callback(GtkWidget *widget, GdkEventExpose *event
 
 void object_barline_closerepeat_callback(GtkWidget *widget, GdkEventExpose *event)
 {
+  GtkWidget *area = score_get_area_from_widget(widget);
 
-	draw_cursor(mouse_bits, mouse_mask_bits, 32, 32);
+	draw_cursor(area, mouse_bits, mouse_mask_bits, 32, 32);
 
 	Selection.object_type = BARLINE_CLOSEREPEAT;
 
@@ -436,8 +470,9 @@ void object_barline_closerepeat_callback(GtkWidget *widget, GdkEventExpose *even
 
 void object_barline_opencloserepeat_callback(GtkWidget *widget, GdkEventExpose *event)
 {
+  GtkWidget *area = score_get_area_from_widget(widget);
 
-	draw_cursor(mouse_bits, mouse_mask_bits, 32, 32);
+	draw_cursor(area, mouse_bits, mouse_mask_bits, 32, 32);
 
 	Selection.object_type = BARLINE_OPENCLOSEREPEAT;
 
@@ -449,8 +484,9 @@ void object_barline_opencloserepeat_callback(GtkWidget *widget, GdkEventExpose *
  ***/
 void object_pppp_callback(GtkWidget *widget, GdkEventExpose *event)
 {
+  GtkWidget *area = score_get_area_from_widget(widget);
 
-	draw_cursor(mouse_bits, mouse_mask_bits, 32, 32);
+	draw_cursor(area, mouse_bits, mouse_mask_bits, 32, 32);
 
 	Selection.object_type = DYNAMIC_PPPP;
 
@@ -458,8 +494,9 @@ void object_pppp_callback(GtkWidget *widget, GdkEventExpose *event)
 
 void object_ppp_callback(GtkWidget *widget, GdkEventExpose *event)
 {
+  GtkWidget *area = score_get_area_from_widget(widget);
 
-	draw_cursor(mouse_bits, mouse_mask_bits, 32, 32);
+	draw_cursor(area, mouse_bits, mouse_mask_bits, 32, 32);
 
 	Selection.object_type = DYNAMIC_PPP;
 
@@ -467,17 +504,18 @@ void object_ppp_callback(GtkWidget *widget, GdkEventExpose *event)
 
 void object_pp_callback(GtkWidget *widget, GdkEventExpose *event)
 {
+  GtkWidget *area = score_get_area_from_widget(widget);
 
-	draw_cursor(mouse_bits, mouse_mask_bits, 32, 32);
-
+	draw_cursor(area, mouse_bits, mouse_mask_bits, 32, 32);
 	Selection.object_type = DYNAMIC_PP;
 
 }
 
 void object_p_callback(GtkWidget *widget, GdkEventExpose *event)
 {
+  GtkWidget *area = score_get_area_from_widget(widget);
 
-	draw_cursor(mouse_bits, mouse_mask_bits, 32, 32);
+	draw_cursor(area, mouse_bits, mouse_mask_bits, 32, 32);
 
 	Selection.object_type = DYNAMIC_P;
 
@@ -485,8 +523,9 @@ void object_p_callback(GtkWidget *widget, GdkEventExpose *event)
 
 void object_mp_callback(GtkWidget *widget, GdkEventExpose *event)
 {
+  GtkWidget *area = score_get_area_from_widget(widget);
 
-	draw_cursor(mouse_bits, mouse_mask_bits, 32, 32);
+	draw_cursor(area, mouse_bits, mouse_mask_bits, 32, 32);
 
 	Selection.object_type = DYNAMIC_MP;
 
@@ -494,8 +533,9 @@ void object_mp_callback(GtkWidget *widget, GdkEventExpose *event)
 
 void object_mf_callback(GtkWidget *widget, GdkEventExpose *event)
 {
+  GtkWidget *area = score_get_area_from_widget(widget);
 
-	draw_cursor(mouse_bits, mouse_mask_bits, 32, 32);
+	draw_cursor(area, mouse_bits, mouse_mask_bits, 32, 32);
 
 	Selection.object_type = DYNAMIC_MF;
 
@@ -503,8 +543,9 @@ void object_mf_callback(GtkWidget *widget, GdkEventExpose *event)
 
 void object_f_callback(GtkWidget *widget, GdkEventExpose *event)
 {
+  GtkWidget *area = score_get_area_from_widget(widget);
 
-	draw_cursor(mouse_bits, mouse_mask_bits, 32, 32);
+	draw_cursor(area, mouse_bits, mouse_mask_bits, 32, 32);
 
 	Selection.object_type = DYNAMIC_F;
 
@@ -512,8 +553,9 @@ void object_f_callback(GtkWidget *widget, GdkEventExpose *event)
 
 void object_ff_callback(GtkWidget *widget, GdkEventExpose *event)
 {
+  GtkWidget *area = score_get_area_from_widget(widget);
 
-	draw_cursor(mouse_bits, mouse_mask_bits, 32, 32);
+	draw_cursor(area, mouse_bits, mouse_mask_bits, 32, 32);
 
 	Selection.object_type = DYNAMIC_FF;
 
@@ -521,8 +563,9 @@ void object_ff_callback(GtkWidget *widget, GdkEventExpose *event)
 
 void object_fff_callback(GtkWidget *widget, GdkEventExpose *event)
 {
+  GtkWidget *area = score_get_area_from_widget(widget);
 
-	draw_cursor(mouse_bits, mouse_mask_bits, 32, 32);
+	draw_cursor(area, mouse_bits, mouse_mask_bits, 32, 32);
 
 	Selection.object_type = DYNAMIC_FFF;
 

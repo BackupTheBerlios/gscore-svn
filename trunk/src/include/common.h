@@ -30,7 +30,7 @@
 
 void clean_statusbar(void);
 
-void refresh(void);
+void refresh(GtkWidget *area);
 
 Score_t *get_score(void);
 
@@ -38,7 +38,7 @@ Object_t * get_object_list(gint staff, gint index);
 
 void update_statusbar(gchar * context_id, gchar * message);
 
-void score_new_size(void);
+void score_new_size(GtkWidget *area);
 
 void gw_message_error(gchar *message);
 

@@ -31,16 +31,20 @@
 #include "spacings.h"
 #include "staff.h"
 #include "draw.h"
+#include "score.h"
+#include "tie.h"
 
 extern void
-tie_notes_selected(void)
+tie_notes_selected(GtkWidget *widget, GdkEventExpose *event)
 {
 	Staff_t *staff_data;
+	Score_t *score = score_get_from_widget(widget);
+	GtkWidget *area = score_get_area_from_widget(widget);
 
 	GList *listrunner;
 	GList *listrunner_next;
 
-	staff_data = (Staff_t *) g_list_nth_data(Score.Staff_list, get_staff_selected(&Score));
+	staff_data = (Staff_t *) g_list_nth_data(score->Staff_list, get_staff_selected(score));
 
 	listrunner = g_list_first(staff_data->Object_list);
 
@@ -73,16 +77,16 @@ tie_notes_selected(void)
 	g_list_free(listrunner);
 	g_list_free(listrunner_next);
 
-	refresh();
+	refresh(area);
      
 }
 
 extern void
-tie_draw_tie(Staff_t *staff, Object_t *object, guint object_x, gint y, gint ynext)
+tie_draw_tie(GtkWidget *area, Staff_t *staff, Object_t *object, guint object_x, gint y, gint ynext)
 {
 
 
-	draw_staff(2, 5, 5, 5, 40, TRUE, FALSE);
+	draw_staff(area, 2, 5, 5, 5, 40, TRUE, FALSE);
 
 /*         Object_t *object_next; */
 /* 	GdkGC *gc; */
@@ -91,19 +95,19 @@ tie_draw_tie(Staff_t *staff, Object_t *object, guint object_x, gint y, gint ynex
 
 /* 	object_next = (Object_t *)object_get_next(object); */
 
-/* 	gc = gdk_gc_new(Score.area->window); */
+/* 	gc = gdk_gc_new(score->area->window); */
 
 
 /* 	printf("x1:%d, y1:%d, x2:%d, y2:%d\n", staff->start_x + object_x, y, staff->start_x + object_x + Spacings.NotesRests.sa_quarter, ynext); */
 
-/* 	gdk_draw_arc(Score.area->window, gc, */
+/* 	gdk_draw_arc(score->area->window, gc, */
 /* 		     TRUE, staff->start_x + object_x,  y, */
 /* 		     staff->start_x + object_x + Spacings.NotesRests.sa_quarter, ynext, */
 /* 		     30, 30); */
 
-/* 	gdk_draw_line(Score.area->window, gc, 5, 5, 100, 5); */
+/* 	gdk_draw_line(score->area->window, gc, 5, 5, 100, 5); */
 
-/* 	gdk_draw_arc(Score.area->window, gc, */
+/* 	gdk_draw_arc(score->area->window, gc, */
 /* 		     TRUE, 10,  20, */
 /* 		     40, 20, */
 /* 		     30, 30); */
@@ -113,7 +117,7 @@ tie_draw_tie(Staff_t *staff, Object_t *object, guint object_x, gint y, gint ynex
 /* 		{ */
 /* 		case EIGHTH: */
 /* 			for ( thickness = 0; thickness < Spacings.Beams.bt; thickness++ ) { */
-/* 				gdk_draw_line(Score.area->window, gc,  */
+/* 				gdk_draw_line(score->area->window, gc,  */
 /* 					      staff->start_x + object_x + 8, y - thickness, */
 /* 					      staff->start_x + object_x + Spacings.NotesRests.sa_quarter - 2, ynext - thickness); */
 /* 			} */
@@ -121,21 +125,21 @@ tie_draw_tie(Staff_t *staff, Object_t *object, guint object_x, gint y, gint ynex
 /* 			break; */
 /* 		case SIXTEENTH: */
 /* 			for ( thickness = 0; thickness < Spacings.Beams.bt; thickness++ ) { */
-/* 				gdk_draw_line(Score.area->window, gc,  */
+/* 				gdk_draw_line(score->area->window, gc,  */
 /* 					      staff->start_x + object_x + 8, y - 21 - thickness, */
 /* 					      staff->start_x + object_x + Spacings.NotesRests.sa_quarter - 2, ynext - 21 - thickness); */
 /* 			} */
 
 
-/* 			gdk_draw_line(Score.area->window, gc,  */
+/* 			gdk_draw_line(score->area->window, gc,  */
 /* 				      staff->start_x + object_x + 8, y - 21, */
 /* 				      staff->start_x + object_x + 8, y - 25); */
-/* 			gdk_draw_line(Score.area->window, gc,  */
+/* 			gdk_draw_line(score->area->window, gc,  */
 /* 				      staff->start_x + object_x + Spacings.NotesRests.sa_quarter - 2, y - 21, */
 /* 				      staff->start_x + object_x + Spacings.NotesRests.sa_quarter - 2, y - 25); */
 
 /* 			for ( thickness = 0; thickness < Spacings.Beams.bt; thickness++ ) { */
-/* 				gdk_draw_line(Score.area->window, gc,  */
+/* 				gdk_draw_line(score->area->window, gc,  */
 /* 					      staff->start_x + object_x + 8, y - 25 - thickness, */
 /* 					      staff->start_x + object_x + Spacings.NotesRests.sa_quarter - 2, ynext - 25 - thickness); */
 /* 			} */

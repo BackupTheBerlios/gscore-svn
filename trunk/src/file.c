@@ -32,6 +32,7 @@
 #include "plugin.h"
 #include "constants.h"
 #include "create_score.h"
+#include "score.h"
 
 #include "gettext.h"
 
@@ -104,8 +105,8 @@ import_score(GtkButton *button, gpointer user_data)
 {
 	const gchar *filename;
 	const gchar *extension;
-	Display_t *display_save;
-	GtkWidget *area_save;
+/* 	Display_t *display_save; */
+/* 	GtkWidget *area_save; */
 	
 
 	GtkWidget *filechooser;
@@ -113,8 +114,8 @@ import_score(GtkButton *button, gpointer user_data)
 	GscorePlugin *plugin;
 	Score_t     *pi;
 
-	display_save = Score.Display;
-	area_save = Score.area;
+/* 	display_save = Score.Display; */
+/* 	area_save = Score.area; */
 
 	filechooser = (GtkWidget *)user_data;
 
@@ -142,11 +143,12 @@ import_score(GtkButton *button, gpointer user_data)
 
 	plugin->filter->import(&pi, filename, NULL);
 
-        Score = *pi;
-	Score.Display = display_save;
-	Score.area = area_save;
-
-	g_print("Test: %d\n", Score.tempo);
+/*         Score = *pi; */
+/* 	Score.Display = display_save; */
+/* 	Score.area = area_save; */
+	score_create_window(pi);
+	
+	g_print("Test: %d\n", pi->tempo);
 
 }
 
@@ -194,6 +196,7 @@ extern void
 export_score(GtkButton *button, gpointer user_data)
 {
 	GtkWidget *score_window_widget;
+	Score_t *score;
 
 	const gchar *filename;
 
@@ -204,6 +207,8 @@ export_score(GtkButton *button, gpointer user_data)
 
 	GscorePlugin *plugin;
 
+	score = score_get_from_widget(GTK_WIDGET(button));
+	
 	filechooser = (GtkWidget *)user_data;
 
 	filename = gtk_entry_get_text(GTK_ENTRY(GTK_FILE_SELECTION(filechooser)
@@ -228,13 +233,14 @@ export_score(GtkButton *button, gpointer user_data)
 
 /* 	printf("Extension: %s\n", extension); */
 /* 	printf("plugin name = %s\n", plugin->info->name); */
-	plugin->filter->export(&Score, filename, NULL);
+	plugin->filter->export(score, filename, NULL);
 
 
 
 	/* Set the title of the score window */
-	score_window_widget = glade_xml_get_widget(gladexml, "score_window");
-
+/* 	score_window_widget = glade_xml_get_widget(gladexml, "score_window"); */
+	score_window_widget = gtk_widget_get_toplevel(GTK_WIDGET(button));
+	
 /* 	filename = gtk_entry_get_text(GTK_ENTRY(GTK_FILE_SELECTION(filechooser)->selection_entry)); */
 
 	gtk_window_set_title(GTK_WINDOW(score_window_widget), filename);

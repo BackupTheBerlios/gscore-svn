@@ -27,6 +27,7 @@
 #include "spacings.h"
 #include "constants.h"
 #include "common.h"
+#include "score.h"
 
 Spacings_t Spacings;
 
@@ -229,6 +230,7 @@ extern
 void update_spacings_from_spinbuttons(void)
 {
 	GtkWidget *widget;
+	GtkWidget *area;
 
 	/* Barlines */
 	widget = glade_xml_get_widget(gladexml, "spcg_bl_hlt");
@@ -307,7 +309,9 @@ void update_spacings_from_spinbuttons(void)
 	widget = glade_xml_get_widget(gladexml, "spcg_t_ypfm");
 	Spacings.Tempo.ypfm  = gtk_spin_button_get_value(GTK_SPIN_BUTTON(widget));
 
-	refresh();
+	area = score_get_area_from_widget(widget);
+	
+	refresh(area);
 }
 
 

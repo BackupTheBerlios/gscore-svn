@@ -29,17 +29,17 @@ gint set_selection_origin(GtkWidget *widget, GdkEventButton *event);
 
 gint do_selection(gint x_root, gint y_root, gint x, gint y);
 
-gint highlight_selection(gdouble x_origin, gdouble y_origin, gdouble x, gdouble y);
+gint highlight_selection(Score_t *score, gdouble x_origin, gdouble y_origin, gdouble x, gdouble y);
 
-gint undo_selection(void);
+gint undo_selection(Score_t *score);
 
 gint get_selection_object_type(gint x, gint y, gint staff);
 
 gint get_selection_id(gint x, gint y, gint staff);
 
-gint get_selection_x_selection(gint x, gint y, gint staff);
+gdouble get_selection_x_selection(gint x, gint y, gint staff);
 
-gint get_selection_y_selection(gint x, gint y, gint staff);
+gdouble get_selection_y_selection(gint x, gint y, gint staff);
 
 gboolean get_selection_with_sharp(gint x, gint y, gint staff);
 

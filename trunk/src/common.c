@@ -26,11 +26,13 @@
 
 #include "gscore.h"
 #include "macros.h"
+#include "score.h"
+#include "common.h"
 
-extern Score_t *get_score(void)
-{
-     return &Score;
-}
+/* extern Score_t *get_score(void) */
+/* { */
+/*      return &Score; */
+/* } */
 
 /* void clean_statusbar(void) */
 /* { */
@@ -44,10 +46,10 @@ extern Score_t *get_score(void)
 /* } */
 
 
-void refresh(void)
+void refresh(GtkWidget *area)
 {
 
-	gtk_widget_queue_draw(GTK_WIDGET(Score.area));
+	gtk_widget_queue_draw(area);
 
   /* when you change the size of the drawingarea, a refresh is done */
 /*   gtk_drawing_area_size(Score.area, Score.Staff[Score.nb_staff].extremity_end_x, */
@@ -75,14 +77,15 @@ void refresh(void)
 /*   return (Object_t *)object_returned; */
 /* } */
 
-void score_new_size(void)
+void score_new_size(GtkWidget *area)
 {
-
+  Score_t *score = score_get_from_widget(area);
+  
 /*   if (Score.newsize == TRUE) */
 /*     { */
-      gtk_widget_set_size_request(GTK_WIDGET(Score.area),
-                                  Score.width,
-                                  Score.height);
+      gtk_widget_set_size_request(area,
+                                  score->width,
+                                  score->height);
 /*       Score.newsize = FALSE; */
 /*     } */
 

@@ -1561,7 +1561,6 @@
 </widget>
 
 <widget class="GtkWindow" id="score_window">
-  <property name="visible">True</property>
   <property name="title" translatable="yes">Unsaved Score</property>
   <property name="type">GTK_WINDOW_TOPLEVEL</property>
   <property name="window_position">GTK_WIN_POS_CENTER</property>
@@ -1575,6 +1574,7 @@
   <property name="skip_pager_hint">False</property>
   <property name="type_hint">GDK_WINDOW_TYPE_HINT_NORMAL</property>
   <property name="gravity">GDK_GRAVITY_NORTH_WEST</property>
+  <signal name="set_focus" handler="score_activate_callback" after="yes" last_modification_time="Sun, 06 Feb 2005 18:46:21 GMT"/>
 
   <child>
     <widget class="GtkVBox" id="vbox2">
@@ -2428,6 +2428,7 @@
 		<widget class="GtkDrawingArea" id="sw_score_da">
 		  <property name="visible">True</property>
 		  <property name="events">GDK_POINTER_MOTION_MASK | GDK_BUTTON1_MOTION_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+		  <signal name="motion_notify_event" handler="mouse_motion_event" object="sw_score_da" last_modification_time="Sun, 06 Feb 2005 15:38:59 GMT"/>
 		</widget>
 	      </child>
 	    </widget>

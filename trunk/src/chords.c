@@ -27,6 +27,7 @@
 #include "position.h"
 #include "constants.h"
 #include "objects.h"
+#include "chords.h"
 
 guint make_chord(Staff_t *staff, 
                  gulong objectid, gulong group_id, gint pitch, 

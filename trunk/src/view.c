@@ -25,189 +25,217 @@
 
 #include "gscore.h"
 #include "common.h"
-
-
+#include "score.h"
+#include "view.h"
 
 extern void
-on_view_measure_number_activate(void)
+on_view_measure_number_activate(GtkWidget *widget)
 {
 
-        GtkWidget *widget;
+/*         GtkWidget *widget; */
+	Display_t *display;
+	GtkWidget *area;
+	
 
-
-	widget =  glade_xml_get_widget (gladexml, "view_measure_number");
-
+/* 	widget =  glade_xml_get_widget (gladexml, "view_measure_number"); */
+	display = score_get_display_from_widget(widget);
+	area = score_get_area_from_widget(widget);
+	
         if ( gtk_check_menu_item_get_active((GtkCheckMenuItem *)widget) ) {
-                Score.Display->measure_number = TRUE;
-		refresh();
+                display->measure_number = TRUE;
+		refresh(area);
 	} else {
-                Score.Display->measure_number = FALSE;
-		refresh();
+                display->measure_number = FALSE;
+		refresh(area);
 	}
 
 }
 
 extern void
-on_view_instruments_activate(void)
+on_view_instruments_activate(GtkWidget *widget)
 {
 
-        GtkWidget *widget;
+/*         GtkWidget *widget; */
+	Display_t *display;
+	GtkWidget *area;
 
-
-	widget =  glade_xml_get_widget (gladexml, "view_instruments");
-
-        if ( gtk_check_menu_item_get_active((GtkCheckMenuItem *)widget) ) {
-                Score.Display->instruments = TRUE;
-		refresh();
+/* 	widget =  glade_xml_get_widget (gladexml, "view_instruments"); */
+	display = score_get_display_from_widget(widget);
+	area = score_get_area_from_widget(widget);
+	
+	if ( gtk_check_menu_item_get_active((GtkCheckMenuItem *)widget) ) {
+                display->instruments = TRUE;
+		refresh(area);
 	} else {
-                Score.Display->instruments = FALSE;
-		refresh();
+                display->instruments = FALSE;
+		refresh(area);
 	}
 
 }
 
 
 extern void
-on_view_tempo_activate(void)
+on_view_tempo_activate(GtkWidget *widget)
 {
 
-        GtkWidget *widget;
+/*         GtkWidget *widget; */
+	Display_t *display;
+	GtkWidget *area;
 
-
-	widget =  glade_xml_get_widget (gladexml, "view_tempo");
-
+/* 	widget =  glade_xml_get_widget (gladexml, "view_tempo"); */
+	display = score_get_display_from_widget(widget);
+	area = score_get_area_from_widget(widget);
+	
         if ( gtk_check_menu_item_get_active((GtkCheckMenuItem *)widget) ) {
-                Score.Display->tempo = TRUE;
-		refresh();
+                display->tempo = TRUE;
+		refresh(area);
 	} else {
-                Score.Display->tempo = FALSE;
-		refresh();
+                display->tempo = FALSE;
+		refresh(area);
 	}
 
 }
 
 extern void
-on_view_clefs_activate(void)
+on_view_clefs_activate(GtkWidget *widget)
 {
 
-        GtkWidget *widget;
+/*         GtkWidget *widget; */
+	Display_t *display;
+	GtkWidget *area;
 
-
-	widget =  glade_xml_get_widget (gladexml, "view_clefs");
+/* 	widget =  glade_xml_get_widget (gladexml, "view_clefs"); */
+	display = score_get_display_from_widget(widget);
+	area = score_get_area_from_widget(widget);
 
         if ( gtk_check_menu_item_get_active((GtkCheckMenuItem *)widget) ) {
-                Score.Display->clefs = TRUE;
-		refresh();
+                display->clefs = TRUE;
+		refresh(area);
 	} else {
-                Score.Display->clefs = FALSE;
-		refresh();
+                display->clefs = FALSE;
+		refresh(area);
 	}
 
 }
 
 extern void
-on_view_score_expressions_activate(void)
+on_view_score_expressions_activate(GtkWidget *widget)
 {
 
-        GtkWidget *widget;
-
-
-	widget =  glade_xml_get_widget (gladexml, "view_score_expressions");
+/*         GtkWidget *widget; */
+	Display_t *display;
+	GtkWidget *area;
+	
+/* 	widget =  glade_xml_get_widget (gladexml, "view_score_expressions"); */
+	display = score_get_display_from_widget(widget);
+	area = score_get_area_from_widget(widget);
 
         if ( gtk_check_menu_item_get_active((GtkCheckMenuItem *)widget) ) {
-                Score.Display->score_expressions = TRUE;
-		refresh();
+                display->score_expressions = TRUE;
+		refresh(area);
 	} else {
-                Score.Display->score_expressions = FALSE;
-		refresh();
+                display->score_expressions = FALSE;
+		refresh(area);
 	}
 
 }
 
 extern void
-on_view_barlines_activate(void)
+on_view_barlines_activate(GtkWidget *widget)
 {
 
-        GtkWidget *widget;
-
-
-	widget =  glade_xml_get_widget (gladexml, "view_barlines");
-
+/*         GtkWidget *widget; */
+	Display_t *display;
+	GtkWidget *area;
+	
+/* 	widget =  glade_xml_get_widget (gladexml, "view_barlines"); */
+	display = score_get_display_from_widget(widget);
+	area = score_get_area_from_widget(widget);
+	
         if ( gtk_check_menu_item_get_active((GtkCheckMenuItem *)widget) ) {
-                Score.Display->barlines = TRUE;
-		refresh();
+                display->barlines = TRUE;
+		refresh(area);
 	} else {
-                Score.Display->barlines = FALSE;
-		refresh();
+                display->barlines = FALSE;
+		refresh(area);
 	}
 
 }
 
 extern void
-on_view_ending_bar_activate(void)
+on_view_ending_bar_activate(GtkWidget *widget)
 {
 
-        GtkWidget *widget;
-
-
-	widget =  glade_xml_get_widget (gladexml, "view_ending_bar");
-
+/*         GtkWidget *widget; */
+	Display_t *display;
+	GtkWidget *area;
+	
+/* 	widget =  glade_xml_get_widget (gladexml, "view_ending_bar"); */
+	display = score_get_display_from_widget(widget);
+	area = score_get_area_from_widget(widget);
+	
         if ( gtk_check_menu_item_get_active((GtkCheckMenuItem *)widget) ) {
-                Score.Display->ending_bar = TRUE;
-		refresh();
+                display->ending_bar = TRUE;
+		refresh(area);
 	} else {
-                Score.Display->ending_bar = FALSE;
-		refresh();
+                display->ending_bar = FALSE;
+		refresh(area);
 	}
 
 }
 
 extern void
-on_view_key_signature_activate(void)
+on_view_key_signature_activate(GtkWidget *widget)
 {
 
-        GtkWidget *widget;
-
-
-	widget =  glade_xml_get_widget (gladexml, "view_key_signature");
-
+/*         GtkWidget *widget; */
+	Display_t *display;
+	GtkWidget *area;
+	
+/* 	widget =  glade_xml_get_widget (gladexml, "view_key_signature"); */
+	display = score_get_display_from_widget(widget);
+	area = score_get_area_from_widget(widget);
+	
         if ( gtk_check_menu_item_get_active((GtkCheckMenuItem *)widget) ) {
-                Score.Display->key_signature = TRUE;
-		refresh();
+                display->key_signature = TRUE;
+		refresh(area);
 	} else {
-                Score.Display->key_signature = FALSE;
-		refresh();
+                display->key_signature = FALSE;
+		refresh(area);
 	}
 
 }
 
 extern void
-on_view_time_signature_activate(void)
+on_view_time_signature_activate(GtkWidget *widget)
 {
 
-        GtkWidget *widget;
-
-
-	widget =  glade_xml_get_widget (gladexml, "view_time_signature");
-
+/*         GtkWidget *widget; */
+	Display_t *display;
+	GtkWidget *area;
+	
+/* 	widget =  glade_xml_get_widget (gladexml, "view_time_signature"); */
+	display = score_get_display_from_widget(widget);
+	area = score_get_area_from_widget(widget);
+	
         if ( gtk_check_menu_item_get_active((GtkCheckMenuItem *)widget) ) {
-                Score.Display->time_signature = TRUE;
-		refresh();
+                display->time_signature = TRUE;
+		refresh(area);
 	} else {
-                Score.Display->time_signature = FALSE;
-		refresh();
+                display->time_signature = FALSE;
+		refresh(area);
 	}
 
 }
 
 extern void
-on_sw_score_headers_menuitem_activate(void)
+on_sw_score_headers_menuitem_activate(GtkWidget *widget)
 {
 
-	GtkWidget *widget;
+/* 	GtkWidget *widget; */
 
 
-	widget = glade_xml_get_widget(gladexml, "sw_score_headers_da");
+/* 	widget = glade_xml_get_widget(gladexml, "sw_score_headers_da"); */
 
 	gtk_widget_show(widget);
 
@@ -269,10 +297,10 @@ on_sw_score_headers_menuitem_activate(void)
 /* view_measures_number(gpointer callback_data, guint callback_action, GtkWidget *widget) */
 /* { */
 
-/* /\*      if (Score.Staff[get_staff_selected()].View.measures_number == TRUE) *\/ */
-/* /\*           Score.Staff[get_staff_selected()].View.measures_number = FALSE; *\/ */
+/* /\*      if (score->Staff[get_staff_selected()].View.measures_number == TRUE) *\/ */
+/* /\*           score->Staff[get_staff_selected()].View.measures_number = FALSE; *\/ */
 /* /\*      else *\/ */
-/* /\*           Score.Staff[get_staff_selected()].View.measures_number = TRUE; *\/ */
+/* /\*           score->Staff[get_staff_selected()].View.measures_number = TRUE; *\/ */
 
 /*      refresh(); */
 

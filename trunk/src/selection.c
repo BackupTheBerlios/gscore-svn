@@ -28,101 +28,105 @@
 #include "draw.h"
 #include "spacings.h"
 #include "staff.h"
+#include "score.h"
+#include "selection.h"
 
-void set_selection_origin(GtkWidget *widget, GdkEventButton *event)
+gint set_selection_origin(GtkWidget *widget, GdkEventButton *event)
 {
-	
+
+  Score_selection_t *selection = score_get_selection_from_widget(widget);
+  
         gdouble x = event->x;
         gdouble y = event->y;
 /*         gint state = event->state; */
 
-        Selection.x_origin = x;
-        Selection.y_origin = y;
-
+        selection->x_origin = x;
+        selection->y_origin = y;
+	return 0;
 }
 
 /* extern  */
 /* void set_selection(selected_e selection) */
 /* { */
-/* 	Selection.selected = selection; */
+/* 	selection->selected = selection; */
 /* } */
 
 /* extern */
 /* selected_e get_selection(void) */
 /* { */
-/* 	return Selection.selected; */
+/* 	return selection->selected; */
 /* } */
 
 /* extern  */
 /* void set_selection_display(display_e selection) */
 /* { */
-/* 	Selection.display = selection; */
+/* 	selection->display = selection; */
 /* } */
 
 /* extern */
 /* display_e get_selection_display(void) */
 /* { */
-/* 	return Selection.display; */
+/* 	return selection->display; */
 /* } */
 
 /* extern  */
 /* void set_selection_note(note_e selection) */
 /* { */
-/* 	Selection.note = selection; */
+/* 	selection->note = selection; */
 /* } */
 
 /* extern */
 /* note_e get_selection_note(void) */
 /* { */
-/* 	return Selection.note; */
+/* 	return selection->note; */
 /* } */
 
 /* extern  */
 /* void set_selection_type(type_e selection) */
 /* { */
-/* 	Selection.type = selection; */
+/* 	selection->type = selection; */
 /* } */
 
 /* extern */
 /* type_e get_selection_type(void) */
 /* { */
-/* 	return Selection.type; */
+/* 	return selection->type; */
 /* } */
 
 /* extern  */
 /* void set_selection_accidentals(accidentals_e selection) */
 /* { */
-/* 	Selection.accidentals = selection; */
+/* 	selection->accidentals = selection; */
 /* } */
 
 /* extern */
 /* accidentals_e get_selection_accidentals(void) */
 /* { */
-/* 	return Selection.accidentals; */
+/* 	return selection->accidentals; */
 /* } */
 
 /* extern  */
 /* void set_selection_barline(barline_e selection) */
 /* { */
-/* 	Selection.barline = selection; */
+/* 	selection->barline = selection; */
 /* } */
 
 /* extern */
 /* barline_e get_selection_barline(void) */
 /* { */
-/* 	return Selection.barline; */
+/* 	return selection->barline; */
 /* } */
 
 /* extern  */
 /* void set_selection_object(object_e selection) */
 /* { */
-/* 	Selection.object = selection; */
+/* 	selection->object = selection; */
 /* } */
 
 /* extern */
 /* object_e get_selection_object(void) */
 /* { */
-/* 	return Selection.object; */
+/* 	return selection->object; */
 /* } */
  
 
@@ -130,20 +134,20 @@ void set_selection_origin(GtkWidget *widget, GdkEventButton *event)
 /* set_selection_origin(GtkWidget *widget, GdkEventButton *event) */
 /* { */
 
-/*      if ((Selection.object == CURSOR) || (Selection.note == CURSOR)) */
+/*      if ((selection->object == CURSOR) || (selection->note == CURSOR)) */
 /*      { */
-/*           Selection.x_origin = event->x; */
-/*           Selection.y_origin = event->y; */
+/*           selection->x_origin = event->x; */
+/*           selection->y_origin = event->y; */
 /*      } */
 
 /*      if (DEBUG == 1) */
-/* 	     g_print("Selection.x (origin) = %f\nSelection.y (origin) = %f\n", Selection.x_origin, Selection.y_origin); */
+/* 	     g_print("selection->x (origin) = %f\nselection->y (origin) = %f\n", selection->x_origin, selection->y_origin); */
 
 /*      return 0; */
 /* } */
 
 extern gint
-highlight_selection(gdouble x_origin, gdouble y_origin, gdouble x, gdouble y)
+highlight_selection(Score_t *score, gdouble x_origin, gdouble y_origin, gdouble x, gdouble y)
 {
 
 	GList *listrunner;
@@ -152,7 +156,7 @@ highlight_selection(gdouble x_origin, gdouble y_origin, gdouble x, gdouble y)
 	gdouble start_x = 0;
 	gdouble object_x = 0;
 
-        staff = g_list_nth_data(Score.Staff_list, get_staff_selected(&Score));
+        staff = g_list_nth_data(score->Staff_list, get_staff_selected(score));
 
 	/* Parsing Objects structure */
 	listrunner = g_list_first(staff->Object_list);
@@ -319,13 +323,13 @@ highlight_selection(gdouble x_origin, gdouble y_origin, gdouble x, gdouble y)
 
 
 extern gint
-undo_selection(void)
+undo_selection(Score_t *score)
 {
 
 	GList *listrunner;
 	Staff_t *staff;
 
-        staff = g_list_nth_data(Score.Staff_list, get_staff_selected(&Score));
+        staff = g_list_nth_data(score->Staff_list, get_staff_selected(score));
 
         if (staff) {
 	/* Parsing Objects structure */
@@ -354,7 +358,7 @@ gint get_selection_object_type(gint x, gint y, gint staff)
 /*      GList *tmp_list; */
      
 
-/*      for ( tmp_list = Score.Staff[staff].Object_list ; tmp_list ; tmp_list = g_list_next(tmp_list)) */
+/*      for ( tmp_list = score->Staff[staff].Object_list ; tmp_list ; tmp_list = g_list_next(tmp_list)) */
 /*      { */
 /*          Object_t *object; */
 /*          gint i = 0; */
@@ -390,7 +394,7 @@ gint get_selection_id(gint x, gint y, gint staff)
 /*      GList *tmp_list; */
      
 
-/*      for ( tmp_list = Score.Staff[staff].Object_list ; tmp_list ; tmp_list = g_list_next(tmp_list)) */
+/*      for ( tmp_list = score->Staff[staff].Object_list ; tmp_list ; tmp_list = g_list_next(tmp_list)) */
 /*      { */
 /*          Object_t *object; */
 /*          gint i = 0; */
@@ -426,7 +430,7 @@ gdouble get_selection_x_selection(gint x, gint y, gint staff)
 /*      GList *tmp_list; */
      
 
-/*      for ( tmp_list = Score.Staff[staff].Object_list ; tmp_list ; tmp_list = g_list_next(tmp_list)) */
+/*      for ( tmp_list = score->Staff[staff].Object_list ; tmp_list ; tmp_list = g_list_next(tmp_list)) */
 /*      { */
 /*          Object_t *object; */
 /*          gint i = 0; */
@@ -463,7 +467,7 @@ gdouble get_selection_y_selection(gint x, gint y, gint staff)
 /*      GList *tmp_list; */
      
 
-/*      for ( tmp_list = Score.Staff[staff].Object_list ; tmp_list ; tmp_list = g_list_next(tmp_list)) */
+/*      for ( tmp_list = score->Staff[staff].Object_list ; tmp_list ; tmp_list = g_list_next(tmp_list)) */
 /*      { */
 /*          Object_t *object; */
 /*          gint i = 0; */
@@ -500,7 +504,7 @@ gboolean get_selection_with_sharp(gint x, gint y, gint staff)
 /*      GList *tmp_list; */
      
 
-/*      for ( tmp_list = Score.Staff[staff].Object_list ; tmp_list ; tmp_list = g_list_next(tmp_list)) */
+/*      for ( tmp_list = score->Staff[staff].Object_list ; tmp_list ; tmp_list = g_list_next(tmp_list)) */
 /*      { */
 /*          Object_t *object; */
 /*          gint i = 0; */
@@ -537,7 +541,7 @@ gboolean get_selection_with_flat(gint x, gint y, gint staff)
 /*      GList *tmp_list; */
      
 
-/*      for ( tmp_list = Score.Staff[staff].Object_list ; tmp_list ; tmp_list = g_list_next(tmp_list)) */
+/*      for ( tmp_list = score->Staff[staff].Object_list ; tmp_list ; tmp_list = g_list_next(tmp_list)) */
 /*      { */
 /*          Object_t *object; */
 /*          gint i = 0; */
@@ -574,7 +578,7 @@ gboolean get_selection_with_natural(gint x, gint y, gint staff)
 /*      GList *tmp_list; */
      
 
-/*      for ( tmp_list = Score.Staff[staff].Object_list ; tmp_list ; tmp_list = g_list_next(tmp_list)) */
+/*      for ( tmp_list = score->Staff[staff].Object_list ; tmp_list ; tmp_list = g_list_next(tmp_list)) */
 /*      { */
 /*          Object_t *object; */
 /*          gint i = 0; */

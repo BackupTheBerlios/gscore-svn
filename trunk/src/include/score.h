@@ -21,7 +21,10 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
+#ifndef _SCORE_H_
+#define _SCORE_H_
 
+#include "key_cursor.h"
 
 void set_tempo(void);
 
@@ -47,8 +50,20 @@ void on_set_header_activate_default(void);
 
 void score_set_header_ok(void);
 
+Score_t *score_get_from_widget(GtkWidget *widget);
+
+GtkWidget *score_get_area_from_widget(GtkWidget *widget);
+
+Display_t *score_get_display_from_widget(GtkWidget *widget);
+
+Score_selection_t *score_get_selection_from_widget(GtkWidget *widget);
+
+KeyCursor_t *score_get_cursor_from_widget(GtkWidget *widget);
+
+void score_create_window(Score_t *score);
 
 /*
 void keybindings (gpointer callback_data,
 		  guint callback_action, GtkWidget * widget);
 */
+#endif

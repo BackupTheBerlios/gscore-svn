@@ -24,16 +24,16 @@
 #ifndef _DRAW_BARLINE_H_
 #define _DRAW_BARLINE_H_
 
-gint draw_barline_single(Staff_t *staff, gint x);
+gint draw_barline_single(GtkWidget *area, Staff_t *staff, gint x);
 
-gint draw_barline_double(Staff_t *staff, gint x);
+gint draw_barline_double(GtkWidget *area, Staff_t *staff, gint x);
 
-gint draw_barline_openrepeat(Staff_t *staff, gint x);
+gint draw_barline_openrepeat(GtkWidget *area, Staff_t *staff, gint x);
 
-gint draw_barline_closerepeat(Staff_t *staff, gint x);
+gint draw_barline_closerepeat(GtkWidget *area, Staff_t *staff, gint x);
 
-gint draw_barline_opencloserepeat(Staff_t *staff, gint x);
+gint draw_barline_opencloserepeat(GtkWidget *area, Staff_t *staff, gint x);
 
-gint draw_barline_endstaff(Staff_t *staff);
+gint draw_barline_endstaff(GtkWidget *area, Staff_t *staff);
 
 #endif

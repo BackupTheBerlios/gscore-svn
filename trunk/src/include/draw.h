@@ -25,34 +25,34 @@
 #define _DRAW_H_
 
 
-gint draw_cursor(const gchar *xbm_file, const gchar *mask_xbm_file, gint width, gint height);
+gint draw_cursor(GtkWidget *area, const gchar *xbm_file, const gchar *mask_xbm_file, gint width, gint height);
 
 gint x_space(GList *list, gint index);
 
 gint print_objects(GList *list);
 
-gint draw_note(gchar *file, gboolean selected, gint x, gint y, gint line_x1, gint line_y1,
+gint draw_note(GtkWidget *area, gchar *file, gboolean selected, gint x, gint y, gint line_x1, gint line_y1,
                gint line_x2, gint line_y2);
 
 gint draw_pixmap(GdkWindow *window, gchar *file, gdouble x, gdouble y);
 
-gint draw_point(gint x, gint y);
+gint draw_point(GtkWidget *area, gint x, gint y);
 
 gint average(gint staff);
 
 gint index_object(gint staff, gint x);
 
-gint draw_staff(guint16 nb_lines, gdouble space_btwn_line, gdouble x1, gdouble y1, gdouble x2, gboolean line, gboolean selected);
+gint draw_staff(GtkWidget *area, guint16 nb_lines, gdouble space_btwn_line, gdouble x1, gdouble y1, gdouble x2, gboolean line, gboolean selected);
 
-gint draw_eighth_up(gboolean selected, gint x, gint y);
+void draw_eighth_up(GtkWidget *area, gboolean selected, gint x, gint y);
 
-gint draw_eighth_down(gboolean selected, gint x, gint y);
+void draw_eighth_down(GtkWidget *area, gboolean selected, gint x, gint y);
 
-gint draw_sixteenth_up(gboolean selected, gint x, gint y);
+void draw_sixteenth_up(GtkWidget *area, gboolean selected, gint x, gint y);
 
-gint draw_sixteenth_down(gboolean selected, gint x, gint y);
+void draw_sixteenth_down(GtkWidget *area, gboolean selected, gint x, gint y);
 
-gint draw_red_rectangle(gint x1, gint y1, gint x2, gint y2);
+void draw_red_rectangle(GtkWidget *area, gint x1, gint y1, gint x2, gint y2);
 
 void draw_tie(gint x, gint y, gint width, gint heigth);
 
@@ -68,10 +68,10 @@ gint draw_selection(gint x_origin, gint y_origin, gint x, gint y);
 
 gboolean colorize_drawingarea(GtkWidget *drawingarea, guint red, guint green, guint blue);
 
-void draw_line(gint red, gint green, gint blue, gint x1, gint y1, gint x2, gint y2);
+void draw_line(GtkWidget *area, gint red, gint green, gint blue, gint x1, gint y1, gint x2, gint y2);
 
-void draw_page_limit(gint x);
+void draw_page_limit(GtkWidget *area, gint x);
 
-void draw_staff_extension(Staff_t *staff, gint position, gdouble x);
+void draw_staff_extension(GtkWidget *area, Staff_t *staff, gint position, gdouble x);
 
 #endif
