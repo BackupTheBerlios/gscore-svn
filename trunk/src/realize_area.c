@@ -612,9 +612,6 @@ realize_object(GtkWidget *area, Staff_t *staff, Object_t *object, gboolean displ
 	}
 
 
-        g_print("**** Staff->start_x = %d, object_x = %d\n", staff->start_x, object_x);
-
-
 	switch(object->type) {
 
 		/* NOTES */

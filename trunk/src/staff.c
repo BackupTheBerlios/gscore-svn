@@ -73,8 +73,8 @@ gboolean create_staff(Score_t *score, guint8 nb_lines, guint8 space_btw_lines,
                       gdouble extremity_begin_x, gdouble extremity_begin_y)
 {
 
-        g_print("*** Staff Creation:\n\t%d lines\n\t%dpixels between lines\n\t%f.0 extremity_begin_x\n\t%f.0 extremity_begin_y\n***",
-                nb_lines, space_btw_lines, extremity_begin_x, extremity_begin_y);
+/*         g_print("*** Staff Creation:\n\t%d lines\n\t%dpixels between lines\n\t%f.0 extremity_begin_x\n\t%f.0 extremity_begin_y\n***", */
+/*                 nb_lines, space_btw_lines, extremity_begin_x, extremity_begin_y); */
 
         score->Staff = g_malloc(sizeof(Staff_t));
  
