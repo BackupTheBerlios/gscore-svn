@@ -32,7 +32,7 @@ localedir = $(libdir)/locale
 gnulocaledir = $(datadir)/locale
 gettextsrcdir = $(datadir)/glib-2.0/gettext/po
 subdir = po
-install_sh = /home/toady/devel/gscore/svn/gscore/trunk/install-sh
+install_sh = /home/toady/devel/svn/gscore/trunk/install-sh
 mkdir_p = mkdir -p --
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 
