@@ -46,6 +46,7 @@ score_key_press_event(GtkWidget *widget, GdkEventKey *event)
 	GtkWidget *gladewidget;
 	GtkAdjustment *adj;
 /* 	Object_t *object; */
+        Staff_t *staffobj;
 	Object_t *tmpobj;
 
 	switch (event->keyval) {
@@ -73,10 +74,12 @@ score_key_press_event(GtkWidget *widget, GdkEventKey *event)
 		case BARLINE_CLOSEREPEAT:
 		case BARLINE_OPENCLOSEREPEAT:
 			add_object(get_staff_selected(), 
-				   Selection.object_type, Selection.accidentals, Selection.nature, 0, 
+				   Selection.object_type, 
+                                   Selection.accidentals, Selection.nature, 0, 
 				   0, 0, 0, 0, 0, 0, KeyCursor.position, 0, FALSE);
 
-			gtk_widget_set_size_request(GTK_WIDGET(Score.area), Score.width, Score.height);
+			gtk_widget_set_size_request(GTK_WIDGET(Score.area), 
+                                                    Score.width, Score.height);
 
 			gladewidget = glade_xml_get_widget(gladexml, "sw_score_sw");
 			adj = gtk_scrolled_window_get_hadjustment(GTK_SCROLLED_WINDOW(gladewidget));
@@ -95,7 +98,8 @@ score_key_press_event(GtkWidget *widget, GdkEventKey *event)
 		case DYNAMIC_FFF:
 			add_object(get_staff_selected(), 
 				   Selection.object_type, 0, 0, 0,
-				   staff_get_current_x(get_staff_selected()), 0, 0, 0, 0, 0, KeyCursor.position, 0, FALSE);
+				   staff_get_current_x(get_staff_selected()), 
+                                   0, 0, 0, 0, 0, KeyCursor.position, 0, FALSE);
 			break;
 		}
 
@@ -116,9 +120,21 @@ score_key_press_event(GtkWidget *widget, GdkEventKey *event)
 		refresh();
 		break;
 	case GDK_Left:
-		tmpobj = (Object_t *)object_get_left(KeyCursor.x_returned);
+                tmpobj = (Object_t *) object_get_left((Staff_t *)g_list_nth_data(Score.Staff_list, get_staff_selected()), KeyCursor.x_returned);
 
-/* 		printf("left id = %d\n", tmpobj->id); */
+                if ( ! tmpobj ) { 
+                        printf("There's no note on the left!\n");
+                        return;
+                }
+
+/* 		tmpobj = (Object_t *)object_get_left(KeyCursor.x_returned); */
+                staffobj = (Staff_t *)g_list_nth_data(Score.Staff_list, get_staff_selected());
+                
+                staffobj->current_x -= Spacings.NotesRests.sa_quarter / 2;
+
+                refresh();
+
+		printf("left id = %d\n", tmpobj->id);
 
 /* 		printf("Object id = %d\n", object->id); */
 		break;

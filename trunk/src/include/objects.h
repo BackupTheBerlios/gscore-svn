@@ -36,7 +36,7 @@ Object_t *object_get_next(Object_t *object);
 
 Object_t *object_get_previous(Object_t *object);
 
-Object_t *object_get_left(gdouble x);
+Object_t *object_get_left(Staff_t *staff, gdouble x);
 
 void get_object_properties(GtkWidget *event_box, GdkEventButton *event, gpointer data);
 

@@ -25,7 +25,6 @@
 
 #include "gscore.h"
 
-
 void print_objects_staff(gint staff)
 {
         Staff_t *staff_data;
@@ -35,8 +34,7 @@ void print_objects_staff(gint staff)
         staff_data = g_list_nth_data(Score.Staff_list, staff);
 
         listrunner = g_list_first(staff_data->Object_list);
-        while (listrunner)
-                {
+        while (listrunner) {
                         Object_t *object_data;
 
                         object_data = (Object_t *)listrunner->data;
@@ -45,12 +43,6 @@ void print_objects_staff(gint staff)
                         printf("Object->type = %d\n", object_data->type);
                         printf("Object->nature = %d\n", object_data->nature);
                         printf("Object->accidentals = %d\n", object_data->accidentals);
-                        printf("Object->x = %f\n", object_data->x);
-                        printf("Object->y = %f\n", object_data->y);
-                        printf("Object->x2 = %f\n", object_data->x2);
-                        printf("Object->y2 = %f\n", object_data->y2);
-                        printf("Object->x3 = %f\n", object_data->x3);
-                        printf("Object->y3 = %f\n", object_data->y3);
                         printf("Object->pitch = %d\n", object_data->pitch);
                         printf("Object->tab_number = %d\n", object_data->tab_number);
                         printf("Object->is_selected = %d\n", object_data->is_selected);

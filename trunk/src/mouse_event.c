@@ -20,7 +20,6 @@ gboolean set_max_x = FALSE;
 gboolean set_max_y = FALSE;
 
 
-
 gboolean 
 mouse_button_release_event(GtkWidget *widget, GdkEventButton *event, gpointer user_data)
 {

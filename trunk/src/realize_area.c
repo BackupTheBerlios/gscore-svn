@@ -650,6 +650,9 @@ realize_object(Staff_t *staff, Object_t *object, gboolean display_barlines, gboo
 	case QUARTER:
 		debug_msg("QUARTER REALIZE CALLBACK\n");
 
+                printf("RA: s + ox = %d\n", staff->start_x + object_x);
+                printf("start_x = %d\n", staff->start_x);
+
 		draw_staff_extension(staff, object->pitch, staff->start_x + object_x);
 
 		if ( object->accidentals & A_SHARP )
