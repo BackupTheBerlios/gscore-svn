@@ -44,6 +44,8 @@ extern GList    *plugins_list;
 extern gint      nb_plugins;
 
 extern struct Score_t         Score;
+extern struct Staff_t         Staff;
+extern struct Object_t        Object;
 extern struct Selection_t     Selection;
 extern struct Clipboard_t     Clipboard;
 extern struct Display_t       Display;

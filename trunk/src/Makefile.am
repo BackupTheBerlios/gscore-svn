@@ -34,7 +34,6 @@ gscore_SOURCES = 	\
 	objects.c \
 	objects_callbacks.c \
 	plugin.c \
-	plugin-conversions.c \
 	position.c \
 	realize_area.c \
 	SConscript \

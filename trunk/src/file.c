@@ -31,7 +31,6 @@
 #include "plugin.h"
 #include "constants.h"
 #include "create_score.h"
-#include "plugin-conversions.h"
 
 static void
 open_set_extension(GtkObject *item)

@@ -50,7 +50,7 @@ fi
 
 AC_SUBST(localstatedir)
 
-plugins_dir=$libdir/pvs
+plugins_dir=$libdir/gscore
 
 AC_SUBST(plugins_dir)
 

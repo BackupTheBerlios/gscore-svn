@@ -506,6 +506,12 @@ realize_object(Staff_t *staff, Object_t *object, gboolean display_barlines, gboo
 	extremity_end_y =  staff->extremity_begin_y +(staff->nb_lines - 1) * staff->space_btw_lines + staff->nb_lines - 1;
 	average = (extremity_end_y - staff->extremity_begin_y) / 2;
 
+	if (object->group_id != 0) {	/* it means it's a chord */
+		if (object_get_previous(object)->group_id == object->group_id)
+			printf("We are having a chord!\n");
+	}
+
+
 	switch(object->type) {
 
 		/* NOTES */

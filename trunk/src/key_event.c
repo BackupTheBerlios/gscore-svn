@@ -30,7 +30,11 @@
 #include "debug.h"
 #include "spacings.h"
 #include "key_cursor.h"
+#include "key_event.h"
 #include "selection.h"
+#include "common.h"
+#include "staff.h"
+#include "objects.h"
 
 
 static gboolean debug_mode = FALSE;
@@ -42,6 +46,7 @@ score_key_press_event(GtkWidget *widget, GdkEventKey *event)
 	GtkWidget *gladewidget;
 	GtkAdjustment *adj;
 	Object_t *object;
+	Object_t *tmpobj;
 
 	switch (event->keyval) {
                         
@@ -69,7 +74,7 @@ score_key_press_event(GtkWidget *widget, GdkEventKey *event)
 		case BARLINE_OPENCLOSEREPEAT:
 			add_object(get_staff_selected(), 
 				   Selection.object_type, Selection.accidentals, Selection.nature, 0, 
-				   NULL, NULL, NULL, NULL, NULL, NULL, KeyCursor.position, NULL, FALSE);
+				   0, 0, 0, 0, 0, 0, KeyCursor.position, 0, FALSE);
 
 			gtk_widget_set_size_request(GTK_WIDGET(Score.area), Score.width, Score.height);
 
@@ -89,8 +94,8 @@ score_key_press_event(GtkWidget *widget, GdkEventKey *event)
 		case DYNAMIC_FF:
 		case DYNAMIC_FFF:
 			add_object(get_staff_selected(), 
-				   Selection.object_type, NULL, NULL, 0,
-				   staff_get_current_x(get_staff_selected()), NULL, NULL, NULL, NULL, NULL, KeyCursor.position, NULL, FALSE);
+				   Selection.object_type, 0, 0, 0,
+				   staff_get_current_x(get_staff_selected()), 0, 0, 0, 0, 0, KeyCursor.position, 0, FALSE);
 			break;
 		}
 
@@ -111,7 +116,9 @@ score_key_press_event(GtkWidget *widget, GdkEventKey *event)
 		refresh();
 		break;
 	case GDK_Left:
-		object_get_left(KeyCursor.x_returned);
+		tmpobj = object_get_left(KeyCursor.x_returned);
+
+		printf("left id = %d\n", tmpobj);
 /* 		printf("Object id = %d\n", object->id); */
 		break;
 	case GDK_Right:
@@ -143,7 +150,7 @@ score_key_press_event(GtkWidget *widget, GdkEventKey *event)
 		break;
 	case GDK_Tab: 		/* The TAB Key simply adds the single barline */
 		add_object(get_staff_selected(), 
-			   BARLINE_SINGLE, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, KeyCursor.position, NULL, FALSE);
+			   BARLINE_SINGLE, 0, 0, 0, 0, 0, 0, 0, 0, 0, KeyCursor.position, 0, FALSE);
 		
 		gtk_widget_set_size_request(GTK_WIDGET(Score.area), Score.width, Score.height);
 

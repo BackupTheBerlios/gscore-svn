@@ -104,7 +104,7 @@ static gchar *get_char_from_accidental(accidentals_e accidentals)
 static gchar *get_char_from_beam(gint type, object_e object)
 {
 
-        if (object & PO_BEAMED)
+        if (object & O_BEAMED)
                 {
                         return "";
                 } else {
@@ -206,7 +206,7 @@ static gchar *get_char_for_duration(const gint value)
 
 static gchar *get_char_from_staccato(object_e object)
 {
-     if (object & PO_STACCATO)
+     if (object & O_STACCATO)
           return ".";
      else
           return "";

@@ -10,6 +10,8 @@
 #include "common.h"
 #include "macros.h"
 
+#include "gettext.h"
+
 #ifdef _WIN32
 # define PLUGIN_EXT ".dll"
 #else
@@ -71,7 +73,7 @@ gscore_plugins_load(GList **plugins_list)
 
 	plugins_dir = g_dir_open(PLUGINS_DIR, 0, &error);
 	if ( plugins_dir == NULL ) {
-		g_message("Could not open `%s'\n`%s'", PLUGINS_DIR, error->message);
+		g_message(_("Could not open `%s'\n`%s'"), PLUGINS_DIR, error->message);
 		g_error_free (error);
 		return -1;
 	}
@@ -80,18 +82,14 @@ gscore_plugins_load(GList **plugins_list)
 		full_filename = g_strconcat(PLUGINS_DIR, G_DIR_SEPARATOR_S, filename, NULL);
 		is_dir = g_file_test(full_filename, G_FILE_TEST_IS_DIR);
 
-/* 		printf("filename: %s\n",filename); */
-/* 		printf("strrchr: %s\n", strrchr(filename, '.')); */
-/* 		printf("cmpval: %d\n", strcmp(strrchr(filename, '.'), ".so")); */
-/* 		&& ( strcmp(strrchr(filename, "."), ".so"))) {		 */
-		if (( ! is_dir ) && ( strcmp(strrchr(filename, '.'), ".so") == 0 )) {
+		if (( ! is_dir ) && ( strcmp(strrchr(filename, '.'), PLUGIN_EXT) == 0 )) {
 			nb_files++;
 			
 			ppnf = g_malloc(sizeof(plugin_pnf));
 			ppnf->path = g_strdup(PLUGINS_DIR); 
 			ppnf->filename = g_strdup(filename);
 
- 			debug_msg(g_strdup_printf("path = %s\nfilename = %s\n", ppnf->path, ppnf->filename));
+ 			debug_msg(g_strdup_printf(_("path = %s\nfilename = %s\n"), ppnf->path, ppnf->filename));
 
 			*plugins_list = g_list_append(*plugins_list, ppnf);
 		}
@@ -120,7 +118,7 @@ gscore_plugin_get(const char *filename)
 	plugin->handle = g_module_open(filename, G_MODULE_BIND_MASK);
 
 	if ( ! plugin->handle ) {
-		debug_msg(g_strdup_printf("Error (g_module_open): %s\nCannot open %s\n", g_module_error(), filename));
+		debug_msg(g_strdup_printf(_("Error (g_module_open): %s\nCannot open %s\n"), g_module_error(), filename));
 	}
 
 	get_symbol = g_module_symbol(plugin->handle, "gscore_plugin_init",
@@ -128,7 +126,7 @@ gscore_plugin_get(const char *filename)
 
 	if ( ! get_symbol ) {
 
-		gw_message_error(g_strdup_printf("Couldn't get the symbol \"gscore_plugin_init\" : %s", g_module_error()));
+		gw_message_error(g_strdup_printf(_("Couldn't get the symbol \"gscore_plugin_init\" : %s"), g_module_error()));
 
 		g_module_close(plugin->handle);
                 plugin->handle = NULL;
@@ -165,7 +163,7 @@ gscore_plugin_get_from_extension(const gchar *extension)
 		plugin = gscore_plugin_get(full_filename);
 
 		if ( ! plugin) {
-			g_printf("Couldn't get the plugin %s!\n", full_filename);
+			g_printf(_("Couldn't get the plugin %s!\n"), full_filename);
 			free(plugin);
 			return NULL;
 		}
