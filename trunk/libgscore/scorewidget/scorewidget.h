@@ -30,7 +30,7 @@ extern    "C"
 #endif                          /* __cplusplus */
 
 #define GTK_TYPE_CAIRO	(gtk_cairo_get_type())
-#define GTK_CAIRO(obj)	GTK_CHECK_CAST (obj, GTK_TYPE_CAIRO, GtkCairo)
+#define SCORE_WIDGET(obj)	GTK_CHECK_CAST (obj, GTK_TYPE_CAIRO, GtkCairo)
 #define GTK_CAIRO_CLASS(klass) GTK_CHECK_CLASS_CAST (klass, GTK_TYPE_CAIRO, GtkCairoClass)
 #define GTK_IS_CAIRO(obj)	GTK_CHECK_TYPE (obj, GTK_TYPE_CAIRO)
 

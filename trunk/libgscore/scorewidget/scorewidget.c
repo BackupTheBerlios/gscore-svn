@@ -28,20 +28,32 @@
 enum
 {
         PAINT,
+        NEW_STAFF,
+        DEL_STAFF,
+        SELECT_STAFF,
+        NEW_OBJECT,
+        DEL_OBJECT,
+        SELECT_OBJET,
         LAST_SIGNAL
 };
 
-static void gtk_cairo_class_init (GtkCairoClass * klass);
+static void 
+score_class_init (GtkCairoClass * klass);
 
-static void gtk_cairo_init (GtkCairo *gtkcairo);
+static void 
+score_init (GtkCairo *gtkcairo);
 
-static void gtk_cairo_destroy (GtkObject *object);
+static void 
+score_destroy (GtkObject *object);
 
-static void gtk_cairo_realize (GtkWidget *widget);
+static void 
+score_realize (GtkWidget *widget);
 
 static void
-gtk_cairo_size_allocate (GtkWidget *widget, GtkAllocation * allocation);
-static gint gtk_cairo_expose (GtkWidget *widget, GdkEventExpose *event);
+score_size_allocate (GtkWidget *widget, GtkAllocation * allocation);
+
+static gint 
+score_expose (GtkWidget *widget, GdkEventExpose *event);
 
 static GtkWidgetClass *parent_class = NULL;
 static guint signals[LAST_SIGNAL] = { 0 };
@@ -49,33 +61,33 @@ static guint signals[LAST_SIGNAL] = { 0 };
 /*FIXME: make the cairo object a property as well,. and deprecate the get_cairo function */
 
 GType
-gtk_cairo_get_type (void)
+score_get_type (void)
 {
-        static GType gtk_cairo_type = 0;
+        static GType score_type = 0;
 
         if (!gtk_cairo_type)
                 {
-                        static const GTypeInfo gtk_cairo_info = {
+                        static const GTypeInfo score_info = {
                                 sizeof (GtkCairoClass),
                                 NULL,
                                 NULL,
-                                (GClassInitFunc) gtk_cairo_class_init,
+                                (GClassInitFunc) score_class_init,
                                 NULL,
                                 NULL,
                                 sizeof (GtkCairo),
                                 0,
-                                (GInstanceInitFunc) gtk_cairo_init,
+                                (GInstanceInitFunc) score_init,
                         };
 
-                        gtk_cairo_type = g_type_register_static (GTK_TYPE_WIDGET, "GtkCairo",
-                                                                 &gtk_cairo_info, 0);
+                        score_type = g_type_register_static (GTK_TYPE_WIDGET, "Score",
+                                                                 &score_info, 0);
                 }
 
         return gtk_cairo_type;
 }
 
 static void
-gtk_cairo_class_init (GtkCairoClass * class)
+score_class_init (GtkCairoClass * class)
 {
         GtkObjectClass *object_class;
         GtkWidgetClass *widget_class;
@@ -85,11 +97,11 @@ gtk_cairo_class_init (GtkCairoClass * class)
 
         parent_class = gtk_type_class (GTK_TYPE_WIDGET);
 
-        object_class->destroy = gtk_cairo_destroy;
+        object_class->destroy = score_destroy;
 
-        widget_class->realize = gtk_cairo_realize;
-        widget_class->expose_event = gtk_cairo_expose;
-        widget_class->size_allocate = gtk_cairo_size_allocate;
+        widget_class->realize = score_realize;
+        widget_class->expose_event = score_expose;
+        widget_class->size_allocate = score_size_allocate;
 
         signals[PAINT] = g_signal_new ("paint",
                                        GTK_TYPE_CAIRO,
@@ -101,13 +113,13 @@ gtk_cairo_class_init (GtkCairoClass * class)
 }
 
 static void
-gtk_cairo_init (GtkCairo *gtkcairo)
+score_init (GtkCairo *gtkcairo)
 {
         gtkcairo->gdkcairo = gdkcairo_new (GTK_WIDGET (gtkcairo));
 }
 
 GtkWidget *
-gtk_cairo_new (void)
+score_new (void)
 {
         GtkWidget *gtkcairo;
         gtkcairo = GTK_WIDGET (g_object_new (GTK_TYPE_CAIRO, NULL));
@@ -118,14 +130,14 @@ gtk_cairo_new (void)
 }
 
 static void
-gtk_cairo_destroy (GtkObject *object)
+score_destroy (GtkObject *object)
 {
         GtkCairo *gtkcairo;
 
         g_return_if_fail (object != NULL);
-        g_return_if_fail (GTK_IS_CAIRO (object));
+        g_return_if_fail (GTK_IS_SCORE_WIDGET (object));
 
-        gtkcairo = GTK_CAIRO (object);
+        gtkcairo = SCORE_WIDGET (object);
 
         gdkcairo_destroy (gtkcairo->gdkcairo);
 
@@ -134,7 +146,7 @@ gtk_cairo_destroy (GtkObject *object)
 }
 
 static void
-gtk_cairo_realize (GtkWidget *widget)
+score_realize (GtkWidget *widget)
 {
         GtkCairo *gtkcairo;
 
@@ -142,13 +154,13 @@ gtk_cairo_realize (GtkWidget *widget)
         g_return_if_fail (GTK_IS_CAIRO (widget));
 
         GTK_WIDGET_SET_FLAGS (widget, GTK_REALIZED);
-        gtkcairo = GTK_CAIRO (widget);
+        gtkcairo = SCORE_WIDGET (widget);
 
         gdkcairo_realize (gtkcairo->gdkcairo);
 }
 
 static void
-gtk_cairo_size_allocate (GtkWidget     *widget,
+score_size_allocate (GtkWidget     *widget,
                          GtkAllocation *allocation)
 {
         GtkCairo *gtkcairo;
@@ -166,13 +178,13 @@ gtk_cairo_size_allocate (GtkWidget     *widget,
 }
 
 static gint
-gtk_cairo_expose (GtkWidget      *widget,
+score_expose (GtkWidget      *widget,
                   GdkEventExpose *event)
 {
         GtkCairo *gtkcairo;
 
         g_return_val_if_fail (widget != NULL, FALSE);
-        g_return_val_if_fail (GTK_IS_CAIRO (widget), FALSE);
+        g_return_val_if_fail (GTK_IS_SCORE (widget), FALSE);
         g_return_val_if_fail (event != NULL, FALSE);
 
         gtkcairo = GTK_CAIRO (widget);
@@ -184,16 +196,16 @@ gtk_cairo_expose (GtkWidget      *widget,
 }
 
 cairo_t  *
-gtk_cairo_get_cairo (GtkCairo *gtkcairo)
+score_get_cairo (GtkCairo *gtkcairo)
 {
         g_return_val_if_fail (gtkcairo != NULL, NULL);
-        g_return_val_if_fail (GTK_IS_CAIRO (gtkcairo), NULL);
+        g_return_val_if_fail (GTK_IS_SCORE (gtkcairo), NULL);
         return ((gdkcairo_t *) gtkcairo->gdkcairo)->cr;
 }
 
 void
-gtk_cairo_set_gdk_color (cairo_t  *cr,
-                         GdkColor *color)
+score_set_gdk_color (cairo_t  *cr,
+                     GdkColor *color)
 {
         double    red, green, blue;
 
@@ -205,7 +217,7 @@ gtk_cairo_set_gdk_color (cairo_t  *cr,
 }
 
 int
-gtk_cairo_backend_is_gl (GtkCairo *gtkcairo)
+score_backend_is_gl (GtkCairo *gtkcairo)
 {
         if (((gdkcairo_t *) gtkcairo->gdkcairo)->backend == GDKCAIRO_BACKEND_GL)
                 return 1;
