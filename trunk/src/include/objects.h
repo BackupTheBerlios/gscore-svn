@@ -1,0 +1,55 @@
+/*
+ * objects.h
+ * gscore - a musical score editor
+ *
+ * (C) Copyright 2001-2004 Sebastien Tricaud
+ * e-mail : toady@gscore.og
+ * URL    : http://www.gscore.org
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+ */
+
+#ifndef _OBJECTS_H_
+#define _OBJECTS_H_
+
+gboolean add_object(gint staff, gint type, accidentals_e accidentals, object_e nature, gulong group_id, 
+                    gint x, gint y, gint x2, gint y2, gint x3, gint y3, 
+                    gint pitch, gint tab_number, gboolean is_selected);
+
+gboolean remove_object(gulong id);
+
+gboolean remove_object_selected(void);
+
+Object_t *object_get_next(Object_t *object);
+
+Object_t *object_get_last(Object_t *object);
+
+Object_t *object_get_left(gdouble x);
+
+void get_object_properties(GtkWidget *event_box, GdkEventButton *event, gpointer data);
+
+void set_object(const gchar *image_filename, GCallback callback_handler, gboolean is_selected, gint x, gint y);
+
+gint add_note (guint staff, gint type, gint x, gint offset);
+
+gint add_barline (guint staff, gint x);
+
+gint update_staffs_size (gint value);
+
+void note_append(gint note_type);
+
+gboolean object_selected_change_type(gint newtype);
+
+#endif

@@ -1,0 +1,7 @@
+Import('env')
+
+env.Program('gscore', ['articulation.c','beam.c', 'common.c', 'create_score.c', 'debug.c', 'display.c', 'draw.c', 'draw_barline.c', 'edit.c', 'error.c', 'file.c', 'help.c', 'insert.c', 'key_cursor.c', 'key_event.c', 'libglade-garbage.c', 'main.c', 'mouse_event.c', 'objects.c', 'objects_callbacks.c', 'plugin-conversions.c','plugin.c', 'position.c', 'realize_area.c', 'score.c', 'selection.c', 'spacings.c', 'splash.c', 'staff.c', 'tab_transposition.c', 'text.c', 'tie.c', 'view.c'])
+
+env.Install('$prefix/bin', 'gscore')
+
+Export('env')

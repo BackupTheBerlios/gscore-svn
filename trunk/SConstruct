@@ -1,0 +1,102 @@
+# Gscore build file for scons
+# http://www.scons.org
+
+env = Environment() 
+
+data_dir = "$DESTDIR"
+
+SConsignFile()
+
+# Get our configuration options: 
+opts = Options('gscore.conf') 
+opts.Add("prefix", "The root installation path", "$DESTDIR")
+opts.Update(env) 
+opts.Save('gscore.conf', env)
+
+debug = ARGUMENTS.get('debug', 0)
+if int(debug):
+	env.Append(CCFLAGS = '-dDEBUG -ggdb')
+
+
+env.Append(CCFLAGS=['-I./src/include'])
+env.Append(CCFLAGS=['-DDATA_DIR=\\"$prefix\\"'])
+
+# Useful to print all construction variables
+#
+# dict = env.Dictionary()
+# keys = dict.keys()
+# keys.sort()
+# for key in keys:
+# 	print "construction variable = '%s', value = '%s'" % (key, dict[key])
+# 
+
+print "CC is: ", env['CC']
+
+#
+# BEGIN: Checks if the required libraries are there 
+#
+ 
+def CheckPKGConfig(context, version): 
+     context.Message( 'Checking for pkg-config... ' ) 
+     ret = context.TryAction('$prefix/bin/pkg-config --atleast-pkgconfig-version=%s' % version)[0] 
+     context.Result( ret ) 
+     return ret 
+ 
+def CheckPKG(context, name): 
+     context.Message( 'Checking for %s... ' % name ) 
+     ret = context.TryAction('$prefix/bin/pkg-config --exists %s' % name)[0] 
+     context.Result( ret ) 
+     return ret 
+ 
+# Configuration: 
+ 
+conf = Configure(env, custom_tests = { 'CheckPKGConfig' : CheckPKGConfig, 
+                                       'CheckPKG' : CheckPKG }) 
+ 
+if not conf.CheckPKGConfig('0.15.0'): 
+     print 'pkg-config >= 0.15.0 not found.' 
+     Exit(1) 
+ 
+ 
+if not conf.CheckPKG('glib-2.0'): 
+     print 'glib-2.0 not found.' 
+     Exit(1) 
+
+if not conf.CheckPKG('gdk-2.0'): 
+     print 'gdk-2.0 not found.' 
+     Exit(1) 
+
+if not conf.CheckPKG('gtk+-2.0'): 
+     print 'gtk+-2.0 not found.' 
+     Exit(1) 
+
+if not conf.CheckPKG('libglade-2.0'): 
+     print 'libglade-2.0 not found.' 
+     Exit(1) 
+ 
+#
+# END: Checks if the required libraries are there 
+#
+
+ 
+env = conf.Finish() 
+ 
+# Now, build: 
+ 
+env.ParseConfig('$prefix/bin/pkg-config --cflags --libs libglade-2.0') 
+
+
+env.Alias('install', '$prefix/bin')
+env.Alias('install', '$prefix/share/gscore/glade')
+env.Alias('install', '$prefix/share/gscore/plugins')
+env.Alias('install', '$prefix/share/gscore/pixmaps')
+
+Export('env')
+
+Export('data_dir')
+
+SConscript('glade/SConscript')
+SConscript('plugins/SConscript')
+SConscript('pixmaps/SConscript')
+SConscript('src/SConscript')
+

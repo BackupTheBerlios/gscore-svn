@@ -1,0 +1,20 @@
+Gscore Building and Installation Instructions
+*********************************************
+
+Gscore requires scons to be built.
+You can get it at http://www.scons.org
+
+Scons is a python powered build system that requires python 2.2
+Majors distributions have scons as a package.
+
+Building
+********
+
+Just type 'scons' to compile. 
+To clean, type 'scons -c'.
+
+Installing
+**********
+
+Type 'scons install' to install.
+
