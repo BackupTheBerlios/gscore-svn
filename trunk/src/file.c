@@ -202,7 +202,7 @@ export_score(GtkButton *button, gpointer user_data)
 
 /* 	text = gtk_entry_get_text(GTK_ENTRY(GTK_FILE_SELECTION(filechooser) */
 /* 					    ->selection_entry)); */
-	filename = gtk_file_selection_get_filename(GTK_FILE_SELECTION(filechooser)));
+	filename = gtk_file_selection_get_filename(GTK_FILE_SELECTION(filechooser));
 
 	extension = strrchr(filename, '.');
 
