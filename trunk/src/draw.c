@@ -114,8 +114,8 @@ gint draw_note(gchar *file, gboolean selected, gint x, gint y, gint line_x1, gin
         scrolled_window = glade_xml_get_widget(gladexml, "sw_score_sw");
         adj = gtk_scrolled_window_get_hadjustment(GTK_SCROLLED_WINDOW(scrolled_window));
 
-        if (x < adj->value - 50) return; /* -50 is a dummy stuff */
-        if (x > adj->value + 2000) return; /* +2000 too */
+        if (x < adj->value - 50) return -1; /* -50 is a dummy stuff */
+        if (x > adj->value + 2000) return -1; /* +2000 too */
 
 	pixbuf = gdk_pixbuf_new_from_file(get_file_from_data_dir(g_strdup(file)), NULL);
 

@@ -79,7 +79,7 @@ score_key_press_event(GtkWidget *widget, GdkEventKey *event)
 
                                 if (tmpobj->pitch == KeyCursor.position) {
                                         gw_message_error("You cannot make a chord with the same pitch.");
-                                        return;
+                                        return FALSE;
                                 }
 
                                 add_object(&Score, get_staff_selected(&Score), 
@@ -143,7 +143,7 @@ score_key_press_event(GtkWidget *widget, GdkEventKey *event)
 
                 if ( ! tmpobj ) { 
                         printf("There's no note on the left!\n");
-                        return;
+                        return FALSE;
                 }
 
 /* 		tmpobj = (Object_t *)object_get_left(KeyCursor.x_returned); */
