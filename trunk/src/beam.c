@@ -29,6 +29,7 @@
 #include "staff.h"
 #include "debug.h"
 #include "spacings.h"
+#include "beam.h"
 
 extern void
 beam_notes_selected(void)
@@ -39,7 +40,7 @@ beam_notes_selected(void)
 	GList *listrunner;
 	GList *listrunner_next;
 
-	staff_data = (Staff_t *) g_list_nth_data(Score.Staff_list, get_staff_selected());
+	staff_data = (Staff_t *) g_list_nth_data(Score.Staff_list, get_staff_selected(&Score));
 
 	listrunner = g_list_first(staff_data->Object_list);
 

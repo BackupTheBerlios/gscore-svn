@@ -74,7 +74,7 @@ score_key_press_event(GtkWidget *widget, GdkEventKey *event)
 		case BARLINE_CLOSEREPEAT:
 		case BARLINE_OPENCLOSEREPEAT:
                         if (event->state & GDK_CONTROL_MASK) { /* Make the chord */
-                                staffobj = (Staff_t *)g_list_nth_data(Score.Staff_list, get_staff_selected());
+                                staffobj = (Staff_t *)g_list_nth_data(Score.Staff_list, get_staff_selected(&Score));
                                 tmpobj = (Object_t *)object_get_left(staffobj, KeyCursor.x_returned);
 
                                 if (tmpobj->pitch == KeyCursor.position) {
@@ -82,14 +82,14 @@ score_key_press_event(GtkWidget *widget, GdkEventKey *event)
                                         return;
                                 }
 
-                                add_object(&Score, get_staff_selected(), 
+                                add_object(&Score, get_staff_selected(&Score), 
                                            Selection.object_type, 
                                            Selection.accidentals, Selection.nature, tmpobj->id, 
                                            0, 0, 0, 0, 0, 0, KeyCursor.position, 0, FALSE);           
                                 
 
                         } else {
-                                add_object(&Score, get_staff_selected(), 
+                                add_object(&Score, get_staff_selected(&Score), 
                                            Selection.object_type, 
                                            Selection.accidentals, Selection.nature, 0, 
                                            0, 0, 0, 0, 0, 0, KeyCursor.position, 0, FALSE);
@@ -113,9 +113,9 @@ score_key_press_event(GtkWidget *widget, GdkEventKey *event)
 		case DYNAMIC_F:
 		case DYNAMIC_FF:
 		case DYNAMIC_FFF:
-			add_object(&Score, get_staff_selected(), 
+			add_object(&Score, get_staff_selected(&Score), 
 				   Selection.object_type, 0, 0, 0,
-				   staff_get_current_x(get_staff_selected()), 
+				   staff_get_current_x(&Score, get_staff_selected(&Score)), 
                                    0, 0, 0, 0, 0, KeyCursor.position, 0, FALSE);
 			break;
 		}
@@ -129,17 +129,17 @@ score_key_press_event(GtkWidget *widget, GdkEventKey *event)
 		refresh();
 		break;
 	case GDK_Up:
-                object_selected_pitch_up();
+                object_selected_pitch_up(&Score);
 		KeyCursor.position++;
 		refresh();
 		break;
 	case GDK_Down:
-                object_selected_pitch_down();
+                object_selected_pitch_down(&Score);
 		KeyCursor.position--;
 		refresh();
 		break;
 	case GDK_Left:
-                tmpobj = (Object_t *) object_get_left((Staff_t *)g_list_nth_data(Score.Staff_list, get_staff_selected()), KeyCursor.x_returned);
+                tmpobj = (Object_t *) object_get_left((Staff_t *)g_list_nth_data(Score.Staff_list, get_staff_selected(&Score)), KeyCursor.x_returned);
 
                 if ( ! tmpobj ) { 
                         printf("There's no note on the left!\n");
@@ -147,7 +147,7 @@ score_key_press_event(GtkWidget *widget, GdkEventKey *event)
                 }
 
 /* 		tmpobj = (Object_t *)object_get_left(KeyCursor.x_returned); */
-                staffobj = (Staff_t *)g_list_nth_data(Score.Staff_list, get_staff_selected());
+                staffobj = (Staff_t *)g_list_nth_data(Score.Staff_list, get_staff_selected(&Score));
                 
                 staffobj->current_x -= Spacings.NotesRests.sa_quarter / 2;
 
@@ -170,7 +170,7 @@ score_key_press_event(GtkWidget *widget, GdkEventKey *event)
 			if ( Selection.object_type != SIXTEENTH )
 				Selection.object_type++;
 
-		}		
+		}
 		break;
 	case GDK_Page_Up:
 		switch ( Selection.object_type ) {
@@ -185,7 +185,7 @@ score_key_press_event(GtkWidget *widget, GdkEventKey *event)
 		}
 		break;
 	case GDK_Tab: 		/* The TAB Key simply adds the single barline */
-		add_object(&Score, get_staff_selected(), 
+		add_object(&Score, get_staff_selected(&Score), 
 			   BARLINE_SINGLE, 0, 0, 0, 0, 0, 0, 0, 0, 0, KeyCursor.position, 0, FALSE);
 		
 		gtk_widget_set_size_request(GTK_WIDGET(Score.area), Score.width, Score.height);
@@ -205,7 +205,7 @@ score_key_press_event(GtkWidget *widget, GdkEventKey *event)
 			printf("** Staves properties:\n");
 			print_staves_list();
 			printf("** Objects on staff selected:\n");
-			print_objects_staff(get_staff_selected());
+			print_objects_staff(get_staff_selected(&Score));
 			printf("\n");
 		} else {
 		}

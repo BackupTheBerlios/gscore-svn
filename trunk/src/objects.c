@@ -22,6 +22,7 @@
  */
 
 #include <gtk/gtk.h>
+#include <glib/gprintf.h>
 
 #include "gscore.h"
 #include "position.h"
@@ -112,7 +113,7 @@ gint object_get_spacing(gint type)
                 retval = STANDARD_KEY_SIZE;
                 break;
         default:
-                printf("Unknown value: %d\n", type);
+                g_printf("Unknown value: %d\n", type);
                 retval = 10;
                 break;
         }
@@ -135,7 +136,7 @@ add_object(Score_t *score, gint staff, gint type, accidentals_e accidentals, obj
         staff_data->Object = g_malloc(sizeof(Object_t));
 
         if ( ! staff_data->Object ) {
-                printf("Cannot add object, memory exhausted\n");
+                g_printf("Cannot add object, memory exhausted\n");
                 return FALSE;
         }
 
@@ -158,7 +159,7 @@ add_object(Score_t *score, gint staff, gint type, accidentals_e accidentals, obj
                 g_list_append(staff_data->Object_list, staff_data->Object);
 
         if (group_id == 0) {
-                staff_set_current_x(staff, staff_get_current_x(staff) + object_get_spacing(type));
+                staff_set_current_x(score, staff, staff_get_current_x(score, staff) + object_get_spacing(type));
 
 		score->staff_extremity_end_x += object_get_spacing(type);
         }
@@ -361,14 +362,14 @@ get_object_properties (GtkWidget      *event_box,
 }
 
 extern gboolean
-object_selected_change_type(gint newtype)
+object_selected_change_type(Score_t *score, gint newtype)
 {
         gboolean something_selected = FALSE;
         Staff_t *staff_data;
 
         GList *listrunner;
 
-        staff_data = (Staff_t *) g_list_nth_data(Score.Staff_list, get_staff_selected());
+        staff_data = (Staff_t *) g_list_nth_data(score->Staff_list, get_staff_selected(score));
 
         listrunner = g_list_first(staff_data->Object_list);
 
@@ -391,14 +392,14 @@ object_selected_change_type(gint newtype)
 }
 
 extern gboolean
-object_selected_pitch_up(void)
+object_selected_pitch_up(Score_t *score)
 {
         gboolean something_selected = FALSE;
         Staff_t *staff_data;
 
         GList *listrunner;
 
-        staff_data = (Staff_t *) g_list_nth_data(Score.Staff_list, get_staff_selected());
+        staff_data = (Staff_t *) g_list_nth_data(score->Staff_list, get_staff_selected(score));
 
         listrunner = g_list_first(staff_data->Object_list);
 
@@ -421,14 +422,14 @@ object_selected_pitch_up(void)
 }
 
 extern gboolean
-object_selected_pitch_down(void)
+object_selected_pitch_down(Score_t *score)
 {
         gboolean something_selected = FALSE;
         Staff_t *staff_data;
 
         GList *listrunner;
 
-        staff_data = (Staff_t *) g_list_nth_data(Score.Staff_list, get_staff_selected());
+        staff_data = (Staff_t *) g_list_nth_data(score->Staff_list, get_staff_selected(score));
 
         listrunner = g_list_first(staff_data->Object_list);
 

@@ -56,10 +56,10 @@ gint update_staffs_size (gint value);
 
 void note_append(gint note_type);
 
-gboolean object_selected_change_type(gint newtype);
+gboolean object_selected_change_type(Score_t *score, gint newtype);
 
-gboolean object_selected_pitch_up(void);
+gboolean object_selected_pitch_up(Score_t *score);
 
-gboolean object_selected_pitch_down(void);
+gboolean object_selected_pitch_down(Score_t *score);
 
 #endif

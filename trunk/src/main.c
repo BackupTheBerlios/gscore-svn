@@ -127,11 +127,11 @@ void gscore_init(void)
 	if( ! create_staff(&Score, 5, 8, Spacings.Measures.xpsfm, Spacings.Measures.ypsfm))
 		printf("ERROR CREATING STAFF");
 
-	set_staff_selected(0);
+	set_staff_selected(&Score, 0);
 
-	staff_set_key(get_staff_selected(), TREBLE_KEY);
+	staff_set_key(&Score, get_staff_selected(&Score), TREBLE_KEY);
 
-	staff_set_key_signature(get_staff_selected(), KEY_SIGNATURE_TREBLE_EMPTY);
+	staff_set_key_signature(&Score, get_staff_selected(&Score), KEY_SIGNATURE_TREBLE_EMPTY);
 
 /* 	set_staff_unselect(get_staff_selected()); */
 /* 	set_staff_selected(1); */
@@ -172,7 +172,7 @@ drawing_area_events(GtkWidget *canvas, GdkEvent  *ev)
 					/* Select the staff with which you want to work */
 					event_btn = (GdkEventButton *)ev;
 					printf("A2: %.0f\n", event_btn->y);
-					set_staff_selected(get_staff_id(event_btn->y));
+					set_staff_selected(&Score, get_staff_id(event_btn->y));
 					/* For the selection */
 					return set_selection_origin(canvas, (GdkEventButton *)ev);
 				case 3:

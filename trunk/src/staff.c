@@ -37,6 +37,7 @@
 #include "macros.h"
 #include "spacings.h"
 #include "objects.h"
+#include "staff.h"
 
 /* GtkWidget * vbox; */
 /* GtkWidget * key_signature_pixmap; */
@@ -53,7 +54,7 @@ gboolean already_packed = FALSE;
 static gint key_signature;
 
 
-gboolean staff_set_time_signature(gint staff, gint signature_type, gint number_of_beats, gint beat_duration);
+/* gboolean staff_set_time_signature(gint staff, gint signature_type, gint number_of_beats, gint beat_duration); */
 
 
 /**
@@ -103,11 +104,11 @@ gboolean create_staff(Score_t *score, guint8 nb_lines, guint8 space_btw_lines,
 }
 
 extern void 
-set_staff_selected(gint staff)
+set_staff_selected(Score_t *score, gint staff)
 {
 
         Staff_t *staff_data;
-	staff_data = g_list_nth_data(Score.Staff_list, staff);
+	staff_data = g_list_nth_data(score->Staff_list, staff);
 
         if (staff_data)
                 staff_data->is_selected = TRUE;
@@ -115,23 +116,23 @@ set_staff_selected(gint staff)
 }
 
 extern void 
-set_staff_unselect(gint staff)
+set_staff_unselect(Score_t *score, gint staff)
 {
 
         Staff_t *staff_data;
-	staff_data = g_list_nth_data(Score.Staff_list, staff);
+	staff_data = g_list_nth_data(score->Staff_list, staff);
 
         if (staff_data)
                 staff_data->is_selected = FALSE;
 
 }
 
-gboolean delete_staff(gint staff)
+gboolean delete_staff(Score_t *score, gint staff)
 {
         GList * listrunner;
         gboolean retval;
 
-        listrunner = g_list_first(Score.Staff_list);
+        listrunner = g_list_first(score->Staff_list);
         if (!listrunner) 
                 retval = FALSE;
         else
@@ -141,22 +142,22 @@ gboolean delete_staff(gint staff)
         {
                 Staff_t *staff_data;
 
-                staff_data = g_list_nth_data(Score.Staff_list, staff);
+                staff_data = g_list_nth_data(score->Staff_list, staff);
 
-                Score.Staff_list = g_list_remove(Score.Staff_list, staff_data);
+                score->Staff_list = g_list_remove(score->Staff_list, staff_data);
         }
 
 	return TRUE;
 }
 
-gint get_staff_selected(void)
+gint get_staff_selected(const Score_t *score)
 {
         GList * listrunner;
         gint    counter;
 
         counter = 0;
 
-        listrunner = g_list_first(Score.Staff_list);
+        listrunner = g_list_first(score->Staff_list);
 
         while ( listrunner ) {
                         Staff_t *staff;
@@ -174,13 +175,13 @@ gint get_staff_selected(void)
         return -1;
 }
 
-gint get_staff_key_signature(guint staff)
+gint get_staff_key_signature(const Score_t *score, guint staff)
 {
 	Staff_t *staff_data;
 
 	gint retval = 0;
 
-	staff_data = g_list_nth_data(Score.Staff_list, staff);
+	staff_data = g_list_nth_data(score->Staff_list, staff);
 
         if (staff_data)
                 retval = staff_data->key_signature;
@@ -189,12 +190,12 @@ gint get_staff_key_signature(guint staff)
 }
 
 /* Returns the y position where the next staff should be */
-gint staff_get_y_for_next(void)
+gint staff_get_y_for_next(const Score_t *score)
 {
         Staff_t *staff_data;
         gint retval = 0;
 
-        staff_data = g_list_nth_data(Score.Staff_list, get_staff_selected());
+        staff_data = g_list_nth_data(score->Staff_list, get_staff_selected(score));
 
         retval += staff_data->extremity_begin_y;
         retval += (staff_data->nb_lines - 1) * staff_data->space_btw_lines + staff_data->nb_lines;
@@ -212,7 +213,7 @@ void staff_add_remove_options(void)
         widget = glade_xml_get_widget(gladexml, "sb_extremityxbegin");
         gtk_spin_button_set_value(GTK_SPIN_BUTTON(widget), Spacings.Measures.xpsfm);
         widget = glade_xml_get_widget(gladexml, "sb_extremityybegin");
-        gtk_spin_button_set_value(GTK_SPIN_BUTTON(widget), staff_get_y_for_next());
+        gtk_spin_button_set_value(GTK_SPIN_BUTTON(widget), staff_get_y_for_next(&Score));
 
 }
 
@@ -254,7 +255,7 @@ void on_settime_ok_clicked(void)
 
         widget = glade_xml_get_widget(gladexml, "stime_radio_common");
 	if ( gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget)) ) {
-		staff_set_time_signature(get_staff_selected(), TIME_SIGNATURE_COMMON_TIME, 4, 4);
+		staff_set_time_signature(&Score, get_staff_selected(&Score), TIME_SIGNATURE_COMMON_TIME, 4, 4);
 
 		Score.staff_extremity_end_x += STANDARD_TIME_SIGNATURE_SIZE;
 /* 		staff_set_current_x(get_staff_selected(),  */
@@ -264,7 +265,7 @@ void on_settime_ok_clicked(void)
 
         widget = glade_xml_get_widget(gladexml, "stime_radio_cut");
 	if ( gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget)) ) {
-		staff_set_time_signature(get_staff_selected(), TIME_SIGNATURE_ALLA_BREVE, 2, 2);
+		staff_set_time_signature(&Score, get_staff_selected(&Score), TIME_SIGNATURE_ALLA_BREVE, 2, 2);
 	}
 
 	refresh();
@@ -283,17 +284,17 @@ gboolean staff_update_statusbar(void)
 
 /*         printf("staff_selected= %d\n", get_staff_selected()); */
 
-        cid = gtk_statusbar_push(GTK_STATUSBAR(widget), cid, g_strdup_printf("Staff: %d", get_staff_selected()));
+        cid = gtk_statusbar_push(GTK_STATUSBAR(widget), cid, g_strdup_printf("Staff: %d", get_staff_selected(&Score)));
 
 
 	return TRUE;
 }
 
-gboolean staff_set_start_x(gint staff, gint start_x)
+gboolean staff_set_start_x(Score_t *score, gint staff, gint start_x)
 {
         Staff_t *staff_data;
 
-        staff_data = g_list_nth_data(Score.Staff_list, staff);
+        staff_data = g_list_nth_data(score->Staff_list, staff);
         
         if ( staff_data ) {
                 staff_data->start_x = start_x;
@@ -316,11 +317,11 @@ gboolean staff_set_start_x(gint staff, gint start_x)
 /* 	return -1; */
 /* } */
 
-gboolean staff_set_key(gint staff, gint key)
+gboolean staff_set_key(Score_t *score, gint staff, gint key)
 {
         Staff_t *staff_data;
 
-        staff_data = g_list_nth_data(Score.Staff_list, staff);
+        staff_data = g_list_nth_data(score->Staff_list, staff);
         
         if ( staff_data ) {
                 staff_data->key = key;
@@ -336,39 +337,39 @@ void staff_set_key_callback(void)
 
         widget = glade_xml_get_widget(gladexml, "setkey_treble_rb");
 	if ( gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget)) )
-		staff_set_key(get_staff_selected(), TREBLE_KEY);
+		staff_set_key(&Score, get_staff_selected(&Score), TREBLE_KEY);
 
         widget = glade_xml_get_widget(gladexml, "setkey_bass_rb");
 	if ( gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget)) )
-		staff_set_key(get_staff_selected(), BASS_KEY);
+		staff_set_key(&Score, get_staff_selected(&Score), BASS_KEY);
 
         widget = glade_xml_get_widget(gladexml, "setkey_alto_rb");
 	if ( gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget)) )
-		staff_set_key(get_staff_selected(), ALTO_KEY);
+		staff_set_key(&Score, get_staff_selected(&Score), ALTO_KEY);
 
         widget = glade_xml_get_widget(gladexml, "setkey_tenor_rb");
 	if ( gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget)) )
-		staff_set_key(get_staff_selected(), TENOR_KEY);
+		staff_set_key(&Score, get_staff_selected(&Score), TENOR_KEY);
 
 	refresh();
 
 }
 
 
-gint staff_get_key(gint staff)
+gint staff_get_key(const Score_t *score, gint staff)
 {
         Staff_t *staff_data;
 
-        staff_data = g_list_nth_data(Score.Staff_list, staff);
+        staff_data = g_list_nth_data(score->Staff_list, staff);
 
         return staff_data->key;
 }
 
-gboolean staff_set_current_x(gint staff, gint current_x)
+gboolean staff_set_current_x(Score_t *score, gint staff, gint current_x)
 {
         Staff_t *staff_data;
 
-        staff_data = g_list_nth_data(Score.Staff_list, staff);
+        staff_data = g_list_nth_data(score->Staff_list, staff);
         
         if (staff_data) {
                 staff_data->current_x = current_x;
@@ -378,20 +379,20 @@ gboolean staff_set_current_x(gint staff, gint current_x)
 	return -1;
 }
 
-gint staff_get_current_x(gint staff)
+gint staff_get_current_x(const Score_t *score, gint staff)
 {
         Staff_t *staff_data;
 
-        staff_data = g_list_nth_data(Score.Staff_list, staff);
+        staff_data = g_list_nth_data(score->Staff_list, staff);
         
 	return staff_data->current_x;
 }
 
-gdouble get_staff_extremity_begin_x(gint staff)
+gdouble get_staff_extremity_begin_x(const Score_t *score, gint staff)
 {
         Staff_t *staff_data;
 
-        staff_data = g_list_nth_data(Score.Staff_list, staff);
+        staff_data = g_list_nth_data(score->Staff_list, staff);
 
 	if(staff_data) {
 	  return staff_data->extremity_begin_x;
@@ -400,11 +401,11 @@ gdouble get_staff_extremity_begin_x(gint staff)
 	}
 }
 
-gdouble get_staff_extremity_begin_y(gint staff)
+gdouble get_staff_extremity_begin_y(const Score_t *score, gint staff)
 {
         Staff_t *staff_data;
 
-        staff_data = g_list_nth_data(Score.Staff_list, staff);
+        staff_data = g_list_nth_data(score->Staff_list, staff);
 
 	if(staff_data) {
 	  return staff_data->extremity_begin_y;
@@ -414,7 +415,7 @@ gdouble get_staff_extremity_begin_y(gint staff)
 }
 
 
-gboolean staff_set_key_signature(gint staff, gint key_signature)
+gboolean staff_set_key_signature(Score_t *score, gint staff, gint key_signature)
 {
 /*         GList * listrunner; */
 
@@ -423,7 +424,7 @@ gboolean staff_set_key_signature(gint staff, gint key_signature)
 /*                 { */
         Staff_t *staff_data;
         
-        staff_data = g_list_nth_data(Score.Staff_list, staff);
+        staff_data = g_list_nth_data(score->Staff_list, staff);
         
         if (staff_data)
                 staff_data->key_signature = key_signature;
@@ -433,7 +434,9 @@ gboolean staff_set_key_signature(gint staff, gint key_signature)
 /*                 } */
 }
 
-gboolean staff_set_time_signature(gint staff, gint signature_type, gint number_of_beats, gint beat_duration)
+gboolean staff_set_time_signature(Score_t *score, gint staff,
+				  gint signature_type, gint number_of_beats,
+				  gint beat_duration)
 {
 /*         GList * listrunner; */
 
@@ -442,7 +445,7 @@ gboolean staff_set_time_signature(gint staff, gint signature_type, gint number_o
 /*                 { */
         Staff_t *staff_data;
         
-        staff_data = g_list_nth_data(Score.Staff_list, staff);
+        staff_data = g_list_nth_data(score->Staff_list, staff);
         
         staff_data->time_signature[0] = signature_type;
         staff_data->time_signature[1] = number_of_beats;
@@ -456,7 +459,7 @@ gboolean staff_set_time_signature(gint staff, gint signature_type, gint number_o
 	return TRUE;
 }
 
-gboolean staff_set_midi_instrument(gint staff, gint midi_instrument)
+gboolean staff_set_midi_instrument(Score_t *score, gint staff, gint midi_instrument)
 {
 /*         GList * listrunner; */
 
@@ -465,7 +468,7 @@ gboolean staff_set_midi_instrument(gint staff, gint midi_instrument)
 /*                 { */
 	Staff_t *staff_data;
 	
-	staff_data = g_list_nth_data(Score.Staff_list, staff);
+	staff_data = g_list_nth_data(score->Staff_list, staff);
 	
 	staff_data->midi_instrument = midi_instrument;
 	
@@ -498,7 +501,7 @@ void on_key_signature_activate(GtkWidget *widget)
 
         /* The adjustment */
 /*         switch (Score.Staff[get_staff_selected()].key_signature) */
-	switch(get_staff_key_signature(get_staff_selected())) {
+	switch(get_staff_key_signature(&Score, get_staff_selected(&Score))) {
 	case KEY_SIGNATURE_TREBLE_EMPTY:
 		widget = glade_xml_get_widget (gladexml, "sks_clef_label");
 		gtk_label_set_text(GTK_LABEL(widget), "C Major or A minor");
@@ -1187,12 +1190,12 @@ void staff_display_measures_numbers(gpointer callback_data, guint callback_actio
 }
 
 
-gdouble get_staff_extremity_end_y(gint staff_id)
+gdouble get_staff_extremity_end_y(const Score_t *score, gint staff_id)
 {
         Staff_t *staff_data;
         gdouble retval = 0;
 
-        staff_data = g_list_nth_data(Score.Staff_list, staff_id);
+        staff_data = g_list_nth_data(score->Staff_list, staff_id);
 
         retval += staff_data->extremity_begin_y;
         retval += (staff_data->nb_lines - 1) * staff_data->space_btw_lines + staff_data->nb_lines;
@@ -1221,7 +1224,7 @@ gint get_staff_id(gdouble y)
 		}
 
 		if ( y >= staff_data->extremity_begin_y ) {
-			if ( y <= get_staff_extremity_end_y(staff_counter) ) {
+			if ( y <= get_staff_extremity_end_y(&Score, staff_counter) ) {
 				staff_id = staff_counter;
 			}
 		}
@@ -1291,7 +1294,7 @@ staff_remove_staff(gpointer callback_data, guint callback_action, GtkWidget *wid
 }
 
 extern gint
-get_staff_key(gint staff)
+get_staff_key(const Score_t *score, gint staff)
 {
 
 /*      gint staff_type = -1; */
@@ -1548,7 +1551,7 @@ staff_add_staff (gpointer callback_data, guint callback_action, GtkWidget *widge
 }
 
 extern 
-void update_key_signature(void)
+void update_key_signature(Score_t *score)
 {
 
         Staff_t *staff_data;
@@ -1556,7 +1559,7 @@ void update_key_signature(void)
 	gint offset = 0;
 
 
-        staff_data = g_list_nth_data(Score.Staff_list, get_staff_selected());
+        staff_data = g_list_nth_data(score->Staff_list, get_staff_selected(score));
 
 	staff_data->key_signature = key_signature;
 
@@ -1608,9 +1611,10 @@ void update_key_signature(void)
 		break;
 	}
 
-	Score.staff_extremity_end_x += offset;
-        staff_set_current_x(get_staff_selected(), staff_get_current_x(get_staff_selected()) + offset);
-	staff_set_start_x(get_staff_selected(), offset);
+	score->staff_extremity_end_x += offset;
+        staff_set_current_x(score, get_staff_selected(score),
+			    staff_get_current_x(score, get_staff_selected(score)) + offset);
+	staff_set_start_x(score, get_staff_selected(score), offset);
 
 	refresh();
 }

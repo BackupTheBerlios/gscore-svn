@@ -45,7 +45,7 @@ void object_cursor_callback(GtkWidget *widget, GdkEventExpose *event)
 void object_doublewhole_callback(GtkWidget *widget, GdkEventExpose *event)
 {
 
-	if ( object_selected_change_type(DOUBLEWHOLE) ) {
+	if ( object_selected_change_type(&Score, DOUBLEWHOLE) ) {
 		refresh();
 	} else {
 		draw_cursor(cursor_doublewhole_bits, cursor_doublewhole_mask_bits, 16, 8);
@@ -57,7 +57,7 @@ void object_doublewhole_callback(GtkWidget *widget, GdkEventExpose *event)
 void object_whole_callback(GtkWidget *widget, GdkEventExpose *event)
 {
 
-	if ( object_selected_change_type(WHOLE) ) {
+	if ( object_selected_change_type(&Score, WHOLE) ) {
 		refresh();
 	} else {
 		draw_cursor(cursor_whole_bits, cursor_whole_mask_bits, 14, 8);
@@ -69,7 +69,7 @@ void object_whole_callback(GtkWidget *widget, GdkEventExpose *event)
 void object_half_callback(GtkWidget *widget, GdkEventExpose *event)
 {
 
-	if ( object_selected_change_type(HALF) ) {
+	if ( object_selected_change_type(&Score, HALF) ) {
 		refresh();
 	} else {
 		draw_cursor(cursor_half_bits, cursor_half_bits, 10, 29);
@@ -81,7 +81,7 @@ void object_half_callback(GtkWidget *widget, GdkEventExpose *event)
 void object_quarter_callback(GtkWidget *widget, GdkEventExpose *event)
 {
 
-	if ( object_selected_change_type(QUARTER) ) {
+	if ( object_selected_change_type(&Score, QUARTER) ) {
 		refresh();
 	} else {
         draw_cursor(cursor_quarter_bits, cursor_quarter_mask_bits, 9, 29);
@@ -94,7 +94,7 @@ void object_quarter_callback(GtkWidget *widget, GdkEventExpose *event)
 void object_eighth_callback(GtkWidget *widget, GdkEventExpose *event)
 {
 
-	if ( object_selected_change_type(EIGHTH) ) {
+	if ( object_selected_change_type(&Score, EIGHTH) ) {
 		refresh();
 	} else {
 		draw_cursor(cursor_eighth_bits, cursor_eighth_mask_bits, 15, 29);
@@ -106,7 +106,7 @@ void object_eighth_callback(GtkWidget *widget, GdkEventExpose *event)
 void object_sixteenth_callback(GtkWidget *widget, GdkEventExpose *event)
 {
 
-	if ( object_selected_change_type(SIXTEENTH) ) {
+	if ( object_selected_change_type(&Score, SIXTEENTH) ) {
 		refresh();
 	} else {
 		draw_cursor(cursor_sixteenth_bits, cursor_sixteenth_mask_bits, 15, 29);

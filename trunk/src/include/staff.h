@@ -32,39 +32,39 @@ gboolean create_staff(Score_t *score, guint8 nb_lines,
                       gdouble extremity_begin_x,
 		      gdouble extremity_begin_y);
 
-gboolean delete_staff(gint staff);
+gboolean delete_staff(Score_t *score, gint staff);
 
-gint get_staff_selected(void);
+gint get_staff_selected(const Score_t *score);
 
-gint get_staff_key_signature(guint staff);
+gint get_staff_key_signature(const Score_t * score, guint staff);
 
-gboolean staff_set_key(gint staff, gint key);
+gboolean staff_set_key(Score_t *score, gint staff, gint key);
 
 void staff_set_key_callback(void);
 
-gint staff_get_key(gint staff);
+gint staff_get_key(const Score_t *score, gint staff);
 
-gboolean staff_set_current_x(gint staff, gint current_x);
+gboolean staff_set_current_x(Score_t *score, gint staff, gint current_x);
 
-gint staff_get_current_x(gint staff);
+gint staff_get_current_x(const Score_t *score, gint staff);
 
-gdouble get_staff_extremity_begin_x(gint staff);
+gdouble get_staff_extremity_begin_x(const Score_t *score, gint staff);
 
-gdouble get_staff_extremity_begin_y(gint staff);
+gdouble get_staff_extremity_begin_y(const Score_t *score, gint staff);
 
-gboolean staff_set_key_signature(gint staff, gint key_signature);
+gboolean staff_set_key_signature(Score_t *score, gint staff, gint key_signature);
 
-gboolean staff_set_time_signature(gint staff, gint signature_type, gint number_of_beats, gint beat_duration);
+gboolean staff_set_time_signature(Score_t *score, gint staff, gint signature_type, gint number_of_beats, gint beat_duration);
 
-gboolean staff_set_midi_instrument(gint staff, gint midi_instrument);
+gboolean staff_set_midi_instrument(Score_t *score, gint staff, gint midi_instrument);
 
-gint staff_get_y_for_next(void);
+gint staff_get_y_for_next(const Score_t *score);
 
 gboolean staff_update_statusbar(void);
 
-gboolean staff_set_start_x(gint staff, gint start_x);
+gboolean staff_set_start_x(Score_t *score, gint staff, gint start_x);
 
-gint staff_get_start_x(gint staff);
+gint staff_get_start_x(Score_t *score, gint staff);
 
 void staff_key_signature(gpointer callback_data, guint callback_action, GtkWidget *widget);
 
@@ -78,18 +78,18 @@ gint get_staff_id(gdouble y);
 
 void deselect_all_staffs(void);
 
-void set_staff_selected(gint staff);
+void set_staff_selected(Score_t *score, gint staff);
 
-void set_staff_unselect(gint staff);
+void set_staff_unselect(Score_t *score, gint staff);
 
 gint staff_remove_staff(gpointer callback_data, guint callback_action, GtkWidget *widget);
 
-gint get_staff_key(gint staff);
+gint get_staff_key(const Score_t *score, gint staff);
 
 void test_remove(void);
 
 void staff_add_staff (gpointer callback_data, guint callback_action, GtkWidget * widget);
 
-gdouble get_staff_extremity_end_y(gint staff_id);
+gdouble get_staff_extremity_end_y(const Score_t *score, gint staff_id);
 
 #endif

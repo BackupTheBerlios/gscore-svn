@@ -61,8 +61,8 @@ mouse_button_press_event(GtkWidget *widget, GdkEventButton *event, gpointer user
 
 		undo_selection();
 
-		set_staff_unselect(get_staff_selected());
-		set_staff_selected(get_staff_id(event->y));
+		set_staff_unselect(&Score, get_staff_selected(&Score));
+		set_staff_selected(&Score, get_staff_id(event->y));
 
 		set_selection_origin(widget, (GdkEventButton *)event);
 	}

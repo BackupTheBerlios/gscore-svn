@@ -152,7 +152,7 @@ highlight_selection(gdouble x_origin, gdouble y_origin, gdouble x, gdouble y)
 	gdouble start_x = 0;
 	gdouble object_x = 0;
 
-        staff = g_list_nth_data(Score.Staff_list, get_staff_selected());
+        staff = g_list_nth_data(Score.Staff_list, get_staff_selected(&Score));
 
 	/* Parsing Objects structure */
 	listrunner = g_list_first(staff->Object_list);
@@ -325,7 +325,7 @@ undo_selection(void)
 	GList *listrunner;
 	Staff_t *staff;
 
-        staff = g_list_nth_data(Score.Staff_list, get_staff_selected());
+        staff = g_list_nth_data(Score.Staff_list, get_staff_selected(&Score));
 
 	/* Parsing Objects structure */
 	listrunner = g_list_first(staff->Object_list);

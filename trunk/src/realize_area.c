@@ -450,7 +450,7 @@ realize_key_signature(Staff_t *staff)
 	}
 
 	/* I do *NOT* like that: what will happen if you decide not to see the keysignature ?!!! */
-	staff_set_start_x(get_staff_selected(),
+	staff_set_start_x(&Score, get_staff_selected(&Score),
 			  timesignature_x);
 
 	return 0;
@@ -486,8 +486,8 @@ static gboolean
 realize_object(Staff_t *staff, Object_t *object, gboolean display_barlines, gboolean display_measure_number)
 {
 
-        Staff_t *tmpstaff;
-        Object_t *tmpobj;
+/*         Staff_t *tmpstaff; */
+/*         Object_t *tmpobj; */
 
         Object_t *object_next;
 /* 	Object_t *object_previous; */
@@ -1228,17 +1228,17 @@ gboolean score_area_callback(GtkWidget *widget, GdkEventExpose *event, gpointer 
 	/* BEGIN: Display the Tempo */
 	if (Score.Display->tempo) {
 		draw_pixmap(Score.area->window, "pixmaps/tb_quarter.xpm",
-			    get_staff_extremity_begin_x(0) + Spacings.Tempo.xpfm,
-			    get_staff_extremity_begin_y(0) - Spacings.Tempo.ypfm);
+			    get_staff_extremity_begin_x(&Score,0) + Spacings.Tempo.xpfm,
+			    get_staff_extremity_begin_y(&Score, 0) - Spacings.Tempo.ypfm);
 
 		if (g_str_equal(Score.tempo_text->str,""))
 			set_text(g_strdup_printf("= %d", Score.tempo),
-				 get_staff_extremity_begin_x(0) + Spacings.Tempo.xpfm + 20,
-				 get_staff_extremity_begin_y(0) - Spacings.Tempo.ypfm + 5);
+				 get_staff_extremity_begin_x(&Score, 0) + Spacings.Tempo.xpfm + 20,
+				 get_staff_extremity_begin_y(&Score, 0) - Spacings.Tempo.ypfm + 5);
 		else
 			set_text(g_strdup_printf("= %d (%s)", Score.tempo, Score.tempo_text->str),
-				 get_staff_extremity_begin_x(0) + Spacings.Tempo.xpfm + 20,
-				 get_staff_extremity_begin_y(0) - Spacings.Tempo.ypfm + 5);
+				 get_staff_extremity_begin_x(&Score, 0) + Spacings.Tempo.xpfm + 20,
+				 get_staff_extremity_begin_y(&Score, 0) - Spacings.Tempo.ypfm + 5);
 	}
 	/* END: Display the Tempo */
 
