@@ -110,27 +110,27 @@ int my_handler(abcHandle h)
 	theScore->Identity->composer = g_string_new((gchar *) s);
 	g_printf("Composer : %s\n", s);
       } else if(strcmp(x,"S_FIELD_V")==0) {
-/* 	create_staff(5, 0,0,0); */
+	create_staff(theScore, 5, 8, 0, 0);
 	/* Copy/Paste from staff.c */
 	/* FIXME: we should find a better way to create objects */
-	theScore->Staff = g_malloc(sizeof(Staff_t));
-	theScore->Staff->nb_lines= 5;
-	theScore->Staff->space_btw_lines = 0;
-        theScore->Staff->is_selected = FALSE;
-        theScore->Staff->key = NO_KEY;
-        theScore->Staff->key_signature = KEY_SIGNATURE_EMPTY;
-        theScore->Staff->time_signature[0] = TIME_SIGNATURE_NORMAL;
-        theScore->Staff->time_signature[1] = 4;
-        theScore->Staff->time_signature[2] = 4;
-        theScore->Staff->measure_number = 1;
-        theScore->Staff->total_measures = theScore->Staff->measure_number;
-        theScore->Staff->extremity_begin_x = 0;
-        theScore->Staff->extremity_begin_y = 0;
-        theScore->Staff->midi_instrument = MIDI_GRAND_PIANO;
-        theScore->Staff->Object_list = NULL;
+/* 	theScore->Staff = g_malloc(sizeof(Staff_t)); */
+/* 	theScore->Staff->nb_lines= 5; */
+/* 	theScore->Staff->space_btw_lines = 0; */
+/*         theScore->Staff->is_selected = FALSE; */
+/*         theScore->Staff->key = NO_KEY; */
+/*         theScore->Staff->key_signature = KEY_SIGNATURE_EMPTY; */
+/*         theScore->Staff->time_signature[0] = TIME_SIGNATURE_NORMAL; */
+/*         theScore->Staff->time_signature[1] = 4; */
+/*         theScore->Staff->time_signature[2] = 4; */
+/*         theScore->Staff->measure_number = 1; */
+/*         theScore->Staff->total_measures = theScore->Staff->measure_number; */
+/*         theScore->Staff->extremity_begin_x = 0; */
+/*         theScore->Staff->extremity_begin_y = 0; */
+/*         theScore->Staff->midi_instrument = MIDI_GRAND_PIANO; */
+/*         theScore->Staff->Object_list = NULL; */
 
-	theScore->Staff_list = g_list_append(theScore->Staff_list,
-					     theScore->Staff);
+/* 	theScore->Staff_list = g_list_append(theScore->Staff_list, */
+/* 					     theScore->Staff); */
 
 	g_printf("Voice: %s\n", s);
 	++numStaff;
@@ -143,19 +143,19 @@ int my_handler(abcHandle h)
       break;
     case T_NOTE:
       the_note = parse_note(s);
-/*       add_object(numStaff,HALF, 0, 0, 0,0,0,0,0,0,0,the_note->pitch,0,FALSE); */
+      add_object(theScore, numStaff,HALF, 0, 0, 0,0,0,0,0,0,0,the_note->pitch,0,FALSE);
       /* FIXME: Use generic function when one is available */
-      theScore->Staff->Object = g_malloc(sizeof(Object_t));
-      theScore->Staff->Object->id= ++theScore->object_id;
-      theScore->Staff->Object->type = HALF; /* TODO: Calculate the real value */
-      theScore->Staff->Object->nature = 0;
-      theScore->Staff->Object->accidentals = 0;
-      theScore->Staff->Object->group_id = 0;
-      theScore->Staff->Object->is_selected = FALSE;
+/*       theScore->Staff->Object = g_malloc(sizeof(Object_t)); */
+/*       theScore->Staff->Object->id= ++theScore->object_id; */
+/*       theScore->Staff->Object->type = HALF; /\* TODO: Calculate the real value *\/ */
+/*       theScore->Staff->Object->nature = 0; */
+/*       theScore->Staff->Object->accidentals = 0; */
+/*       theScore->Staff->Object->group_id = 0; */
+/*       theScore->Staff->Object->is_selected = FALSE; */
 
-      theScore->Staff->Object_list = g_list_append(theScore->Staff->Object_list,
-						   theScore->Staff->Object);
-      theScore->staff_extremity_end_x += object_get_spacing(HALF);
+/*       theScore->Staff->Object_list = g_list_append(theScore->Staff->Object_list, */
+/* 						   theScore->Staff->Object); */
+/*       theScore->staff_extremity_end_x += object_get_spacing(HALF); */
       
       
       g_print("Note: %s\n", s);
