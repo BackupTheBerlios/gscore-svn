@@ -1,3 +1,11 @@
+2005-01-13 toady <toady@gscore.org>
+
+	* src/realize_area.c: Fixed bug #2870
+	
+2005-01-11 toady <toady@gscore.org>
+
+	* src/file.c: Fixed bug #3025, reported by Jerome Marrec
+	
 2005-01-05 toady <toady@gscore.org>
 
 	* src/mouse_event.c: Fixed bug pointed by Raymond Ostertag. Notes selected even if the cursor is not selected.

@@ -738,6 +738,12 @@ realize_object(Staff_t *staff, Object_t *object, gboolean display_barlines, gboo
 		if ( object->nature & O_BEAMED ) {
 			if ( object->nature & O_LAST_BEAMED ) {
 				if ( y < staff->extremity_begin_y + average ) {
+					if ( object->nature & O_STACCATO )
+						draw_point(staff->start_x + object_x + 4, y - 8);
+				
+					if ( object->nature & O_TENUTO )
+						draw_line(0,0,0, staff->start_x + object_x, y - 8, staff->start_x + object_x + 8, y -8);
+
 					draw_note(QUARTER_HEAD,
 						  is_selected,
 						  staff->start_x + object_x,
@@ -747,6 +753,12 @@ realize_object(Staff_t *staff, Object_t *object, gboolean display_barlines, gboo
 						  staff->start_x + object_x,
 						  y + 3);
 				} else {
+					if ( object->nature & O_STACCATO )
+						draw_point(staff->start_x + object_x + 3, y + 13);
+				
+					if ( object->nature & O_TENUTO )
+						draw_line(0,0,0, staff->start_x + object_x, y + 13, staff->start_x + object_x + 8, y + 13);
+
 					draw_note(QUARTER_HEAD,
 						  is_selected,
 						  staff->start_x + object_x,
@@ -758,6 +770,12 @@ realize_object(Staff_t *staff, Object_t *object, gboolean display_barlines, gboo
 				}
 			} else {
 				if ( y < staff->extremity_begin_y + average ) {
+					if ( object->nature & O_STACCATO )
+						draw_point(staff->start_x + object_x + 4, y - 8);
+				
+					if ( object->nature & O_TENUTO )
+						draw_line(0,0,0, staff->start_x + object_x, y - 8, staff->start_x + object_x + 8, y -8);
+
 					draw_note(QUARTER_HEAD,
 						  is_selected,
 						  staff->start_x + object_x,
@@ -769,6 +787,12 @@ realize_object(Staff_t *staff, Object_t *object, gboolean display_barlines, gboo
 
 					beam_draw_beam(staff, object, object_x - 8, y + 25, ynext + 25);
 				} else {
+					if ( object->nature & O_STACCATO )
+						draw_point(staff->start_x + object_x + 3, y + 13);
+				
+					if ( object->nature & O_TENUTO )
+						draw_line(0,0,0, staff->start_x + object_x, y + 13, staff->start_x + object_x + 8, y + 13);
+
 					draw_note(QUARTER_HEAD,
 						  is_selected,
 						  staff->start_x + object_x,
@@ -835,6 +859,12 @@ realize_object(Staff_t *staff, Object_t *object, gboolean display_barlines, gboo
 		if ( object->nature & O_BEAMED ) {
 			if ( object->nature & O_LAST_BEAMED ) {
 				if ( y < staff->extremity_begin_y + average ) {
+					if ( object->nature & O_STACCATO )
+						draw_point(staff->start_x + object_x + 4, y - 8);
+				
+					if ( object->nature & O_TENUTO )
+						draw_line(0,0,0, staff->start_x + object_x, y - 8, staff->start_x + object_x + 8, y -8);
+
 					draw_note(QUARTER_HEAD,
 						  is_selected,
 						  staff->start_x + object_x,
@@ -844,6 +874,12 @@ realize_object(Staff_t *staff, Object_t *object, gboolean display_barlines, gboo
 						  staff->start_x + object_x,
 						  y + 3);
 				} else {
+					if ( object->nature & O_STACCATO )
+						draw_point(staff->start_x + object_x + 3, y + 13);
+
+					if ( object->nature & O_TENUTO )
+						draw_line(0,0,0, staff->start_x + object_x, y + 13, staff->start_x + object_x + 8, y + 13);
+
 					draw_note(QUARTER_HEAD,
 						  is_selected,
 						  staff->start_x + object_x,
@@ -855,6 +891,12 @@ realize_object(Staff_t *staff, Object_t *object, gboolean display_barlines, gboo
 				}
 			} else {
 				if ( y < staff->extremity_begin_y + average ) {
+					if ( object->nature & O_STACCATO )
+						draw_point(staff->start_x + object_x + 4, y - 8);
+				
+					if ( object->nature & O_TENUTO )
+						draw_line(0,0,0, staff->start_x + object_x, y - 8, staff->start_x + object_x + 8, y -8);
+
 					draw_note(QUARTER_HEAD,
 						  is_selected,
 						  staff->start_x + object_x,
@@ -867,6 +909,12 @@ realize_object(Staff_t *staff, Object_t *object, gboolean display_barlines, gboo
 					beam_draw_beam(staff, object, object_x - 8, y + 46, ynext + 46);
 
 				} else {
+					if ( object->nature & O_STACCATO )
+						draw_point(staff->start_x + object_x + 3, y + 13);
+
+					if ( object->nature & O_TENUTO )
+						draw_line(0,0,0, staff->start_x + object_x, y + 13, staff->start_x + object_x + 8, y + 13);
+
 					draw_note(QUARTER_HEAD,
 						  is_selected,
 						  staff->start_x + object_x,

@@ -113,10 +113,8 @@ import_score(GtkButton *button, gpointer user_data)
 
 	filechooser = (GtkWidget *)user_data;
 
-/* 	filename = gtk_entry_get_text(GTK_ENTRY(GTK_FILE_SELECTION(filechooser) */
-/* 						->selection_entry)); */
-
-	filename = gtk_file_selection_get_filename(GTK_FILE_SELECTION(filechooser));
+	filename = gtk_entry_get_text(GTK_ENTRY(GTK_FILE_SELECTION(filechooser)
+						->selection_entry));
 
 	printf("File choosen:%s\n", filename);
 
@@ -127,6 +125,7 @@ import_score(GtkButton *button, gpointer user_data)
 		return;
 	}
 
+	filename = gtk_file_selection_get_filename(GTK_FILE_SELECTION(filechooser));
 
 	GSCORE_PLUGIN_INIT(plugin);
 	plugin = gscore_plugin_get_from_extension(extension);
@@ -200,9 +199,8 @@ export_score(GtkButton *button, gpointer user_data)
 
 	filechooser = (GtkWidget *)user_data;
 
-/* 	text = gtk_entry_get_text(GTK_ENTRY(GTK_FILE_SELECTION(filechooser) */
-/* 					    ->selection_entry)); */
-	filename = gtk_file_selection_get_filename(GTK_FILE_SELECTION(filechooser));
+	filename = gtk_entry_get_text(GTK_ENTRY(GTK_FILE_SELECTION(filechooser)
+						->selection_entry));
 
 	extension = strrchr(filename, '.');
 
@@ -210,6 +208,8 @@ export_score(GtkButton *button, gpointer user_data)
 		gw_message_error("No extension chosen (NULL)");
 		return;
 	}
+
+	filename = gtk_file_selection_get_filename(GTK_FILE_SELECTION(filechooser));
 
 	GSCORE_PLUGIN_INIT(plugin);
 	plugin = gscore_plugin_get_from_extension(extension);
