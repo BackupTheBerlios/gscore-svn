@@ -141,5 +141,5 @@ gboolean abc_filter_import (Score_t **score,
         GSCORE_PLUGIN_STRUCT_INIT(*score);
         *score = spi;
 
-	return TRUE;
+	return abc_load_file(filename,score);
 }
