@@ -2,7 +2,7 @@
  * gscore.h
  * gscore - a musical score editor
  *
- * (C) Copyright 2001-2004 Sebastien Tricaud
+ * (C) Copyright 2001-2005 Sebastien Tricaud
  * e-mail : toady@gscore.og
  * URL    : http://www.gscore.org
  *
@@ -36,7 +36,7 @@
 /* Set debug to 0 to avoid the g_messages */
 #define DEBUG 0
 
-#define VERSION "0.0.7"
+#define VERSION "0.0.9"
 
 /* Few extern variables */
 extern GladeXML *gladexml;

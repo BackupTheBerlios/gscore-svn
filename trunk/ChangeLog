@@ -1,7 +1,7 @@
-2004-12-28 toady <toady@gscore.org>
+2005-01-05 toady <toady@gscore.org>
 
-	* src/main.c: reuse of splash screen
-
+	* src/mouse_event.c: Fixed bug pointed by Raymond Ostertag. Notes selected even if the cursor is not selected.
+	
 2004-12-17 toady <toady@gscore.org>
      
 	* SConstruct: Applied patch from Julien Salort for better prefixing <julien.salort ens-lyon fr>

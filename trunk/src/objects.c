@@ -310,11 +310,11 @@ Object_t *object_get_next(Object_t *object)
 }
 
 /* Returns the object before the one provided as parameter */
-Object_t *object_get_last(Object_t *object)
+Object_t *object_get_previous(Object_t *object)
 {
 	GList *listrunner_staff;
 	GList *listrunner_object;
-	GList *list_object_last;
+	GList *list_object_previous;
 
 	Staff_t *staff_data;
 	Object_t *object_data;
@@ -329,9 +329,9 @@ Object_t *object_get_last(Object_t *object)
 			object_data = (Object_t *)listrunner_object->data;
 
 			if (object_data->id == object->id) {
-			  list_object_last = g_list_last(listrunner_object);
-			  if (list_object_last)
-			    return (Object_t *) list_object_last->data;
+			  list_object_previous  = g_list_previous(listrunner_object);
+			  if (list_object_previous)
+				  return (Object_t *) list_object_previous->data;
 			}
 
 			listrunner_object = g_list_next(listrunner_object);

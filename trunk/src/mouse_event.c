@@ -28,7 +28,12 @@ mouse_button_release_event(GtkWidget *widget, GdkEventButton *event, gpointer us
 /* 	printf("Selection.x_origin = %f, Selection.y_origin = %f, Selection.x = %f, Selection.y = %f\n", */
 /* 	       Selection.x_origin, Selection.y_origin, Selection.x, Selection.y); */
 
-	highlight_selection(Selection.x_origin, Selection.y_origin, Selection.x, Selection.y);
+	if ( Selection.object_type == CURSOR ) {
+
+		highlight_selection(Selection.x_origin, Selection.y_origin, 
+				    Selection.x, Selection.y);
+
+	}
 
         Selection.x_origin = 0;
         Selection.y_origin = 0;

@@ -34,7 +34,7 @@ gboolean remove_object_selected(void);
 
 Object_t *object_get_next(Object_t *object);
 
-Object_t *object_get_last(Object_t *object);
+Object_t *object_get_previous(Object_t *object);
 
 Object_t *object_get_left(gdouble x);
 

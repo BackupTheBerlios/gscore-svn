@@ -483,6 +483,7 @@ realize_object(Staff_t *staff, Object_t *object, gboolean display_barlines, gboo
 {
 
         Object_t *object_next;
+	Object_t *object_previous;
 	gint y = 0;
 	gint ynext = 0;
 	gdouble extremity_end_y = 0;
@@ -494,8 +495,13 @@ realize_object(Staff_t *staff, Object_t *object, gboolean display_barlines, gboo
 	y = get_y_from_position(staff->key, staff->extremity_begin_y, object->pitch);
 
 	object_next = object_get_next(object);
-	if (object_next)
-	  ynext = get_y_from_position(staff->key, staff->extremity_begin_y, object_next->pitch);
+	if (object_next) {
+		ynext = get_y_from_position(staff->key, staff->extremity_begin_y, object_next->pitch);
+	}
+
+/* 	object_previous = object_get_previous(object); */
+/* 	if (object_previous) { */
+/* 	} */
 
 	extremity_end_y =  staff->extremity_begin_y +(staff->nb_lines - 1) * staff->space_btw_lines + staff->nb_lines - 1;
 	average = (extremity_end_y - staff->extremity_begin_y) / 2;

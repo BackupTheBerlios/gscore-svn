@@ -79,12 +79,10 @@ beam_notes_selected(void)
 extern void
 beam_draw_beam(Staff_t *staff, Object_t *object, guint object_x, gint y, gint ynext)
 {
-        Object_t *object_next;
 	GdkGC *gc;
 
 	guint thickness = 0;
 
-	object_next = (Object_t *)object_get_next(object);
 
 	gc = gdk_gc_new(Score.area->window);
 

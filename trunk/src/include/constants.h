@@ -2,7 +2,7 @@
  * constants.h
  * gscore - a musical score editor
  *
- * (C) Copyright 2001-2004 Sebastien Tricaud
+ * (C) Copyright 2001-2005 Sebastien Tricaud
  * e-mail : toady@gscore.og
  * URL    : http://www.gscore.org
  *
@@ -23,7 +23,7 @@
 #ifndef _CONSTANT_H_
 #define _CONSTANT_H_
 
-#define APP_VERSION "0.0.7"
+#define APP_VERSION "0.0.9"
 
 /***
  *** Pixmaps location
@@ -177,6 +177,15 @@
 #define DYNAMIC_F 206
 #define DYNAMIC_FF 207
 #define DYNAMIC_FFF 208
+
+/* Clipboard */
+/* When you select quarters and you want to change them into half, this is called */
+#define ACTION_CHANGE_OBJECT 300
+#define ACTION_CHANGE_STAFF 301	      /* Change Key Signature, etc. */
+#define ACTION_ADD_OBJECT 302         /* When you add an object */
+#define ACTION_ADD_STAFF 303          /* When you add a staff */
+#define ACTION_DEL_OBJECT 304
+#define ACTION_DEL_STAFF 305
 
 
 /* MIDI */
