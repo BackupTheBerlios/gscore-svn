@@ -215,15 +215,15 @@ void glade_set_widgets(void)
 
 	Score.area = glade_xml_get_widget (gladexml, "sw_score_da");
 
-	gtk_widget_set_events(Score.area, GDK_EXPOSURE_MASK
-			      | GDK_LEAVE_NOTIFY_MASK
-			      | GDK_BUTTON_PRESS_MASK
-			      | GDK_BUTTON_MOTION_MASK
-                              | GDK_BUTTON1_MOTION_MASK
-                              | GDK_KEY_PRESS_MASK
-                              | GDK_KEY_RELEASE_MASK
-			      | GDK_BUTTON_RELEASE_MASK
-			      | GDK_POINTER_MOTION_MASK);
+/* 	gtk_widget_set_events(Score.area, GDK_EXPOSURE_MASK */
+/* 			      | GDK_LEAVE_NOTIFY_MASK */
+/* 			      | GDK_BUTTON_PRESS_MASK */
+/* 			      | GDK_BUTTON_MOTION_MASK */
+/*                               | GDK_BUTTON1_MOTION_MASK */
+/*                               | GDK_KEY_PRESS_MASK */
+/*                               | GDK_KEY_RELEASE_MASK */
+/* 			      | GDK_BUTTON_RELEASE_MASK */
+/* 			      | GDK_POINTER_MOTION_MASK); */
 
 	Score.height = 500;
 	Score.width = 500;
@@ -248,6 +248,8 @@ int main(int argc, char *argv[])
 	gchar *full_filename;
 	GscorePlugin *plugin;
 	plugin_pnf *ppnf;
+
+        gchar *extension;
 
 /* 	gint scale = 0; */
 
@@ -279,6 +281,7 @@ int main(int argc, char *argv[])
 	}
 
 	splash_destroy();
+
 
 	gladexml = glade_xml_new(get_file_from_data_dir("glade/gscore.glade"), NULL, NULL);
 
@@ -318,6 +321,26 @@ int main(int argc, char *argv[])
 		fprintf(fp, "Gscore 0.0.9\n");
 	}
 	fclose(fp);
+
+        /* BEGIN: Open a file from the command line */
+        if (argc > 1) {
+                extension = strrchr(argv[1], '.');
+
+                if ( ! extension ) {
+                        printf("The file has no extension, gscore cannot guess the appropriate plugin\n");
+                }
+
+                GSCORE_PLUGIN_INIT(plugin);
+                plugin = gscore_plugin_get_from_extension(extension);
+
+                if ( ! plugin ) {
+                        printf("No plugin available for this file, feel free to write one :)\n");
+                }
+
+                plugin->filter->import(&Score, argv[1], NULL);
+        }
+
+        /* END: Open a file from the command line */
 
 
 	gtk_main();
