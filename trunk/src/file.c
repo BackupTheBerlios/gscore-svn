@@ -104,11 +104,17 @@ import_score(GtkButton *button, gpointer user_data)
 {
 	const gchar *filename;
 	const gchar *extension;
+	Display_t *display_save;
+	GtkWidget *area_save;
+	
 
 	GtkWidget *filechooser;
 
 	GscorePlugin *plugin;
 	Score_t     *pi;
+
+	display_save = Score.Display;
+	area_save = Score.area;
 
 	filechooser = (GtkWidget *)user_data;
 
@@ -137,6 +143,8 @@ import_score(GtkButton *button, gpointer user_data)
 	plugin->filter->import(&pi, filename, NULL);
 
         Score = *pi;
+	Score.Display = display_save;
+	Score.area = area_save;
 
 	g_print("Test: %d\n", Score.tempo);
 
