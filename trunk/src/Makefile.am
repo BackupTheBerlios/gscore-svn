@@ -1,15 +1,15 @@
 SUBDIRS = 
 
-DEFS = -I$(top_srcdir)/ -I$(srcdir)/include/ 
-	-DPLUGINS_DIR=\"@plugins_dir@\" \
-	-DDATADIR=\"/usr/local\" \
-	@LIBGLADE2_CFLAGS@
+DEFS = -I$(top_srcdir)/ -I$(srcdir)/include/ \
+	-DPLUGINS_DIR=\"$(plugins_dir)\" \
+	-DDATA_DIR=\"/usr/local\" \
+	$(LIBGLADE2_CFLAGS)
 
 bin_PROGRAMS = gscore
 gscore_LDFLAGS = -export-dynamic
-gscore_LDADD = @LIBGLADE2_LIBS@
+gscore_LDADD = $(LIBGLADE2_LIBS)
 
-gscore_SOURCES = 			\
+gscore_SOURCES = 	\
 	articulation.c \
 	beam.c \
 	common.c \

@@ -50,9 +50,9 @@ fi
 
 AC_SUBST(localstatedir)
 
-plugin_dir=$libdir/pvs
+plugins_dir=$libdir/pvs
 
-AC_SUBST(plugin_dir)
+AC_SUBST(plugins_dir)
 
 dnl **************************************************
 dnl * Check for Gtkdoc.                              *
@@ -109,6 +109,5 @@ echo "    - Glib version           : ${GLIB2_VERSION}"
 echo "    - GTK+ version           : ${GTK2_VERSION}"
 echo "    - Libglade version       : ${LIBGLADE2_VERSION}"
 echo
-echo "    - Libglade CFLAGS        : ${LIBGLADE2_CFLAGS}"
-echo "    - Libglade LIBS          : ${LIBGLADE2_LIBS}"
+echo "    You can now run 'make' to compile gscore"
 echo
