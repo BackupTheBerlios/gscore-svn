@@ -239,6 +239,42 @@ void glade_set_widgets(void)
 
 }
 
+gboolean load_plugin_from_command_line(gchar *filename)
+{
+	GscorePlugin *plugin;
+	Score_t     *pi;
+
+	Display_t *display_save;
+	GtkWidget *area_save;
+
+        gchar *extension;
+
+
+	display_save = Score.Display;
+	area_save = Score.area;
+
+        extension = strrchr(filename, '.');
+
+        if ( ! extension ) {
+                printf("The file has no extension, gscore cannot guess the appropriate plugin\n");
+        }
+
+        GSCORE_PLUGIN_INIT(plugin);
+        plugin = gscore_plugin_get_from_extension(extension);
+
+        if ( ! plugin ) {
+                printf("No plugin available for this file, feel free to write one :)\n");
+        }
+
+        plugin->filter->import(&pi, filename, NULL);
+
+        Score = *pi;
+	Score.Display = display_save;
+	Score.area = area_save;
+
+        return TRUE;
+
+}
 
 int main(int argc, char *argv[]) 
 {
@@ -249,7 +285,6 @@ int main(int argc, char *argv[])
 	GscorePlugin *plugin;
 	plugin_pnf *ppnf;
 
-        gchar *extension;
 
 /* 	gint scale = 0; */
 
@@ -322,25 +357,9 @@ int main(int argc, char *argv[])
 	}
 	fclose(fp);
 
-        /* BEGIN: Open a file from the command line */
-        if (argc > 1) {
-                extension = strrchr(argv[1], '.');
-
-                if ( ! extension ) {
-                        printf("The file has no extension, gscore cannot guess the appropriate plugin\n");
-                }
-
-                GSCORE_PLUGIN_INIT(plugin);
-                plugin = gscore_plugin_get_from_extension(extension);
-
-                if ( ! plugin ) {
-                        printf("No plugin available for this file, feel free to write one :)\n");
-                }
-
-                plugin->filter->import(&Score, argv[1], NULL);
-        }
-
-        /* END: Open a file from the command line */
+        /* Open a file from the command line */
+        if (argc > 1)
+                load_plugin_from_command_line(argv[1]);
 
 
 	gtk_main();
