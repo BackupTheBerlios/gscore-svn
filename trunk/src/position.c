@@ -237,9 +237,9 @@ gdouble get_y_from_position_no_key(guint16 space_btwn_lines, gint zero, gdouble 
                     continue;
                }
                
-               if ( i == -2 ) {
-                    value += (height / 2) + 1;
-               }
+/*                if ( i == -2 ) { */
+/*                     value += (height / 2) + 1; */
+/*                } */
 
                if ( ! is_even(i) ) {
                     value += (height / 2);

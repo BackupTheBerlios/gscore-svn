@@ -357,119 +357,120 @@ KeyCursor_t *score_get_cursor_from_widget(GtkWidget *widget)
 
 void score_create_window(Score_t *score)
 {
-  Display_t *Display;
-  Score_selection_t *selection;
-  KeyCursor_t *KeyCursor;
-  GladeXML *xml;
-  GtkWidget *window;
-  GtkWidget *area;
+        Display_t *Display;
+        Score_selection_t *selection;
+        KeyCursor_t *KeyCursor;
+        GladeXML *xml;
+        GtkWidget *window;
+        GtkWidget *area;
   
-  selection = g_malloc(sizeof(Score_selection_t));
-  selection->x_origin = 0;
-  selection->y_origin = 0;
-  selection->x = 0;
-  selection->y = 0;
+        selection = g_malloc(sizeof(Score_selection_t));
+        selection->x_origin = 0;
+        selection->y_origin = 0;
+        selection->x = 0;
+        selection->y = 0;
   
-  if(score==NULL) {
-    score = g_malloc(sizeof(Score_t));
+        if(score==NULL) {
+                score = g_malloc(sizeof(Score_t));
     	
 
-    score->Staff_list = NULL;   /* Staff list */
+                score->Staff_list = NULL;   /* Staff list */
+                
+                score->object_id = 0;
+                score->tempo = 60;
+                score->tempo_text = g_string_new("");
 
-	score->tempo = 60;
-	score->tempo_text = g_string_new("");
+                score->Identity = g_malloc(sizeof(Identity_t));
+                score->Identity->title = g_string_new(_("My Score"));
+                score->Identity->subtitle = g_string_new(_("made with gscore"));
+                score->Identity->composer = g_string_new(_("gscore's user"));
 
-	score->Identity = g_malloc(sizeof(Identity_t));
-	score->Identity->title = g_string_new(_("My Score"));
-	score->Identity->subtitle = g_string_new(_("made with gscore"));
-	score->Identity->composer = g_string_new(_("gscore's user"));
-
-	score->staff_extremity_end_x = 100; /* Just a value to start, nothing really important */
-	score->staff_startx = Spacings.Clefs.sb + STANDARD_KEY_SIZE + Spacings.Clefs.sa + 
-		get_key_signature_spacing(KEY_SIGNATURE_TREBLE_EMPTY) + Spacings.KeySignatures.saks +
-		STANDARD_TIME_SIGNATURE_SIZE + Spacings.TimeSignatures.sats;
+                score->staff_extremity_end_x = 100; /* Just a value to start, nothing really important */
+                score->staff_startx = Spacings.Clefs.sb + STANDARD_KEY_SIZE + Spacings.Clefs.sa + 
+                        get_key_signature_spacing(KEY_SIGNATURE_TREBLE_EMPTY) + Spacings.KeySignatures.saks +
+                        STANDARD_TIME_SIGNATURE_SIZE + Spacings.TimeSignatures.sats;
 
 
-	/* Create a Staff, to have something when we start the software */
+                /* Create a Staff, to have something when we start the software */
 
-	if( ! create_staff(score, 5, 8, Spacings.Measures.xpsfm, Spacings.Measures.ypsfm))
-		printf("ERROR CREATING STAFF");
+                if( ! create_staff(score, 5, 8, Spacings.Measures.xpsfm, Spacings.Measures.ypsfm))
+                        printf("ERROR CREATING STAFF");
 
-	set_staff_selected(score, 0);
+                set_staff_selected(score, 0);
 
-	staff_set_key(score, get_staff_selected(score), TREBLE_KEY);
+                staff_set_key(score, get_staff_selected(score), TREBLE_KEY);
 
-	staff_set_key_signature(score, get_staff_selected(score), KEY_SIGNATURE_TREBLE_EMPTY);
+                staff_set_key_signature(score, get_staff_selected(score), KEY_SIGNATURE_TREBLE_EMPTY);
 
-/* 	set_staff_unselect(get_staff_selected()); */
-/* 	set_staff_selected(1); */
+                /* 	set_staff_unselect(get_staff_selected()); */
+                /* 	set_staff_selected(1); */
 
-  }
+        }
 
-  KeyCursor = g_malloc(sizeof(KeyCursor_t));
+        KeyCursor = g_malloc(sizeof(KeyCursor_t));
   
-  KeyCursor->position = 0;
+        KeyCursor->position = 0;
 
 
 
-  Display = g_malloc(sizeof(Display_t));
-  Display->measure_number = TRUE;
-  Display->instruments = FALSE;
-  Display->clefs = TRUE;
-  Display->score_expressions = TRUE;
-  Display->barlines = TRUE;
-  Display->ending_bar = TRUE;
-  Display->key_signature = TRUE;
-  Display->time_signature = TRUE;
-  Display->tempo = TRUE;
+        Display = g_malloc(sizeof(Display_t));
+        Display->measure_number = TRUE;
+        Display->instruments = FALSE;
+        Display->clefs = TRUE;
+        Display->score_expressions = TRUE;
+        Display->barlines = TRUE;
+        Display->ending_bar = TRUE;
+        Display->key_signature = TRUE;
+        Display->time_signature = TRUE;
+        Display->tempo = TRUE;
 
-/*   xml = glade_xml_new(get_file_from_data_dir("glade/gscore.glade"), */
-/* 		      "score_window", NULL); */
-  /* BEGIN Dirty hack */
-  xml = glade_xml_new(get_file_from_data_dir("glade/gscore.glade"),
-		      NULL, NULL);
-  window = glade_xml_get_widget(xml, "main_window");
-  gtk_widget_hide(window);
-  /* END Dirty hack */
-  window = glade_xml_get_widget(xml, "score_window");
-  glade_xml_signal_autoconnect(xml) ;
+        /*   xml = glade_xml_new(get_file_from_data_dir("glade/gscore.glade"), */
+        /* 		      "score_window", NULL); */
+        /* BEGIN Dirty hack */
+        xml = glade_xml_new(get_file_from_data_dir("glade/gscore.glade"),
+                            NULL, NULL);
+        window = glade_xml_get_widget(xml, "main_window");
+        gtk_widget_hide(window);
+        /* END Dirty hack */
+        window = glade_xml_get_widget(xml, "score_window");
+        glade_xml_signal_autoconnect(xml) ;
   
-  g_signal_connect(GTK_OBJECT(window), "key_press_event",
-		   G_CALLBACK(score_key_press_event), NULL);
+        g_signal_connect(GTK_OBJECT(window), "key_press_event",
+                         G_CALLBACK(score_key_press_event), NULL);
 
-  area = glade_xml_get_widget(xml, "sw_score_da");
+        area = glade_xml_get_widget(xml, "sw_score_da");
 
-  g_object_set_data(G_OBJECT(window), "score", score);
-  g_object_set_data(G_OBJECT(window), "area", area);
-  g_object_set_data(G_OBJECT(window), "selection", selection);
-  g_object_set_data(G_OBJECT(window), "cursor", KeyCursor);
-  g_object_set_data(G_OBJECT(window), "display", Display);
+        g_object_set_data(G_OBJECT(window), "score", score);
+        g_object_set_data(G_OBJECT(window), "area", area);
+        g_object_set_data(G_OBJECT(window), "selection", selection);
+        g_object_set_data(G_OBJECT(window), "cursor", KeyCursor);
+        g_object_set_data(G_OBJECT(window), "display", Display);
 
-/*   glade_set_widgets(xml); */
-  score->height = 500;
-  score->width = 500;
+        /*   glade_set_widgets(xml); */
+        score->height = 500;
+        score->width = 500;
   
-  g_signal_connect(GTK_OBJECT(area), "expose_event",
-		   G_CALLBACK(score_area_callback), NULL);
-  g_signal_connect(GTK_OBJECT(area), "button_press_event",
-		   G_CALLBACK(mouse_button_press_event), NULL);
-  g_signal_connect(GTK_OBJECT(area), "button_release_event",
-		   G_CALLBACK(mouse_button_release_event), NULL);
-/*   g_signal_connect(GTK_OBJECT(area), "motion_notify_event", */
-/* 		   G_CALLBACK(mouse_motion_event), NULL); */
+        g_signal_connect(GTK_OBJECT(area), "expose_event",
+                         G_CALLBACK(score_area_callback), NULL);
+        g_signal_connect(GTK_OBJECT(area), "button_press_event",
+                         G_CALLBACK(mouse_button_press_event), NULL);
+        g_signal_connect(GTK_OBJECT(area), "button_release_event",
+                         G_CALLBACK(mouse_button_release_event), NULL);
+        /*   g_signal_connect(GTK_OBJECT(area), "motion_notify_event", */
+        /* 		   G_CALLBACK(mouse_motion_event), NULL); */
 	
-  staff_update_statusbar(xml);
+        staff_update_statusbar(xml);
 
-  gtk_widget_show(window);
+        gtk_widget_show(window);
   
-  /* Set the white color to the drawing area */
-  /* We want the score to be white */
-  if ( ! area ) {
-    printf(_("Error: The score layout cannot be drawn\n"));
-/*     return -1; */
-  } else {
-    colorize_drawingarea(area, 65535, 65535, 65535);
-  }
+        /* Set the white color to the drawing area */
+        /* We want the score to be white */
+        if ( ! area ) {
+                printf(_("Error: The score layout cannot be drawn\n"));
+                /*     return -1; */
+        } else {
+                colorize_drawingarea(area, 65535, 65535, 65535);
+        }
 }
 
 gboolean score_activate_callback(GtkWidget *widget)

@@ -309,7 +309,7 @@ Object_t *object_get_left(Staff_t *staff, gdouble x)
         GList *listrunner_object;
 
         Object_t *object_data;
-        Object_t *ret_object;   /* The object to return */
+        Object_t *ret_object = NULL;   /* The object to return */
 
         gdouble object_x = 0;
 
@@ -324,6 +324,9 @@ Object_t *object_get_left(Staff_t *staff, gdouble x)
                         
                 if ((staff->start_x + object_x) <= x) {
                         ret_object = (Object_t *)object_data;
+/*                         printf("object_data->id = %lu\n", object_data->id); */
+/*                         printf("ret_object->id = %lu\n", ret_object->id); */
+
                 } 
 
                 listrunner_object = g_list_next(listrunner_object);

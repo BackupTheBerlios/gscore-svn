@@ -1,3 +1,4 @@
+/* -*- mode:C; tab-width:8; c-basic-offset:8; indent-tabs-mode:true -*- */
 /*
  * key_event.c
  * gscore - a musical score editor
@@ -47,8 +48,8 @@ score_key_press_event(GtkWidget *widget, GdkEventKey *event)
 	GtkAdjustment *adj;
 	Score_t *score;
 /* 	Object_t *object; */
-        Staff_t *staffobj;
-	Object_t *tmpobj;
+        Staff_t *staffobj = NULL;
+	Object_t *tmpobj = NULL;
 	GtkWidget *area;
 	KeyCursor_t *cursor;
 
@@ -82,7 +83,12 @@ score_key_press_event(GtkWidget *widget, GdkEventKey *event)
 		case BARLINE_OPENCLOSEREPEAT:
                         if (event->state & GDK_CONTROL_MASK) { /* Make the chord */
                                 staffobj = (Staff_t *)g_list_nth_data(score->Staff_list, get_staff_selected(score));
+                                
+                                if ( ! staffobj ) return FALSE;
+
                                 tmpobj = (Object_t *)object_get_left(staffobj, cursor->x_returned);
+
+                                if ( ! tmpobj ) return FALSE;
 
                                 if (tmpobj->pitch == cursor->position) {
                                         gw_message_error("You cannot make a chord with the same pitch.");
@@ -155,14 +161,14 @@ score_key_press_event(GtkWidget *widget, GdkEventKey *event)
 
 /* 		tmpobj = (Object_t *)object_get_left(cursor->x_returned); */
                 staffobj = (Staff_t *)g_list_nth_data(score->Staff_list, get_staff_selected(score));
+                if ( ! staffobj ) return FALSE;
                 
                 staffobj->current_x -= Spacings.NotesRests.sa_quarter / 2;
 
                 refresh(area);
 
-		printf("left id = %d\n", tmpobj->id);
+		printf("left id = %lu\n", tmpobj->id);
 
-/* 		printf("Object id = %d\n", object->id); */
 		break;
 	case GDK_Right:
 		break;
