@@ -335,7 +335,8 @@ extern void save_file(const gchar *filename, Score_t *score)
 			g_print("%%\n");
 			g_print("V:%d\n", staff_counter);
 			g_print("L:1/4\n");
-			g_print("K:%s\n", get_char_from_key_signature(staff_data->key_signature));
+			g_print("K:%s clef=%s\n", get_char_from_key_signature(staff_data->key_signature), 
+                                get_char_from_key(staff_data->key));
 
 			if ( ! staff_data->Object_list)
 				printf("liste nulle\n");
