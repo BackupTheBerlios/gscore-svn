@@ -1,3 +1,11 @@
+2005-04-02 Toady <toady@gscore.org>
+
+	* src/score.c: Replace "set header" glade widget with custom to make the release in 2005 and stop fighting with glade for MDI stuff
+	
+2005-04-01 Toady <toady@gscore.org>
+
+	* src/key_event.c: Make chord only with notes
+	
 2005-03-30 Toady <toady@gscore.org>
 
 	* src/beam.c: Fixed bug when the last note selected you want to beam is the last in the list

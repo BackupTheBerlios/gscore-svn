@@ -1697,12 +1697,11 @@
 		  </child>
 
 		  <child>
-		    <widget class="GtkImageMenuItem" id="sw_headers_menuitem">
+		    <widget class="GtkImageMenuItem" id="sw_header_menuitem">
 		      <property name="visible">True</property>
-		      <property name="label" translatable="yes">Set _headers</property>
+		      <property name="label" translatable="yes">Set _header</property>
 		      <property name="use_underline">True</property>
-		      <signal name="activate" handler="on_set_header_activate_default" object="score_window" last_modification_time="Fri, 29 Oct 2004 22:01:52 GMT"/>
-		      <signal name="activate" handler="gtk_widget_show" object="set_header" last_modification_time="Fri, 29 Oct 2004 22:01:52 GMT"/>
+		      <signal name="activate" handler="set_header_widget" last_modification_time="Fri, 29 Oct 2004 22:01:52 GMT"/>
 
 		      <child internal-child="image">
 			<widget class="GtkImage" id="image2521">

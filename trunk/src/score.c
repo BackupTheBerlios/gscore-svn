@@ -76,6 +76,94 @@
 /* } */
 
 /*
+ * BEGIN: GTK WIDGETS
+ * This are temporary GTK Widget so that I can make the release and strop strugling with
+ * glade to get data from some random boxes
+ * That shouldn't be there, it will be dropped latter.
+ */
+extern void 
+set_header_widget(GtkButton *widget, gpointer user_data)
+{
+        GtkWidget *dialog;
+        GtkWidget *button;
+        GtkWidget *main_vbox, *vbox, *hbox;
+        GtkWidget *label;
+        GtkWidget *title_entry;
+        GtkWidget *subtitle_entry;
+        GtkWidget *composer_entry;
+        GtkWidget *hseparator;
+
+        gint response;
+
+        Score_t *score;
+	score = score_get_from_widget(widget);
+
+        
+        dialog = gtk_dialog_new_with_buttons("Set Header", NULL,
+                                             GTK_DIALOG_MODAL, 
+                                             GTK_STOCK_CANCEL,
+                                             GTK_RESPONSE_REJECT,
+                                             GTK_STOCK_OK,
+                                             GTK_RESPONSE_ACCEPT,
+                                             NULL);
+
+        hbox = gtk_hbox_new(FALSE, 10);
+        gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog)->vbox), hbox,
+                           TRUE, TRUE, 0);
+
+        vbox = gtk_vbox_new(TRUE, 10);
+        gtk_box_pack_start(GTK_BOX(hbox), vbox,
+                           TRUE, TRUE, 0);
+
+        label = gtk_label_new("Title: ");
+        gtk_box_pack_start(GTK_BOX(vbox), label,
+                           FALSE, FALSE, 5);
+
+        label = gtk_label_new("Subtitle: ");
+        gtk_box_pack_start(GTK_BOX(vbox), label,
+                           FALSE, FALSE, 5);
+
+        label = gtk_label_new("Composer: ");
+        gtk_box_pack_start(GTK_BOX(vbox), label,
+                           FALSE, FALSE, 5);
+
+        vbox = gtk_vbox_new(TRUE, 10);
+        gtk_box_pack_start(GTK_BOX(hbox), vbox,
+                           TRUE, TRUE, 5);
+
+        title_entry = gtk_entry_new();
+        gtk_box_pack_start(GTK_BOX(vbox), title_entry,
+                           FALSE, FALSE, 5);
+	gtk_entry_set_text(GTK_ENTRY(title_entry), score->Identity->title->str);
+
+        subtitle_entry = gtk_entry_new();
+        gtk_box_pack_start(GTK_BOX(vbox), subtitle_entry,
+                           FALSE, FALSE, 5);
+	gtk_entry_set_text(GTK_ENTRY(subtitle_entry), score->Identity->subtitle->str);
+
+        composer_entry = gtk_entry_new();
+        gtk_box_pack_start(GTK_BOX(vbox), composer_entry,
+                           FALSE, FALSE, 5);
+	gtk_entry_set_text(GTK_ENTRY(composer_entry), score->Identity->composer->str);
+    
+        gtk_widget_show_all(dialog);
+
+        response = gtk_dialog_run (GTK_DIALOG (dialog));
+
+        if (response == GTK_RESPONSE_ACCEPT) {
+                score->Identity->title = g_string_new(gtk_entry_get_text(GTK_ENTRY(title_entry)));
+                score->Identity->subtitle = g_string_new(gtk_entry_get_text(GTK_ENTRY(subtitle_entry)));
+                score->Identity->composer = g_string_new(gtk_entry_get_text(GTK_ENTRY(composer_entry)));
+        }
+
+        gtk_widget_destroy (dialog);
+}
+/* 
+ * END: GTK WIDGETS
+ */
+
+
+/*
  * FIXME: Should be backported to libgscore
  * Creates a new score object
  * @Returns: the score object
