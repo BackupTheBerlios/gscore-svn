@@ -1,9 +1,0 @@
-Import ('env')
-Import ('data_dir')
-
-env.Install('$prefix/share/gscore/plugins', 'abc/libabc.so')
-
-SConscript('abc/SConscript')
-
-Export('env')
-Export('data_dir')

@@ -31,40 +31,41 @@ extern    "C"
 
 #define GTK_TYPE_CAIRO	(gtk_cairo_get_type())
 #define SCORE_WIDGET(obj)	GTK_CHECK_CAST (obj, GTK_TYPE_CAIRO, GtkCairo)
-#define GTK_CAIRO_CLASS(klass) GTK_CHECK_CLASS_CAST (klass, GTK_TYPE_CAIRO, GtkCairoClass)
-#define GTK_IS_CAIRO(obj)	GTK_CHECK_TYPE (obj, GTK_TYPE_CAIRO)
+#define SCORE_WIDGET_CLASS(klass) GTK_CHECK_CLASS_CAST (klass, GTK_TYPE_CAIRO, GtkCairoClass)
+#define GTK_IS_SCORE_WIDGET(obj)	GTK_CHECK_TYPE (obj, GTK_TYPE_CAIRO)
 
-  typedef struct _GtkCairo GtkCairo;
-  typedef struct _GtkCairoClass GtkCairoClass;
+  typedef struct _ScoreWidget ScoreWidget;
+  typedef struct _ScoreWidgetClass ScoreWidgetClass;
 
 #define gdkcairo_t void
 
-  struct _GtkCairo
+  struct _ScoreWidget
   {
-    GtkWidget widget;
-    gdkcairo_t *gdkcairo;
+          GtkWidget widget;
+          gdkcairo_t *gdkcairo;
   };
 
 #undef gdkcairo_t
 
-  struct _GtkCairoClass
+  struct _ScoreWidgetClass
   {
-    GtkWidgetClass parent_class;
-    void      (*paint) (GtkCairo *, cairo_t *c);
+          GtkWidgetClass parent_class;
+          void      (*paint) (ScoreWidget *, cairo_t *c);
+          void      (*new_staff) (ScoreWidget *, cairo_t *c);
   };
 
-  GType     gtk_cairo_get_type (void);
+  GType     score_widget_get_type (void);
 
-  GtkWidget *gtk_cairo_new (void);
+  GtkWidget *score_widget_new (void);
 
-  cairo_t  *gtk_cairo_get_cairo (GtkCairo *gtkcairo);
+  cairo_t  *score_widget_get_cairo (ScoreWidget *scorewidget);
 
 
 /* convenience function to set the current cairo color
  * from a GdkColor
  */
-  void      gtk_cairo_set_gdk_color (cairo_t  *cr,
-                                     GdkColor *color);
+  void      cairo_set_gdk_color (cairo_t  *cr,
+                                 GdkColor *color);
 
 #ifdef __cplusplus
 }
