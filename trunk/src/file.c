@@ -116,7 +116,7 @@ import_score(GtkButton *button, gpointer user_data)
 /* 	filename = gtk_entry_get_text(GTK_ENTRY(GTK_FILE_SELECTION(filechooser) */
 /* 						->selection_entry)); */
 
-	filename = gtk_file_selection_get_filename(GTK_FILE_SELECTION(filechooser)));
+	filename = gtk_file_selection_get_filename(GTK_FILE_SELECTION(filechooser));
 
 	printf("File choosen:%s\n", filename);
 
