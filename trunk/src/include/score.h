@@ -66,6 +66,20 @@ KeyCursor_t *score_get_cursor_from_widget(GtkWidget *widget);
 
 GtkScrolledWindow *score_get_scrolled_window_from_widget(GtkWidget *widget);
 
+GtkWidget *score_get_setkey_treble_rb_from_widget(GtkWidget *widget);
+
+GtkWidget *score_get_setkey_bass_rb_from_widget(GtkWidget *widget);
+
+GtkWidget *score_get_setkey_tenor_rb_from_widget(GtkWidget *widget);
+
+GtkWidget *score_get_setkey_alto_rb_from_widget(GtkWidget *widget);
+
+GtkWidget *score_get_sks_clef_label_from_widget(GtkWidget *widget);
+
+GtkWidget *score_get_sks_image_from_widget(GtkWidget *widget);
+
+GtkWidget *score_get_sks_hbox_from_widget(GtkWidget *widget);
+
 void score_create_window(Score_t *score);
 
 /*

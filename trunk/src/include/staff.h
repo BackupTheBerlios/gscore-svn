@@ -40,7 +40,7 @@ gint staff_get_key_signature(const Score_t * score, guint staff);
 
 gboolean staff_set_key(Score_t *score, gint staff, gint key);
 
-void staff_set_key_callback(void);
+void staff_set_key_callback(GtkButton *button, gpointer user_data);
 
 gint staff_get_key(const Score_t *score, gint staff);
 
@@ -93,5 +93,7 @@ void staff_add_staff (gpointer callback_data, guint callback_action, GtkWidget *
 gdouble get_staff_extremity_end_y(const Score_t *score, gint staff_id);
 
 Staff_t *staff_selected_get_from_score(Score_t *score);
+
+void update_key_signature(GtkButton *widget, gpointer user_data);
 
 #endif

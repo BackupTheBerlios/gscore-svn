@@ -1,6 +1,7 @@
 2005-03-25 Toady <toady@gscore.org>
 
 	* src/objects_callbacks.c: Sets/Uset stuff on objects selected
+	* src/staff.c, src/score.c: Make dialog boxes work using gobjects
 	
 2005-03-24 Toady <toady@gscore.org>
 

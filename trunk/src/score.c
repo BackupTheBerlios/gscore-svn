@@ -207,6 +207,63 @@ GtkScrolledWindow *score_get_scrolled_window_from_widget(GtkWidget *widget)
         return (GtkScrolledWindow *) g_object_get_data(G_OBJECT(parent), "scrolledwindow");
 }
 
+GtkWidget *score_get_setkey_treble_rb_from_widget(GtkWidget *widget)
+{
+        GtkWidget *parent;
+        parent = get_toplevel(widget);
+        if(parent == NULL) return NULL;
+        return (GtkWidget *) g_object_get_data(G_OBJECT(parent), "setkey_treble_rb");
+}
+
+GtkWidget *score_get_setkey_bass_rb_from_widget(GtkWidget *widget)
+{
+        GtkWidget *parent;
+        parent = get_toplevel(widget);
+        if(parent == NULL) return NULL;
+        return (GtkWidget *) g_object_get_data(G_OBJECT(parent), "setkey_bass_rb");
+}
+
+GtkWidget *score_get_setkey_alto_rb_from_widget(GtkWidget *widget)
+{
+        GtkWidget *parent;
+        parent = get_toplevel(widget);
+        if(parent == NULL) return NULL;
+        return (GtkWidget *) g_object_get_data(G_OBJECT(parent), "setkey_alto_rb");
+}
+
+GtkWidget *score_get_setkey_tenor_rb_from_widget(GtkWidget *widget)
+{
+        GtkWidget *parent;
+        parent = get_toplevel(widget);
+        if(parent == NULL) return NULL;
+        return (GtkWidget *) g_object_get_data(G_OBJECT(parent), "setkey_tenor_rb");
+}
+
+GtkWidget *score_get_sks_clef_label_from_widget(GtkWidget *widget)
+{
+        GtkWidget *parent;
+        parent = get_toplevel(widget);
+        if(parent == NULL) return NULL;
+        return (GtkWidget *) g_object_get_data(G_OBJECT(parent), "sks_clef_label");
+}
+
+GtkWidget *score_get_sks_image_from_widget(GtkWidget *widget)
+{
+        GtkWidget *parent;
+        parent = get_toplevel(widget);
+        if(parent == NULL) return NULL;
+        return (GtkWidget *) g_object_get_data(G_OBJECT(parent), "sks_image");
+}
+
+GtkWidget *score_get_sks_hbox_from_widget(GtkWidget *widget)
+{
+        GtkWidget *parent;
+        parent = get_toplevel(widget);
+        if(parent == NULL) return NULL;
+        return (GtkWidget *) g_object_get_data(G_OBJECT(parent), "sks_hbox");
+}
+
+
 void score_create_window(Score_t *score)
 {
         Display_t *Display;
@@ -215,6 +272,17 @@ void score_create_window(Score_t *score)
         GladeXML *xml;
         GtkWidget *window;
         GtkWidget *area;
+
+        /* Ugly, but needed for now :( */
+        GtkWidget *setkey_treble_rb;
+        GtkWidget *setkey_bass_rb;
+        GtkWidget *setkey_alto_rb;
+        GtkWidget *setkey_tenor_rb;
+        GtkWidget *sks_clef_label;
+        GtkWidget *sks_image;
+        GtkWidget *sks_hbox;
+        /* End of the Ugliest stuff I've done */
+
         GtkScrolledWindow *scrolled_window;
   
         selection = g_malloc(sizeof(Score_selection_t));
@@ -253,12 +321,29 @@ void score_create_window(Score_t *score)
 
         scrolled_window = glade_xml_get_widget(xml, "sw_score_sw");
 
+        setkey_treble_rb = glade_xml_get_widget(xml, "setkey_treble_rb");
+        setkey_bass_rb = glade_xml_get_widget(xml, "setkey_bass_rb");
+        setkey_alto_rb = glade_xml_get_widget(xml, "setkey_alto_rb");
+        setkey_tenor_rb = glade_xml_get_widget(xml, "setkey_tenor_rb");
+
+        sks_clef_label = glade_xml_get_widget(xml, "sks_clef_label");
+        sks_image      = glade_xml_get_widget(xml, "sks_image"); 
+        sks_hbox       = glade_xml_get_widget(xml, "sks_hbox");
+
         g_object_set_data(G_OBJECT(window), "score", score);
         g_object_set_data(G_OBJECT(window), "area", area);
         g_object_set_data(G_OBJECT(window), "selection", selection);
         g_object_set_data(G_OBJECT(window), "cursor", KeyCursor);
         g_object_set_data(G_OBJECT(window), "display", Display);
         g_object_set_data(G_OBJECT(window), "scrolledwindow", scrolled_window);
+        g_object_set_data(G_OBJECT(window), "setkey_treble_rb", setkey_treble_rb);
+        g_object_set_data(G_OBJECT(window), "setkey_bass_rb", setkey_bass_rb);
+        g_object_set_data(G_OBJECT(window), "setkey_alto_rb", setkey_alto_rb);
+        g_object_set_data(G_OBJECT(window), "setkey_tenor_rb", setkey_tenor_rb);
+        g_object_set_data(G_OBJECT(window), "sks_clef_label", sks_clef_label);
+        g_object_set_data(G_OBJECT(window), "sks_image", sks_image);
+        g_object_set_data(G_OBJECT(window), "sks_hbox", sks_hbox);
+
 
         /*   glade_set_widgets(xml); */
         score->height = 500;

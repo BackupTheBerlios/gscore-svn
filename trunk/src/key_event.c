@@ -272,6 +272,8 @@ score_key_press_event(GtkWidget *widget, GdkEventKey *event)
                 
                 gtk_widget_set_size_request(GTK_WIDGET(area), score->width, score->height);
 
+                refresh(area);
+                
                 break;
         case GDK_d:
                 if ( debug_mode == TRUE ) {

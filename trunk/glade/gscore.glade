@@ -6650,7 +6650,7 @@ Alastair  Porter, alastair@linuxexperience.com
 	      <property name="focus_on_click">True</property>
 	      <property name="response_id">-5</property>
 	      <signal name="clicked" handler="gtk_widget_hide" object="set_key_signature" last_modification_time="Fri, 09 Apr 2004 07:59:15 GMT"/>
-	      <signal name="clicked" handler="update_key_signature" last_modification_time="Fri, 15 Oct 2004 14:15:51 GMT"/>
+	      <signal name="clicked" handler="update_key_signature" object="score_window" last_modification_time="Fri, 15 Oct 2004 14:15:51 GMT"/>
 	    </widget>
 	  </child>
 	</widget>
@@ -11435,7 +11435,7 @@ Alastair  Porter, alastair@linuxexperience.com
 	      <property name="relief">GTK_RELIEF_NORMAL</property>
 	      <property name="focus_on_click">True</property>
 	      <property name="response_id">0</property>
-	      <signal name="clicked" handler="staff_set_key_callback" last_modification_time="Thu, 18 Nov 2004 00:28:04 GMT"/>
+	      <signal name="clicked" handler="staff_set_key_callback" object="score_window" last_modification_time="Thu, 18 Nov 2004 00:28:04 GMT"/>
 	      <signal name="clicked" handler="gtk_widget_hide" after="yes" object="set_key" last_modification_time="Thu, 18 Nov 2004 00:28:09 GMT"/>
 
 	      <child>
