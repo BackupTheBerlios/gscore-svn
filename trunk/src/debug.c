@@ -41,16 +41,16 @@ void print_objects_staff(gint staff)
 
                         object_data = (Object_t *)listrunner->data;
 
-                        printf("Object->id = %d\n", object_data->id);
+                        printf("Object->id = %ul\n", object_data->id);
                         printf("Object->type = %d\n", object_data->type);
                         printf("Object->nature = %d\n", object_data->nature);
                         printf("Object->accidentals = %d\n", object_data->accidentals);
-                        printf("Object->x = %d\n", object_data->x);
-                        printf("Object->y = %d\n", object_data->y);
-                        printf("Object->x2 = %d\n", object_data->x2);
-                        printf("Object->y2 = %d\n", object_data->y2);
-                        printf("Object->x3 = %d\n", object_data->x3);
-                        printf("Object->y3 = %d\n", object_data->y3);
+                        printf("Object->x = %f\n", object_data->x);
+                        printf("Object->y = %f\n", object_data->y);
+                        printf("Object->x2 = %f\n", object_data->x2);
+                        printf("Object->y2 = %f\n", object_data->y2);
+                        printf("Object->x3 = %f\n", object_data->x3);
+                        printf("Object->y3 = %f\n", object_data->y3);
                         printf("Object->pitch = %d\n", object_data->pitch);
                         printf("Object->tab_number = %d\n", object_data->tab_number);
                         printf("Object->is_selected = %d\n", object_data->is_selected);

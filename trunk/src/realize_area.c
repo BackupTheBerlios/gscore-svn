@@ -452,6 +452,7 @@ realize_key_signature(Staff_t *staff)
 	staff_set_start_x(get_staff_selected(),
 			  timesignature_x);
 
+	return 0;
 }
 
 static gdouble 
@@ -476,6 +477,8 @@ realize_timesignature(Staff_t *staff)
 		default:
 			break;
 		}
+
+	return 0;
 }
 
 static gboolean
@@ -483,7 +486,7 @@ realize_object(Staff_t *staff, Object_t *object, gboolean display_barlines, gboo
 {
 
         Object_t *object_next;
-	Object_t *object_previous;
+/* 	Object_t *object_previous; */
 	gint y = 0;
 	gint ynext = 0;
 	gdouble extremity_end_y = 0;
@@ -1182,6 +1185,9 @@ realize_object(Staff_t *staff, Object_t *object, gboolean display_barlines, gboo
 		break;
 		
 	}
+
+	return FALSE;
+
 }
 
 gboolean score_area_callback(GtkWidget *widget, GdkEventExpose *event, gpointer data)

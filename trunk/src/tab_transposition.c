@@ -35,6 +35,7 @@ gint score_to_tab_simple_return_string(gint note)
 
 /*      return 1; */
 
+	return 0;
 }
 
 gint score_to_tab_simple_return_number(gint note)
@@ -60,4 +61,5 @@ gint score_to_tab_simple_return_number(gint note)
      
 /*      return value; */
 
+	return 0;
 }

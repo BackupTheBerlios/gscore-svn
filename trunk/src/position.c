@@ -45,6 +45,8 @@ gint get_pitch_from_y(gint staff, gint y)
 /*           break; */
 /*      } */
 
+	return 0;
+
 }
 
 gint get_position(gint key, gint staff, gint y)
@@ -94,6 +96,8 @@ gint get_position(gint key, gint staff, gint y)
 
 /*      return value; */
 
+	return 0;
+
 }
 
 static
@@ -104,6 +108,7 @@ gboolean around_zero(gint position)
 /*           return TRUE; */
 /*      else */
 /*           return FALSE; */
+	return 0;
 
 }
 
@@ -338,6 +343,8 @@ get_spacing_for_object(gint type)
 /* /\* 	     return Spacings.NotesRests.sa_quarter; *\/ */
 /*      } */
 
+	return 0;
+
 }
 
 gdouble set_x_pos(gint staff, gint x, gint type)
@@ -373,6 +380,9 @@ gdouble set_x_pos(gint staff, gint x, gint type)
 /*      } */
 
 /*      return value; */
+
+	return 0;
+
 }
 
 gdouble get_x_pos(gint staff, gint x)
@@ -400,6 +410,8 @@ gdouble get_x_pos(gint staff, gint x)
 /*      } */
 
 /*      return value; */
+
+	return 0;
 
 }
 

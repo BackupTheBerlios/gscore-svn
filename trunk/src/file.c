@@ -23,6 +23,7 @@
 
 #include <gtk/gtk.h>
 #include <stdio.h>
+#include <string.h>
 
 #include "file.h"
 #include "debug.h"
@@ -62,7 +63,6 @@ create_open_save_menu(void)
 {
 	GtkWidget *menu;
 	GtkWidget *item;
-	GList *tmp;
 
 	GscorePlugin *plugin;
 	plugin_pnf *ppnf;
@@ -102,7 +102,6 @@ create_open_save_menu(void)
 extern void
 import_score(GtkButton *button, gpointer user_data)
 {
-	const gchar *last_dot;
 	const gchar *filename;
 	const gchar *extension;
 
@@ -188,8 +187,6 @@ export_score(GtkButton *button, gpointer user_data)
 
 	const gchar *filename;
 
-	const gchar *text;
-	const gchar *last_dot;
 	const gchar *extension;
 
 

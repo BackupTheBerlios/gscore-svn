@@ -27,6 +27,7 @@
 #include "constants.h"
 #include "common.h"
 #include "draw.h"
+#include "objects.h"
 
 #include "cursors.h"
 

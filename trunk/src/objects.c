@@ -30,6 +30,7 @@
 #include "debug.h"
 #include "key_cursor.h"
 #include "spacings.h"
+#include "staff.h"
 
 gint object_get_spacing(gint type)
 {
@@ -132,6 +133,11 @@ add_object(gint staff, gint type, accidentals_e accidentals, object_e nature, gu
 
         staff_data->Object = g_malloc(sizeof(Object_t));
 
+	if ( ! staff_data->Object ) {
+		printf("Cannot add object, memory exhausted\n");
+		return FALSE;
+	}
+
         staff_data->Object->id = ++Score.object_id;
         staff_data->Object->type = type;
         staff_data->Object->nature = nature;
@@ -206,6 +212,8 @@ add_object(gint staff, gint type, accidentals_e accidentals, object_e nature, gu
 		printf("(add_objects) Unknown object %d\n", type);
 		break;
 	}
+
+	return TRUE;
 }
 
 extern gboolean 
@@ -229,7 +237,7 @@ remove_object(gulong id)
 
 			if ( object->id == id ) {
 				staff->Object_list = g_list_remove(staff->Object_list, object);
-				return;
+				return TRUE;
 			}
 
 			listrunner_object = g_list_next(listrunner_object);
@@ -238,7 +246,7 @@ remove_object(gulong id)
 		listrunner_staff = g_list_next(listrunner_staff);
 	}
 
-	return TRUE;
+	return FALSE;
 }
 
 extern gboolean 
@@ -250,7 +258,7 @@ remove_object_selected(void)
 	Staff_t *staff;
 	Object_t *object;
 
-	g_return_if_fail( object != NULL );
+/* 	g_return_if_fail( object != NULL ); */
 
 	listrunner_staff = g_list_first(Score.Staff_list);
 
@@ -348,7 +356,6 @@ Object_t *object_get_left(gdouble x)
 {
 	GList *listrunner_staff;
 	GList *listrunner_object;
-	GList *list_object_next;
 
 	Staff_t *staff_data;
 	Object_t *object_data;

@@ -45,6 +45,8 @@
 #include "spacings.h"
 #include "key_cursor.h"
 #include "mouse_event.h"
+#include "staff.h"
+#include "common.h"
 
 GtkWidget *Window;
 GladeXML *gladexml;
@@ -194,6 +196,7 @@ drawing_area_events(GtkWidget *canvas, GdkEvent  *ev)
 			return FALSE;
 		}
 
+	return FALSE;
 }
 
 void showda(void)
@@ -206,9 +209,9 @@ void showda(void)
 static
 void glade_set_widgets(void)
 {
-	GtkWidget *objects_vbox, *buttons_vbox;
-	GtkWidget *objects_hbox;
-	GtkWidget *object_button;
+/* 	GtkWidget *objects_vbox, *buttons_vbox; */
+/* 	GtkWidget *objects_hbox; */
+/* 	GtkWidget *object_button; */
 
 	Score.area = glade_xml_get_widget (gladexml, "sw_score_da");
 
@@ -246,7 +249,7 @@ int main(int argc, char *argv[])
 	GscorePlugin *plugin;
 	plugin_pnf *ppnf;
 
-	gint scale = 0;
+/* 	gint scale = 0; */
 
 	FILE *fp;
 
@@ -303,7 +306,7 @@ int main(int argc, char *argv[])
 	/* We want the score to be white */
 	if ( ! Score.area ) {
 		printf(_("Error: The score layout cannot be drawn\n"));
-		exit(1);
+		return -1;
 	} else {
 		colorize_drawingarea(Score.area, 65535, 65535, 65535);
 	}

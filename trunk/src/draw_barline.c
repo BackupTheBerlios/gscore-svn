@@ -81,7 +81,6 @@ gint draw_barline_openrepeat(Staff_t *staff, gint x)
 {
 	GdkGC * gc;
 
-	gint i;
 	gint average = 0;
      
 	guint8 thickness = 0;
@@ -141,7 +140,6 @@ gint draw_barline_openrepeat(Staff_t *staff, gint x)
 gint draw_barline_closerepeat(Staff_t *staff, gint x)
 {
 	GdkGC * gc;
-	gint i;
 	gint average = 0;
      
 	guint8 thickness = 0;
@@ -192,7 +190,6 @@ gint draw_barline_closerepeat(Staff_t *staff, gint x)
 gint draw_barline_opencloserepeat(Staff_t *staff, gint x)
 {
 	GdkGC * gc;
-	gint i;
 	gint average = 0;
      
 	guint8 thickness = 0;
@@ -291,5 +288,5 @@ gint draw_barline_endstaff(Staff_t *staff)
 /* 		      Score.staff_extremity_end_x, extremity_end_y - 1); */
 
 
-/* 	return 0; */
+	return 0;
 }

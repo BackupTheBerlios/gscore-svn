@@ -31,6 +31,7 @@
 #include "constants.h"
 #include "common.h"
 #include "macros.h"
+#include "debug.h"
 
 gint 
 draw_cursor(const gchar *xbm, const gchar *mask_xbm, gint width, gint height)
@@ -90,7 +91,7 @@ gint x_space(GList *list, gint index)
 	/*           return -1; */
 	/*      } */
      
-
+	return 0;
 
 }
 
@@ -225,6 +226,8 @@ gint average(gint staff)
 /*      sum = average+Score.Staff[staff].extremity_begin_y; */
 
 /*      return sum; */
+	return 0;
+
 }
 
 gint index_object(gint staff, gint x)
@@ -251,7 +254,7 @@ gint index_object(gint staff, gint x)
 /* 	}                */
 	
 /* 	return counter; */
-	
+	return 0;
 }
 
 extern
@@ -379,7 +382,7 @@ gint draw_placement(gint x, gint y)
 /*      gdk_draw_line(Score.area->window, gc, */
 /*                    x+10, y-4, x+10, y+4); */
 
-/*      return 0; */
+     return 0;
 
 }
 
@@ -422,7 +425,6 @@ gboolean colorize_drawingarea(GtkWidget *drawingarea, guint red, guint green, gu
 {
         GdkColor  gdk_color;
         GdkColormap * colormap;
-	GtkWidget *widget;
 
         colormap = gdk_drawable_get_colormap(drawingarea->window);
         gdk_color.red = red;

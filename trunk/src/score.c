@@ -95,7 +95,7 @@ gint score_add_tab (gpointer callback_data, guint callback_action, GtkWidget *wi
 /* /\*      draw_barline_endstaff(Score.nb_staves); *\/ */
 /*      refresh(); */
 
-/*      return 0; */
+	return 0;
 }
 
 void

@@ -27,13 +27,14 @@
 #include "constants.h"
 #include "draw.h"
 #include "spacings.h"
+#include "staff.h"
 
 void set_selection_origin(GtkWidget *widget, GdkEventButton *event)
 {
 	
         gdouble x = event->x;
         gdouble y = event->y;
-        gint state = event->state;
+/*         gint state = event->state; */
 
         Selection.x_origin = x;
         Selection.y_origin = y;
@@ -311,6 +312,8 @@ highlight_selection(gdouble x_origin, gdouble y_origin, gdouble x, gdouble y)
 
 		listrunner = g_list_next(listrunner);
 	}
+	
+	return 0;
 
 }
 
@@ -336,6 +339,8 @@ undo_selection(void)
 	}
 
 	g_list_free(listrunner);
+
+	return 0;
 }
 
 
@@ -371,7 +376,7 @@ gint get_selection_object_type(gint x, gint y, gint staff)
          
 /*      } */
 
-/*      return 0; */
+     return 0;
      
 }
 
@@ -407,7 +412,7 @@ gint get_selection_id(gint x, gint y, gint staff)
          
 /*      } */
 
-/*      return 0; */
+     return 0;
      
 }
 
@@ -444,7 +449,7 @@ gdouble get_selection_x_selection(gint x, gint y, gint staff)
          
 /*      } */
 
-/*      return 0; */
+     return 0;
      
 }
 
@@ -481,7 +486,7 @@ gdouble get_selection_y_selection(gint x, gint y, gint staff)
          
 /*      } */
 
-/*      return 0; */
+     return 0;
      
 }
 
@@ -518,7 +523,7 @@ gboolean get_selection_with_sharp(gint x, gint y, gint staff)
          
 /*      } */
 
-/*      return 0; */
+     return 0;
      
 }
 
@@ -555,7 +560,7 @@ gboolean get_selection_with_flat(gint x, gint y, gint staff)
          
 /*      } */
 
-/*      return 0; */
+     return 0;
      
 }
 
@@ -592,6 +597,6 @@ gboolean get_selection_with_natural(gint x, gint y, gint staff)
          
 /*      } */
 
-/*      return 0; */
+     return 0;
      
 }

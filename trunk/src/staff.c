@@ -36,6 +36,7 @@
 #include "debug.h"
 #include "macros.h"
 #include "spacings.h"
+#include "objects.h"
 
 /* GtkWidget * vbox; */
 /* GtkWidget * key_signature_pixmap; */
@@ -145,6 +146,7 @@ gboolean delete_staff(gint staff)
                 Score.Staff_list = g_list_remove(Score.Staff_list, staff_data);
         }
 
+	return TRUE;
 }
 
 gint get_staff_selected(void)
@@ -183,6 +185,7 @@ gint get_staff_key_signature(guint staff)
         if (staff_data)
                 retval = staff_data->key_signature;
 
+	return 0;
 }
 
 /* Returns the y position where the next staff should be */
@@ -281,6 +284,9 @@ gboolean staff_update_statusbar(void)
 /*         printf("staff_selected= %d\n", get_staff_selected()); */
 
         cid = gtk_statusbar_push(GTK_STATUSBAR(widget), cid, g_strdup_printf("Staff: %d", get_staff_selected()));
+
+
+	return TRUE;
 }
 
 gboolean staff_set_start_x(gint staff, gint start_x)
@@ -414,6 +420,7 @@ gboolean staff_set_key_signature(gint staff, gint key_signature)
         if (staff_data)
                 staff_data->key_signature = key_signature;
 
+	return TRUE;
 /*                         listrunner = g_list_next(listrunner); */
 /*                 } */
 }
@@ -438,25 +445,28 @@ gboolean staff_set_time_signature(gint staff, gint signature_type, gint number_o
 
 /*         g_list_free(listrunner); */
 
+	return TRUE;
 }
 
 gboolean staff_set_midi_instrument(gint staff, gint midi_instrument)
 {
-        GList * listrunner;
+/*         GList * listrunner; */
 
 /*         listrunner = g_list_first(Score.Staff_list); */
 /*         while (listrunner) */
 /*                 { */
-                        Staff_t *staff_data;
-
-                        staff_data = g_list_nth_data(Score.Staff_list, staff);
-
-                        staff_data->midi_instrument = midi_instrument;
-
+	Staff_t *staff_data;
+	
+	staff_data = g_list_nth_data(Score.Staff_list, staff);
+	
+	staff_data->midi_instrument = midi_instrument;
+	
 /*                         listrunner = g_list_next(listrunner); */
 /*                 } */
-
+	
 /*         g_list_free(listrunner); */
+	
+	return TRUE;
 }
 
 
@@ -1269,7 +1279,7 @@ staff_remove_staff(gpointer callback_data, guint callback_action, GtkWidget *wid
 
 /*      refresh(); */
 
-/*      return 0; */
+     return 0;
 }
 
 extern gint
@@ -1284,6 +1294,7 @@ get_staff_key(gint staff)
 
 /*      return staff_type; */
 
+	return 0;
 }
 
 /* void staff_set_midi_instrument(gpointer callback_data, guint callback_action, GtkWidget *widget) */
@@ -1599,33 +1610,33 @@ void update_key_signature(void)
 extern
 void staff_change_key_callback(void)
 {
-        GtkWidget *widget;
+/*         GtkWidget *widget; */
 
-        widget = glade_xml_get_widget(gladexml, "changekey_treble_rb");
-	if ( gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget)) )
-		add_object(get_staff_selected(),
-			   TREBLE_KEY, NULL, NULL, 0,
-			   NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, FALSE);
+/*         widget = glade_xml_get_widget(gladexml, "changekey_treble_rb"); */
+/* 	if ( gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget)) ) */
+/* 		add_object(get_staff_selected(), */
+/* 			   TREBLE_KEY, NULL, NULL, 0, */
+/* 			   NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, FALSE); */
 
-        widget = glade_xml_get_widget(gladexml, "changekey_bass_rb");
-	if ( gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget)) )
-		add_object(get_staff_selected(),
-			   BASS_KEY, NULL, NULL, 0,
-			   NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, FALSE);
+/*         widget = glade_xml_get_widget(gladexml, "changekey_bass_rb"); */
+/* 	if ( gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget)) ) */
+/* 		add_object(get_staff_selected(), */
+/* 			   BASS_KEY, NULL, NULL, 0, */
+/* 			   NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, FALSE); */
 
-        widget = glade_xml_get_widget(gladexml, "changekey_alto_rb");
-	if ( gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget)) )
-		add_object(get_staff_selected(),
-			   ALTO_KEY, NULL, NULL, 0,
-			   NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, FALSE);
+/*         widget = glade_xml_get_widget(gladexml, "changekey_alto_rb"); */
+/* 	if ( gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget)) ) */
+/* 		add_object(get_staff_selected(), */
+/* 			   ALTO_KEY, NULL, NULL, 0, */
+/* 			   NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, FALSE); */
 
-        widget = glade_xml_get_widget(gladexml, "changekey_tenor_rb");
-	if ( gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget)) )
-		add_object(get_staff_selected(),
-			   TENOR_KEY, NULL, NULL, 0,
-			   NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, FALSE);
+/*         widget = glade_xml_get_widget(gladexml, "changekey_tenor_rb"); */
+/* 	if ( gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget)) ) */
+/* 		add_object(get_staff_selected(), */
+/* 			   TENOR_KEY, NULL, NULL, 0, */
+/* 			   NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, FALSE); */
 
-	gtk_widget_set_size_request(GTK_WIDGET(Score.area), Score.width, Score.height);
+/* 	gtk_widget_set_size_request(GTK_WIDGET(Score.area), Score.width, Score.height); */
 
 	refresh();
 }

@@ -7,7 +7,7 @@
 #include "draw.h"
 #include "selection.h"
 #include "key_cursor.h"
-
+#include "common.h"
 
 gint max_x = 0;
 gint max_y = 0;

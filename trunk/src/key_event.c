@@ -45,7 +45,7 @@ score_key_press_event(GtkWidget *widget, GdkEventKey *event)
 {
 	GtkWidget *gladewidget;
 	GtkAdjustment *adj;
-	Object_t *object;
+/* 	Object_t *object; */
 	Object_t *tmpobj;
 
 	switch (event->keyval) {
@@ -118,7 +118,7 @@ score_key_press_event(GtkWidget *widget, GdkEventKey *event)
 	case GDK_Left:
 		tmpobj = (Object_t *)object_get_left(KeyCursor.x_returned);
 
-		printf("left id = %d\n", tmpobj->id);
+/* 		printf("left id = %d\n", tmpobj->id); */
 
 /* 		printf("Object id = %d\n", object->id); */
 		break;

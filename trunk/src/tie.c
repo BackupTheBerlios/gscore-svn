@@ -29,6 +29,7 @@
 #include "staff.h"
 #include "debug.h"
 #include "spacings.h"
+#include "staff.h"
 
 extern void
 tie_notes_selected(void)

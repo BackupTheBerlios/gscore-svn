@@ -26,6 +26,7 @@
 #include "gscore.h"
 #include "spacings.h"
 #include "constants.h"
+#include "common.h"
 
 Spacings_t Spacings;
 

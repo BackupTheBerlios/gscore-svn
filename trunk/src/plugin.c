@@ -27,10 +27,6 @@
 /* static GList *plugins          = NULL; */
 static GList *load_queue       = NULL;
 
-static size_t search_path_count = 0;
-static char **search_paths = NULL;
-static int plugins_id_max = 0;
-
 
 extern gint
 gscore_plugins_list(GList *plugins_list)
@@ -49,6 +45,7 @@ gscore_plugins_list(GList *plugins_list)
 		tmp = g_list_next(tmp);
 	}
 
+	return 0;
 }
 
 extern gint
@@ -61,7 +58,6 @@ gscore_plugins_load(GList **plugins_list)
 	
 	const gchar *filename;
 	const gchar *full_filename; /* path+filename */
-	const gchar *home_dir_plugins_path;
 
 	gboolean is_dir;
 	gdouble nb_files = 0;
