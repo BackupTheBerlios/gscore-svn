@@ -8,8 +8,7 @@
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
+ * the Free Software Foundation; version 2 of the License.
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -27,6 +26,56 @@
 #include "gscore.h"
 #include "macros.h"
 
+#define LICENSE_TEXT "\
+This program is free software; you can redistribute it and/or modify\n\
+it under the terms of the GNU General Public License as published by\n\
+the Free Software Foundation; version 2 of the License.\n\n\
+\
+This program is distributed in the hope that it will be useful,\n\
+but WITHOUT ANY WARRANTY; without even the implied warranty of\n\
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n\
+GNU General Public License for more details.\n\n\
+\
+You should have received a copy of the GNU General Public License\n\
+along with this program; if not, write to the Free Software\n\
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.\n\
+"
+
+extern void
+on_help_about_activate(void)
+{
+	GtkWidget *about;
+	GdkPixbuf *logo;
+
+	const gchar *authors[] = {"Sebastien Tricaud", 
+				  "Jerome Marrec", 
+				  "Frederic Motte", 
+				  "Alastair Porter", 
+				  NULL};
+	
+	const gchar *artists[] = {"Damien Cante (logos)", 
+				  "Audrey Maurin (pixmaps from lilypond)",
+				  NULL};
+
+	gchar *filename;
+	filename = get_file_from_data_dir("pixmaps/gscore.xpm");
+	logo = gtk_image_get_pixbuf((GtkImage *)gtk_image_new_from_file(filename));
+
+	about = gtk_about_dialog_new();
+
+	gtk_about_dialog_set_name(GTK_ABOUT_DIALOG(about), "Gscore");
+	gtk_about_dialog_set_version(GTK_ABOUT_DIALOG(about), VERSION);
+	gtk_about_dialog_set_logo(GTK_ABOUT_DIALOG(about), logo);
+	gtk_about_dialog_set_copyright(GTK_ABOUT_DIALOG(about), "Copyright (C) Sebastien Tricaud 2001-2005");
+	gtk_about_dialog_set_license(GTK_ABOUT_DIALOG(about), LICENSE_TEXT);
+	gtk_about_dialog_set_website(GTK_ABOUT_DIALOG(about), "http://www.gscore.org");
+	gtk_about_dialog_set_comments(GTK_ABOUT_DIALOG(about), "A musical score editor");
+	gtk_about_dialog_set_authors(GTK_ABOUT_DIALOG(about), authors);
+	gtk_about_dialog_set_artists(GTK_ABOUT_DIALOG(about), artists);
+
+	gtk_widget_show(about);
+
+}
 
 /* void */
 /* help_help_callback(gpointer callback_data, guint callback_action, GtkWidget *widget) */

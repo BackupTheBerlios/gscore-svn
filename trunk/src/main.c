@@ -2,7 +2,7 @@
  * main.c
  * gscore - a musical score editor
  *
- * (C) Copyright 2001-2004 Sebastien Tricaud
+ * (C) Copyright 2001-2005 Sebastien Tricaud
  * e-mail : toady@gscore.org
  * URL    : http://www.gscore.org
  *
@@ -63,7 +63,7 @@ Spacings_t  Spacings;
 static void 
 print_gpl(void)
 {
-	g_print("\nGscore v %s, Copyright 2001-2004 Sebastien Y. Tricaud\n", g_strdup_printf("%s", VERSION));
+	g_print("\nGscore v %s, Copyright 2001-2005 Sebastien Y. Tricaud\n", g_strdup_printf("%s", VERSION));
 	g_print("Gscore comes with ABSOLUTELY NO WARRANTY and is provided AS IS;\n");
 	g_print("This is free software, and you are welcome to redistribute it\n");
 	g_print("under certain conditions;\n");
@@ -240,6 +240,7 @@ void glade_set_widgets(void)
 int main(int argc, char *argv[]) 
 {
 	GtkWidget *widget;
+
 	gint i = 0;
 	gchar *full_filename;
 	GscorePlugin *plugin;
@@ -252,6 +253,29 @@ int main(int argc, char *argv[])
 
 	gtk_init(&argc, &argv);
 
+
+	nb_plugins = gscore_plugins_load(&plugins_list);
+
+	splash_create();
+
+	for ( i = 0; i < nb_plugins; i++) {
+			ppnf = g_list_nth_data(plugins_list, i);
+			full_filename = g_strconcat(ppnf->path, G_DIR_SEPARATOR_S, ppnf->filename, NULL);
+
+			g_print("filename: %s\n", full_filename);
+			GSCORE_PLUGIN_INIT(plugin);
+			plugin = gscore_plugin_get(full_filename);
+
+			if ( ! plugin ) {
+				gw_message_error(g_strdup_printf(_("Unable to load plugin %s"),full_filename));
+			} else {
+				plugin->init_proc();
+				splash_update("Loading plugins...", 
+					      plugin->info->name, nb_plugins - i);
+			}
+	}
+
+	splash_destroy();
 
 	gladexml = glade_xml_new(get_file_from_data_dir("glade/gscore.glade"), NULL, NULL);
 
@@ -266,44 +290,6 @@ int main(int argc, char *argv[])
 	gscore_init();
 
 	
-	nb_plugins = gscore_plugins_load(&plugins_list);
-
-	/* 	gscore_plugins_list(plugins_list); */
-
-	/* 	widget = glade_xml_get_widget (gladexml, "splashscreen_progressbar"); */
-
-	g_print("There are %d plugins\n", nb_plugins);
-
-	for ( i = 0; i < nb_plugins; i++) {
-			ppnf = g_list_nth_data(plugins_list, i);
-			full_filename = g_strconcat(ppnf->path, G_DIR_SEPARATOR_S, ppnf->filename, NULL);
-
-			g_print("filename: %s\n", full_filename);
-			GSCORE_PLUGIN_INIT(plugin);
-			plugin = gscore_plugin_get(full_filename);
-
-			if ( ! plugin ) {
-				gw_message_error(g_strdup_printf(_("Unable to load plugin %s"),full_filename));
-			} else {
-				g_print("Loading Plugin: %s v.%s\n", plugin->info->name, plugin->info->version);
-
-
-				plugin->init_proc();
-			}
-
-			/* 		scale = nb_plugins - i; */
-
-			/* 		if (scale != 0) */
-			/* 			gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (widget), */
-			/* 						       1.0 / scale); */
-			/* 		else */
-			/* 			gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (widget), */
-			/* 						       1.0); */
-	}
-
-
-	/* 	widget = glade_xml_get_widget (gladexml, "splashscreen"); */
-	/* 	gtk_widget_destroy(widget); */
 
 	widget = glade_xml_get_widget (gladexml, "score_window");
 	gtk_widget_show(widget);
@@ -326,7 +312,7 @@ int main(int argc, char *argv[])
 	if ( ! fp ) { 		/* The file doesn't exist, gscore is launched for the first time! */
 		gw_message_info("Congratulations!\nYou are running Gscore for the first time!\n\nFirst of all, this is not a final version. There are many bugs, many features missing...\nHowever, feel free to report bugs and wishes to help this software to become better.\n\nA few tips to start:\n- <Space>: adds the object\n- <Tab>: add a single barline\n- <Del>: Erase the objects selected with the mouse.\n\nThis release can make ABC Music. If you want to print your score, you need the abc tools (abcm2ps for example).");
 		fp = fopen(g_strconcat(g_get_home_dir(), "/.gscore", NULL), "w");
-		fprintf(fp, "Gscore 0.0.7\n");
+		fprintf(fp, "Gscore 0.0.9\n");
 	}
 	fclose(fp);
 

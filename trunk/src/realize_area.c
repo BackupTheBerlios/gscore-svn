@@ -652,9 +652,9 @@ realize_object(Staff_t *staff, Object_t *object, gboolean display_barlines, gboo
 				  staff->start_x + object_x - 10,
 				  y - 6, 0,0, 0,0);
 
-		if ( object->nature & O_TIE_START ) {
-			tie_draw_tie(staff, object, object_x, y, y);
-		}
+/* 		if ( object->nature & O_TIE_START ) { */
+/* 			tie_draw_tie(staff, object, object_x, y, ynext); */
+/* 		} */
 
 		/* 8 means the width of a quarter note. It's not really nice (* FIXME *) */
 		if ( object->nature & O_DURATION )
@@ -1153,6 +1153,7 @@ gboolean score_area_callback(GtkWidget *widget, GdkEventExpose *event, gpointer 
 	}
 	/* END: Display the Tempo */
 
+
 	/* BEGIN: Walk through staves */
 	listrunner_staff = g_list_first(Score.Staff_list);
 	while ( listrunner_staff ) {
@@ -1198,7 +1199,10 @@ gboolean score_area_callback(GtkWidget *widget, GdkEventExpose *event, gpointer 
 		while ( listrunner_object ) {
 			Object_t *object;
 			object = (Object_t *)listrunner_object->data;
-			
+
+/* 			draw_staff(2, 5, 5, 5, 40, TRUE, FALSE); */
+/* 			tie_draw_tie(staff, object, 20, 20, 20); */
+
 			if ( object )
 				realize_object(staff, object, Score.Display->barlines, Score.Display->measure_number);
 

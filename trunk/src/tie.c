@@ -78,22 +78,34 @@ tie_notes_selected(void)
 extern void
 tie_draw_tie(Staff_t *staff, Object_t *object, guint object_x, gint y, gint ynext)
 {
-        Object_t *object_next;
-	GdkGC *gc;
-
-	guint thickness = 0;
-
-	object_next = (Object_t *)object_get_next(object);
-
-	gc = gdk_gc_new(Score.area->window);
 
 
-	printf("x1:%d, y1:%d, x2:%d, y2:%d\n", staff->start_x + object_x, y, staff->start_x + object_x + Spacings.NotesRests.sa_quarter, ynext);
+	draw_staff(2, 5, 5, 5, 40, TRUE, FALSE);
 
-	gdk_draw_arc(Score.area->window, gc,
-		     TRUE, staff->start_x + object_x,  y,
-		     staff->start_x + object_x + Spacings.NotesRests.sa_quarter, ynext,
-		     30, 30);
+/*         Object_t *object_next; */
+/* 	GdkGC *gc; */
+
+/* 	guint thickness = 0; */
+
+/* 	object_next = (Object_t *)object_get_next(object); */
+
+/* 	gc = gdk_gc_new(Score.area->window); */
+
+
+/* 	printf("x1:%d, y1:%d, x2:%d, y2:%d\n", staff->start_x + object_x, y, staff->start_x + object_x + Spacings.NotesRests.sa_quarter, ynext); */
+
+/* 	gdk_draw_arc(Score.area->window, gc, */
+/* 		     TRUE, staff->start_x + object_x,  y, */
+/* 		     staff->start_x + object_x + Spacings.NotesRests.sa_quarter, ynext, */
+/* 		     30, 30); */
+
+/* 	gdk_draw_line(Score.area->window, gc, 5, 5, 100, 5); */
+
+/* 	gdk_draw_arc(Score.area->window, gc, */
+/* 		     TRUE, 10,  20, */
+/* 		     40, 20, */
+/* 		     30, 30); */
+
 
 /* 	switch (object->type) */
 /* 		{ */

@@ -2,7 +2,7 @@
  * objects.c
  * gscore - a musical score editor
  *
- * (C) Copyright 2001-2004 Sebastien Tricaud
+ * (C) Copyright 2001-2005 Sebastien Tricaud
  * e-mail : toady@gscore.og
  * URL    : http://www.gscore.org
  *

@@ -44,71 +44,71 @@ static void splash_map (void);
 void
 splash_create(void)
 {
-/*   GtkWidget *vbox; */
 
-/*   GtkWidget *logo; */
-/*   GtkWidget *frame; */
-/*   GtkWidget *label; */
-/*   GtkWidget *align; */
+	GtkWidget *vbox;
 
-/*   gchar str[256]; */
+	GtkWidget *logo;
+	GtkWidget *frame;
+	GtkWidget *label;
+	GtkWidget *align;
 
-/*   splash = gtk_window_new(GTK_WINDOW_TOPLEVEL); */
-/*   gtk_window_set_type_hint (GTK_WINDOW (splash), */
-/*                             GDK_WINDOW_TYPE_HINT_SPLASHSCREEN); */
-/*   gtk_window_set_title (GTK_WINDOW (splash), _("Gscore Startup")); */
-/*   gtk_window_set_resizable (GTK_WINDOW (splash), FALSE); */
-/*   gtk_window_set_position (GTK_WINDOW (splash), GTK_WIN_POS_CENTER); */
+	gchar str[256];
 
-/*   g_signal_connect_swapped (splash, "delete_event", */
-/*                             G_CALLBACK (exit), GINT_TO_POINTER (0)); */
+	splash = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+	gtk_window_set_type_hint (GTK_WINDOW (splash),
+				  GDK_WINDOW_TYPE_HINT_SPLASHSCREEN);
+	gtk_window_set_title (GTK_WINDOW (splash), "Gscore Startup");
+	gtk_window_set_resizable (GTK_WINDOW (splash), FALSE);
+	gtk_window_set_position (GTK_WINDOW (splash), GTK_WIN_POS_CENTER);
 
-/*   gtk_window_set_auto_startup_notification (FALSE); */
-/*   g_signal_connect (splash, "map", */
-/*                     G_CALLBACK (splash_map), */
-/*                     NULL); */
+	g_signal_connect_swapped (splash, "delete_event",
+				  G_CALLBACK (exit), GINT_TO_POINTER (0));
 
-/*   frame = gtk_frame_new (NULL); */
-/*   gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_OUT); */
-/*   gtk_container_add (GTK_CONTAINER (splash), frame); */
+	gtk_window_set_auto_startup_notification (FALSE);
+	g_signal_connect (splash, "map",
+			  G_CALLBACK (splash_map),
+			  NULL);
 
-/*   vbox = gtk_vbox_new (FALSE, 4); */
-/*   gtk_container_add (GTK_CONTAINER (frame), vbox); */
+	frame = gtk_frame_new (NULL);
+	gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_OUT);
+	gtk_container_add (GTK_CONTAINER (splash), frame);
 
-/*   /\* add the pixmap *\/ */
-/*   logo = gtk_image_new_from_file(get_file_from_data_dir(LOGO_GILBERT)); */
+	vbox = gtk_vbox_new (FALSE, 4);
+	gtk_container_add (GTK_CONTAINER (frame), vbox);
 
-/*   align =  gtk_alignment_new (0.5, 0.5, 1.0, 1.0); */
-/*   gtk_box_pack_start (GTK_BOX (vbox), align, FALSE, TRUE, 0); */
+	/* add the pixmap */
+	logo = gtk_image_new_from_file(get_file_from_data_dir(LOGO_GILBERT));
+
+	align =  gtk_alignment_new (0.5, 0.5, 1.0, 1.0);
+	gtk_box_pack_start (GTK_BOX (vbox), align, FALSE, TRUE, 0);
  
-/*   gtk_container_add (GTK_CONTAINER (align), logo); */
+	gtk_container_add (GTK_CONTAINER (align), logo);
 
-/*   g_snprintf(str, sizeof(str), _("Gscore v %s\n\n"), VERSION); */
-/*   label = gtk_label_new (str); */
-/*   gtk_box_pack_start(GTK_BOX(vbox), label, FALSE, TRUE, 1); */
+	g_snprintf(str, sizeof(str), "Gscore v %s\n\n", VERSION);
+	label = gtk_label_new (str);
+	gtk_box_pack_start(GTK_BOX(vbox), label, FALSE, TRUE, 1);
 
-/*   label_action = gtk_label_new(_("Loading plugins")); */
-/*   gtk_box_pack_start(GTK_BOX(vbox), label_action, FALSE, TRUE, 1); */
+	label_action = gtk_label_new("Loading plugins");
+	gtk_box_pack_start(GTK_BOX(vbox), label_action, FALSE, TRUE, 1);
 
-/*   label_plugin = gtk_label_new(_("")); */
-/*   gtk_box_pack_start(GTK_BOX(vbox), label_plugin, FALSE, TRUE, 1); */
+	label_plugin = gtk_label_new("");
+	gtk_box_pack_start(GTK_BOX(vbox), label_plugin, FALSE, TRUE, 1);
 
-/*   progress = gtk_progress_bar_new(); */
-/*   gtk_box_pack_start(GTK_BOX(vbox), progress, FALSE, TRUE, 1); */
+	progress = gtk_progress_bar_new();
+	gtk_box_pack_start(GTK_BOX(vbox), progress, FALSE, TRUE, 1);
 
-/*   gtk_widget_show_all(splash); */
+	gtk_widget_show_all(splash);
+
 }
 
 void
 splash_destroy (void)
 {
-/* 	GtkWidget *widget; */
 
-/* 	if (splash) */
-/* 	{ */
-/* 		gtk_widget_destroy (splash); */
-/* 		splash = NULL; */
-/* 	} */
+	if (splash) {
+		gtk_widget_destroy (splash);
+		splash = NULL;
+	}
 
 }
 
@@ -118,27 +118,27 @@ splash_update (const gchar *text_action,
                const gchar *text_plugin,
 	       gdouble      scale)
 {
-/*   if (!splash) */
-/*     return; */
 
-/*   if (text_action) */
-/*     gtk_label_set_text (GTK_LABEL (label_action), text_action); */
+	if (!splash)
+		return;
 
-/*   if (text_plugin) */
-/*     gtk_label_set_text (GTK_LABEL (label_plugin), text_plugin); */
+	if (text_action)
+		gtk_label_set_text (GTK_LABEL (label_action), text_action);
 
-/*   /\* if there's no scale (ie. = no plugins), they are already loaded ;) *\/ */
-/*   if (scale != 0) */
-/*   gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (progress), */
-/*                                  1.0 / scale); */
-/* /\*   gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (progress),  *\/ */
-/* /\*                                  1.0 / scale); *\/ */
-/*   else */
-/*   gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (progress),  */
-/*                                  1.0); */
+	if (text_plugin)
+		gtk_label_set_text (GTK_LABEL (label_plugin), text_plugin);
 
-/*   while (gtk_events_pending ()) */
-/*     gtk_main_iteration (); */
+	/* if there's no scale (ie. = no plugins), they are already loaded ;) */
+	if (scale != 0)
+		gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (progress),
+					       1.0 / scale);
+	else
+		gtk_progress_bar_set_fraction (GTK_PROGRESS_BAR (progress),
+					       1.0);
+
+	while (gtk_events_pending ())
+		gtk_main_iteration ();
+
 }
 
 
@@ -147,9 +147,11 @@ splash_update (const gchar *text_action,
 static void
 splash_map (void)
 {
+
   /*  Reenable startup notification after the splash has been shown
    *  so that the next window that is mapped sends the notification.  
    */
-/*    gtk_window_set_auto_startup_notification (TRUE); */
+   gtk_window_set_auto_startup_notification (TRUE);
+
 }
 
