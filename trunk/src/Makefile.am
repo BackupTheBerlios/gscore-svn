@@ -32,11 +32,13 @@ gscore_SOURCES = 	\
 	Makefile.am \
 	mode.c \
 	mouse_event.c \
+	notes.c \
 	objects.c \
 	objects_callbacks.c \
 	plugin.c \
 	position.c \
 	realize_area.c \
+	rests.c \
 	SConscript \
 	score.c \
 	selection.c \

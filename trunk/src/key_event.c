@@ -37,6 +37,8 @@
 #include "staff.h"
 #include "objects.h"
 #include "score.h"
+#include "notes.h"
+#include "rests.h"
 
 static gboolean debug_mode = FALSE;
 
@@ -44,18 +46,23 @@ static gboolean debug_mode = FALSE;
 extern gboolean
 score_key_press_event(GtkWidget *widget, GdkEventKey *event)
 {
-        GtkWidget *gladewidget;
-        GtkAdjustment *adj;
-        Score_t *score;
+        GtkWidget *gladewidget = NULL;
+        GtkAdjustment *adj = NULL;
+        Score_t *score = NULL;
 /*      Object_t *object; */
         Staff_t *staffobj = NULL;
         Object_t *tmpobj = NULL;
         GtkWidget *area;
-        KeyCursor_t *cursor;
+        KeyCursor_t *cursor = NULL;
 
         score = score_get_from_widget(widget);
         area = score_get_area_from_widget(widget);
         cursor = score_get_cursor_from_widget(widget);
+
+        if ( ! cursor ) {
+                printf("No Cursor!\n");
+                return;
+        }
         
         switch (event->keyval) {
                         
@@ -81,6 +88,23 @@ score_key_press_event(GtkWidget *widget, GdkEventKey *event)
                 case BARLINE_OPENREPEAT:
                 case BARLINE_CLOSEREPEAT:
                 case BARLINE_OPENCLOSEREPEAT:
+
+                        gladewidget = glade_xml_get_widget(gladexml, "sw_score_sw");
+
+                        if ( ! gladewidget )
+                                g_warning("Cannot get the glade widget!");
+
+                        adj = gtk_scrolled_window_get_hadjustment(GTK_SCROLLED_WINDOW(gladewidget));
+                        if ( ! adj )
+                                g_warning("Cannot get the adj widget!");
+
+                        printf("cursor->x_returned = %d\n", cursor->x_returned);
+ 
+                        gtk_adjustment_set_value(adj, cursor->x_returned - 300);
+                        gtk_scrolled_window_set_hadjustment(GTK_SCROLLED_WINDOW(gladewidget), adj);
+
+
+
                         if (event->state & GDK_CONTROL_MASK) { /* Make the chord */
                                 staffobj = (Staff_t *)g_list_nth_data(score->Staff_list, get_staff_selected(score));
                                 
@@ -99,6 +123,7 @@ score_key_press_event(GtkWidget *widget, GdkEventKey *event)
                                            Selection.object_type, 
                                            Selection.accidentals, Selection.nature, tmpobj->id, 
                                            0, 0, 0, 0, 0, 0, cursor->position, 0, FALSE);           
+
                                 
 
                         } else {
@@ -123,11 +148,6 @@ score_key_press_event(GtkWidget *widget, GdkEventKey *event)
 
                         gtk_widget_set_size_request(GTK_WIDGET(score_get_area_from_widget(widget)), 
                                                     score->width, score->height);
-
-                        gladewidget = glade_xml_get_widget(gladexml, "sw_score_sw");
-                        adj = gtk_scrolled_window_get_hadjustment(GTK_SCROLLED_WINDOW(gladewidget));
-                        gtk_adjustment_set_value(adj, cursor->x_returned - 300);
-                        gtk_scrolled_window_set_hadjustment(GTK_SCROLLED_WINDOW(gladewidget), adj);
 
                         break;
                 case DYNAMIC_PPPP:
@@ -165,21 +185,39 @@ score_key_press_event(GtkWidget *widget, GdkEventKey *event)
                 refresh(area);
                 break;
         case GDK_Left:
-                tmpobj = (Object_t *) object_get_left((Staff_t *)g_list_nth_data(score->Staff_list, get_staff_selected(score)), cursor->x_returned);
+                tmpobj = (Object_t *) 
+                        object_get_left((Staff_t *)
+                                        g_list_nth_data(score->Staff_list, 
+                                                        get_staff_selected(score)), 
+                                        cursor->x_returned);
 
                 if ( ! tmpobj ) { 
                         printf("There's no note on the left!\n");
                         return FALSE;
                 }
 
-                staffobj = (Staff_t *)g_list_nth_data(score->Staff_list, get_staff_selected(score));
+                staffobj = (Staff_t *)
+                        g_list_nth_data(score->Staff_list, 
+                                        get_staff_selected(score));
+
                 if ( ! staffobj ) return FALSE;
                 
-                staffobj->current_x -= Spacings.NotesRests.sa_quarter / 2;
+                if ( is_note(tmpobj->type) ||
+                     is_rest(tmpobj->type) ) {
 
-                refresh(area);
+                        if ( staffobj->current_x == 
+                             tmpobj->x + (object_get_spacing(tmpobj->type) / 2)) {
+                                staffobj->current_x = tmpobj->x;
+                        } else {
+                                staffobj->current_x -= 
+                                        tmpobj->x + 
+                                        (object_get_spacing(tmpobj->type) / 2);
+                        }
 
-                printf("left id = %lu\n", tmpobj->id);
+                        refresh(area);
+
+                        printf("left id = %lu\n", tmpobj->id);
+                }
 
                 break;
         case GDK_Right:

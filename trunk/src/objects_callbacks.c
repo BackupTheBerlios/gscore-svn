@@ -1,3 +1,4 @@
+/* -*- mode:C; tab-width:8; c-default-style:linux; c-basic-offset:8; indent-tabs-mode:nil -*- */
 /*
  * objects_callbacks.c: callbacks for the toolbar and the menu
  * gscore - a music score editor

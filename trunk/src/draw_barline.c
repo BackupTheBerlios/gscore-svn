@@ -1,3 +1,4 @@
+/* -*- mode:C; tab-width:8; c-default-style:linux; c-basic-offset:8; indent-tabs-mode:nil -*- */
 /*
  * draw_barline.c
  * gscore - a musical score editor

@@ -1,3 +1,4 @@
+/* -*- mode:C; tab-width:8; c-default-style:linux; c-basic-offset:8; indent-tabs-mode:nil -*- */
 /*
  * main.c
  * gscore - a musical score editor
@@ -193,14 +194,7 @@ gboolean load_plugin_from_command_line(gchar *filename)
 	GscorePlugin *plugin;
 	Score_t     *pi;
 
-/* 	Display_t *display_save; */
-/* 	GtkWidget *area_save; */
-
         gchar *extension;
-
-
-/* 	display_save = score->Display; */
-/* 	area_save = score->area; */
 
         extension = strrchr(filename, '.');
 
@@ -217,9 +211,6 @@ gboolean load_plugin_from_command_line(gchar *filename)
 
         plugin->filter->import(&pi, filename, NULL);
 
-/*         Score = *pi; */
-/* 	score->Display = display_save; */
-/* 	score->area = area_save; */
 	score_create_window(pi);
 
         return TRUE;
@@ -228,15 +219,10 @@ gboolean load_plugin_from_command_line(gchar *filename)
 
 int main(int argc, char *argv[]) 
 {
-/* 	GtkWidget *widget; */
-
 	gint i = 0;
 	gchar *full_filename;
 	GscorePlugin *plugin;
 	plugin_pnf *ppnf;
-
-
-/* 	gint scale = 0; */
 
 	FILE *fp;
 
@@ -249,24 +235,23 @@ int main(int argc, char *argv[])
 	splash_create();
 
 	for ( i = 0; i < nb_plugins; i++) {
-			ppnf = g_list_nth_data(plugins_list, i);
-			full_filename = g_strconcat(ppnf->path, G_DIR_SEPARATOR_S, ppnf->filename, NULL);
+                ppnf = g_list_nth_data(plugins_list, i);
+                full_filename = g_strconcat(ppnf->path, G_DIR_SEPARATOR_S, ppnf->filename, NULL);
 
-			g_print("filename: %s\n", full_filename);
-			GSCORE_PLUGIN_INIT(plugin);
-			plugin = gscore_plugin_get(full_filename);
+                g_print("filename: %s\n", full_filename);
+                GSCORE_PLUGIN_INIT(plugin);
+                plugin = gscore_plugin_get(full_filename);
 
-			if ( ! plugin ) {
-				gw_message_error(g_strdup_printf(_("Unable to load plugin %s"),full_filename));
-			} else {
-				plugin->init_proc();
-				splash_update("Loading plugins...", 
-					      plugin->info->name, nb_plugins - i);
-			}
+                if ( ! plugin ) {
+                        gw_message_error(g_strdup_printf(_("Unable to load plugin %s"),full_filename));
+                } else {
+                        plugin->init_proc();
+                        splash_update("Loading plugins...", 
+                                      plugin->info->name, nb_plugins - i);
+                }
 	}
 
 	splash_destroy();
-
 
 	gladexml = glade_xml_new(get_file_from_data_dir("glade/gscore.glade"), NULL, NULL);
 
@@ -277,14 +262,6 @@ int main(int argc, char *argv[])
 	glade_xml_signal_autoconnect(gladexml);
 
 	gscore_init();
-/* 	glade_set_widgets(gladexml); */
-
-
-	
-
-/* 	widget = glade_xml_get_widget (gladexml, "score_window"); */
-
-
 
 
 	fp = fopen(g_strconcat(g_get_home_dir(), "/.gscore", NULL), "r");
@@ -297,9 +274,9 @@ int main(int argc, char *argv[])
 
         /* Open a file from the command line */
         if (argc > 1) {
-	  load_plugin_from_command_line(argv[1]);
+                load_plugin_from_command_line(argv[1]);
 	} else {
-	  score_create_window(NULL);
+                score_create_window(NULL);
 	}
 
 	g_log_set_fatal_mask("Gtk", G_LOG_LEVEL_CRITICAL);

@@ -1,10 +1,10 @@
 /* -*- mode:C; tab-width:8; c-default-style:linux; c-basic-offset:8; indent-tabs-mode:nil -*- */
 /*
- * display.c
+ * notes.h
  * gscore - a musical score editor
  *
- * (C) Copyright 2001-2004 Sebastien Tricaud
- * e-mail : toady@gscore.org
+ * (C) Copyright 2001-2005 Sebastien Tricaud
+ * e-mail : toady@gscore.og
  * URL    : http://www.gscore.org
  *
  * This program is free software; you can redistribute it and/or modify
@@ -22,30 +22,10 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-#include <gtk/gtk.h>
+#ifndef _NOTES_H_
+#define _NOTES_H_
 
-#include "gscore.h"
-#include "display.h"
+gboolean is_note(gint type);
 
-void
-barnotes (gpointer callback_data, guint callback_action, GtkWidget *widget)
-{
+#endif
 
-}
-
-void display_new_page(gint measure)
-{
-
-}
-
-void display_measure_line_return(GtkWidget *area, gint measure)
-{
-          GdkGC *gc;
-          gint j = 0;
-
-          gc = gdk_gc_new(area->window);
-
-          gdk_draw_line(area->window, gc,
-                        20,j, 20, j+20);
-
-}

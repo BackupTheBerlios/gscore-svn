@@ -1,3 +1,4 @@
+/* -*- mode:C; tab-width:8; c-default-style:linux; c-basic-offset:8; indent-tabs-mode:nil -*- */
 /*
  * realize_area.c
  * gscore - a musical score editor
@@ -90,7 +91,7 @@ realize_key(GtkWidget *area, Staff_t *staff)
 static gdouble 
 realize_key_signature(GtkWidget *area, Staff_t *staff)
 {
-  Score_t *score = score_get_from_widget(area);
+        Score_t *score = score_get_from_widget(area);
   
 	guint keysignature_x = staff->extremity_begin_x + Spacings.Clefs.sb + STANDARD_KEY_SIZE + Spacings.Clefs.sa;
 
@@ -127,7 +128,7 @@ realize_key_signature(GtkWidget *area, Staff_t *staff)
 		timesignature_x = 
 			keysignature_x + 
 			4 * Spacings.KeySignatures.sbksa + 
-/* 			5 * STANDARD_ACCIDENTAL_SIZE + */
+                        /* 			5 * STANDARD_ACCIDENTAL_SIZE + */
 			Spacings.KeySignatures.saks;
 
 		break;
@@ -148,7 +149,7 @@ realize_key_signature(GtkWidget *area, Staff_t *staff)
 		timesignature_x = 
 			keysignature_x + 
 			2 * Spacings.KeySignatures.sbksa + 
-/* 			3 * STANDARD_ACCIDENTAL_SIZE +  */
+                        /* 			3 * STANDARD_ACCIDENTAL_SIZE +  */
 			Spacings.KeySignatures.saks;
 
 		break;
@@ -185,7 +186,7 @@ realize_key_signature(GtkWidget *area, Staff_t *staff)
 		timesignature_x = 
 			keysignature_x + 
 			6 * Spacings.KeySignatures.sbksa + 
-/* 			7 * STANDARD_ACCIDENTAL_SIZE +  */
+                        /* 			7 * STANDARD_ACCIDENTAL_SIZE +  */
 			Spacings.KeySignatures.saks;
 
 		break;
@@ -197,7 +198,7 @@ realize_key_signature(GtkWidget *area, Staff_t *staff)
 
 		timesignature_x = 
 			keysignature_x + 
-/* 			STANDARD_ACCIDENTAL_SIZE +  */
+                        /* 			STANDARD_ACCIDENTAL_SIZE +  */
 			Spacings.KeySignatures.saks;
 
 		break;
@@ -214,7 +215,7 @@ realize_key_signature(GtkWidget *area, Staff_t *staff)
 		timesignature_x = 
 			keysignature_x + 
 			4 * Spacings.KeySignatures.sbksa + 
-/* 			5 * STANDARD_ACCIDENTAL_SIZE + */
+                        /* 			5 * STANDARD_ACCIDENTAL_SIZE + */
 			Spacings.KeySignatures.saks;
 
 		break;
@@ -247,7 +248,7 @@ realize_key_signature(GtkWidget *area, Staff_t *staff)
 		timesignature_x = 
 			keysignature_x + 
 			5 * Spacings.KeySignatures.sbksa + 
-/* 			6 * STANDARD_ACCIDENTAL_SIZE +  */
+                        /* 			6 * STANDARD_ACCIDENTAL_SIZE +  */
 			Spacings.KeySignatures.saks;
 
 		break;
@@ -272,7 +273,7 @@ realize_key_signature(GtkWidget *area, Staff_t *staff)
 		timesignature_x = 
 			keysignature_x + 
 			3 * Spacings.KeySignatures.sbksa + 
-/* 			4 * STANDARD_ACCIDENTAL_SIZE + */
+                        /* 			4 * STANDARD_ACCIDENTAL_SIZE + */
 			Spacings.KeySignatures.saks;
 
 		break;
@@ -297,7 +298,7 @@ realize_key_signature(GtkWidget *area, Staff_t *staff)
 		timesignature_x = 
 			keysignature_x + 
 			3 * Spacings.KeySignatures.sbksa + 
-/* 			4 * STANDARD_ACCIDENTAL_SIZE +  */
+                        /* 			4 * STANDARD_ACCIDENTAL_SIZE +  */
 			Spacings.KeySignatures.saks;
 
 		break;
@@ -330,7 +331,7 @@ realize_key_signature(GtkWidget *area, Staff_t *staff)
 		timesignature_x = 
 			keysignature_x + 
 			5 * Spacings.KeySignatures.sbksa + 
-/* 			6 * STANDARD_ACCIDENTAL_SIZE + */
+                        /* 			6 * STANDARD_ACCIDENTAL_SIZE + */
 			Spacings.KeySignatures.saks;
 
 		break;
@@ -347,7 +348,7 @@ realize_key_signature(GtkWidget *area, Staff_t *staff)
 		timesignature_x = 
 			keysignature_x + 
 			Spacings.KeySignatures.sbksa +
-/* 			2 * STANDARD_ACCIDENTAL_SIZE +  */
+                        /* 			2 * STANDARD_ACCIDENTAL_SIZE +  */
 			Spacings.KeySignatures.saks;
 
 		break;
@@ -359,7 +360,7 @@ realize_key_signature(GtkWidget *area, Staff_t *staff)
 
 		timesignature_x = 
 			keysignature_x +
-/* 			STANDARD_ACCIDENTAL_SIZE + */
+                        /* 			STANDARD_ACCIDENTAL_SIZE + */
 			Spacings.KeySignatures.saks;
 		
 		break;
@@ -396,7 +397,7 @@ realize_key_signature(GtkWidget *area, Staff_t *staff)
 		timesignature_x = 
 			keysignature_x + 
 			6 * Spacings.KeySignatures.sbksa +
-/* 			7 * STANDARD_ACCIDENTAL_SIZE + */
+                        /* 			7 * STANDARD_ACCIDENTAL_SIZE + */
 			Spacings.KeySignatures.saks;
 
 		break;
@@ -417,7 +418,7 @@ realize_key_signature(GtkWidget *area, Staff_t *staff)
 		timesignature_x = 
 			keysignature_x + 
 			2 * Spacings.KeySignatures.sbksa +
-/* 			3 * STANDARD_ACCIDENTAL_SIZE + */
+                        /* 			3 * STANDARD_ACCIDENTAL_SIZE + */
 			Spacings.KeySignatures.saks;
 
 		break;
@@ -446,7 +447,7 @@ realize_key_signature(GtkWidget *area, Staff_t *staff)
 		timesignature_x = 
 			keysignature_x + 
 			4 * Spacings.KeySignatures.sbksa +
-/* 			5 * STANDARD_ACCIDENTAL_SIZE + */
+                        /* 			5 * STANDARD_ACCIDENTAL_SIZE + */
 			Spacings.KeySignatures.saks;
 
 		break;

@@ -1,5 +1,9 @@
 2005-02-08 Toady <toady@gscore.org>
 
+	* src/objects.c, src/key_event.c: Basic object insertion working
+
+2005-02-08 Toady <toady@gscore.org>
+
 	* src/score.c: fixed bug that would not initialize the id given to object value
 	* src/key_event.c: improved object insertion
 

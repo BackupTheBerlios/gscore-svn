@@ -52,8 +52,6 @@ void refresh(GtkWidget *area)
 	gtk_widget_queue_draw(area);
 
   /* when you change the size of the drawingarea, a refresh is done */
-/*   gtk_drawing_area_size(Score.area, Score.Staff[Score.nb_staff].extremity_end_x, */
-/*                         Score.Staff[Score.nb_staff].extremity_end_y); */
 }
 
 /* Object_t * get_object_list(gint staff, gint index) */
