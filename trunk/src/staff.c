@@ -325,10 +325,10 @@ gboolean staff_set_key(Score_t *score, gint staff, gint key)
         
         if ( staff_data ) {
                 staff_data->key = key;
-		return 0;
+		return TRUE;
 	}
 
-	return -1;
+	return FALSE;
 }
 
 void staff_set_key_callback(void)
@@ -361,8 +361,12 @@ gint staff_get_key(const Score_t *score, gint staff)
         Staff_t *staff_data;
 
         staff_data = g_list_nth_data(score->Staff_list, staff);
+        
+        if (staff_data) {
+                return staff_data->key;
+        }
 
-        return staff_data->key;
+        return -1;
 }
 
 gboolean staff_set_current_x(Score_t *score, gint staff, gint current_x)
@@ -373,10 +377,10 @@ gboolean staff_set_current_x(Score_t *score, gint staff, gint current_x)
         
         if (staff_data) {
                 staff_data->current_x = current_x;
-		return 0;
+		return TRUE;
 	}
 	
-	return -1;
+	return FALSE;
 }
 
 gint staff_get_current_x(const Score_t *score, gint staff)
@@ -385,7 +389,10 @@ gint staff_get_current_x(const Score_t *score, gint staff)
 
         staff_data = g_list_nth_data(score->Staff_list, staff);
         
-	return staff_data->current_x;
+        if (staff_data)
+                return staff_data->current_x;
+
+        return -1;
 }
 
 gdouble get_staff_extremity_begin_x(const Score_t *score, gint staff)
@@ -394,11 +401,12 @@ gdouble get_staff_extremity_begin_x(const Score_t *score, gint staff)
 
         staff_data = g_list_nth_data(score->Staff_list, staff);
 
-	if(staff_data) {
-	  return staff_data->extremity_begin_x;
-	} else {
-	  return 0;
-	}
+	if(staff_data)
+                return staff_data->extremity_begin_x;
+
+        
+        return 0;
+
 }
 
 gdouble get_staff_extremity_begin_y(const Score_t *score, gint staff)
@@ -407,77 +415,61 @@ gdouble get_staff_extremity_begin_y(const Score_t *score, gint staff)
 
         staff_data = g_list_nth_data(score->Staff_list, staff);
 
-	if(staff_data) {
+	if(staff_data)
 	  return staff_data->extremity_begin_y;
-	} else {
-	  return 0;
-	}
+
+        
+        return 0;
+
 }
 
 
 gboolean staff_set_key_signature(Score_t *score, gint staff, gint key_signature)
 {
-/*         GList * listrunner; */
 
-/*         listrunner = g_list_first(Score.Staff_list); */
-/*         while (listrunner) */
-/*                 { */
         Staff_t *staff_data;
         
         staff_data = g_list_nth_data(score->Staff_list, staff);
         
-        if (staff_data)
+        if (staff_data) {
                 staff_data->key_signature = key_signature;
+                return TRUE;
+        }
 
-	return TRUE;
-/*                         listrunner = g_list_next(listrunner); */
-/*                 } */
+	return FALSE;
+
 }
 
 gboolean staff_set_time_signature(Score_t *score, gint staff,
 				  gint signature_type, gint number_of_beats,
 				  gint beat_duration)
 {
-/*         GList * listrunner; */
-
-/*         listrunner = g_list_first(Score.Staff_list); */
-/*         while (listrunner) */
-/*                 { */
         Staff_t *staff_data;
         
         staff_data = g_list_nth_data(score->Staff_list, staff);
-        
-        staff_data->time_signature[0] = signature_type;
-        staff_data->time_signature[1] = number_of_beats;
-        staff_data->time_signature[2] = beat_duration;
-        
-/*         listrunner = g_list_next(listrunner); */
-/*                 } */
 
-/*         g_list_free(listrunner); */
+        if (staff_data) {
+                staff_data->time_signature[0] = signature_type;
+                staff_data->time_signature[1] = number_of_beats;
+                staff_data->time_signature[2] = beat_duration;
+                return TRUE;
+        }
 
-	return TRUE;
+        return FALSE;
 }
 
 gboolean staff_set_midi_instrument(Score_t *score, gint staff, gint midi_instrument)
 {
-/*         GList * listrunner; */
-
-/*         listrunner = g_list_first(Score.Staff_list); */
-/*         while (listrunner) */
-/*                 { */
 	Staff_t *staff_data;
 	
 	staff_data = g_list_nth_data(score->Staff_list, staff);
-	
-	staff_data->midi_instrument = midi_instrument;
-	
-/*                         listrunner = g_list_next(listrunner); */
-/*                 } */
-	
-/*         g_list_free(listrunner); */
-	
-	return TRUE;
+
+	if (staff_data) {
+                staff_data->midi_instrument = midi_instrument;
+                return TRUE;
+        }
+
+        return FALSE;
 }
 
 
@@ -1197,10 +1189,13 @@ gdouble get_staff_extremity_end_y(const Score_t *score, gint staff_id)
 
         staff_data = g_list_nth_data(score->Staff_list, staff_id);
 
-        retval += staff_data->extremity_begin_y;
-        retval += (staff_data->nb_lines - 1) * staff_data->space_btw_lines + staff_data->nb_lines;
-
+        if (staff_data) {
+                retval += staff_data->extremity_begin_y;
+                retval += (staff_data->nb_lines - 1) * staff_data->space_btw_lines + staff_data->nb_lines;
         return retval;
+        }
+
+        return 0;
 }
 
 /* Accordingly to the y position of the cursor, this function returns the staff number */
@@ -1560,6 +1555,8 @@ void update_key_signature(Score_t *score)
 
 
         staff_data = g_list_nth_data(score->Staff_list, get_staff_selected(score));
+
+        if ( ! staff_data ) return;
 
 	staff_data->key_signature = key_signature;
 
