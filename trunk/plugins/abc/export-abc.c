@@ -176,41 +176,6 @@ static gchar *get_char_from_pitch(gulong group_id, gint key, gint type, gint pit
         return "";
 }
 
-static gchar *get_char_from_chord(Staff_t *staff, Object_t *object)
-{
-        Object_t *object_data;
-        GList *listrunner_object;
-
-        char *retstr = "[";
-
-        retstr = g_strconcat(retstr,
-                             get_char_from_pitch(0, staff->key, object->type, object->pitch),
-                             NULL);
-
-        listrunner_object = g_list_first(staff->Object_list);
-        while ( listrunner_object ) {
-                object_data = (Object_t *)listrunner_object->data;
-
-                if (object_data) {
-
-                        if (object->id == object_data->group_id) {
-                                retstr = g_strconcat(retstr,
-                                                     get_char_from_pitch(0, staff->key, object_data->type, object_data->pitch),
-                                                     NULL);
-                        }
-                        
-                }
-
-                listrunner_object = g_list_next(listrunner_object);
-        }
-
-        g_list_free(listrunner_object);
-
-        retstr = g_strconcat(retstr, "]", NULL);
-
-        return retstr;
-}
-
 static gchar *get_char_for_duration(const gint value)
 {
         switch(value)
@@ -247,12 +212,49 @@ static gchar *get_char_from_staccato(object_e object)
           return "";
 }
 
+static gchar *get_char_from_chord(Staff_t *staff, Object_t *object)
+{
+        Object_t *object_data;
+        GList *listrunner_object;
+
+        char *retstr = "[";
+
+        retstr = g_strconcat(retstr,
+                             get_char_from_pitch(0, staff->key, object->type, object->pitch),
+                             get_char_for_duration(object_data->type),
+                             NULL);
+
+        listrunner_object = g_list_first(staff->Object_list);
+        while ( listrunner_object ) {
+                object_data = (Object_t *)listrunner_object->data;
+
+                if (object_data) {
+
+                        if (object->id == object_data->group_id) {
+                                retstr = g_strconcat(retstr,
+                                                     get_char_from_pitch(0, staff->key, object_data->type, object_data->pitch),
+                                                     get_char_for_duration(object_data->type),
+                                                     NULL);
+                        }
+                        
+                }
+
+                listrunner_object = g_list_next(listrunner_object);
+        }
+
+        g_list_free(listrunner_object);
+
+        retstr = g_strconcat(retstr, "]", NULL);
+
+        return retstr;
+}
+
 static void abc_print_object(gpointer data, gpointer user_data)
 {
         Staff_t  *staff = (Staff_t *)user_data; 
         Object_t *object;
 
-        gchar *char_from_object;
+        gchar *char_from_object = NULL;
 
         object = (Object_t *) data;
 
@@ -277,16 +279,19 @@ static void abc_print_object(gpointer data, gpointer user_data)
                 g_print(" :| ");
                 break;
         default:
-                char_from_object = is_chord(staff, object) ? 
-                        get_char_from_chord(staff, object) : 
-                        get_char_from_pitch(object->group_id, staff->key, object->type, object->pitch),
 
-                g_print("%s%s%s%s%s",
+                if ( is_chord(staff, object) ) {
+                        char_from_object = get_char_from_chord(staff, object);
+                } else {
+                        char_from_object = get_char_from_pitch(object->group_id, staff->key, object->type, object->pitch);
+                        g_strconcat(char_from_object, get_char_for_duration(object->type), NULL);
+                }
+
+                g_print("%s%s%s%s",
                         get_char_from_staccato(object->nature),
                         get_char_from_beam(object->type, object->nature),
                         get_char_from_accidental(object->accidentals),
-                        char_from_object,
-                        get_char_for_duration(object->type));
+                        char_from_object);
 
         }
 
