@@ -1,3 +1,7 @@
+2005-01-20 toady <toady@gscore.org>
+
+	* src/draw.c: don't render notes which are not displayed on screen (yadh)
+	
 2005-01-13 toady <toady@gscore.org>
 
 	* src/realize_area.c: Fixed bug #2870

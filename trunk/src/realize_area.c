@@ -497,6 +497,7 @@ realize_object(Staff_t *staff, Object_t *object, gboolean display_barlines, gboo
 	is_selected = object->is_selected;
 	y = get_y_from_position(staff->key, staff->extremity_begin_y, object->pitch);
 
+
 	object_next = object_get_next(object);
 	if (object_next) {
 		ynext = get_y_from_position(staff->key, staff->extremity_begin_y, object_next->pitch);
@@ -1272,7 +1273,7 @@ gboolean score_area_callback(GtkWidget *widget, GdkEventExpose *event, gpointer 
 /* 			draw_staff(2, 5, 5, 5, 40, TRUE, FALSE); */
 /* 			tie_draw_tie(staff, object, 20, 20, 20); */
 
-			if ( object )
+			if (object)
 				realize_object(staff, object, Score.Display->barlines, Score.Display->measure_number);
 
 			listrunner_object = g_list_next(listrunner_object);

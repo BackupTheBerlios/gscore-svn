@@ -1,1 +1,2 @@
-SUBDIRS = abc
+SUBDIRS = abc midi
+

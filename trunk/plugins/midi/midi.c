@@ -91,7 +91,7 @@ void open_midi(const gchar *filename)
 {
 
 	if (!(midi_out = midi_file_create (filename, MIDI_FLAG_PUT | MIDI_FLAG_CREATE)))
-		gw_message_error(_("Cannot save the file"));
+/* 		gw_message_error(_("Cannot save the file")); */
 
 	/* Set the default Timestamp for a quarter */
 	midi_file_set_tpqn (midi_out, DEFAULT_TIMESTAMP);
@@ -191,56 +191,56 @@ gboolean midi_filter_export (Score_t *score,
 			       const gchar *filename,
 			       void *user_data)
 {
-        Staff_t *staff_data;
-        GList *listrunner;
+/*         Staff_t *staff_data; */
+/*         GList *listrunner; */
 
 
-	g_print("Export function called for %s\n", PLUGIN_NAME);
-	g_print("Saving %s\n", filename);
+/* 	g_print("Export function called for %s\n", PLUGIN_NAME); */
+/* 	g_print("Saving %s\n", filename); */
 
-        /* Just to show that we get the tempo from the score from gscore */
-        g_print("Tempo: %d\n", score->tempo);
+/*         /\* Just to show that we get the tempo from the score from gscore *\/ */
+/*         g_print("Tempo: %d\n", score->tempo); */
 
-	g_print("Other objects...\n");
+/* 	g_print("Other objects...\n"); */
 	
 
-        staff_data = g_list_nth_data(score->Staff_list, 0);
-        listrunner = g_list_first(staff_data->Object_list);
-        while (listrunner)
-                {
-/*                         Object_t *object_data; */
+/*         staff_data = g_list_nth_data(score->Staff_list, 0); */
+/*         listrunner = g_list_first(staff_data->Object_list); */
+/*         while (listrunner) */
+/*                 { */
+/* /\*                         Object_t *object_data; *\/ */
 
-/*                         object_data = (Object_t *)listrunner->data; */
+/* /\*                         object_data = (Object_t *)listrunner->data; *\/ */
 
-			mmsg.timestamp = 0;
+/* 			mmsg.timestamp = 0; */
 			
-/* 			MIDI_MSG_CHPROG(&mmsg, chan, staff_data->midi_instrument); */
-/* 			MIDI_MSG_CHAN(&mmsg, chan, staff_data->midi_instrument); */
-			midi_put_msg(midi_out, &mmsg);
+/* /\* 			MIDI_MSG_CHPROG(&mmsg, chan, staff_data->midi_instrument); *\/ */
+/* /\* 			MIDI_MSG_CHAN(&mmsg, chan, staff_data->midi_instrument); *\/ */
+/* 			midi_put_msg(midi_out, &mmsg); */
 			
-			g_list_foreach(staff_data->Object_list, midi_export_object, (gpointer) staff_data->key);
-			chan++;
+/* 			g_list_foreach(staff_data->Object_list, midi_export_object, (gpointer) staff_data->key); */
+/* 			chan++; */
 
-/*                         printf("Object->id = %d\n", object_data->id); */
-/*                         printf("Object->type = %d\n", object_data->type); */
-/*                         printf("Object->nature = %d\n", object_data->nature); */
-/*                         printf("Object->accidentals = %d\n", object_data->accidentals); */
-/*                         printf("Object->x = %d\n", object_data->x); */
-/*                         printf("Object->y = %d\n", object_data->y); */
-/*                         printf("Object->x2 = %d\n", object_data->x2); */
-/*                         printf("Object->y2 = %d\n", object_data->y2); */
-/*                         printf("Object->x3 = %d\n", object_data->x3); */
-/*                         printf("Object->y3 = %d\n", object_data->y3); */
-/*                         printf("Object->pitch = %d\n", object_data->pitch); */
-/*                         printf("Object->tab_number = %d\n", object_data->tab_number); */
-/*                         printf("Object->is_selected = %d\n", object_data->is_selected); */
+/* /\*                         printf("Object->id = %d\n", object_data->id); *\/ */
+/* /\*                         printf("Object->type = %d\n", object_data->type); *\/ */
+/* /\*                         printf("Object->nature = %d\n", object_data->nature); *\/ */
+/* /\*                         printf("Object->accidentals = %d\n", object_data->accidentals); *\/ */
+/* /\*                         printf("Object->x = %d\n", object_data->x); *\/ */
+/* /\*                         printf("Object->y = %d\n", object_data->y); *\/ */
+/* /\*                         printf("Object->x2 = %d\n", object_data->x2); *\/ */
+/* /\*                         printf("Object->y2 = %d\n", object_data->y2); *\/ */
+/* /\*                         printf("Object->x3 = %d\n", object_data->x3); *\/ */
+/* /\*                         printf("Object->y3 = %d\n", object_data->y3); *\/ */
+/* /\*                         printf("Object->pitch = %d\n", object_data->pitch); *\/ */
+/* /\*                         printf("Object->tab_number = %d\n", object_data->tab_number); *\/ */
+/* /\*                         printf("Object->is_selected = %d\n", object_data->is_selected); *\/ */
 
-                        listrunner = g_list_next(listrunner);
-                }
+/*                         listrunner = g_list_next(listrunner); */
+/*                 } */
 
-        g_list_free(listrunner);
+/*         g_list_free(listrunner); */
 
-	close_midi();
+/* 	close_midi(); */
 
 	return TRUE;
 }
@@ -251,18 +251,54 @@ gboolean midi_filter_import (Score_t **score,
 {
         Score_t *spi;
 
+        midi_t *midi;
+
+        int nb_tracks;
+        int tempo;
+
         g_print("Import function called for %s\n", PLUGIN_NAME);
 	g_print("Loading %s\n", filename);
 
         /* The following sets the tempo for the score */
-        GSCORE_PLUGIN_INIT_STRUCT(spi);
+        GSCORE_PLUGIN_STRUCT_INIT(spi);
 
-        spi->tempo = 10;
+/*         spi->tempo = 10; */
+        midi = midi_file_create(filename, MIDI_FLAG_GET);
+
+        nb_tracks = midi_file_get_nb_tracks(midi);
+
+
+        while ( midi_get_msg(midi, &mmsg) >= 0 ) {
+                if(MIDI_MSG_EOF (&mmsg)) break;
+                if(MIDI_MSG_EOT (&mmsg)) break;
+                if(MIDI_MSG_NULL (&mmsg)) break;
+
+                switch(MIDI_MSG_TYPE(&mmsg)) {
+                case MIDI_SYSTEM:
+                        switch(MIDI_MSG_STATUS(&mmsg)) {
+                        case MIDI_SYS_META:
+                                switch(MIDI_MSG_DATA1(&mmsg)) {
+                                case MIDI_SYS_META_TEMPO:
+                                        tempo = MIDI_MSG_TEMPO(&mmsg);
+                                        printf("Tempo = %d\n", tempo);
+                                        break;
+                                }
+                                break;
+                        }
+                        break;
+                case MIDI_NOTE_ON:
+                        printf("Note_on: %d", MIDI_MSG_NOTE(&mmsg));
+                        break;
+                }
+
+        }
+
+        
 
 
         /* We give the structure to the pointer */
         /* I believe it's cleaner this way. Now it's up to you */
-        GSCORE_PLUGIN_INIT_STRUCT(*score);
+        GSCORE_PLUGIN_STRUCT_INIT(*score);
         *score = spi;
 
 	return TRUE;

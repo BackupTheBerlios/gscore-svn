@@ -32,6 +32,8 @@
 #include "common.h"
 #include "macros.h"
 #include "debug.h"
+#include "key_cursor.h"
+
 
 gint 
 draw_cursor(const gchar *xbm, const gchar *mask_xbm, gint width, gint height)
@@ -104,7 +106,18 @@ gint draw_note(gchar *file, gboolean selected, gint x, gint y, gint line_x1, gin
 	 *** his piece of code has been droped :P
 	 ***/
 
+        GtkWidget *scrolled_window;
+        GtkAdjustment *adj;
+
 	GdkPixbuf *pixbuf;
+
+        scrolled_window = glade_xml_get_widget(gladexml, "sw_score_sw");
+        adj = gtk_scrolled_window_get_hadjustment(GTK_SCROLLED_WINDOW(scrolled_window));
+
+        printf("object_x = %d, adjvalue = %f\n", x, adj->value);
+
+        if (x < adj->value - 50) return; /* -50 is a dummy stuff */
+        if (x > adj->value + 2000) return; /* +2000 too */
 
 	pixbuf = gdk_pixbuf_new_from_file(get_file_from_data_dir(g_strdup(file)), NULL);
 
