@@ -129,10 +129,12 @@ score_key_press_event(GtkWidget *widget, GdkEventKey *event)
 		refresh();
 		break;
 	case GDK_Up:
+                object_selected_pitch_up();
 		KeyCursor.position++;
 		refresh();
 		break;
 	case GDK_Down:
+                object_selected_pitch_down();
 		KeyCursor.position--;
 		refresh();
 		break;

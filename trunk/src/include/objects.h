@@ -55,4 +55,8 @@ void note_append(gint note_type);
 
 gboolean object_selected_change_type(gint newtype);
 
+gboolean object_selected_pitch_up(void);
+
+gboolean object_selected_pitch_down(void);
+
 #endif

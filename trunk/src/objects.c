@@ -389,3 +389,63 @@ object_selected_change_type(gint newtype)
 
         return something_selected;
 }
+
+extern gboolean
+object_selected_pitch_up(void)
+{
+        gboolean something_selected = FALSE;
+        Staff_t *staff_data;
+
+        GList *listrunner;
+
+        staff_data = (Staff_t *) g_list_nth_data(Score.Staff_list, get_staff_selected());
+
+        listrunner = g_list_first(staff_data->Object_list);
+
+        while (listrunner) {
+                Object_t *object;
+
+                object = (Object_t *)listrunner->data;
+
+                if (object->is_selected) {
+                        object->pitch++;
+                        something_selected = TRUE;
+                }
+                                  
+                listrunner = g_list_next(listrunner);
+        }
+
+        g_list_free(listrunner);
+
+        return something_selected;
+}
+
+extern gboolean
+object_selected_pitch_down(void)
+{
+        gboolean something_selected = FALSE;
+        Staff_t *staff_data;
+
+        GList *listrunner;
+
+        staff_data = (Staff_t *) g_list_nth_data(Score.Staff_list, get_staff_selected());
+
+        listrunner = g_list_first(staff_data->Object_list);
+
+        while (listrunner) {
+                Object_t *object;
+
+                object = (Object_t *)listrunner->data;
+
+                if (object->is_selected) {
+                        object->pitch--;
+                        something_selected = TRUE;
+                }
+                                  
+                listrunner = g_list_next(listrunner);
+        }
+
+        g_list_free(listrunner);
+
+        return something_selected;
+}
