@@ -32,7 +32,7 @@ dnl Checks for library functions.
 AC_TYPE_SIGNAL
 AC_FUNC_VPRINTF
 AC_CHECK_FUNCS(gettimeofday select socket strdup strerror strstr)
-
+7
 dnl Checks for programs
 AM_PROG_LIBTOOL
 
@@ -64,6 +64,18 @@ AC_SUBST(HAVE_GTK_DOC)
 AC_ARG_ENABLE(gtk-doc, [  --enable-gtk-doc  Use gtk-doc to build documentation [default=no]], enable_gtk_doc="$enableval", enable_gtk_doc=no)
 AM_CONDITIONAL(ENABLE_GTK_DOC, test x$enable_gtk_doc = xyes)
 
+dnl ********************************************************
+dnl languages
+dnl ********************************************************
+ALL_LINGUAS="cs de en_CA nl pt_BR sv zh_CN"
+
+dnl ********************************************************
+dnl triggers gettext
+dnl ********************************************************
+AM_GLIB_GNU_GETTEXT
+GETTEXT_PACKAGE=gscore
+AC_SUBST(GETTEXT_PACKAGE)
+AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"$GETTEXT_PACKAGE",[fix])
 
 dnl *******************************
 dnl checking for glib
@@ -104,6 +116,8 @@ plugins/abc/Makefile
 src/Makefile
 
 glade/Makefile
+
+po/Makefile.in
 
 ])
 
