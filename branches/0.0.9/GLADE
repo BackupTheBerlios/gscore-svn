@@ -1,0 +1,8 @@
+Because Glade sometime forgets my signals, here we go :)
+
+
+widget | signal | handler | object | after
+
+
+sw_score_da | event | drawing_area_events | sw_score_da | Y
+sw_set_tempo_menuitem | activate | gtk_widget_show | set_tempo | N
