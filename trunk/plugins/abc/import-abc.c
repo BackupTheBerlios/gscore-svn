@@ -1,3 +1,4 @@
+#include <glib.h>
 #include "import-abc.h"
 
 #include "abcp.h"

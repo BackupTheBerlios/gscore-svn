@@ -28,9 +28,6 @@ static void print_in_file(const gchar *s)
 static gchar * get_char_from_key(gint key)
 {
 
-     gchar * value = NULL;
-
-
      switch(key){
      case NO_KEY: return "empty";
      case TREBLE_KEY: return "treble";
@@ -256,10 +253,8 @@ extern void save_file(const gchar *filename, Score_t *score)
         GPrintFunc old_handler;
 
         GList *listrunner_staves = g_list_first(score->Staff_list);
-        GList *listrunner_objects;
 
         Staff_t *staff_data;
-        Object_t *object_data;
         gint staff_counter = 0;
 
         g_print("save_file(%s)\n", filename);
