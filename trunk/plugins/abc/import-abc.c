@@ -4,6 +4,7 @@
 #include <staff.h>
 #include <objects.h>
 #include <common.h>
+#include <gscore.h>
 
 #include "import-abc.h"
 
@@ -12,7 +13,8 @@
 static Score_t *theScore;
 static gint numStaff;
 static gint numTitle;
-
+static gulong group_id;
+static object_e decor;
 static const char *pitch_string = "CDEFGABcdefgab',";
 
 typedef struct 
@@ -27,6 +29,7 @@ typedef struct
 {
   gint pitch;
   duration_t duration;
+  accidentals_e accident;
 } note_t;
 
 static note_t *parse_note(const char *string)
@@ -38,8 +41,27 @@ static note_t *parse_note(const char *string)
   int nomin=0;
   int denom=0;
 
+  /* determine accidentals */
+  i=1;
+  switch(string[0])
+    {
+    case '=':
+      the_note.accident = A_NATURAL;
+      break;
+    case '^':
+      the_note.accident = A_SHARP;
+      break;
+    case '_':
+      the_note.accident = A_FLAT;
+      break;
+    default:
+      the_note.accident = A_NONE;
+      i = 0;
+    }  
+
   /* Determine the note pitch */
-  pitch = strchr(pitch_string, string[0]) - pitch_string -4;
+
+  pitch = strchr(pitch_string, string[i]) - pitch_string -4;
   for(i=1; string[i] == '\''; ++i){
     pitch+=8;
   }
@@ -79,7 +101,20 @@ static note_t *parse_note(const char *string)
   return &the_note;
 }
 
-static int event_note(char *s) 
+static int event_decor(const char *s)
+{
+  g_printf("Decor : '%s'\n", s);
+  decor = O_AUTOSTEM;
+
+  if(strchr(s, '.')) decor |= O_STACCATO;
+  if(strchr(s, 'v')) decor |= O_MARCATODOWN;
+  if(strchr(s, 'u')) decor |= O_MARCATOUP;
+
+  return 0;
+}
+
+
+static int event_note(const char *s) 
 {
   note_t *the_note;
   int ticks;			/* Duration expressed in ticks
@@ -87,10 +122,9 @@ static int event_note(char *s)
   int num0 = 0;
   int num1 = 0;
   int type;
-/*   int accidents; */
   gboolean is_rest = FALSE;
   
-/*   g_print("Note: %s\n", s); */
+  g_print("Note: %s\n", s);
   the_note = parse_note(s);
   is_rest = (gboolean) strchr("Zz", s[0]);
 
@@ -107,17 +141,6 @@ static int event_note(char *s)
     ticks = ticks >> 1;
   }
 
-/*   switch(nom0+num1) */
-/*     { */
-/*     case 1: */
-/*       type = SIXTYFOURTH; */
-/*       break; */
-/*     case 2: */
-/*       type = THIRTYSECOND; */
-/*       break; */
-/*     case 3: */
-      
-/*     } */
   /* !!! This code supposes that constants are well ordered */
   type = SIXTYFOURTH + 1 -num0 -num1;
   if(is_rest) {
@@ -130,15 +153,15 @@ static int event_note(char *s)
   
   add_object(theScore, numStaff,
 	     type,
-	     0, 0, 0,0,0,0,0,0,0,
+	     the_note->accident, decor, 0,0,0,0,0,0,0,
 	     the_note->pitch,0,FALSE);
   
   return 0;
 }
 
-static int event_field(char x, const char *s)
+static int event_field(char x, const char *s, int state)
 {
-  g_print("Field : %c '%s'\n", x, s);
+  g_print("Field : %c '%s' %d\n", x, s, state);
   
   switch(x)
     {
@@ -191,6 +214,15 @@ static int event_field(char x, const char *s)
       base_note.nomin = atoi(s);
       base_note.denom = atoi(strchr(s,'/')+1);
       break;
+    case 'K':
+      if(numStaff==-1) {	/* No voice has been declared */
+	create_staff(theScore, 5, 8, 35,
+		     staff_get_y_for_next(theScore));
+
+	++numStaff;
+	staff_set_key(theScore, numStaff, TREBLE_KEY);
+      }
+      
     default:
       g_printf("Other field : %c\n",x);
       break;
@@ -199,7 +231,7 @@ static int event_field(char x, const char *s)
   return 0;
 }
 
-static int event_bar(char *s)
+static int event_bar(const char *s)
 {
   int type;
   
@@ -224,7 +256,7 @@ static int event_bar(char *s)
   }
   add_object(theScore, numStaff,
 	     type,
-	     0, 0, 0,0,0,0,0,0,0,
+	     0, 0, group_id, 0,0,0,0,0,0,
 	     0, 0,FALSE);
   
   return 0;
@@ -253,7 +285,7 @@ int my_handler(abcHandle h)
   switch(t)
     {
     case T_FIELDB:
-      return event_field(x[strlen(x)-1],s);
+      return event_field(x[strlen(x)-1],s,abcState(scan));
       break;
       
     case T_NOTE:
@@ -262,8 +294,10 @@ int my_handler(abcHandle h)
 /*       break; */
     case T_BAR:
       return event_bar(s);
+    case T_DECOR:
+      return event_decor(s);
     default:
-/*       g_printf("%s ", abcTokenName(t)); */
+      g_printf("%s ", abcTokenName(t));
       break;
     }
 
