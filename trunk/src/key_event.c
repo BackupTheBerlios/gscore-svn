@@ -102,10 +102,23 @@ score_key_press_event(GtkWidget *widget, GdkEventKey *event)
                                 
 
                         } else {
-                                add_object(score, get_staff_selected(score), 
-                                           Selection.object_type, 
-                                           Selection.accidentals, Selection.nature, 0, 
-                                           0, 0, 0, 0, 0, 0, cursor->position, 0, FALSE);
+                                tmpobj = (Object_t *) 
+                                        object_get_right((Staff_t *)
+                                                         g_list_nth_data(score->Staff_list, 
+                                                                         get_staff_selected(score)), 
+                                                         cursor->x_returned);
+
+
+                                if ( ! tmpobj )
+                                        add_object(score, get_staff_selected(score), 
+                                                   Selection.object_type, 
+                                                   Selection.accidentals, Selection.nature, 0, 
+                                                   0, 0, 0, 0, 0, 0, cursor->position, 0, FALSE);
+                                else
+                                        object_insert(score, tmpobj, get_staff_selected(score),
+                                                      Selection.object_type,
+                                                      Selection.accidentals, Selection.nature, 0,
+                                                      cursor->position, 0, FALSE);
                         }
 
                         gtk_widget_set_size_request(GTK_WIDGET(score_get_area_from_widget(widget)), 

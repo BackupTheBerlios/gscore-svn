@@ -34,6 +34,8 @@ gboolean add_object(Score_t *score, gint staff, gint type,
 		    gint x3, gint y3, gint pitch, gint tab_number,
 		    gboolean is_selected);
 
+gboolean object_insert(Score_t *score, Object_t *rightobj, gint staff, gint type, accidentals_e accidentals, object_e nature, gulong group_id, gint pitch, gint tab_number, gboolean is_selected);
+
 gboolean remove_object(Score_t *score, gulong id);
 
 gboolean remove_object_selected(Score_t *score);

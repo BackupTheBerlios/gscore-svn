@@ -168,6 +168,56 @@ add_object(Score_t *score, gint staff, gint type, accidentals_e accidentals, obj
         return TRUE;
 }
 
+extern gboolean
+object_insert(Score_t *score, Object_t *rightobj, 
+              gint staff, gint type, 
+              accidentals_e accidentals, object_e nature, 
+              gulong group_id, 
+              gint pitch, gint tab_number, gboolean is_selected)
+{
+        GList *node = NULL;
+
+        Staff_t *staff_data;
+
+        staff_data = g_list_nth_data(score->Staff_list, staff);
+
+
+        staff_data->Object = g_malloc(sizeof(Object_t));
+
+        if ( ! staff_data->Object ) {
+                g_printf("Cannot add object, memory exhausted\n");
+                return FALSE;
+        }
+
+        staff_data->Object->id = ++score->object_id;
+        staff_data->Object->type = type;
+        staff_data->Object->nature = nature;
+        staff_data->Object->accidentals = accidentals;
+        staff_data->Object->group_id = group_id;
+        staff_data->Object->x = 0;
+        staff_data->Object->y = 0;
+        staff_data->Object->x2 = 0;
+        staff_data->Object->y2 = 0;
+        staff_data->Object->x3 = 0;
+        staff_data->Object->y3 = 0;
+        staff_data->Object->pitch = pitch;
+        staff_data->Object->tab_number = tab_number;
+        staff_data->Object->is_selected = is_selected;
+
+        node = g_list_find(staff_data->Object_list, rightobj);
+
+        staff_data->Object_list =
+                g_list_insert_before(staff_data->Object_list, node, staff_data->Object);
+
+        if (group_id == 0) {
+                staff_set_current_x(score, staff, staff_get_current_x(score, staff) + object_get_spacing(type));
+
+		score->staff_extremity_end_x += object_get_spacing(type);
+        }
+
+        return TRUE;
+}
+
 extern gboolean 
 remove_object(Score_t *score,gulong id)
 {
