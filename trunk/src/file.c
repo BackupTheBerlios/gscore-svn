@@ -113,8 +113,10 @@ import_score(GtkButton *button, gpointer user_data)
 
 	filechooser = (GtkWidget *)user_data;
 
-	filename = gtk_entry_get_text(GTK_ENTRY(GTK_FILE_SELECTION(filechooser)
-						->selection_entry));
+/* 	filename = gtk_entry_get_text(GTK_ENTRY(GTK_FILE_SELECTION(filechooser) */
+/* 						->selection_entry)); */
+
+	filename = gtk_file_selection_get_filename(GTK_FILE_SELECTION(filechooser)));
 
 	printf("File choosen:%s\n", filename);
 
@@ -198,9 +200,11 @@ export_score(GtkButton *button, gpointer user_data)
 
 	filechooser = (GtkWidget *)user_data;
 
-	text = gtk_entry_get_text(GTK_ENTRY(GTK_FILE_SELECTION(filechooser)
-					    ->selection_entry));
-	extension = strrchr(text, '.');
+/* 	text = gtk_entry_get_text(GTK_ENTRY(GTK_FILE_SELECTION(filechooser) */
+/* 					    ->selection_entry)); */
+	filename = gtk_file_selection_get_filename(GTK_FILE_SELECTION(filechooser)));
+
+	extension = strrchr(filename, '.');
 
 	if ( ! extension ) {
 		gw_message_error("No extension chosen (NULL)");
@@ -217,14 +221,14 @@ export_score(GtkButton *button, gpointer user_data)
 
 /* 	printf("Extension: %s\n", extension); */
 /* 	printf("plugin name = %s\n", plugin->info->name); */
-	plugin->filter->export(&Score, text, NULL);
+	plugin->filter->export(&Score, filename, NULL);
 
 
 
 	/* Set the title of the score window */
 	score_window_widget = glade_xml_get_widget(gladexml, "score_window");
 
-	filename = gtk_entry_get_text(GTK_ENTRY(GTK_FILE_SELECTION(filechooser)->selection_entry));
+/* 	filename = gtk_entry_get_text(GTK_ENTRY(GTK_FILE_SELECTION(filechooser)->selection_entry)); */
 
 	gtk_window_set_title(GTK_WINDOW(score_window_widget), filename);
 
