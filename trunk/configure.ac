@@ -4,8 +4,8 @@ AC_INIT([Gscore], [0.0.9],
 AM_INIT_AUTOMAKE
 
 dnl Libraries requirements
-GLIB2_VERSION=2.4.6
-GTK2_VERSION=2.4.3
+GLIB2_VERSION=2.6.0
+GTK2_VERSION=2.6.0
 LIBGLADE2_VERSION=2.4.0
 
 AC_SUBST(LIBGLADE2_VERSION)
@@ -103,8 +103,12 @@ src/Makefile
 
 echo
 echo "*** Dumping configuration ***"
+echo "    - Compiler               : ${CC}"
 echo "    - Generate documentation : $enable_gtk_doc"
-echo " Compiler	: ${CC}"
-echo " CFLAGS : ${CFLAGS}"
-echo " LIBGLADE_CFLAGS: ${LIBGLADE2_CFLAGS}"
-echo " LIBGLADE_LIBS: ${LIBGLADE2_LIBS}"
+echo "    - Glib version           : ${GLIB2_VERSION}"
+echo "    - GTK+ version           : ${GTK2_VERSION}"
+echo "    - Libglade version       : ${LIBGLADE2_VERSION}"
+echo
+echo "    - Libglade CFLAGS        : ${LIBGLADE2_CFLAGS}"
+echo "    - Libglade LIBS          : ${LIBGLADE2_LIBS}"
+echo
