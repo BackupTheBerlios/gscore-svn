@@ -198,7 +198,12 @@ gint staff_get_y_for_next(const Score_t *score)
 
 	selected = get_staff_selected(score);
 	if(selected == -1) {
-	  staff_data = g_list_last(score->Staff_list)->data;
+	  GList *list = g_list_last(score->Staff_list);
+	  if(list ) {
+	    staff_data = list->data;
+	  } else {
+	    staff_data = NULL;
+	  }
 	} else {
 	  staff_data = g_list_nth_data(score->Staff_list, selected);
 	}
