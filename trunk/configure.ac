@@ -7,11 +7,12 @@ dnl Libraries requirements
 GLIB2_VERSION=2.6.0
 GTK2_VERSION=2.6.0
 LIBGLADE2_VERSION=2.4.0
+CAIRO_VERSION=0.1.1
 
 AC_SUBST(LIBGLADE2_VERSION)
 AC_SUBST(GLIB2_VERSION)
 AC_SUBST(GTK2_VERSION)
-
+AC_SUBST(CAIRO_VERSION)
 
 AM_MAINTAINER_MODE
 
@@ -93,6 +94,25 @@ dnl *******************************
 PKG_CHECK_MODULES(LIBGLADE2,[libglade-2.0 >= $LIBGLADE2_VERSION])
 
 dnl *******************************
+dnl checking for cairo
+dnl *******************************
+PKG_CHECK_MODULES(CAIRO, cairo >= 0.1.1)
+AC_SUBST(CAIRO_CFLAGS)
+AC_SUBST(CAIRO_LIBS)
+
+dnl OpenGL support for cairo ?
+AC_ARG_ENABLE(gl,
+               [  --enable-gl            Enable OpenGL support (glitz)],
+               [use_gl=$enableval],  [use_gl=yes])
+
+if test "x$use_gl" = "xyes"; then
+  PKG_CHECK_MODULES(GL, glitz-glx >= 0.4.0, [
+  GTKCAIRO_CFLAGS="$GTKCAIRO_CFLAGS $GL_CFLAGS -DUSE_GL" 
+  GTKCAIRO_LIBS="$GTKCAIRO_LIBS $GL_LIBS"
+  use_gl=yes], [use_gl="no (bitrotted at the moment)"])
+fi
+
+dnl *******************************
 dnl checking for libabcp
 dnl *******************************
 AC_CHECK_LIB(abcp, abcScanFile, [], [
@@ -114,6 +134,8 @@ AC_SUBST(LDFLAGS)
 AC_SUBST(CFLAGS)
 AC_SUBST(LIBGLADE2_CFLAGS)
 AC_SUBST(LIBGLADE2_LIBS)
+AC_SUBST(CAIRO_CFLAGS)
+AC_SUBST(CAIRO_LIBS)
 
 AC_OUTPUT([
 

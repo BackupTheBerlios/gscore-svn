@@ -1,0 +1,13 @@
+prefix=/usr/local
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: libgscore
+Description: Gscore library
+Version: 0.1
+
+Requires: cairo gtk+-2.0
+Libs: -L${libdir} -lgscore
+Cflags: -I${includedir}
+
