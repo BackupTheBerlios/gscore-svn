@@ -73,10 +73,27 @@ score_key_press_event(GtkWidget *widget, GdkEventKey *event)
 		case BARLINE_OPENREPEAT:
 		case BARLINE_CLOSEREPEAT:
 		case BARLINE_OPENCLOSEREPEAT:
-			add_object(get_staff_selected(), 
-				   Selection.object_type, 
-                                   Selection.accidentals, Selection.nature, 0, 
-				   0, 0, 0, 0, 0, 0, KeyCursor.position, 0, FALSE);
+                        if (event->state & GDK_CONTROL_MASK) {
+                                staffobj = (Staff_t *)g_list_nth_data(Score.Staff_list, get_staff_selected());
+                                tmpobj = (Object_t *)object_get_left(staffobj, KeyCursor.x_returned);
+
+                                if (tmpobj->pitch == KeyCursor.position) {
+                                        gw_message_error("You cannot make a chord with the same pitch.");
+                                        return;
+                                }
+
+                                add_object(get_staff_selected(), 
+                                           Selection.object_type, 
+                                           Selection.accidentals, Selection.nature, tmpobj->id, 
+                                           0, 0, 0, 0, 0, 0, KeyCursor.position, 0, FALSE);           
+                                
+
+                        } else {
+                                add_object(get_staff_selected(), 
+                                           Selection.object_type, 
+                                           Selection.accidentals, Selection.nature, 0, 
+                                           0, 0, 0, 0, 0, 0, KeyCursor.position, 0, FALSE);
+                        }
 
 			gtk_widget_set_size_request(GTK_WIDGET(Score.area), 
                                                     Score.width, Score.height);

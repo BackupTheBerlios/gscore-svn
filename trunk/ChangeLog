@@ -1,6 +1,7 @@
 2005-01-20 toady <toady@gscore.org>
 
 	* src/draw.c: don't render notes which are not displayed on screen (yadh)
+	* src/key_event.c, src/realize_area.c: basic chords support
 	
 2005-01-13 toady <toady@gscore.org>
 
