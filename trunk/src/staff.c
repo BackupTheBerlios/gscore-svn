@@ -175,7 +175,7 @@ gint get_staff_selected(const Score_t *score)
         return -1;
 }
 
-gint get_staff_key_signature(const Score_t *score, guint staff)
+gint staff_get_key_signature(const Score_t *score, guint staff)
 {
 	Staff_t *staff_data;
 
@@ -501,7 +501,7 @@ void on_key_signature_activate(GtkWidget *widget)
 
         /* The adjustment */
 /*         switch (Score.Staff[get_staff_selected()].key_signature) */
-	switch(get_staff_key_signature(&Score, get_staff_selected(&Score))) {
+	switch(staff_get_key_signature(&Score, get_staff_selected(&Score))) {
 	case KEY_SIGNATURE_TREBLE_EMPTY:
 		widget = glade_xml_get_widget (gladexml, "sks_clef_label");
 		gtk_label_set_text(GTK_LABEL(widget), "C Major or A minor");

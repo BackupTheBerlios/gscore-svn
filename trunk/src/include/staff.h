@@ -36,7 +36,7 @@ gboolean delete_staff(Score_t *score, gint staff);
 
 gint get_staff_selected(const Score_t *score);
 
-gint get_staff_key_signature(const Score_t * score, guint staff);
+gint staff_get_key_signature(const Score_t * score, guint staff);
 
 gboolean staff_set_key(Score_t *score, gint staff, gint key);
 
