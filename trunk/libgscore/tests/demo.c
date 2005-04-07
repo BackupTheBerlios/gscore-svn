@@ -1,7 +1,7 @@
 /* vim: set ts=4 sw=4 et : */
 
 #include <gtk/gtk.h>
-#include <gtkcairo.h>
+#include <libgscore.h>
 
 #define ANIMATE_ROTATE_STEP 0.05
 #define ANIMATE_FRAME_DELAY 40
@@ -72,7 +72,7 @@ show_test (void)
   GtkWidget *win, *vbox, *frame, *gtkcairo, *slider, *animate;
 
   win = gtk_window_new (GTK_WINDOW_TOPLEVEL);
-  gtk_window_set_title (GTK_WINDOW (win), "GtkCairo Demo");
+  gtk_window_set_title (GTK_WINDOW (win), "ScoreWidget Demo");
   g_signal_connect (G_OBJECT (win), "delete-event",
                     G_CALLBACK (gtk_main_quit), NULL);
 
@@ -84,7 +84,7 @@ show_test (void)
 
   slider = gtk_hscale_new_with_range (0, ROTATE_MAX, 0.05);
 
-  gtkcairo = gtk_cairo_new ();
+  gtkcairo = score_widget_new ();
   gtk_widget_set_usize (GTK_WIDGET (gtkcairo), INITIAL_SIZE, INITIAL_SIZE);
   g_signal_connect (G_OBJECT (gtkcairo), "paint", G_CALLBACK (paint), slider);
 

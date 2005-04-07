@@ -18,8 +18,8 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307  USA
  */
 
-#ifndef GTK_CAIRO_H
-#define GTK_CAIRO_H
+#ifndef SCOREWIDGET_H
+#define SCOREWIDGET_H
 
 #include <gtk/gtkwidget.h>
 #include <cairo.h>
@@ -29,10 +29,10 @@ extern    "C"
 {
 #endif                          /* __cplusplus */
 
-#define GTK_TYPE_CAIRO	(gtk_cairo_get_type())
-#define SCORE_WIDGET(obj)	GTK_CHECK_CAST (obj, GTK_TYPE_CAIRO, GtkCairo)
-#define SCORE_WIDGET_CLASS(klass) GTK_CHECK_CLASS_CAST (klass, GTK_TYPE_CAIRO, GtkCairoClass)
-#define GTK_IS_SCORE_WIDGET(obj)	GTK_CHECK_TYPE (obj, GTK_TYPE_CAIRO)
+#define TYPE_SCORE_WIDGET	(score_widget_get_type())
+#define SCORE_WIDGET(obj)	GTK_CHECK_CAST (obj, TYPE_SCORE_WIDGET, ScoreWidget)
+#define SCORE_WIDGET_CLASS(klass) GTK_CHECK_CLASS_CAST (klass, TYPE_SCORE_WIDGET, ScoreWidgetClass)
+#define IS_SCORE_WIDGET(obj)	GTK_CHECK_TYPE (obj, TYPE_SCORE_WIDGET)
 
   typedef struct _ScoreWidget ScoreWidget;
   typedef struct _ScoreWidgetClass ScoreWidgetClass;
@@ -71,4 +71,4 @@ extern    "C"
 }
 #endif                          /* __cplusplus */
 
-#endif                          /* GTK_CAIRO_H */
+#endif                          /* SCOREWIDGET_H */

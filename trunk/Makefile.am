@@ -1,3 +1,3 @@
-SUBDIRS = plugins src glade pixmaps
+SUBDIRS = libgscore plugins src glade pixmaps
 
 

@@ -2,14 +2,14 @@ lib_LTLIBRARIES = libgscore.la
 include_HEADERS = libgscore.h
  
 libgscore_la_SOURCES = \
-	scorewidget.c \
-	scorewidget.h \
-	gdkcairo.h \
-	gdkcairo.c
+	scorewidget/scorewidget.c \
+	scorewidget/scorewidget.h \
+	scorewidget/gdkcairo.h \
+	scorewidget/gdkcairo.c
 
-libgscore_la_LDFLAGS = -version-info @VERSION_INFO@
+# libgscore_la_LDFLAGS = -version-info "0.1"
 
-INCLUDES = $(CAIRO_CFLAGS)
+INCLUDES = $(CAIRO_CFLAGS) $(LIBGLADE2_CFLAGS)
 
-libgscore_la_LIBADD = $(CAIRO_LIBS)
+libgscore_la_LIBADD = $(CAIRO_LIBS) $(LIBGLADE2_LIBS)
 

@@ -141,6 +141,8 @@ AC_OUTPUT([
 
 Makefile
 
+libgscore/Makefile
+
 plugins/Makefile
 plugins/abc/Makefile
 plugins/midi/Makefile

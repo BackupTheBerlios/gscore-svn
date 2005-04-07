@@ -23,7 +23,7 @@
 #include <gdk/gdkx.h>
 
 #include "gdkcairo.h"
-#include "gtkcairo.h"
+#include "scorewidget.h"
 
 enum
 {
@@ -66,7 +66,7 @@ static guint signals[LAST_SIGNAL] = { 0 };
 GType
 score_widget_get_type (void)
 {
-        static GType score_widget_type = NULL;
+        static GType score_widget_type = 0;
 
         if ( ! score_widget_type )
                 {
@@ -98,16 +98,16 @@ score_widget_class_init (ScoreWidgetClass * class)
         object_class = (GtkObjectClass *) class;
         widget_class = (GtkWidgetClass *) class;
 
-        parent_class = gtk_type_class (GTK_TYPE_WIDGET);
+        parent_class = gtk_type_class (TYPE_SCORE_WIDGET);
 
         object_class->destroy = score_widget_destroy;
 
         widget_class->realize = score_widget_realize;
-        widget_class->expose_event = score_expose;
-        widget_class->size_allocate = score_size_allocate;
+        widget_class->expose_event = score_widget_expose;
+        widget_class->size_allocate = score_widget_size_allocate;
 
         signals[PAINT] = g_signal_new ("paint",
-                                       GTK_TYPE_SCORE_WIDGET,
+                                       TYPE_SCORE_WIDGET,
                                        G_SIGNAL_RUN_LAST,
                                        G_STRUCT_OFFSET (ScoreWidgetClass, paint),
                                        NULL, NULL,
@@ -115,7 +115,7 @@ score_widget_class_init (ScoreWidgetClass * class)
                                        G_TYPE_NONE, 1, G_TYPE_POINTER);
 
         signals[NEW_STAFF] = g_signal_new ("new_staff",
-                                           GTK_TYPE_SCORE_WIDGET,
+                                           TYPE_SCORE_WIDGET,
                                            G_SIGNAL_RUN_LAST,
                                            G_STRUCT_OFFSET (ScoreWidgetClass, new_staff),
                                            NULL, NULL,
@@ -134,7 +134,7 @@ GtkWidget *
 score_widget_new (void)
 {
         GtkWidget *scorewidget;
-        scorewidget = GTK_WIDGET (g_object_new (GTK_TYPE_SCORE_WIDGET, NULL));
+        scorewidget = GTK_WIDGET (g_object_new (TYPE_SCORE_WIDGET, NULL));
 
         gtk_widget_queue_draw (GTK_WIDGET (scorewidget));
 
@@ -147,11 +147,11 @@ score_widget_destroy (GtkObject *object)
         ScoreWidget *scorewidget;
 
         g_return_if_fail (object != NULL);
-        g_return_if_fail (GTK_IS_SCORE_WIDGET (object));
+        g_return_if_fail (IS_SCORE_WIDGET (object));
 
         scorewidget = SCORE_WIDGET (object);
 
-        gdkcairo_destroy (gtkcairo->gdkcairo);
+        gdkcairo_destroy (scorewidget->gdkcairo);
 
         if (GTK_OBJECT_CLASS (parent_class)->destroy)
                 (*GTK_OBJECT_CLASS (parent_class)->destroy) (object);
@@ -163,7 +163,7 @@ score_widget_realize (GtkWidget *widget)
         ScoreWidget *scorewidget;
 
         g_return_if_fail (widget != NULL);
-        g_return_if_fail (GTK_IS_SCORE_WIDGET (widget));
+        g_return_if_fail (IS_SCORE_WIDGET (widget));
 
         GTK_WIDGET_SET_FLAGS (widget, GTK_REALIZED);
         scorewidget = SCORE_WIDGET (widget);
@@ -177,10 +177,10 @@ score_widget_size_allocate (GtkWidget     *widget,
 {
         ScoreWidget *scorewidget;
         g_return_if_fail (widget != NULL);
-        g_return_if_fail (GTK_IS_CAIRO (widget));
+        g_return_if_fail (IS_SCORE_WIDGET (widget));
         g_return_if_fail (allocation != NULL);
 
-        scorewidget = GTK_CAIRO (widget);
+        scorewidget = SCORE_WIDGET (widget);
 
         widget->allocation = *allocation;
 
@@ -196,14 +196,14 @@ score_widget_expose (GtkWidget      *widget,
         ScoreWidget *scorewidget;
 
         g_return_val_if_fail (widget != NULL, FALSE);
-        g_return_val_if_fail (GTK_IS_SCORE (widget), FALSE);
+        g_return_val_if_fail (IS_SCORE_WIDGET (widget), FALSE);
         g_return_val_if_fail (event != NULL, FALSE);
 
-        scorewidget = GTK_CAIRO (widget);
+        scorewidget = SCORE_WIDGET (widget);
 
-        cairo_save (gtk_cairo_get_cairo (scorewidget));
+        cairo_save (score_widget_get_cairo (scorewidget));
         gdkcairo_expose (scorewidget->gdkcairo, event);
-        cairo_restore (gtk_cairo_get_cairo (scorewidget));
+        cairo_restore (score_widget_get_cairo (scorewidget));
 
         return FALSE;
 }
@@ -211,8 +211,8 @@ score_widget_expose (GtkWidget      *widget,
 cairo_t  *
 score_widget_get_cairo (ScoreWidget *scorewidget)
 {
-        g_return_val_if_fail (ScoreWidget != NULL, NULL);
-        g_return_val_if_fail (GTK_IS_SCORE (ScoreWidget), NULL);
+        g_return_val_if_fail (scorewidget != NULL, NULL);
+        g_return_val_if_fail (IS_SCORE_WIDGET (scorewidget), NULL);
         return ((gdkcairo_t *) scorewidget->gdkcairo)->cr;
 }
 
