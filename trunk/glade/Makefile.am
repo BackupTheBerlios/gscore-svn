@@ -1,5 +1,6 @@
 gladefiles = \
 	gscore.glade \
+	score-ui.glade \
 	 \
 	alla_breve.xpm \
 	clefs-C.xpm \

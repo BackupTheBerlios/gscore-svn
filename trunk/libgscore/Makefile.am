@@ -1,6 +1,8 @@
 lib_LTLIBRARIES = libgscore.la
-include_HEADERS = libgscore.h
- 
+include_HEADERS = libgscore.h \
+	scorewidget/gdkcairo.h \
+	scorewidget/scorewidget.h
+
 libgscore_la_SOURCES = \
 	scorewidget/scorewidget.c \
 	scorewidget/scorewidget.h \
