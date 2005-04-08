@@ -147,6 +147,8 @@ plugins/Makefile
 plugins/abc/Makefile
 plugins/midi/Makefile
 
+pixmaps/Makefile
+
 src/Makefile
 
 glade/Makefile

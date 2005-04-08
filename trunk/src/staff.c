@@ -368,43 +368,43 @@ gboolean staff_set_key(Score_t *score, gint staff, gint key)
 extern void 
 staff_set_key_callback(GtkButton *button, gpointer user_data)
 {
-        GtkWidget *widget;
-	Score_t *score;
-	GtkWidget *area;
-        GtkWidget *treble_w;
-        GtkWidget *bass_w;
-        GtkWidget *alto_w;
-        GtkWidget *tenor_w;
+/*         GtkWidget *widget; */
+/* 	Score_t *score; */
+/* 	GtkWidget *area; */
+/*         GtkWidget *treble_w; */
+/*         GtkWidget *bass_w; */
+/*         GtkWidget *alto_w; */
+/*         GtkWidget *tenor_w; */
 
-/*         widget = glade_xml_get_widget(gladexml, "setkey_treble_rb"); */
+/* /\*         widget = glade_xml_get_widget(gladexml, "setkey_treble_rb"); *\/ */
         
-/* 	score = score_get_from_widget(widget); */
-/* 	area = score_get_area_from_widget(widget); */
-	score = score_get_from_widget(GTK_WIDGET(button));
-	area = score_get_area_from_widget(GTK_WIDGET(button));
+/* /\* 	score = score_get_from_widget(widget); *\/ */
+/* /\* 	area = score_get_area_from_widget(widget); *\/ */
+/* 	score = score_get_from_widget(GTK_WIDGET(button)); */
+/* 	area = score_get_area_from_widget(GTK_WIDGET(button)); */
 
-        treble_w = score_get_setkey_treble_rb_from_widget(GTK_WIDGET(button));
-        bass_w = score_get_setkey_bass_rb_from_widget(GTK_WIDGET(button));
-        alto_w = score_get_setkey_alto_rb_from_widget(GTK_WIDGET(button));
-        tenor_w = score_get_setkey_tenor_rb_from_widget(GTK_WIDGET(button));
+/*         treble_w = score_get_setkey_treble_rb_from_widget(GTK_WIDGET(button)); */
+/*         bass_w = score_get_setkey_bass_rb_from_widget(GTK_WIDGET(button)); */
+/*         alto_w = score_get_setkey_alto_rb_from_widget(GTK_WIDGET(button)); */
+/*         tenor_w = score_get_setkey_tenor_rb_from_widget(GTK_WIDGET(button)); */
 	
-	if ( gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(treble_w)) ) {
-		staff_set_key(score, get_staff_selected(score), TREBLE_KEY);
-        }
+/* 	if ( gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(treble_w)) ) { */
+/* 		staff_set_key(score, get_staff_selected(score), TREBLE_KEY); */
+/*         } */
 
-/*         widget = glade_xml_get_widget(gladexml, "setkey_bass_rb"); */
-	if ( gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(bass_w)) ) {
-		staff_set_key(score, get_staff_selected(score), BASS_KEY);
-        }
-/*         widget = glade_xml_get_widget(gladexml, "setkey_alto_rb"); */
-	if ( gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(alto_w)) )
-		staff_set_key(score, get_staff_selected(score), ALTO_KEY);
+/* /\*         widget = glade_xml_get_widget(gladexml, "setkey_bass_rb"); *\/ */
+/* 	if ( gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(bass_w)) ) { */
+/* 		staff_set_key(score, get_staff_selected(score), BASS_KEY); */
+/*         } */
+/* /\*         widget = glade_xml_get_widget(gladexml, "setkey_alto_rb"); *\/ */
+/* 	if ( gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(alto_w)) ) */
+/* 		staff_set_key(score, get_staff_selected(score), ALTO_KEY); */
 
-/*         widget = glade_xml_get_widget(gladexml, "setkey_tenor_rb"); */
-	if ( gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(tenor_w)) )
-		staff_set_key(score, get_staff_selected(score), TENOR_KEY);
+/* /\*         widget = glade_xml_get_widget(gladexml, "setkey_tenor_rb"); *\/ */
+/* 	if ( gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(tenor_w)) ) */
+/* 		staff_set_key(score, get_staff_selected(score), TENOR_KEY); */
 
-	refresh(area);
+/* 	refresh(area); */
 
 }
 
@@ -549,135 +549,135 @@ static GtkWidget *get_toplevel(GtkWidget *widget)
 
 void on_key_signature_activate(GtkWidget *widget)
 {
-	GtkWidget *hscale;
-	GtkAdjustment *adj;
-	Score_t *score = score_get_from_widget(widget);
+/* 	GtkWidget *hscale; */
+/* 	GtkAdjustment *adj; */
+/* 	Score_t *score = score_get_from_widget(widget); */
 
-        GtkWidget *sks_clef_label = score_get_sks_clef_label_from_widget(widget);
-        GtkWidget *sks_image = score_get_sks_image_from_widget(widget);
-        GtkWidget *sks_hbox = score_get_sks_hbox_from_widget(widget);
+/*         GtkWidget *sks_clef_label = score_get_sks_clef_label_from_widget(widget); */
+/*         GtkWidget *sks_image = score_get_sks_image_from_widget(widget); */
+/*         GtkWidget *sks_hbox = score_get_sks_hbox_from_widget(widget); */
 
-	gint value_adj = 0;
+/* 	gint value_adj = 0; */
 
-        /* The adjustment */
+/*         /\* The adjustment *\/ */
 
-	switch(staff_get_key_signature(score, get_staff_selected(score))) {
-	case KEY_SIGNATURE_TREBLE_EMPTY:
-		gtk_label_set_text(GTK_LABEL(sks_clef_label), "C Major or A minor");
-		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/treble_empty.xpm"));
+/* 	switch(staff_get_key_signature(score, get_staff_selected(score))) { */
+/* 	case KEY_SIGNATURE_TREBLE_EMPTY: */
+/* 		gtk_label_set_text(GTK_LABEL(sks_clef_label), "C Major or A minor"); */
+/* 		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/treble_empty.xpm")); */
 
-		value_adj = 0;
-		break;
-	case KEY_SIGNATURE_TREBLE_A_SHARP:
-		gtk_label_set_text(GTK_LABEL(sks_clef_label), "B Major or G sharp minor");
-		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/treble_A_sharp.xpm"));
+/* 		value_adj = 0; */
+/* 		break; */
+/* 	case KEY_SIGNATURE_TREBLE_A_SHARP: */
+/* 		gtk_label_set_text(GTK_LABEL(sks_clef_label), "B Major or G sharp minor"); */
+/* 		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/treble_A_sharp.xpm")); */
 
-		value_adj = 5;
-		break;
-	case KEY_SIGNATURE_TREBLE_B_SHARP:
-		gtk_label_set_text(GTK_LABEL(sks_clef_label), "C sharp Major or A sharp minor");
-		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/treble_B_sharp.xpm"));
+/* 		value_adj = 5; */
+/* 		break; */
+/* 	case KEY_SIGNATURE_TREBLE_B_SHARP: */
+/* 		gtk_label_set_text(GTK_LABEL(sks_clef_label), "C sharp Major or A sharp minor"); */
+/* 		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/treble_B_sharp.xpm")); */
 
-		value_adj = 7;
-		break;
-	case KEY_SIGNATURE_TREBLE_C_SHARP:
-		gtk_label_set_text(GTK_LABEL(sks_clef_label), "D Major or B minor");
-		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/treble_C_sharp.xpm"));
+/* 		value_adj = 7; */
+/* 		break; */
+/* 	case KEY_SIGNATURE_TREBLE_C_SHARP: */
+/* 		gtk_label_set_text(GTK_LABEL(sks_clef_label), "D Major or B minor"); */
+/* 		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/treble_C_sharp.xpm")); */
 
-		value_adj = 2;
-		break;
-	case KEY_SIGNATURE_TREBLE_D_SHARP:
-		gtk_label_set_text(GTK_LABEL(sks_clef_label), "E Major or C sharp minor");
-		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/treble_D_sharp.xpm"));
+/* 		value_adj = 2; */
+/* 		break; */
+/* 	case KEY_SIGNATURE_TREBLE_D_SHARP: */
+/* 		gtk_label_set_text(GTK_LABEL(sks_clef_label), "E Major or C sharp minor"); */
+/* 		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/treble_D_sharp.xpm")); */
 
-		value_adj = 4;
-		break;
-	case KEY_SIGNATURE_TREBLE_E_SHARP:
-		gtk_label_set_text(GTK_LABEL(sks_clef_label), "F sharp Major or  D sharp minor");
-		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/treble_E_sharp.xpm"));
+/* 		value_adj = 4; */
+/* 		break; */
+/* 	case KEY_SIGNATURE_TREBLE_E_SHARP: */
+/* 		gtk_label_set_text(GTK_LABEL(sks_clef_label), "F sharp Major or  D sharp minor"); */
+/* 		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/treble_E_sharp.xpm")); */
 
-		value_adj = 6;
-		break;
-	case KEY_SIGNATURE_TREBLE_F_SHARP:
-		gtk_label_set_text(GTK_LABEL(sks_clef_label), "G Major or E minor");
-		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/treble_F_sharp.xpm"));
+/* 		value_adj = 6; */
+/* 		break; */
+/* 	case KEY_SIGNATURE_TREBLE_F_SHARP: */
+/* 		gtk_label_set_text(GTK_LABEL(sks_clef_label), "G Major or E minor"); */
+/* 		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/treble_F_sharp.xpm")); */
 
-		value_adj = 1;
-		break;
-	case KEY_SIGNATURE_TREBLE_G_SHARP:
-		gtk_label_set_text(GTK_LABEL(sks_clef_label), "A Major or F sharp minor");
-		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/treble_G_sharp.xpm"));
+/* 		value_adj = 1; */
+/* 		break; */
+/* 	case KEY_SIGNATURE_TREBLE_G_SHARP: */
+/* 		gtk_label_set_text(GTK_LABEL(sks_clef_label), "A Major or F sharp minor"); */
+/* 		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/treble_G_sharp.xpm")); */
 
-		value_adj = 3;
-		break;
-	case KEY_SIGNATURE_TREBLE_A_FLAT:
-		gtk_label_set_text(GTK_LABEL(sks_clef_label), "E flat Major or C minor");
-		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/treble_A_flat.xpm"));
+/* 		value_adj = 3; */
+/* 		break; */
+/* 	case KEY_SIGNATURE_TREBLE_A_FLAT: */
+/* 		gtk_label_set_text(GTK_LABEL(sks_clef_label), "E flat Major or C minor"); */
+/* 		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/treble_A_flat.xpm")); */
 
-		value_adj = -3;
-		break;
-	case KEY_SIGNATURE_TREBLE_B_FLAT:
-		gtk_label_set_text(GTK_LABEL(sks_clef_label), "F Major or D minor");
-		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/treble_B_flat.xpm"));
+/* 		value_adj = -3; */
+/* 		break; */
+/* 	case KEY_SIGNATURE_TREBLE_B_FLAT: */
+/* 		gtk_label_set_text(GTK_LABEL(sks_clef_label), "F Major or D minor"); */
+/* 		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/treble_B_flat.xpm")); */
 
-		value_adj = -1;
-		break;
-	case KEY_SIGNATURE_TREBLE_C_FLAT:
-		gtk_label_set_text(GTK_LABEL(sks_clef_label), "G flat Major or E flat minor");
-		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/treble_C_flat.xpm"));
+/* 		value_adj = -1; */
+/* 		break; */
+/* 	case KEY_SIGNATURE_TREBLE_C_FLAT: */
+/* 		gtk_label_set_text(GTK_LABEL(sks_clef_label), "G flat Major or E flat minor"); */
+/* 		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/treble_C_flat.xpm")); */
 
-		value_adj = -6;
-		break;
-	case KEY_SIGNATURE_TREBLE_D_FLAT:
-		gtk_label_set_text(GTK_LABEL(sks_clef_label), "A flat Major or F minor");
-		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/treble_D_flat.xpm"));
+/* 		value_adj = -6; */
+/* 		break; */
+/* 	case KEY_SIGNATURE_TREBLE_D_FLAT: */
+/* 		gtk_label_set_text(GTK_LABEL(sks_clef_label), "A flat Major or F minor"); */
+/* 		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/treble_D_flat.xpm")); */
 
-		value_adj = -4;
-		break;
-	case KEY_SIGNATURE_TREBLE_E_FLAT:
-		gtk_label_set_text(GTK_LABEL(sks_clef_label), "B flat Major or G minor");
-		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/treble_E_flat.xpm"));
+/* 		value_adj = -4; */
+/* 		break; */
+/* 	case KEY_SIGNATURE_TREBLE_E_FLAT: */
+/* 		gtk_label_set_text(GTK_LABEL(sks_clef_label), "B flat Major or G minor"); */
+/* 		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/treble_E_flat.xpm")); */
 
-		value_adj = -2;
-		break;
-	case KEY_SIGNATURE_TREBLE_F_FLAT:
-		gtk_label_set_text(GTK_LABEL(sks_clef_label), "D flat Major");
-		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/treble_F_flat.xpm"));
+/* 		value_adj = -2; */
+/* 		break; */
+/* 	case KEY_SIGNATURE_TREBLE_F_FLAT: */
+/* 		gtk_label_set_text(GTK_LABEL(sks_clef_label), "D flat Major"); */
+/* 		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/treble_F_flat.xpm")); */
 
-		value_adj = -7;
-		break;
-	case KEY_SIGNATURE_TREBLE_G_FLAT:
-		gtk_label_set_text(GTK_LABEL(sks_clef_label), "D flat Major or B minor");
-		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/treble_G_flat.xpm"));
+/* 		value_adj = -7; */
+/* 		break; */
+/* 	case KEY_SIGNATURE_TREBLE_G_FLAT: */
+/* 		gtk_label_set_text(GTK_LABEL(sks_clef_label), "D flat Major or B minor"); */
+/* 		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/treble_G_flat.xpm")); */
 
-		value_adj = -5;
-		break;
-	}
+/* 		value_adj = -5; */
+/* 		break; */
+/* 	} */
 
 
 
-	adj = GTK_ADJUSTMENT(gtk_adjustment_new(value_adj, -7, 7, 1, 1, 0));
+/* 	adj = GTK_ADJUSTMENT(gtk_adjustment_new(value_adj, -7, 7, 1, 1, 0)); */
    
-	if ( ! already_packed)
-	{
-		hscale = gtk_hscale_new (adj);
+/* 	if ( ! already_packed) */
+/* 	{ */
+/* 		hscale = gtk_hscale_new (adj); */
    
-		gtk_scale_set_digits(GTK_SCALE(hscale), 0);
-		gtk_scale_set_draw_value(GTK_SCALE(hscale), FALSE);
-		GTK_RANGE(hscale)->round_digits = 0;
+/* 		gtk_scale_set_digits(GTK_SCALE(hscale), 0); */
+/* 		gtk_scale_set_draw_value(GTK_SCALE(hscale), FALSE); */
+/* 		GTK_RANGE(hscale)->round_digits = 0; */
 
 
-/* 		widget = glade_xml_get_widget(gladexml, "sks_hbox"); */
-		gtk_box_pack_start_defaults(GTK_BOX(sks_hbox), hscale);
+/* /\* 		widget = glade_xml_get_widget(gladexml, "sks_hbox"); *\/ */
+/* 		gtk_box_pack_start_defaults(GTK_BOX(sks_hbox), hscale); */
 
-		g_signal_connect(GTK_OBJECT(adj),"value_changed",
-				 G_CALLBACK(ValueOfRange), widget);
+/* 		g_signal_connect(GTK_OBJECT(adj),"value_changed", */
+/* 				 G_CALLBACK(ValueOfRange), widget); */
 
-		gtk_widget_show(hscale);
+/* 		gtk_widget_show(hscale); */
 
-		already_packed = TRUE;
+/* 		already_packed = TRUE; */
 
-	}
+/* 	} */
 }
 
 void on_key_signature_value_changed(void)
@@ -708,124 +708,124 @@ void on_key_signature_value_changed(void)
 void ValueOfRange (GtkAdjustment *adj, gpointer user_data)
 {
 
-        GtkWidget *widget = (GtkWidget *) user_data;
+/*         GtkWidget *widget = (GtkWidget *) user_data; */
 
-        GtkWidget *sks_clef_label = score_get_sks_clef_label_from_widget(widget);
-        GtkWidget *sks_image = score_get_sks_image_from_widget(widget);
+/*         GtkWidget *sks_clef_label = score_get_sks_clef_label_from_widget(widget); */
+/*         GtkWidget *sks_image = score_get_sks_image_from_widget(widget); */
 
-	gint i;
+/* 	gint i; */
 
-	i = adj->value;
+/* 	i = adj->value; */
 	
-	switch (i) {
+/* 	switch (i) { */
 		
-	case -1:
-		/* 		score->Staff[get_staff_selected()].key_signature = */
-		key_signature = KEY_SIGNATURE_TREBLE_B_FLAT;
+/* 	case -1: */
+/* 		/\* 		score->Staff[get_staff_selected()].key_signature = *\/ */
+/* 		key_signature = KEY_SIGNATURE_TREBLE_B_FLAT; */
 		
-		gtk_label_set_text(GTK_LABEL(sks_clef_label), "F Major or D minor");
-		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/treble_B_flat.xpm"));
+/* 		gtk_label_set_text(GTK_LABEL(sks_clef_label), "F Major or D minor"); */
+/* 		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/treble_B_flat.xpm")); */
 
-		break;
-	case -2:
-		key_signature = KEY_SIGNATURE_TREBLE_E_FLAT;
+/* 		break; */
+/* 	case -2: */
+/* 		key_signature = KEY_SIGNATURE_TREBLE_E_FLAT; */
 
-		gtk_label_set_text(GTK_LABEL(sks_clef_label), "B flat Major or G minor");
-		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/treble_E_flat.xpm"));
+/* 		gtk_label_set_text(GTK_LABEL(sks_clef_label), "B flat Major or G minor"); */
+/* 		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/treble_E_flat.xpm")); */
 
-		break;
-	case -3:
-		key_signature = KEY_SIGNATURE_TREBLE_A_FLAT;
+/* 		break; */
+/* 	case -3: */
+/* 		key_signature = KEY_SIGNATURE_TREBLE_A_FLAT; */
 
-		gtk_label_set_text(GTK_LABEL(sks_clef_label), "E flat Major or C minor");
-		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/treble_A_flat.xpm"));
+/* 		gtk_label_set_text(GTK_LABEL(sks_clef_label), "E flat Major or C minor"); */
+/* 		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/treble_A_flat.xpm")); */
 
-		break;
-	case -4:
-		key_signature = KEY_SIGNATURE_TREBLE_D_FLAT;
+/* 		break; */
+/* 	case -4: */
+/* 		key_signature = KEY_SIGNATURE_TREBLE_D_FLAT; */
 
-		gtk_label_set_text(GTK_LABEL(sks_clef_label), "A flat Major or F minor");
-		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/treble_D_flat.xpm"));
+/* 		gtk_label_set_text(GTK_LABEL(sks_clef_label), "A flat Major or F minor"); */
+/* 		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/treble_D_flat.xpm")); */
 
-		break;
-	case -5:
-		key_signature = KEY_SIGNATURE_TREBLE_G_FLAT;
+/* 		break; */
+/* 	case -5: */
+/* 		key_signature = KEY_SIGNATURE_TREBLE_G_FLAT; */
 
-		gtk_label_set_text(GTK_LABEL(sks_clef_label), "D flat Major or B minor");
-		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/treble_G_flat.xpm"));
+/* 		gtk_label_set_text(GTK_LABEL(sks_clef_label), "D flat Major or B minor"); */
+/* 		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/treble_G_flat.xpm")); */
 
-		break;
-	case -6:
-		key_signature = KEY_SIGNATURE_TREBLE_C_FLAT;
+/* 		break; */
+/* 	case -6: */
+/* 		key_signature = KEY_SIGNATURE_TREBLE_C_FLAT; */
 
-		gtk_label_set_text(GTK_LABEL(sks_clef_label), "G flat Major or E flat minor");
-		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/treble_C_flat.xpm"));
+/* 		gtk_label_set_text(GTK_LABEL(sks_clef_label), "G flat Major or E flat minor"); */
+/* 		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/treble_C_flat.xpm")); */
 
-		break;
-	case -7:
-		key_signature = KEY_SIGNATURE_TREBLE_F_FLAT;
+/* 		break; */
+/* 	case -7: */
+/* 		key_signature = KEY_SIGNATURE_TREBLE_F_FLAT; */
 
-		gtk_label_set_text(GTK_LABEL(sks_clef_label), "C flat Major or A flat minor");
-		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/treble_F_flat.xpm"));
+/* 		gtk_label_set_text(GTK_LABEL(sks_clef_label), "C flat Major or A flat minor"); */
+/* 		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/treble_F_flat.xpm")); */
 
-		break;
-	case 0:
-		key_signature = KEY_SIGNATURE_TREBLE_EMPTY;
+/* 		break; */
+/* 	case 0: */
+/* 		key_signature = KEY_SIGNATURE_TREBLE_EMPTY; */
 
-		gtk_label_set_text(GTK_LABEL(sks_clef_label), "C Major or A minor");
-		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/treble_empty.xpm"));
+/* 		gtk_label_set_text(GTK_LABEL(sks_clef_label), "C Major or A minor"); */
+/* 		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/treble_empty.xpm")); */
 
-		break;
-	case 1:
-		key_signature = KEY_SIGNATURE_TREBLE_F_SHARP;
+/* 		break; */
+/* 	case 1: */
+/* 		key_signature = KEY_SIGNATURE_TREBLE_F_SHARP; */
 
-		gtk_label_set_text(GTK_LABEL(sks_clef_label), "G Major or E minor");
-		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/treble_F_sharp.xpm"));
+/* 		gtk_label_set_text(GTK_LABEL(sks_clef_label), "G Major or E minor"); */
+/* 		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/treble_F_sharp.xpm")); */
 
-		break;
-	case 2:
-		key_signature = KEY_SIGNATURE_TREBLE_C_SHARP;
+/* 		break; */
+/* 	case 2: */
+/* 		key_signature = KEY_SIGNATURE_TREBLE_C_SHARP; */
 
-		gtk_label_set_text(GTK_LABEL(sks_clef_label), "D Major or B minor");
-		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/treble_C_sharp.xpm"));
+/* 		gtk_label_set_text(GTK_LABEL(sks_clef_label), "D Major or B minor"); */
+/* 		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/treble_C_sharp.xpm")); */
 
-		break;
-	case 3:
-		key_signature = KEY_SIGNATURE_TREBLE_G_SHARP;
+/* 		break; */
+/* 	case 3: */
+/* 		key_signature = KEY_SIGNATURE_TREBLE_G_SHARP; */
 
-		gtk_label_set_text(GTK_LABEL(sks_clef_label), "A Major or F sharp minor");
-		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/treble_G_sharp.xpm"));
+/* 		gtk_label_set_text(GTK_LABEL(sks_clef_label), "A Major or F sharp minor"); */
+/* 		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/treble_G_sharp.xpm")); */
 
-		break;
-	case 4:
-		key_signature = KEY_SIGNATURE_TREBLE_D_SHARP;
+/* 		break; */
+/* 	case 4: */
+/* 		key_signature = KEY_SIGNATURE_TREBLE_D_SHARP; */
 
-		gtk_label_set_text(GTK_LABEL(sks_clef_label), "E Major or C sharp minor");
-		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/treble_D_sharp.xpm"));
+/* 		gtk_label_set_text(GTK_LABEL(sks_clef_label), "E Major or C sharp minor"); */
+/* 		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/treble_D_sharp.xpm")); */
 
-		break;
-	case 5:
-		key_signature = KEY_SIGNATURE_TREBLE_A_SHARP;
+/* 		break; */
+/* 	case 5: */
+/* 		key_signature = KEY_SIGNATURE_TREBLE_A_SHARP; */
 
-		gtk_label_set_text(GTK_LABEL(sks_clef_label), "B Major or G sharp minor");
-		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/treble_A_sharp.xpm"));
+/* 		gtk_label_set_text(GTK_LABEL(sks_clef_label), "B Major or G sharp minor"); */
+/* 		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/treble_A_sharp.xpm")); */
 
-		break;
-	case 6:
-		key_signature = KEY_SIGNATURE_TREBLE_E_SHARP;
+/* 		break; */
+/* 	case 6: */
+/* 		key_signature = KEY_SIGNATURE_TREBLE_E_SHARP; */
 
-		gtk_label_set_text(GTK_LABEL(sks_clef_label), "F sharp Major or  D sharp minor");
-		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/treble_E_sharp.xpm"));
+/* 		gtk_label_set_text(GTK_LABEL(sks_clef_label), "F sharp Major or  D sharp minor"); */
+/* 		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/treble_E_sharp.xpm")); */
 
-		break;
-	case 7:
-		key_signature = KEY_SIGNATURE_TREBLE_B_SHARP;
+/* 		break; */
+/* 	case 7: */
+/* 		key_signature = KEY_SIGNATURE_TREBLE_B_SHARP; */
 
-		gtk_label_set_text(GTK_LABEL(sks_clef_label), "C sharp Major or A sharp minor");
-		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/treble_B_sharp.xpm"));
+/* 		gtk_label_set_text(GTK_LABEL(sks_clef_label), "C sharp Major or A sharp minor"); */
+/* 		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/treble_B_sharp.xpm")); */
 
-		break;
-	}
+/* 		break; */
+/* 	} */
 }
 
 

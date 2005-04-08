@@ -54,12 +54,12 @@ insert_text_callback(GtkButton *widget, gpointer user_data)
 /*         GtkWidget *font = score_get_insert_text_font_from_widget(widget); */
 /*         GtkWidget *color = score_get_insert_text_color_from_widget(widget); */
 
-        entry = glade_xml_get_widget(gladexml, "insert_text_entry");
-        data = gtk_entry_get_text(entry);
-        g_print("Text we got: %s\n", data);
-        entry = score_get_insert_text_entry_from_widget(widget);
-        data = gtk_entry_get_text(entry);
-        g_print("Text we got: %s\n", data);
+/*         entry = glade_xml_get_widget(gladexml, "insert_text_entry"); */
+/*         data = gtk_entry_get_text(entry); */
+/*         g_print("Text we got: %s\n", data); */
+/*         entry = score_get_insert_text_entry_from_widget(widget); */
+/*         data = gtk_entry_get_text(entry); */
+/*         g_print("Text we got: %s\n", data); */
 }
 
 /* globals vars */

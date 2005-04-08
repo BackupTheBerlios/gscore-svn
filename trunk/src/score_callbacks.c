@@ -50,93 +50,93 @@ static GtkWidget *get_toplevel(GtkWidget *widget)
 extern void
 set_tempo(GtkButton *widget, gpointer user_data)
 {
-        GtkWidget *spinbutton;
-        GtkWidget *entry;
-        GtkWidget *radiobutton;
-	Score_t *score;
-	GtkWidget *area;
+/*         GtkWidget *spinbutton; */
+/*         GtkWidget *entry; */
+/*         GtkWidget *radiobutton; */
+/* 	Score_t *score; */
+/* 	GtkWidget *area; */
 	
-/* 	spinbutton =  glade_xml_get_widget (gladexml, "tempo_spinbutton"); */
-/* 	entry =  glade_xml_get_widget (gladexml, "tempo_entry"); */
-	score = score_get_from_widget(widget);
-	area = score_get_area_from_widget(widget);
-        spinbutton = score_get_tempo_spinbutton_from_widget(widget);
-        entry = score_get_tempo_entry_from_widget(entry);
+/* /\* 	spinbutton =  glade_xml_get_widget (gladexml, "tempo_spinbutton"); *\/ */
+/* /\* 	entry =  glade_xml_get_widget (gladexml, "tempo_entry"); *\/ */
+/* 	score = score_get_from_widget(widget); */
+/* 	area = score_get_area_from_widget(widget); */
+/*         spinbutton = score_get_tempo_spinbutton_from_widget(widget); */
+/*         entry = score_get_tempo_entry_from_widget(entry); */
 	
-        score->tempo = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(spinbutton));
+/*         score->tempo = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(spinbutton)); */
 
-/* 	radiobutton =  glade_xml_get_widget (gladexml, "tempo_quarter_rb"); */
-/*         g_print("state: %d\n", gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(radiobutton))); */
+/* /\* 	radiobutton =  glade_xml_get_widget (gladexml, "tempo_quarter_rb"); *\/ */
+/* /\*         g_print("state: %d\n", gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(radiobutton))); *\/ */
 
-        score->tempo_text = g_string_new(gtk_entry_get_text((GtkEntry *)entry));
+/*         score->tempo_text = g_string_new(gtk_entry_get_text((GtkEntry *)entry)); */
 
-	refresh(area);
+/* 	refresh(area); */
 }
 
 extern void 
 on_set_header_activate_default(GtkButton *widget, gpointer user_data)
 {
-	GtkWidget *title;
-	GtkWidget *subtitle;
-	GtkWidget *composer;
-	Score_t *score;
+/* 	GtkWidget *title; */
+/* 	GtkWidget *subtitle; */
+/* 	GtkWidget *composer; */
+/* 	Score_t *score; */
 	
-	title    = score_get_title_entry_from_widget(widget);
-	subtitle = score_get_subtitle_entry_from_widget(widget);
-	composer = score_get_composer_entry_from_widget(widget);
-	score    = score_get_from_widget(widget);
+/* 	title    = score_get_title_entry_from_widget(widget); */
+/* 	subtitle = score_get_subtitle_entry_from_widget(widget); */
+/* 	composer = score_get_composer_entry_from_widget(widget); */
+/* 	score    = score_get_from_widget(widget); */
 
-	gtk_entry_set_text(GTK_ENTRY(title), score->Identity->title->str);
-	gtk_entry_set_text(GTK_ENTRY(subtitle), score->Identity->subtitle->str);
-	gtk_entry_set_text(GTK_ENTRY(composer), score->Identity->composer->str);
+/* 	gtk_entry_set_text(GTK_ENTRY(title), score->Identity->title->str); */
+/* 	gtk_entry_set_text(GTK_ENTRY(subtitle), score->Identity->subtitle->str); */
+/* 	gtk_entry_set_text(GTK_ENTRY(composer), score->Identity->composer->str); */
 
 }
 
 extern void 
 score_set_header_ok(GtkButton *widget, gpointer user_data)
 {
-	GtkWidget *title;
-	GtkWidget *subtitle;
-	GtkWidget *composer;
-	Score_t *score;
+/* 	GtkWidget *title; */
+/* 	GtkWidget *subtitle; */
+/* 	GtkWidget *composer; */
+/* 	Score_t *score; */
 
-/* 	title = glade_xml_get_widget(gladexml, "title_entry"); */
-/* 	subtitle = glade_xml_get_widget(gladexml, "subtitle_entry"); */
-/* 	composer = glade_xml_get_widget(gladexml, "composer_entry"); */
-	title    = score_get_title_entry_from_widget(widget);
-	subtitle = score_get_subtitle_entry_from_widget(widget);
-	composer = score_get_composer_entry_from_widget(widget);
-	score = score_get_from_widget(title);
+/* /\* 	title = glade_xml_get_widget(gladexml, "title_entry"); *\/ */
+/* /\* 	subtitle = glade_xml_get_widget(gladexml, "subtitle_entry"); *\/ */
+/* /\* 	composer = glade_xml_get_widget(gladexml, "composer_entry"); *\/ */
+/* 	title    = score_get_title_entry_from_widget(widget); */
+/* 	subtitle = score_get_subtitle_entry_from_widget(widget); */
+/* 	composer = score_get_composer_entry_from_widget(widget); */
+/* 	score = score_get_from_widget(title); */
 
-	score->Identity->title = g_string_assign(score->Identity->title, 
-                                                 gtk_entry_get_text(GTK_ENTRY(title)));
-	score->Identity->subtitle = g_string_assign(score->Identity->subtitle, 
-                                                    gtk_entry_get_text(GTK_ENTRY(subtitle)));
-	score->Identity->composer = g_string_assign(score->Identity->composer, 
-                                                    gtk_entry_get_text(GTK_ENTRY(composer)));
+/* 	score->Identity->title = g_string_assign(score->Identity->title,  */
+/*                                                  gtk_entry_get_text(GTK_ENTRY(title))); */
+/* 	score->Identity->subtitle = g_string_assign(score->Identity->subtitle,  */
+/*                                                     gtk_entry_get_text(GTK_ENTRY(subtitle))); */
+/* 	score->Identity->composer = g_string_assign(score->Identity->composer,  */
+/*                                                     gtk_entry_get_text(GTK_ENTRY(composer))); */
 
 }
 
 extern gboolean 
 score_activate_callback(GtkWidget *widget)
 {
-        static const char *props[] = {
-                "score", "area", "selection", "cursor", "display",
-                NULL};
-        int i;
-        GtkWidget *main_window;
-        GtkWidget *score_window;
+/*         static const char *props[] = { */
+/*                 "score", "area", "selection", "cursor", "display", */
+/*                 NULL}; */
+/*         int i; */
+/*         GtkWidget *main_window; */
+/*         GtkWidget *score_window; */
   
-        main_window = glade_xml_get_widget(gladexml, "main_window");
-        score_window = get_toplevel(widget);
+/*         main_window = glade_xml_get_widget(gladexml, "main_window"); */
+/*         score_window = get_toplevel(widget); */
   
-        for(i=0; props[i] != NULL; ++i) {
-                g_object_set_data(G_OBJECT(main_window), props[i],
-                                  g_object_get_data(G_OBJECT(score_window),
-                                                    props[i]));
+/*         for(i=0; props[i] != NULL; ++i) { */
+/*                 g_object_set_data(G_OBJECT(main_window), props[i], */
+/*                                   g_object_get_data(G_OBJECT(score_window), */
+/*                                                     props[i])); */
     
-        }
-        return TRUE;
+/*         } */
+/*         return TRUE; */
   
 }
 

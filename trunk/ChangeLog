@@ -1,3 +1,7 @@
+2005-04-08 Toady <toady@gscore.org>
+
+	* src/score.c: gets the score widget to draw using cairo instructions
+	
 2005-04-04 Toady <toady@gscore.org>
 
 	* plugins/abc/import-abc.c, src/score.c: abc plugin can import scores correctly

@@ -3,11 +3,11 @@ SUBDIRS =
 DEFS = -I$(top_srcdir)/ -I$(srcdir)/include/	\
 	-DPLUGINS_DIR=\"$(plugins_dir)\"	\
 	-DDATA_DIR=\"$(datadir)\"		\
-	$(LIBGLADE2_CFLAGS)
+	$(LIBGLADE2_CFLAGS) $(CAIRO_CFLAGS)
 
 bin_PROGRAMS = gscore
 gscore_LDFLAGS = -export-dynamic
-gscore_LDADD = $(LIBGLADE2_LIBS)
+gscore_LDADD = $(LIBGLADE2_LIBS) $(CAIRO_LIBS) -lgscore
 
 gscore_SOURCES =				\
 	articulation.c				\

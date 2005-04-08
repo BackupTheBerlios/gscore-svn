@@ -27,6 +27,8 @@
 #include <gettext.h>
 #include <glade/glade-xml.h>
 
+#include <libgscore.h>
+
 #include "gscore.h"
 #include "display.h"
 #include "draw.h"
@@ -46,34 +48,8 @@
 #define OK     "OK"
 #define CANCEL "Cancel"
 
-
-/* GType */
-/* score_get_type(void) */
-/* { */
-/*         static GType object_type = 0; */
-
-/*         if ( ! object_type ) { */
-/*                 static const GTypeInfo object_info = */
-/*                         { */
-/*                                 sizeof(Score_t), */
-/*                                 (GBaseInitFunc) NULL, */
-/*                                 (GBaseFinalizeFunc) NULL, */
-/*                                 (GClassInitFunc) NULL, */
-/*                                 NULL,           /\* class_finalize *\/ */
-/*                                 NULL,           /\* class_data *\/ */
-/*                                 sizeof (Score_t), */
-/*                                 0,              /\* n_preallocs *\/ */
-/*                                 (GInstanceInitFunc) NULL /\* init *\/ */
-/*                         }; */
-
-/*                 object_type = g_type_register_static(G_TYPE_OBJECT,  */
-/*                                                      "Score", */
-/*                                                      &object_info, */
-/*                                                      0); */
-/*         } */
-
-/*         return object_type; */
-/* } */
+GladeXML  *score_xml;
+GtkWidget *score_widget;
 
 /*
  * BEGIN: GTK WIDGETS
@@ -295,124 +271,26 @@ GtkScrolledWindow *score_get_scrolled_window_from_widget(GtkWidget *widget)
         return (GtkScrolledWindow *) g_object_get_data(G_OBJECT(parent), "scrolledwindow");
 }
 
-GtkWidget *score_get_setkey_treble_rb_from_widget(GtkWidget *widget)
+void paint(GtkWidget *widget,
+           cairo_t   *cairo,
+           GtkRange  *range)
 {
-        GtkWidget *parent;
-        parent = get_toplevel(widget);
-        if(parent == NULL) return NULL;
-        return (GtkWidget *) g_object_get_data(G_OBJECT(parent), "setkey_treble_rb");
-}
 
-GtkWidget *score_get_setkey_bass_rb_from_widget(GtkWidget *widget)
-{
-        GtkWidget *parent;
-        parent = get_toplevel(widget);
-        if(parent == NULL) return NULL;
-        return (GtkWidget *) g_object_get_data(G_OBJECT(parent), "setkey_bass_rb");
-}
+        gint width    = widget->allocation.width;
+        gint height   = widget->allocation.height;
+        gint box_size = (width + height) / 6;
 
-GtkWidget *score_get_setkey_alto_rb_from_widget(GtkWidget *widget)
-{
-        GtkWidget *parent;
-        parent = get_toplevel(widget);
-        if(parent == NULL) return NULL;
-        return (GtkWidget *) g_object_get_data(G_OBJECT(parent), "setkey_alto_rb");
-}
+        cairo_save (cairo);
+        cairo_default_matrix (cairo);
+        cairo_translate (cairo, width / 2, height / 2);
 
-GtkWidget *score_get_setkey_tenor_rb_from_widget(GtkWidget *widget)
-{
-        GtkWidget *parent;
-        parent = get_toplevel(widget);
-        if(parent == NULL) return NULL;
-        return (GtkWidget *) g_object_get_data(G_OBJECT(parent), "setkey_tenor_rb");
-}
+/*         cairo_rotate (cairo, gtk_range_get_value (range)); */
+        cairo_rectangle (cairo, -box_size, -box_size, box_size, box_size);
+        cairo_set_rgb_color (cairo, 0, 0, 0);
+        cairo_fill (cairo);
+        cairo_restore (cairo);
 
-GtkWidget *score_get_sks_clef_label_from_widget(GtkWidget *widget)
-{
-        GtkWidget *parent;
-        parent = get_toplevel(widget);
-        if(parent == NULL) return NULL;
-        return (GtkWidget *) g_object_get_data(G_OBJECT(parent), "sks_clef_label");
-}
 
-GtkWidget *score_get_sks_image_from_widget(GtkWidget *widget)
-{
-        GtkWidget *parent;
-        parent = get_toplevel(widget);
-        if(parent == NULL) return NULL;
-        return (GtkWidget *) g_object_get_data(G_OBJECT(parent), "sks_image");
-}
-
-GtkWidget *score_get_sks_hbox_from_widget(GtkWidget *widget)
-{
-        GtkWidget *parent;
-        parent = get_toplevel(widget);
-        if(parent == NULL) return NULL;
-        return (GtkWidget *) g_object_get_data(G_OBJECT(parent), "sks_hbox");
-}
-
-GtkWidget *score_get_tempo_spinbutton_from_widget(GtkWidget *widget)
-{
-        GtkWidget *parent;
-        parent = get_toplevel(widget);
-        if(parent == NULL) return NULL;
-        return (GtkWidget *) g_object_get_data(G_OBJECT(parent), "tempo_spinbutton");
-}
-
-GtkWidget *score_get_tempo_entry_from_widget(GtkWidget *widget)
-{
-        GtkWidget *parent;
-        parent = get_toplevel(widget);
-        if(parent == NULL) return NULL;
-        return (GtkWidget *) g_object_get_data(G_OBJECT(parent), "tempo_entry");
-}
-
-GtkWidget *score_get_title_entry_from_widget(GtkWidget *widget)
-{
-        GtkWidget *parent;
-        parent = get_toplevel(widget);
-        if(parent == NULL) return NULL;
-        return (GtkWidget *) g_object_get_data(G_OBJECT(parent), "title_entry");
-}
-
-GtkWidget *score_get_subtitle_entry_from_widget(GtkWidget *widget)
-{
-        GtkWidget *parent;
-        parent = get_toplevel(widget);
-        if(parent == NULL) return NULL;
-        return (GtkWidget *) g_object_get_data(G_OBJECT(parent), "subtitle_entry");
-}
-
-GtkWidget *score_get_composer_entry_from_widget(GtkWidget *widget)
-{
-        GtkWidget *parent;
-        parent = get_toplevel(widget);
-        if(parent == NULL) return NULL;
-        return (GtkWidget *) g_object_get_data(G_OBJECT(parent), "composer_entry");
-}
-
-GtkWidget *score_get_insert_text_entry_from_widget(GtkWidget *widget)
-{
-        GtkWidget *parent;
-        parent = get_toplevel(widget);
-        if(parent == NULL) return NULL;
-        return (GtkWidget *) g_object_get_data(G_OBJECT(parent), "insert_text_entry");
-}
-
-GtkWidget *score_get_insert_text_font_from_widget(GtkWidget *widget)
-{
-        GtkWidget *parent;
-        parent = get_toplevel(widget);
-        if(parent == NULL) return NULL;
-        return (GtkWidget *) g_object_get_data(G_OBJECT(parent), "insert_text_font");
-}
-
-GtkWidget *score_get_insert_text_color_from_widget(GtkWidget *widget)
-{
-        GtkWidget *parent;
-        parent = get_toplevel(widget);
-        if(parent == NULL) return NULL;
-        return (GtkWidget *) g_object_get_data(G_OBJECT(parent), "insert_text_color");
 }
 
 
@@ -421,33 +299,16 @@ void score_create_window(Score_t *score)
         Display_t *Display;
         Score_selection_t *selection;
         KeyCursor_t *KeyCursor;
-        GladeXML *xml;
-        GtkWidget *window;
-        GtkWidget *area;
+        ScoreWidget *sw;
+        
+        GtkWidget *viewport;
+/*         GladeXML *xml; */
+/*         GtkWidget *window; */
+/*         GtkWidget *area; */
 
-        /* Ugly, but needed for now :( */
-        GtkWidget *setkey_treble_rb;
-        GtkWidget *setkey_bass_rb;
-        GtkWidget *setkey_alto_rb;
-        GtkWidget *setkey_tenor_rb;
-        GtkWidget *sks_clef_label;
-        GtkWidget *sks_image;
-        GtkWidget *sks_hbox;
-
-        GtkWidget *tempo_spinbutton;
-        GtkWidget *tempo_entry;
-
-        GtkWidget *title_entry;
-        GtkWidget *subtitle_entry;
-        GtkWidget *composer_entry;
-
-        GtkWidget *insert_text_entry;
-        GtkWidget *insert_text_font;
-        GtkWidget *insert_text_color;
-        /* End of the Ugliest stuff I've ever done */
-
-        GtkScrolledWindow *scrolled_window;
+/*         GtkScrolledWindow *scrolled_window; */
   
+
         selection = g_malloc(sizeof(Score_selection_t));
         selection->x_origin = 0;
         selection->y_origin = 0;
@@ -456,109 +317,76 @@ void score_create_window(Score_t *score)
   
         if(score == NULL) {
                 score = gscore_score_new();
-        } 
+        }
 
         KeyCursor = g_malloc(sizeof(KeyCursor_t));
   
         KeyCursor->position = 0;
 
 
-
         Display = gscore_display_new();
 
-        /*   xml = glade_xml_new(get_file_from_data_dir("glade/gscore.glade"), */
-        /* 		      "score_window", NULL); */
-        /* BEGIN Dirty hack */
-        xml = glade_xml_new(get_file_from_data_dir("glade/gscore.glade"),
+        score_xml = glade_xml_new(get_file_from_data_dir("glade/score-ui.glade"),
                             NULL, NULL);
-        window = glade_xml_get_widget(xml, "main_window");
-        gtk_widget_hide(window);
-        /* END Dirty hack */
-        window = glade_xml_get_widget(xml, "score_window");
-        glade_xml_signal_autoconnect(xml) ;
-  
-        g_signal_connect(GTK_OBJECT(window), "key_press_event",
+
+        score_widget = glade_xml_get_widget(score_xml, "score");
+        glade_xml_signal_autoconnect(score_xml);
+        g_signal_connect(G_OBJECT(score_widget), "key_press_event",
                          G_CALLBACK(score_key_press_event), NULL);
 
-        area = glade_xml_get_widget(xml, "sw_score_da");
+        viewport = glade_xml_get_widget(score_xml, "score_viewport");
 
-        scrolled_window = glade_xml_get_widget(xml, "sw_score_sw");
-
-        setkey_treble_rb = glade_xml_get_widget(xml, "setkey_treble_rb");
-        setkey_bass_rb = glade_xml_get_widget(xml, "setkey_bass_rb");
-        setkey_alto_rb = glade_xml_get_widget(xml, "setkey_alto_rb");
-        setkey_tenor_rb = glade_xml_get_widget(xml, "setkey_tenor_rb");
-
-        sks_clef_label = glade_xml_get_widget(xml, "sks_clef_label");
-        sks_image      = glade_xml_get_widget(xml, "sks_image"); 
-        sks_hbox       = glade_xml_get_widget(xml, "sks_hbox");
-
-        tempo_spinbutton = glade_xml_get_widget(xml, "tempo_spinbutton");
-        tempo_entry = glade_xml_get_widget(xml, "tempo_entry");
-        
-	title_entry = glade_xml_get_widget(gladexml, "title_entry");
-	subtitle_entry = glade_xml_get_widget(gladexml, "subtitle_entry");
-	composer_entry = glade_xml_get_widget(gladexml, "composer_entry");
-
-        insert_text_entry = glade_xml_get_widget(gladexml, "insert_text_entry");
-        insert_text_font = glade_xml_get_widget(gladexml, "insert_text_font");
-        insert_text_color = glade_xml_get_widget(gladexml, "insert_text_color");
-
-
-        g_object_set_data(G_OBJECT(window), "score", score);
-        g_object_set_data(G_OBJECT(window), "area", area);
-        g_object_set_data(G_OBJECT(window), "selection", selection);
-        g_object_set_data(G_OBJECT(window), "cursor", KeyCursor);
-        g_object_set_data(G_OBJECT(window), "display", Display);
-        g_object_set_data(G_OBJECT(window), "scrolledwindow", scrolled_window);
-
-        g_object_set_data(G_OBJECT(window), "setkey_treble_rb", setkey_treble_rb);
-        g_object_set_data(G_OBJECT(window), "setkey_bass_rb", setkey_bass_rb);
-        g_object_set_data(G_OBJECT(window), "setkey_alto_rb", setkey_alto_rb);
-        g_object_set_data(G_OBJECT(window), "setkey_tenor_rb", setkey_tenor_rb);
-
-        g_object_set_data(G_OBJECT(window), "sks_clef_label", sks_clef_label);
-        g_object_set_data(G_OBJECT(window), "sks_image", sks_image);
-        g_object_set_data(G_OBJECT(window), "sks_hbox", sks_hbox);
-
-        g_object_set_data(G_OBJECT(window), "tempo_spinbutton", tempo_spinbutton);
-        g_object_set_data(G_OBJECT(window), "tempo_entry", tempo_entry);
-
-        g_object_set_data(G_OBJECT(window), "title_entry", title_entry);
-        g_object_set_data(G_OBJECT(window), "subtitle_entry", subtitle_entry);
-        g_object_set_data(G_OBJECT(window), "composer_entry", composer_entry);
-
-        g_object_set_data(G_OBJECT(window), "insert_text_entry", insert_text_entry);
-        g_object_set_data(G_OBJECT(window), "insert_text_font", insert_text_font);
-        g_object_set_data(G_OBJECT(window), "insert_text_color", insert_text_color);
-
-        /*   glade_set_widgets(xml); */
+        sw = score_widget_new();
         score->height = 500;
         score->width = 500;
 
-        g_print("**** staff_selected = %d\n", score->staff_selected);
-  
-        g_signal_connect(GTK_OBJECT(area), "expose_event",
-                         G_CALLBACK(score_area_callback), NULL);
-        g_signal_connect(GTK_OBJECT(area), "button_press_event",
-                         G_CALLBACK(mouse_button_press_event), NULL);
-        g_signal_connect(GTK_OBJECT(area), "button_release_event",
-                         G_CALLBACK(mouse_button_release_event), NULL);
-        /*   g_signal_connect(GTK_OBJECT(area), "motion_notify_event", */
-        /* 		   G_CALLBACK(mouse_motion_event), NULL); */
-	
-        staff_update_statusbar(xml);
+        gtk_widget_set_usize(GTK_WIDGET(sw), score->width, score->height);
+        g_signal_connect (G_OBJECT (sw), "paint", G_CALLBACK (paint), NULL);
 
-        gtk_widget_show(window);
+        gtk_container_add(GTK_CONTAINER(viewport), sw);
+
+        g_print("OK\n");
+
+        gtk_widget_show(sw);
+
+/*         area = glade_xml_get_widget(xml, "sw_score_da"); */
+
+/*         scrolled_window = glade_xml_get_widget(xml, "sw_score_sw"); */
+
+/*         g_object_set_data(G_OBJECT(window), "score", score); */
+/*         g_object_set_data(G_OBJECT(window), "area", area); */
+/*         g_object_set_data(G_OBJECT(window), "selection", selection); */
+/*         g_object_set_data(G_OBJECT(window), "cursor", KeyCursor); */
+/*         g_object_set_data(G_OBJECT(window), "display", Display); */
+/*         g_object_set_data(G_OBJECT(window), "scrolledwindow", scrolled_window); */
+
+        /*   glade_set_widgets(xml); */
+
+/*         g_print("**** staff_selected = %d\n", score->staff_selected); */
+  
+/*         g_signal_connect(GTK_OBJECT(area), "expose_event", */
+/*                          G_CALLBACK(score_area_callback), NULL); */
+/*         g_signal_connect(GTK_OBJECT(area), "button_press_event", */
+/*                          G_CALLBACK(mouse_button_press_event), NULL); */
+/*         g_signal_connect(GTK_OBJECT(area), "button_release_event", */
+/*                          G_CALLBACK(mouse_button_release_event), NULL); */
+
+
+/*           g_signal_connect(GTK_OBJECT(area), "motion_notify_event", */
+/*         		   G_CALLBACK(mouse_motion_event), NULL); */
+	
+/*         staff_update_statusbar(xml); */
+
+        gtk_widget_show_all(score_widget);
   
         /* Set the white color to the drawing area */
         /* We want the score to be white */
-        if ( ! area ) {
-                printf(_("Error: The score layout cannot be drawn\n"));
-                /*     return -1; */
-        } else {
-                colorize_drawingarea(area, 65535, 65535, 65535);
-        }
+/*         if ( ! area ) { */
+/*                 printf(_("Error: The score layout cannot be drawn\n")); */
+/*                 /\*     return -1; *\/ */
+/*         } else { */
+/*                 colorize_drawingarea(area, 65535, 65535, 65535); */
+/*         } */
 }
 
 gboolean score_set_staff_extremity_end_x(Score_t *score, gdouble extremity_end_x)
