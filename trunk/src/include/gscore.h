@@ -226,6 +226,12 @@ typedef struct Identity_t
         
 } Identity_t;
 
+typedef struct Colors_t
+{
+        gdouble staves[2];       /* {red, green, blue} */
+        gdouble objects[2];
+} Colors_t;
+
 typedef struct Score_t
 {
 
@@ -256,6 +262,7 @@ typedef struct Score_t
 	/** Where we start to put the notes */
         gdouble       staff_startx;
         struct Identity_t  * Identity; /* Useful informations */
+        struct Colors_t * Colors;
 /*         struct Display_t   * Display; */
 
         /** Staves tracked in a list, to have many staves as your memory allow you to have */

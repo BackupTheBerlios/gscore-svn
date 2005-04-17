@@ -1,3 +1,7 @@
+2005-04-18 Toady <toady@gscore.org>
+
+	* src/draw_staff.c, src/include/draw_staff.h: creation to draw a cairo staff
+	
 2005-04-08 Toady <toady@gscore.org>
 
 	* src/score.c: gets the score widget to draw using cairo instructions

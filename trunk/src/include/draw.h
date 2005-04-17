@@ -42,7 +42,7 @@ gint average(gint staff);
 
 gint index_object(gint staff, gint x);
 
-gint draw_staff(GtkWidget *area, guint16 nb_lines, gdouble space_btwn_line, gdouble x1, gdouble y1, gdouble x2, gboolean line, gboolean selected);
+/* gint draw_staff(GtkWidget *area, guint16 nb_lines, gdouble space_btwn_line, gdouble x1, gdouble y1, gdouble x2, gboolean line, gboolean selected); */
 
 void draw_eighth_up(GtkWidget *area, gboolean selected, gint x, gint y);
 

@@ -274,58 +274,58 @@ gint index_object(gint staff, gint x)
 	return 0;
 }
 
-extern
-gint draw_staff(GtkWidget *area, guint16 nb_lines, gdouble space_btwn_line, gdouble x1, gdouble y1, gdouble x2,
-                gboolean line, gboolean selected)
-{
-	/*
-	 *   nb_line is the number of lines for your score, it's usualy 5 and may be 6 for a tablature
-	 *   space_btwn_line is the space (in pixels) to leave between each line
-	 *   x1 is the x coordonate where to start
-	 *   y1 is the y coordonate where to start
-	 *   x2 is the x coordonate where to stop
-	 *   line: if true, draw a line a the beginning of the staff
-	 *   selected: if true, draw a blue staff
-	 */
+/* extern */
+/* gint draw_staff(GtkWidget *area, guint16 nb_lines, gdouble space_btwn_line, gdouble x1, gdouble y1, gdouble x2, */
+/*                 gboolean line, gboolean selected) */
+/* { */
+/* 	/\* */
+/* 	 *   nb_line is the number of lines for your score, it's usualy 5 and may be 6 for a tablature */
+/* 	 *   space_btwn_line is the space (in pixels) to leave between each line */
+/* 	 *   x1 is the x coordonate where to start */
+/* 	 *   y1 is the y coordonate where to start */
+/* 	 *   x2 is the x coordonate where to stop */
+/* 	 *   line: if true, draw a line a the beginning of the staff */
+/* 	 *   selected: if true, draw a blue staff */
+/* 	 *\/ */
 
-	GdkGC *gc;
-	GdkColor color;
-	gdouble counter = 0; /* set to add this value to the x1 position */
-	gint16 i = 0;
-	Score_t *score = score_get_from_widget(area);
+/* 	GdkGC *gc; */
+/* 	GdkColor color; */
+/* 	gdouble counter = 0; /\* set to add this value to the x1 position *\/ */
+/* 	gint16 i = 0; */
+/* 	Score_t *score = score_get_from_widget(area); */
 
-	gc = gdk_gc_new(area->window);
+/* 	gc = gdk_gc_new(area->window); */
 
-/*         x2 = 300; */
+/* /\*         x2 = 300; *\/ */
 
-/* 	g_print("|draw.c| draw_staff(nb_lines = %d, space_btwn_line = %f, x1 = %f, y1 = %f, x2 = %f, line = %d, selected = %d)\n", nb_lines, space_btwn_line, x1, y1, x2, line, selected); */
-/* 	debug_msg(g_strdup_printf("|draw.c| draw_staff(nb_lines = %d, space_btwn_line = %f, x1 = %f, y1 = %f, x2 = %f, line = %d, selected = %d)\n", nb_lines, space_btwn_line, x1, y1, x2, line, selected)); */
+/* /\* 	g_print("|draw.c| draw_staff(nb_lines = %d, space_btwn_line = %f, x1 = %f, y1 = %f, x2 = %f, line = %d, selected = %d)\n", nb_lines, space_btwn_line, x1, y1, x2, line, selected); *\/ */
+/* /\* 	debug_msg(g_strdup_printf("|draw.c| draw_staff(nb_lines = %d, space_btwn_line = %f, x1 = %f, y1 = %f, x2 = %f, line = %d, selected = %d)\n", nb_lines, space_btwn_line, x1, y1, x2, line, selected)); *\/ */
 
-	if ( selected ) {
-		color.red   = 0;
-		color.green = 0;
-		color.blue  = 65535;
-		gdk_colormap_alloc_color(gtk_widget_get_colormap(area), &color, TRUE, TRUE);
-		gdk_gc_set_foreground(gc, &color);
-	}
+/* 	if ( selected ) { */
+/* 		color.red   = 0; */
+/* 		color.green = 0; */
+/* 		color.blue  = 65535; */
+/* 		gdk_colormap_alloc_color(gtk_widget_get_colormap(area), &color, TRUE, TRUE); */
+/* 		gdk_gc_set_foreground(gc, &color); */
+/* 	} */
 
-	while ( i < nb_lines ) {
-		gdk_draw_line(area->window, gc,
-			      x1, y1+counter, x2, y1+counter);
-		counter = counter + space_btwn_line + 1;
-		++i;
+/* 	while ( i < nb_lines ) { */
+/* 		gdk_draw_line(area->window, gc, */
+/* 			      x1, y1+counter, x2, y1+counter); */
+/* 		counter = counter + space_btwn_line + 1; */
+/* 		++i; */
 
-		score->width = x2 + 300;
-	}
+/* 		score->width = x2 + 300; */
+/* 	} */
 
-	if ( line ) {
-		gdk_draw_line(area->window, gc,
-			      x1, y1,
-			      x1, y1+(nb_lines-1)+(nb_lines-1)*space_btwn_line);
-	}
+/* 	if ( line ) { */
+/* 		gdk_draw_line(area->window, gc, */
+/* 			      x1, y1, */
+/* 			      x1, y1+(nb_lines-1)+(nb_lines-1)*space_btwn_line); */
+/* 	} */
 
-	return 0;
-}
+/* 	return 0; */
+/* } */
 
 gint draw_point(GtkWidget *area, gint x, gint y)
 {

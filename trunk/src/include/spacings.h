@@ -69,12 +69,12 @@ typedef struct Clefs_t
 	gint sa;		/* Space after */
 } Clefs_t;
 
-typedef struct Colors_t
-{
-	gint clefs;
-	gint barlines;
-	gint staves;
-} Colors_t;
+/* typedef struct Colors_t */
+/* { */
+/* 	gint clefs; */
+/* 	gint barlines; */
+/* 	gint staves; */
+/* } Colors_t; */
 
 typedef struct KeySignatures_t
 {

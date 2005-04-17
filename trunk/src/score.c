@@ -46,6 +46,9 @@
 #include "mouse_event.h"
 #include "gscore-font-constants.h"
 
+#include "draw_staff.h"
+
+
 #define OK     "OK"
 #define CANCEL "Cancel"
 
@@ -164,8 +167,19 @@ Score_t *gscore_score_new(void)
         score->tempo = 60;
         score->tempo_text = g_string_new("");
 
+        score->Colors = g_malloc(sizeof(Colors_t));
+        if ( ! score->Colors ) {
+                printf("Memory exhausted!\n");
+                return NULL;
+        }
+        score->Colors->staves[0] = 0; /* red */
+        score->Colors->staves[1] = 0; /* green */
+        score->Colors->staves[2] = 0; /* blue */
+        score->Colors->objects[0] = 0; /* red */
+        score->Colors->objects[1] = 0; /* green */
+        score->Colors->objects[2] = 0; /* blue */
+
         score->Identity = g_malloc(sizeof(Identity_t));
-        
         if ( ! score->Identity ) {
                 printf("Memory exhausted!\n");
                 return NULL;
@@ -313,20 +327,23 @@ void paint(GtkWidget *widget,
 /*         cairo_move_to (cr, 50, 100); */
 /*         cairo_show_text (cr, "greetings from gtk and cairo"); */
 
-        cairo_set_rgb_color (cr, 0,0,0);
 
-        cairo_move_to (cr, 5, 50.5);
-        cairo_rel_line_to (cr, 800, 0);
-        cairo_move_to (cr, 5, 58.5);
-        cairo_rel_line_to (cr, 800, 0);
-        cairo_move_to (cr, 5, 66.5);
-        cairo_rel_line_to (cr, 800.5, 0);
-        cairo_move_to (cr, 5, 74.5);
-        cairo_rel_line_to (cr, 800.5, 0);
-        cairo_move_to (cr, 5, 82.5);
-        cairo_rel_line_to (cr, 800, 0);
-        cairo_set_line_width(cr, 1);
-        cairo_stroke(cr);
+        draw_staff(cr, 0, 0, 0, 0, 0, 0);
+/*         cairo_set_rgb_color (cr, 0,0,0); */
+
+/*         cairo_move_to (cr, 5, 50.5); */
+/*         cairo_rel_line_to (cr, 800, 0); */
+/*         cairo_move_to (cr, 5, 58.5); */
+/*         cairo_rel_line_to (cr, 800, 0); */
+/*         cairo_move_to (cr, 5, 66.5); */
+/*         cairo_rel_line_to (cr, 800.5, 0); */
+/*         cairo_move_to (cr, 5, 74.5); */
+/*         cairo_rel_line_to (cr, 800.5, 0); */
+/*         cairo_move_to (cr, 5, 82.5); */
+/*         cairo_rel_line_to (cr, 800, 0); */
+/*         cairo_set_line_width(cr, 1); */
+/*         cairo_stroke(cr); */
+
 
         /* Show the quarter note head */
         cairo_select_font (cr, "gscore", CAIRO_FONT_SLANT_NORMAL,

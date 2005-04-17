@@ -17,6 +17,7 @@ gscore_SOURCES =				\
 	debug.c					\
 	display.c				\
 	draw_barline.c				\
+	draw_staff.c 				\
 	draw.c					\
 	edit.c					\
 	error.c					\
