@@ -9,7 +9,7 @@ DEFS = -I$(top_srcdir)/ -I$(srcdir)/include/	\
 
 bin_PROGRAMS = gscore
 gscore_LDFLAGS = -export-dynamic
-gscore_LDADD = $(LIBGLADE2_LIBS) $(CAIRO_LIBS) -lgscore
+gscore_LDADD = $(LIBGLADE2_LIBS) $(CAIRO_LIBS) -l$(top_srcdir)/libgscore/libgscore.la
 
 gscore_SOURCES =				\
 	articulation.c				\
