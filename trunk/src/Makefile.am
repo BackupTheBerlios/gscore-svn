@@ -2,6 +2,7 @@ SUBDIRS =
 
 DEFS = -I$(top_srcdir)/ -I$(srcdir)/include/	\
 	-I$(top_srcdir)/libgscore 		\
+	-I$(top_srcdir)/libgscore/scorewidget	\
 	-DPLUGINS_DIR=\"$(plugins_dir)\"	\
 	-DDATA_DIR=\"$(datadir)\"		\
 	$(LIBGLADE2_CFLAGS) $(CAIRO_CFLAGS)
