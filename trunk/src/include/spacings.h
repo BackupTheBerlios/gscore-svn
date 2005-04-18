@@ -69,13 +69,6 @@ typedef struct Clefs_t
 	gint sa;		/* Space after */
 } Clefs_t;
 
-/* typedef struct Colors_t */
-/* { */
-/* 	gint clefs; */
-/* 	gint barlines; */
-/* 	gint staves; */
-/* } Colors_t; */
-
 typedef struct KeySignatures_t
 {
 	gint sbksa;		/* Space between key signature accidentals */
@@ -127,7 +120,6 @@ typedef struct Spacings_t
 	struct Barlines_t         Barlines;
 	struct Beams_t            Beams;
 	struct Clefs_t            Clefs;
-	struct Colors_t           Colors;
 	struct KeySignatures_t    KeySignatures;
         struct Measures_t         Measures;
 	struct NotesRests_t       NotesRests;

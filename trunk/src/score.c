@@ -167,17 +167,17 @@ Score_t *gscore_score_new(void)
         score->tempo = 60;
         score->tempo_text = g_string_new("");
 
-        score->Colors = g_malloc(sizeof(Colors_t));
-        if ( ! score->Colors ) {
-                printf("Memory exhausted!\n");
-                return NULL;
-        }
-        score->Colors->staves[0] = 0; /* red */
-        score->Colors->staves[1] = 0; /* green */
-        score->Colors->staves[2] = 0; /* blue */
-        score->Colors->objects[0] = 0; /* red */
-        score->Colors->objects[1] = 0; /* green */
-        score->Colors->objects[2] = 0; /* blue */
+/*         score->Colors = g_malloc(sizeof(GscoreColors_t)); */
+/*         if ( ! score->Colors ) { */
+/*                 printf("Memory exhausted!\n"); */
+/*                 return NULL; */
+/*         } */
+/*         score->Colors->staves[0] = 0; /\* red *\/ */
+/*         score->Colors->staves[1] = 0; /\* green *\/ */
+/*         score->Colors->staves[2] = 0; /\* blue *\/ */
+/*         score->Colors->objects[0] = 0; /\* red *\/ */
+/*         score->Colors->objects[1] = 0; /\* green *\/ */
+/*         score->Colors->objects[2] = 0; /\* blue *\/ */
 
         score->Identity = g_malloc(sizeof(Identity_t));
         if ( ! score->Identity ) {
