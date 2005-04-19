@@ -223,8 +223,11 @@ int main(int argc, char *argv[])
 
 	gladexml = glade_xml_new(get_file_from_data_dir("glade/gscore.glade"), NULL, NULL);
 
-	if ( ! gladexml ) 
+	if ( ! gladexml ) {
 		g_error(_("Glade file not found in %s\n"), get_file_from_data_dir("glade/"));
+                
+                return -1;
+        }
 
 
 	glade_xml_signal_autoconnect(gladexml);
