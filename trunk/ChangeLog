@@ -1,3 +1,7 @@
+2005-04-20 Toady <toady@gscore.org>
+
+	* src/score.c: cleaned and added functions to work with scores better
+	
 2005-04-19 Toady <toady@gscore.org>
 
 	* src/layout-engine.c, src/include/layout-engine.c: added

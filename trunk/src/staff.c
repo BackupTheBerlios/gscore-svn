@@ -227,115 +227,115 @@ gint staff_get_y_for_next(const Score_t *score)
 void staff_add_remove_options(void)
 {
 
-        GtkWidget *widget;
-	Score_t *score;
+/*         GtkWidget *widget; */
+/* 	Score_t *score; */
 
-        widget = glade_xml_get_widget(gladexml, "sb_extremityxbegin");
-        gtk_spin_button_set_value(GTK_SPIN_BUTTON(widget), Spacings.Measures.xpsfm);
-        widget = glade_xml_get_widget(gladexml, "sb_extremityybegin");
-	score = score_get_from_widget(widget);
+/*         widget = glade_xml_get_widget(gladexml, "sb_extremityxbegin"); */
+/*         gtk_spin_button_set_value(GTK_SPIN_BUTTON(widget), Spacings.Measures.xpsfm); */
+/*         widget = glade_xml_get_widget(gladexml, "sb_extremityybegin"); */
+/* 	score = score_get_from_widget(widget); */
 	
-        gtk_spin_button_set_value(GTK_SPIN_BUTTON(widget), staff_get_y_for_next(score));
+/*         gtk_spin_button_set_value(GTK_SPIN_BUTTON(widget), staff_get_y_for_next(score)); */
 
 }
 
 void staff_add_remove_ok(void)
 {
 
-        GtkWidget *widget;
-	Score_t *score;
-	GtkWidget *area;
+/*         GtkWidget *widget; */
+/* 	Score_t *score; */
+/* 	GtkWidget *area; */
 	
 
-        guint numberoflines;
-        guint spacebetweenlines;
-        guint extremityxbegin;
-        guint extremityybegin;
+/*         guint numberoflines; */
+/*         guint spacebetweenlines; */
+/*         guint extremityxbegin; */
+/*         guint extremityybegin; */
 
 
-        widget = glade_xml_get_widget(gladexml, "sb_numberoflines");
-        numberoflines = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(widget));
-        widget = glade_xml_get_widget(gladexml, "sb_spacebetweenlines");
-        spacebetweenlines = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(widget));
-        widget = glade_xml_get_widget(gladexml, "sb_extremityxbegin");
-        extremityxbegin = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(widget));
-        widget = glade_xml_get_widget(gladexml, "sb_extremityybegin");
-        extremityybegin = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(widget));
+/*         widget = glade_xml_get_widget(gladexml, "sb_numberoflines"); */
+/*         numberoflines = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(widget)); */
+/*         widget = glade_xml_get_widget(gladexml, "sb_spacebetweenlines"); */
+/*         spacebetweenlines = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(widget)); */
+/*         widget = glade_xml_get_widget(gladexml, "sb_extremityxbegin"); */
+/*         extremityxbegin = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(widget)); */
+/*         widget = glade_xml_get_widget(gladexml, "sb_extremityybegin"); */
+/*         extremityybegin = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(widget)); */
 
-        widget = glade_xml_get_widget(gladexml, "staff_insert_below");
-	score = score_get_from_widget(widget);
-	area = score_get_area_from_widget(widget);
+/*         widget = glade_xml_get_widget(gladexml, "staff_insert_below"); */
+/* 	score = score_get_from_widget(widget); */
+/* 	area = score_get_area_from_widget(widget); */
 
-        if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget))) {
-                        /* Add a staff below ;) */
-                        create_staff(score, numberoflines, spacebetweenlines,
-                                     extremityxbegin, extremityybegin);
-                }
+/*         if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget))) { */
+/*                         /\* Add a staff below ;) *\/ */
+/*                         create_staff(score, numberoflines, spacebetweenlines, */
+/*                                      extremityxbegin, extremityybegin); */
+/*                 } */
 
-        refresh(area);
+/*         refresh(area); */
 
 }
 
 void on_settime_ok_clicked(void)
 {
-        GtkWidget *widget;
-	Score_t *score;
-	GtkWidget *area;
+/*         GtkWidget *widget; */
+/* 	Score_t *score; */
+/* 	GtkWidget *area; */
 	
-        widget = glade_xml_get_widget(gladexml, "stime_radio_common");
-	score = score_get_from_widget(widget);
-	area = score_get_area_from_widget(widget);
+/*         widget = glade_xml_get_widget(gladexml, "stime_radio_common"); */
+/* 	score = score_get_from_widget(widget); */
+/* 	area = score_get_area_from_widget(widget); */
 	
-	if ( gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget)) ) {
-		staff_set_time_signature(score, get_staff_selected(score), TIME_SIGNATURE_COMMON_TIME, 4, 4);
+/* 	if ( gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget)) ) { */
+/* 		staff_set_time_signature(score, get_staff_selected(score), TIME_SIGNATURE_COMMON_TIME, 4, 4); */
 
-		score->staff_extremity_end_x += STANDARD_TIME_SIGNATURE_SIZE;
-/* 		staff_set_current_x(get_staff_selected(),  */
-/* 				    staff_get_current_x(get_staff_selected()) + STANDARD_TIME_SIGNATURE_SIZE + Spacings.TimeSignatures.sats); */
-/* 		staff_set_start_x(get_staff_selected(), offset); */
-	}
+/* 		score->staff_extremity_end_x += STANDARD_TIME_SIGNATURE_SIZE; */
+/* /\* 		staff_set_current_x(get_staff_selected(),  *\/ */
+/* /\* 				    staff_get_current_x(get_staff_selected()) + STANDARD_TIME_SIGNATURE_SIZE + Spacings.TimeSignatures.sats); *\/ */
+/* /\* 		staff_set_start_x(get_staff_selected(), offset); *\/ */
+/* 	} */
 
-        widget = glade_xml_get_widget(gladexml, "stime_radio_cut");
-	if ( gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget)) ) {
-		staff_set_time_signature(score, get_staff_selected(score), TIME_SIGNATURE_ALLA_BREVE, 2, 2);
-	}
+/*         widget = glade_xml_get_widget(gladexml, "stime_radio_cut"); */
+/* 	if ( gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(widget)) ) { */
+/* 		staff_set_time_signature(score, get_staff_selected(score), TIME_SIGNATURE_ALLA_BREVE, 2, 2); */
+/* 	} */
 
-	refresh(area);
+/* 	refresh(area); */
 
 }
 
 gboolean staff_update_statusbar(GladeXML *xml)
 {
-        GtkWidget *widget;
-	Score_t *score;
+/*         GtkWidget *widget; */
+/* 	Score_t *score; */
 
-        guint cid;              /* Context ID */
+/*         guint cid;              /\* Context ID *\/ */
 
-        widget = glade_xml_get_widget(xml, "statusbar");
-	score = score_get_from_widget(widget);
+/*         widget = glade_xml_get_widget(xml, "statusbar"); */
+/* 	score = score_get_from_widget(widget); */
 
-        cid = gtk_statusbar_get_context_id(GTK_STATUSBAR(widget), "staff");
+/*         cid = gtk_statusbar_get_context_id(GTK_STATUSBAR(widget), "staff"); */
 
-/*         printf("staff_selected= %d\n", get_staff_selected()); */
+/* /\*         printf("staff_selected= %d\n", get_staff_selected()); *\/ */
 
-        cid = gtk_statusbar_push(GTK_STATUSBAR(widget), cid, g_strdup_printf("Staff: %d", get_staff_selected(score)));
+/*         cid = gtk_statusbar_push(GTK_STATUSBAR(widget), cid, g_strdup_printf("Staff: %d", get_staff_selected(score))); */
 
 
-	return TRUE;
+/* 	return TRUE; */
 }
 
 gboolean staff_set_start_x(Score_t *score, gint staff, gint start_x)
 {
-        Staff_t *staff_data;
+/*         Staff_t *staff_data; */
 
-        staff_data = g_list_nth_data(score->Staff_list, staff);
+/*         staff_data = g_list_nth_data(score->Staff_list, staff); */
         
-        if ( staff_data ) {
-                staff_data->start_x = start_x;
-		return TRUE;
-	}
+/*         if ( staff_data ) { */
+/*                 staff_data->start_x = start_x; */
+/* 		return TRUE; */
+/* 	} */
 
-	return FALSE;
+/* 	return FALSE; */
 }
 
 /* gint staff_get_start_x(Staff_t *staff) */
@@ -353,16 +353,16 @@ gboolean staff_set_start_x(Score_t *score, gint staff, gint start_x)
 
 gboolean staff_set_key(Score_t *score, gint staff, gint key)
 {
-        Staff_t *staff_data;
+/*         Staff_t *staff_data; */
 
-        staff_data = (Staff_t *)g_list_nth_data(score->Staff_list, staff);
+/*         staff_data = (Staff_t *)g_list_nth_data(score->Staff_list, staff); */
         
-        if ( staff_data ) {
-                staff_data->key = key;
-		return TRUE;
-	}
+/*         if ( staff_data ) { */
+/*                 staff_data->key = key; */
+/* 		return TRUE; */
+/* 	} */
 
-	return FALSE;
+/* 	return FALSE; */
 }
 
 extern void 
@@ -411,68 +411,68 @@ staff_set_key_callback(GtkButton *button, gpointer user_data)
 
 gint staff_get_key(const Score_t *score, gint staff)
 {
-        Staff_t *staff_data;
+/*         Staff_t *staff_data; */
 
-        staff_data = g_list_nth_data(score->Staff_list, staff);
+/*         staff_data = g_list_nth_data(score->Staff_list, staff); */
         
-        if (staff_data) {
-                return staff_data->key;
-        }
+/*         if (staff_data) { */
+/*                 return staff_data->key; */
+/*         } */
 
-        return -1;
+/*         return -1; */
 }
 
 gboolean staff_set_current_x(Score_t *score, gint staff, gint current_x)
 {
-        Staff_t *staff_data;
+/*         Staff_t *staff_data; */
 
-        staff_data = g_list_nth_data(score->Staff_list, staff);
+/*         staff_data = g_list_nth_data(score->Staff_list, staff); */
         
-        if (staff_data) {
-                staff_data->current_x = current_x;
-		return TRUE;
-	}
+/*         if (staff_data) { */
+/*                 staff_data->current_x = current_x; */
+/* 		return TRUE; */
+/* 	} */
 	
-	return FALSE;
+/* 	return FALSE; */
 }
 
 gint staff_get_current_x(const Score_t *score, gint staff)
 {
-        Staff_t *staff_data;
+/*         Staff_t *staff_data; */
 
-        staff_data = g_list_nth_data(score->Staff_list, staff);
+/*         staff_data = g_list_nth_data(score->Staff_list, staff); */
         
-        if (staff_data)
-                return staff_data->current_x;
+/*         if (staff_data) */
+/*                 return staff_data->current_x; */
 
-        return -1;
+/*         return -1; */
 }
 
 gdouble get_staff_extremity_begin_x(const Score_t *score, gint staff)
 {
-        Staff_t *staff_data;
+/*         Staff_t *staff_data; */
 
-        staff_data = g_list_nth_data(score->Staff_list, staff);
+/*         staff_data = g_list_nth_data(score->Staff_list, staff); */
 
-	if(staff_data)
-                return staff_data->extremity_begin_x;
+/* 	if(staff_data) */
+/*                 return staff_data->extremity_begin_x; */
 
         
-        return 0;
+/*         return 0; */
 
 }
 
 gdouble get_staff_extremity_begin_y(const Score_t *score, gint staff)
 {
-        Staff_t *staff_data;
+/*         Staff_t *staff_data; */
 
-        staff_data = g_list_nth_data(score->Staff_list, staff);
+/*         staff_data = g_list_nth_data(score->Staff_list, staff); */
 
-	if(staff_data)
-	  return staff_data->extremity_begin_y;
+/* 	if(staff_data) */
+/* 	  return staff_data->extremity_begin_y; */
 
         
-        return 0;
+/*         return 0; */
 
 }
 
@@ -480,16 +480,16 @@ gdouble get_staff_extremity_begin_y(const Score_t *score, gint staff)
 gboolean staff_set_key_signature(Score_t *score, gint staff, gint key_signature)
 {
 
-        Staff_t *staff_data;
+/*         Staff_t *staff_data; */
         
-        staff_data = g_list_nth_data(score->Staff_list, staff);
+/*         staff_data = g_list_nth_data(score->Staff_list, staff); */
         
-        if (staff_data) {
-                staff_data->key_signature = key_signature;
-                return TRUE;
-        }
+/*         if (staff_data) { */
+/*                 staff_data->key_signature = key_signature; */
+/*                 return TRUE; */
+/*         } */
 
-	return FALSE;
+/* 	return FALSE; */
 
 }
 
@@ -497,32 +497,32 @@ gboolean staff_set_time_signature(Score_t *score, gint staff,
 				  gint signature_type, gint number_of_beats,
 				  gint beat_duration)
 {
-        Staff_t *staff_data;
+/*         Staff_t *staff_data; */
         
-        staff_data = g_list_nth_data(score->Staff_list, staff);
+/*         staff_data = g_list_nth_data(score->Staff_list, staff); */
 
-        if (staff_data) {
-                staff_data->time_signature[0] = signature_type;
-                staff_data->time_signature[1] = number_of_beats;
-                staff_data->time_signature[2] = beat_duration;
-                return TRUE;
-        }
+/*         if (staff_data) { */
+/*                 staff_data->time_signature[0] = signature_type; */
+/*                 staff_data->time_signature[1] = number_of_beats; */
+/*                 staff_data->time_signature[2] = beat_duration; */
+/*                 return TRUE; */
+/*         } */
 
-        return FALSE;
+/*         return FALSE; */
 }
 
 gboolean staff_set_midi_instrument(Score_t *score, gint staff, gint midi_instrument)
 {
-	Staff_t *staff_data;
+/* 	Staff_t *staff_data; */
 	
-	staff_data = g_list_nth_data(score->Staff_list, staff);
+/* 	staff_data = g_list_nth_data(score->Staff_list, staff); */
 
-	if (staff_data) {
-                staff_data->midi_instrument = midi_instrument;
-                return TRUE;
-        }
+/* 	if (staff_data) { */
+/*                 staff_data->midi_instrument = midi_instrument; */
+/*                 return TRUE; */
+/*         } */
 
-        return FALSE;
+/*         return FALSE; */
 }
 
 
@@ -535,17 +535,17 @@ gboolean staff_set_midi_instrument(Score_t *score, gint staff, gint midi_instrum
 
 void ValueOfRange (GtkAdjustment *adj, gpointer user_data);
 
-static GtkWidget *get_toplevel(GtkWidget *widget)
-{
+/* static GtkWidget *get_toplevel(GtkWidget *widget) */
+/* { */
   
-        GladeXML *xml = glade_get_widget_tree(widget);
+/*         GladeXML *xml = glade_get_widget_tree(widget); */
 
-        if(xml == gladexml) {
-                return glade_xml_get_widget(xml, "main_window");
-        } else {
-                return  glade_xml_get_widget(xml, "score_window");
-        }
-}
+/*         if(xml == gladexml) { */
+/*                 return glade_xml_get_widget(xml, "main_window"); */
+/*         } else { */
+/*                 return  glade_xml_get_widget(xml, "score_window"); */
+/*         } */
+/* } */
 
 void on_key_signature_activate(GtkWidget *widget)
 {
@@ -1546,77 +1546,77 @@ extern
 void update_key_signature(GtkButton *widget, gpointer user_data)
 {
 
-        Score_t *score;
-        Staff_t *staff_data;
-	GtkWidget *area;
+/*         Score_t *score; */
+/*         Staff_t *staff_data; */
+/* 	GtkWidget *area; */
 
-        score = score_get_from_widget(widget);
-        area  = score_get_area_from_widget(widget);
+/*         score = score_get_from_widget(widget); */
+/*         area  = score_get_area_from_widget(widget); */
 
-	gint offset = 0;
+/* 	gint offset = 0; */
 
 
-        staff_data = g_list_nth_data(score->Staff_list, get_staff_selected(score));
+/*         staff_data = g_list_nth_data(score->Staff_list, get_staff_selected(score)); */
 
-        if ( ! staff_data ) return;
+/*         if ( ! staff_data ) return; */
 
-	staff_data->key_signature = key_signature;
+/* 	staff_data->key_signature = key_signature; */
 
-	switch(key_signature) {
-	case KEY_SIGNATURE_TREBLE_EMPTY:
-		/* We don't need to update the spacing here :) */
-		break;
-	case KEY_SIGNATURE_TREBLE_A_SHARP:
-		offset += (5 * Spacings.KeySignatures.sbksa) + Spacings.KeySignatures.saks;
-		break;
-	case KEY_SIGNATURE_TREBLE_B_SHARP:
-		offset += (7 * Spacings.KeySignatures.sbksa) + Spacings.KeySignatures.saks;
-		break;
-	case KEY_SIGNATURE_TREBLE_C_SHARP:
-		offset += (2 * Spacings.KeySignatures.sbksa) + Spacings.KeySignatures.saks;
-		break;
-	case KEY_SIGNATURE_TREBLE_D_SHARP:
-		offset += (6 * Spacings.KeySignatures.sbksa) + Spacings.KeySignatures.saks;
-		break;
-	case KEY_SIGNATURE_TREBLE_E_SHARP:
-		offset += (4 * Spacings.KeySignatures.sbksa) + Spacings.KeySignatures.saks;
-		break;
-	case KEY_SIGNATURE_TREBLE_F_SHARP:
-		offset += (1 * Spacings.KeySignatures.sbksa) + Spacings.KeySignatures.saks;
-		break;
-	case KEY_SIGNATURE_TREBLE_G_SHARP:
-		offset += (3 * Spacings.KeySignatures.sbksa) + Spacings.KeySignatures.saks;
-		break;
-	case KEY_SIGNATURE_TREBLE_A_FLAT:
-		offset += (3 * Spacings.KeySignatures.sbksa) + Spacings.KeySignatures.saks;
-		break;
-	case KEY_SIGNATURE_TREBLE_B_FLAT:
-		offset += (1 * Spacings.KeySignatures.sbksa) + Spacings.KeySignatures.saks;
-		break;
-	case KEY_SIGNATURE_TREBLE_C_FLAT:
-		offset += (6 * Spacings.KeySignatures.sbksa) + Spacings.KeySignatures.saks;
-		break;
-	case KEY_SIGNATURE_TREBLE_D_FLAT:
-		offset += (4 * Spacings.KeySignatures.sbksa) + Spacings.KeySignatures.saks;
-		break;
-	case KEY_SIGNATURE_TREBLE_E_FLAT:
-		offset += (2 * Spacings.KeySignatures.sbksa) + Spacings.KeySignatures.saks;
-		break;
-	case KEY_SIGNATURE_TREBLE_F_FLAT:
-		offset += (7 * Spacings.KeySignatures.sbksa) + Spacings.KeySignatures.saks;
-		break;
-	case KEY_SIGNATURE_TREBLE_G_FLAT:
-		offset += (5 * Spacings.KeySignatures.sbksa) + Spacings.KeySignatures.saks;
-		break;
-	}
+/* 	switch(key_signature) { */
+/* 	case KEY_SIGNATURE_TREBLE_EMPTY: */
+/* 		/\* We don't need to update the spacing here :) *\/ */
+/* 		break; */
+/* 	case KEY_SIGNATURE_TREBLE_A_SHARP: */
+/* 		offset += (5 * Spacings.KeySignatures.sbksa) + Spacings.KeySignatures.saks; */
+/* 		break; */
+/* 	case KEY_SIGNATURE_TREBLE_B_SHARP: */
+/* 		offset += (7 * Spacings.KeySignatures.sbksa) + Spacings.KeySignatures.saks; */
+/* 		break; */
+/* 	case KEY_SIGNATURE_TREBLE_C_SHARP: */
+/* 		offset += (2 * Spacings.KeySignatures.sbksa) + Spacings.KeySignatures.saks; */
+/* 		break; */
+/* 	case KEY_SIGNATURE_TREBLE_D_SHARP: */
+/* 		offset += (6 * Spacings.KeySignatures.sbksa) + Spacings.KeySignatures.saks; */
+/* 		break; */
+/* 	case KEY_SIGNATURE_TREBLE_E_SHARP: */
+/* 		offset += (4 * Spacings.KeySignatures.sbksa) + Spacings.KeySignatures.saks; */
+/* 		break; */
+/* 	case KEY_SIGNATURE_TREBLE_F_SHARP: */
+/* 		offset += (1 * Spacings.KeySignatures.sbksa) + Spacings.KeySignatures.saks; */
+/* 		break; */
+/* 	case KEY_SIGNATURE_TREBLE_G_SHARP: */
+/* 		offset += (3 * Spacings.KeySignatures.sbksa) + Spacings.KeySignatures.saks; */
+/* 		break; */
+/* 	case KEY_SIGNATURE_TREBLE_A_FLAT: */
+/* 		offset += (3 * Spacings.KeySignatures.sbksa) + Spacings.KeySignatures.saks; */
+/* 		break; */
+/* 	case KEY_SIGNATURE_TREBLE_B_FLAT: */
+/* 		offset += (1 * Spacings.KeySignatures.sbksa) + Spacings.KeySignatures.saks; */
+/* 		break; */
+/* 	case KEY_SIGNATURE_TREBLE_C_FLAT: */
+/* 		offset += (6 * Spacings.KeySignatures.sbksa) + Spacings.KeySignatures.saks; */
+/* 		break; */
+/* 	case KEY_SIGNATURE_TREBLE_D_FLAT: */
+/* 		offset += (4 * Spacings.KeySignatures.sbksa) + Spacings.KeySignatures.saks; */
+/* 		break; */
+/* 	case KEY_SIGNATURE_TREBLE_E_FLAT: */
+/* 		offset += (2 * Spacings.KeySignatures.sbksa) + Spacings.KeySignatures.saks; */
+/* 		break; */
+/* 	case KEY_SIGNATURE_TREBLE_F_FLAT: */
+/* 		offset += (7 * Spacings.KeySignatures.sbksa) + Spacings.KeySignatures.saks; */
+/* 		break; */
+/* 	case KEY_SIGNATURE_TREBLE_G_FLAT: */
+/* 		offset += (5 * Spacings.KeySignatures.sbksa) + Spacings.KeySignatures.saks; */
+/* 		break; */
+/* 	} */
 
-	score->staff_extremity_end_x += offset;
-        staff_set_current_x(score, get_staff_selected(score),
-			    staff_get_current_x(score, get_staff_selected(score)) + offset);
-	staff_set_start_x(score, get_staff_selected(score), offset);
+/* 	score->staff_extremity_end_x += offset; */
+/*         staff_set_current_x(score, get_staff_selected(score), */
+/* 			    staff_get_current_x(score, get_staff_selected(score)) + offset); */
+/* 	staff_set_start_x(score, get_staff_selected(score), offset); */
 
-	/* TODO: find a way to refresh ALL drawing areas displaying score */
-	refresh(area);
+/* 	/\* TODO: find a way to refresh ALL drawing areas displaying score *\/ */
+/* 	refresh(area); */
 }
 
 extern

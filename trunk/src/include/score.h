@@ -26,7 +26,7 @@
 
 #include "key_cursor.h"
 
-Score_t *gscore_score_new(void);
+Score_t *score_new(void);
 
 gint score_add_tab (gpointer callback_data, guint callback_action,
                     GtkWidget * widget);

@@ -179,7 +179,7 @@ gboolean load_plugin_from_command_line(gchar *filename)
 
         plugin->filter->import(&pi, filename, NULL);
 
-	score_create_window(pi);
+	score_window_new(pi);
 
         return TRUE;
 
@@ -247,7 +247,7 @@ int main(int argc, char *argv[])
         if (argc > 1) {
                 load_plugin_from_command_line(argv[1]);
 	} else {
-                score_create_window(NULL);
+                score_window_new(NULL);
 	}
 
 #ifdef DEBUG

@@ -394,40 +394,40 @@ gdouble get_x_pos(gint staff, gint x)
 extern gboolean
 position_set_adjustment(GtkWidget *widget, KeyCursor_t *cursor)
 {
-        GtkAdjustment *adj = NULL;
-        GtkScrolledWindow *sw = NULL;
+/*         GtkAdjustment *adj = NULL; */
+/*         GtkScrolledWindow *sw = NULL; */
 
-        sw = score_get_scrolled_window_from_widget(widget);
-        adj = gtk_scrolled_window_get_hadjustment(GTK_SCROLLED_WINDOW(sw));
+/*         sw = score_get_scrolled_window_from_widget(widget); */
+/*         adj = gtk_scrolled_window_get_hadjustment(GTK_SCROLLED_WINDOW(sw)); */
 
-        if ( ! GTK_IS_ADJUSTMENT(adj) )
-                return FALSE;
+/*         if ( ! GTK_IS_ADJUSTMENT(adj) ) */
+/*                 return FALSE; */
 
-        gtk_adjustment_set_value(adj, cursor->x_returned - 300);
+/*         gtk_adjustment_set_value(adj, cursor->x_returned - 300); */
 
-        gtk_scrolled_window_set_hadjustment(GTK_SCROLLED_WINDOW(sw), adj);
+/*         gtk_scrolled_window_set_hadjustment(GTK_SCROLLED_WINDOW(sw), adj); */
 
-        return TRUE;
+/*         return TRUE; */
 
 }
 
 extern gboolean
 position_set_adjustment_x(GtkWidget *widget, gdouble x)
 {
-        GtkAdjustment *adj = NULL;
-        GtkScrolledWindow *sw = NULL;
+/*         GtkAdjustment *adj = NULL; */
+/*         GtkScrolledWindow *sw = NULL; */
 
-        sw = score_get_scrolled_window_from_widget(widget);
-        adj = gtk_scrolled_window_get_hadjustment(GTK_SCROLLED_WINDOW(sw));
+/*         sw = score_get_scrolled_window_from_widget(widget); */
+/*         adj = gtk_scrolled_window_get_hadjustment(GTK_SCROLLED_WINDOW(sw)); */
 
-        if ( ! GTK_IS_ADJUSTMENT(adj) )
-                return FALSE;
+/*         if ( ! GTK_IS_ADJUSTMENT(adj) ) */
+/*                 return FALSE; */
 
-        gtk_adjustment_set_value(adj, x);
+/*         gtk_adjustment_set_value(adj, x); */
 
-        gtk_scrolled_window_set_hadjustment(GTK_SCROLLED_WINDOW(sw), adj);
+/*         gtk_scrolled_window_set_hadjustment(GTK_SCROLLED_WINDOW(sw), adj); */
 
-        return TRUE;
+/*         return TRUE; */
 
 }
 

@@ -70,7 +70,7 @@ void layout_paint(GtkWidget *widget,
         /***************
          * Draw Staves *
          ***************/
-        draw_staff(cr, 5, 8, 5, 50, 300, 0);
+        draw_staff(cr, 5, 8, 20, 50, 300, 1);
 
 
         cairo_set_rgb_color (cr, 0, 0, 0);

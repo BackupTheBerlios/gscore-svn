@@ -37,58 +37,58 @@ extern void
 beam_notes_selected(GtkButton *widget, gpointer user_data)
 {
 
-	Staff_t *staff_data;
-	Score_t *score = NULL;
-	GtkWidget *area;
+/* 	Staff_t *staff_data; */
+/* 	Score_t *score = NULL; */
+/* 	GtkWidget *area; */
 	
-	GList *listrunner = NULL;
-	GList *listrunner_next = NULL;
+/* 	GList *listrunner = NULL; */
+/* 	GList *listrunner_next = NULL; */
 
-	score = score_get_from_widget(GTK_WIDGET(widget));
+/* 	score = score_get_from_widget(GTK_WIDGET(widget)); */
         
-        if ( ! score ) g_warning("No Score!");
+/*         if ( ! score ) g_warning("No Score!"); */
 
-	area = score_get_area_from_widget(GTK_WIDGET(widget));
+/* 	area = score_get_area_from_widget(GTK_WIDGET(widget)); */
 
-	staff_data = (Staff_t *) g_list_nth_data(score->Staff_list,
-						 get_staff_selected(score));
+/* 	staff_data = (Staff_t *) g_list_nth_data(score->Staff_list, */
+/* 						 get_staff_selected(score)); */
 
-	listrunner = g_list_first(staff_data->Object_list);
+/* 	listrunner = g_list_first(staff_data->Object_list); */
 
-	listrunner_next = g_list_next(listrunner);
+/* 	listrunner_next = g_list_next(listrunner); */
 
-	while (listrunner) {
-                Object_t *note;
-                Object_t *next_note = NULL;
+/* 	while (listrunner) { */
+/*                 Object_t *note; */
+/*                 Object_t *next_note = NULL; */
 
-                note = (Object_t *)listrunner->data;
+/*                 note = (Object_t *)listrunner->data; */
 
-                if (listrunner_next)
-                        next_note = (Object_t *)listrunner_next->data;
+/*                 if (listrunner_next) */
+/*                         next_note = (Object_t *)listrunner_next->data; */
 
-                if (note->is_selected) {
-                        note->nature |= O_BEAMED;
-                        if ( next_note ) {
-                                if (( ! next_note->is_selected ) || ( ! listrunner_next)) {
-                                        note->nature |= O_LAST_BEAMED;
-                                }
-                        } else {
-                                if (!listrunner_next)
-                                        note->nature |= O_LAST_BEAMED;
-                        }
-                }
+/*                 if (note->is_selected) { */
+/*                         note->nature |= O_BEAMED; */
+/*                         if ( next_note ) { */
+/*                                 if (( ! next_note->is_selected ) || ( ! listrunner_next)) { */
+/*                                         note->nature |= O_LAST_BEAMED; */
+/*                                 } */
+/*                         } else { */
+/*                                 if (!listrunner_next) */
+/*                                         note->nature |= O_LAST_BEAMED; */
+/*                         } */
+/*                 } */
 
-                listrunner = g_list_next(listrunner);
+/*                 listrunner = g_list_next(listrunner); */
 
-                if ((listrunner_next) && (listrunner))
-                        listrunner_next = g_list_next(listrunner);
+/*                 if ((listrunner_next) && (listrunner)) */
+/*                         listrunner_next = g_list_next(listrunner); */
 
-        }
+/*         } */
 
-	g_list_free(listrunner);
-	g_list_free(listrunner_next);
+/* 	g_list_free(listrunner); */
+/* 	g_list_free(listrunner_next); */
 
-	refresh(area);
+/* 	refresh(area); */
 
 }
 

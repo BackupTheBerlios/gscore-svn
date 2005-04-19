@@ -142,330 +142,330 @@ void set_spacings_init(void)
 extern 
 void set_values_spacings_spinbuttons(void)
 {
-	GtkWidget *widget;
-	GtkWidget *display;
+/* 	GtkWidget *widget; */
+/* 	GtkWidget *display; */
 
-	display = glade_xml_get_widget(gladexml, "spcg_rests");
-	widget = glade_xml_get_widget(gladexml, "spcg_nr_nlwr");
-	gtk_widget_set_sensitive(display, !gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget)));
+/* 	display = glade_xml_get_widget(gladexml, "spcg_rests"); */
+/* 	widget = glade_xml_get_widget(gladexml, "spcg_nr_nlwr"); */
+/* 	gtk_widget_set_sensitive(display, !gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget))); */
 
-	/* Barlines */
-	widget = glade_xml_get_widget(gladexml, "spcg_bl_hlt");
-	gtk_spin_button_set_value(GTK_SPIN_BUTTON(widget), Spacings.Barlines.hlt);
-	widget = glade_xml_get_widget(gladexml, "spcg_bl_tlt");
-	gtk_spin_button_set_value(GTK_SPIN_BUTTON(widget), Spacings.Barlines.tlt);
-	widget = glade_xml_get_widget(gladexml, "spcg_bl_sbhatl");
-	gtk_spin_button_set_value(GTK_SPIN_BUTTON(widget), Spacings.Barlines.sbhatl);
-	widget = glade_xml_get_widget(gladexml, "spcg_bl_swdb");
-	gtk_spin_button_set_value(GTK_SPIN_BUTTON(widget), Spacings.Barlines.swdb);
-	widget = glade_xml_get_widget(gladexml, "spcg_bl_sblad");
-	gtk_spin_button_set_value(GTK_SPIN_BUTTON(widget), Spacings.Barlines.sblad);
-	widget = glade_xml_get_widget(gladexml, "spcg_bl_sbd");
-	gtk_spin_button_set_value(GTK_SPIN_BUTTON(widget), Spacings.Barlines.sbd);
-	widget = glade_xml_get_widget(gladexml, "spcg_bl_sab");
-	gtk_spin_button_set_value(GTK_SPIN_BUTTON(widget), Spacings.Barlines.sab);
+/* 	/\* Barlines *\/ */
+/* 	widget = glade_xml_get_widget(gladexml, "spcg_bl_hlt"); */
+/* 	gtk_spin_button_set_value(GTK_SPIN_BUTTON(widget), Spacings.Barlines.hlt); */
+/* 	widget = glade_xml_get_widget(gladexml, "spcg_bl_tlt"); */
+/* 	gtk_spin_button_set_value(GTK_SPIN_BUTTON(widget), Spacings.Barlines.tlt); */
+/* 	widget = glade_xml_get_widget(gladexml, "spcg_bl_sbhatl"); */
+/* 	gtk_spin_button_set_value(GTK_SPIN_BUTTON(widget), Spacings.Barlines.sbhatl); */
+/* 	widget = glade_xml_get_widget(gladexml, "spcg_bl_swdb"); */
+/* 	gtk_spin_button_set_value(GTK_SPIN_BUTTON(widget), Spacings.Barlines.swdb); */
+/* 	widget = glade_xml_get_widget(gladexml, "spcg_bl_sblad"); */
+/* 	gtk_spin_button_set_value(GTK_SPIN_BUTTON(widget), Spacings.Barlines.sblad); */
+/* 	widget = glade_xml_get_widget(gladexml, "spcg_bl_sbd"); */
+/* 	gtk_spin_button_set_value(GTK_SPIN_BUTTON(widget), Spacings.Barlines.sbd); */
+/* 	widget = glade_xml_get_widget(gladexml, "spcg_bl_sab"); */
+/* 	gtk_spin_button_set_value(GTK_SPIN_BUTTON(widget), Spacings.Barlines.sab); */
 
-	/* Clefs */
-	widget = glade_xml_get_widget(gladexml, "spcg_cl_sb");
-	gtk_spin_button_set_value(GTK_SPIN_BUTTON(widget), Spacings.Clefs.sb);
-	widget = glade_xml_get_widget(gladexml, "spcg_cl_sa");
-	gtk_spin_button_set_value(GTK_SPIN_BUTTON(widget), Spacings.Clefs.sa);
+/* 	/\* Clefs *\/ */
+/* 	widget = glade_xml_get_widget(gladexml, "spcg_cl_sb"); */
+/* 	gtk_spin_button_set_value(GTK_SPIN_BUTTON(widget), Spacings.Clefs.sb); */
+/* 	widget = glade_xml_get_widget(gladexml, "spcg_cl_sa"); */
+/* 	gtk_spin_button_set_value(GTK_SPIN_BUTTON(widget), Spacings.Clefs.sa); */
 
-	/* Key Signatures */
-	widget = glade_xml_get_widget(gladexml, "spcg_ks_sbksa");
-	gtk_spin_button_set_value(GTK_SPIN_BUTTON(widget), Spacings.KeySignatures.sbksa);
-	widget = glade_xml_get_widget(gladexml, "spcg_ks_saks");
-	gtk_spin_button_set_value(GTK_SPIN_BUTTON(widget), Spacings.KeySignatures.saks);
+/* 	/\* Key Signatures *\/ */
+/* 	widget = glade_xml_get_widget(gladexml, "spcg_ks_sbksa"); */
+/* 	gtk_spin_button_set_value(GTK_SPIN_BUTTON(widget), Spacings.KeySignatures.sbksa); */
+/* 	widget = glade_xml_get_widget(gladexml, "spcg_ks_saks"); */
+/* 	gtk_spin_button_set_value(GTK_SPIN_BUTTON(widget), Spacings.KeySignatures.saks); */
 
-        /* Measures */
-	widget = glade_xml_get_widget(gladexml, "spcg_m_xpsfm");
-	gtk_spin_button_set_value(GTK_SPIN_BUTTON(widget), Spacings.Measures.xpsfm);
-	widget = glade_xml_get_widget(gladexml, "spcg_m_ypsfm");
-	gtk_spin_button_set_value(GTK_SPIN_BUTTON(widget), Spacings.Measures.ypsfm);
-	widget = glade_xml_get_widget(gladexml, "spcg_m_slbm");
-	gtk_spin_button_set_value(GTK_SPIN_BUTTON(widget), Spacings.Measures.slbm);
+/*         /\* Measures *\/ */
+/* 	widget = glade_xml_get_widget(gladexml, "spcg_m_xpsfm"); */
+/* 	gtk_spin_button_set_value(GTK_SPIN_BUTTON(widget), Spacings.Measures.xpsfm); */
+/* 	widget = glade_xml_get_widget(gladexml, "spcg_m_ypsfm"); */
+/* 	gtk_spin_button_set_value(GTK_SPIN_BUTTON(widget), Spacings.Measures.ypsfm); */
+/* 	widget = glade_xml_get_widget(gladexml, "spcg_m_slbm"); */
+/* 	gtk_spin_button_set_value(GTK_SPIN_BUTTON(widget), Spacings.Measures.slbm); */
 
-	/* Notes and Rests */
-	widget = glade_xml_get_widget(gladexml, "spcg_nr_doublewhole");
-	gtk_spin_button_set_value(GTK_SPIN_BUTTON(widget), Spacings.NotesRests.sa_doublewhole);
-	widget = glade_xml_get_widget(gladexml, "spcg_nr_doublewholerest");
-	gtk_spin_button_set_value(GTK_SPIN_BUTTON(widget), Spacings.NotesRests.sa_doublewholerest);
-	widget = glade_xml_get_widget(gladexml, "spcg_nr_whole");
-	gtk_spin_button_set_value(GTK_SPIN_BUTTON(widget), Spacings.NotesRests.sa_whole);
-	widget = glade_xml_get_widget(gladexml, "spcg_nr_wholerest");
-	gtk_spin_button_set_value(GTK_SPIN_BUTTON(widget), Spacings.NotesRests.sa_wholerest);
-	widget = glade_xml_get_widget(gladexml, "spcg_nr_half");
-	gtk_spin_button_set_value(GTK_SPIN_BUTTON(widget), Spacings.NotesRests.sa_half);
-	widget = glade_xml_get_widget(gladexml, "spcg_nr_halfrest");
-	gtk_spin_button_set_value(GTK_SPIN_BUTTON(widget), Spacings.NotesRests.sa_halfrest);
-	widget = glade_xml_get_widget(gladexml, "spcg_nr_quarter");
-	gtk_spin_button_set_value(GTK_SPIN_BUTTON(widget), Spacings.NotesRests.sa_quarter);
-	widget = glade_xml_get_widget(gladexml, "spcg_nr_quarterrest");
-	gtk_spin_button_set_value(GTK_SPIN_BUTTON(widget), Spacings.NotesRests.sa_quarterrest);
-	widget = glade_xml_get_widget(gladexml, "spcg_nr_eighth");
-	gtk_spin_button_set_value(GTK_SPIN_BUTTON(widget), Spacings.NotesRests.sa_eighth);
-	widget = glade_xml_get_widget(gladexml, "spcg_nr_eighthrest");
-	gtk_spin_button_set_value(GTK_SPIN_BUTTON(widget), Spacings.NotesRests.sa_eighthrest);
-	widget = glade_xml_get_widget(gladexml, "spcg_nr_sixteenth");
-	gtk_spin_button_set_value(GTK_SPIN_BUTTON(widget), Spacings.NotesRests.sa_sixteenth);
-	widget = glade_xml_get_widget(gladexml, "spcg_nr_sixteenthrest");
-	gtk_spin_button_set_value(GTK_SPIN_BUTTON(widget), Spacings.NotesRests.sa_sixteenthrest);
-	widget = glade_xml_get_widget(gladexml, "spcg_nr_thirtysecond");
-	gtk_spin_button_set_value(GTK_SPIN_BUTTON(widget), Spacings.NotesRests.sa_thirtysecond);
-	widget = glade_xml_get_widget(gladexml, "spcg_nr_thirtysecondrest");
-	gtk_spin_button_set_value(GTK_SPIN_BUTTON(widget), Spacings.NotesRests.sa_thirtysecondrest);
-	widget = glade_xml_get_widget(gladexml, "spcg_nr_sixtyfourth");
-	gtk_spin_button_set_value(GTK_SPIN_BUTTON(widget), Spacings.NotesRests.sa_sixtyfourth);
-	widget = glade_xml_get_widget(gladexml, "spcg_nr_sixtyfourthrest");
-	gtk_spin_button_set_value(GTK_SPIN_BUTTON(widget), Spacings.NotesRests.sa_sixtyfourthrest);
+/* 	/\* Notes and Rests *\/ */
+/* 	widget = glade_xml_get_widget(gladexml, "spcg_nr_doublewhole"); */
+/* 	gtk_spin_button_set_value(GTK_SPIN_BUTTON(widget), Spacings.NotesRests.sa_doublewhole); */
+/* 	widget = glade_xml_get_widget(gladexml, "spcg_nr_doublewholerest"); */
+/* 	gtk_spin_button_set_value(GTK_SPIN_BUTTON(widget), Spacings.NotesRests.sa_doublewholerest); */
+/* 	widget = glade_xml_get_widget(gladexml, "spcg_nr_whole"); */
+/* 	gtk_spin_button_set_value(GTK_SPIN_BUTTON(widget), Spacings.NotesRests.sa_whole); */
+/* 	widget = glade_xml_get_widget(gladexml, "spcg_nr_wholerest"); */
+/* 	gtk_spin_button_set_value(GTK_SPIN_BUTTON(widget), Spacings.NotesRests.sa_wholerest); */
+/* 	widget = glade_xml_get_widget(gladexml, "spcg_nr_half"); */
+/* 	gtk_spin_button_set_value(GTK_SPIN_BUTTON(widget), Spacings.NotesRests.sa_half); */
+/* 	widget = glade_xml_get_widget(gladexml, "spcg_nr_halfrest"); */
+/* 	gtk_spin_button_set_value(GTK_SPIN_BUTTON(widget), Spacings.NotesRests.sa_halfrest); */
+/* 	widget = glade_xml_get_widget(gladexml, "spcg_nr_quarter"); */
+/* 	gtk_spin_button_set_value(GTK_SPIN_BUTTON(widget), Spacings.NotesRests.sa_quarter); */
+/* 	widget = glade_xml_get_widget(gladexml, "spcg_nr_quarterrest"); */
+/* 	gtk_spin_button_set_value(GTK_SPIN_BUTTON(widget), Spacings.NotesRests.sa_quarterrest); */
+/* 	widget = glade_xml_get_widget(gladexml, "spcg_nr_eighth"); */
+/* 	gtk_spin_button_set_value(GTK_SPIN_BUTTON(widget), Spacings.NotesRests.sa_eighth); */
+/* 	widget = glade_xml_get_widget(gladexml, "spcg_nr_eighthrest"); */
+/* 	gtk_spin_button_set_value(GTK_SPIN_BUTTON(widget), Spacings.NotesRests.sa_eighthrest); */
+/* 	widget = glade_xml_get_widget(gladexml, "spcg_nr_sixteenth"); */
+/* 	gtk_spin_button_set_value(GTK_SPIN_BUTTON(widget), Spacings.NotesRests.sa_sixteenth); */
+/* 	widget = glade_xml_get_widget(gladexml, "spcg_nr_sixteenthrest"); */
+/* 	gtk_spin_button_set_value(GTK_SPIN_BUTTON(widget), Spacings.NotesRests.sa_sixteenthrest); */
+/* 	widget = glade_xml_get_widget(gladexml, "spcg_nr_thirtysecond"); */
+/* 	gtk_spin_button_set_value(GTK_SPIN_BUTTON(widget), Spacings.NotesRests.sa_thirtysecond); */
+/* 	widget = glade_xml_get_widget(gladexml, "spcg_nr_thirtysecondrest"); */
+/* 	gtk_spin_button_set_value(GTK_SPIN_BUTTON(widget), Spacings.NotesRests.sa_thirtysecondrest); */
+/* 	widget = glade_xml_get_widget(gladexml, "spcg_nr_sixtyfourth"); */
+/* 	gtk_spin_button_set_value(GTK_SPIN_BUTTON(widget), Spacings.NotesRests.sa_sixtyfourth); */
+/* 	widget = glade_xml_get_widget(gladexml, "spcg_nr_sixtyfourthrest"); */
+/* 	gtk_spin_button_set_value(GTK_SPIN_BUTTON(widget), Spacings.NotesRests.sa_sixtyfourthrest); */
 
-        /* Tempo */
-	widget = glade_xml_get_widget(gladexml, "spcg_t_xpfm");
-	gtk_spin_button_set_value(GTK_SPIN_BUTTON(widget), Spacings.Tempo.xpfm);
-	widget = glade_xml_get_widget(gladexml, "spcg_t_ypfm");
-	gtk_spin_button_set_value(GTK_SPIN_BUTTON(widget), Spacings.Tempo.ypfm);
+/*         /\* Tempo *\/ */
+/* 	widget = glade_xml_get_widget(gladexml, "spcg_t_xpfm"); */
+/* 	gtk_spin_button_set_value(GTK_SPIN_BUTTON(widget), Spacings.Tempo.xpfm); */
+/* 	widget = glade_xml_get_widget(gladexml, "spcg_t_ypfm"); */
+/* 	gtk_spin_button_set_value(GTK_SPIN_BUTTON(widget), Spacings.Tempo.ypfm); */
 	
 }
 
 extern 
 void update_spacings_from_spinbuttons(void)
 {
-	GtkWidget *widget;
-	GtkWidget *area;
+/* 	GtkWidget *widget; */
+/* 	GtkWidget *area; */
 
-	/* Barlines */
-	widget = glade_xml_get_widget(gladexml, "spcg_bl_hlt");
-	Spacings.Barlines.hlt = gtk_spin_button_get_value(GTK_SPIN_BUTTON(widget));
-	widget = glade_xml_get_widget(gladexml, "spcg_bl_tlt");
-	Spacings.Barlines.tlt = gtk_spin_button_get_value(GTK_SPIN_BUTTON(widget));
-	widget = glade_xml_get_widget(gladexml, "spcg_bl_sbhatl");
-	Spacings.Barlines.sbhatl = gtk_spin_button_get_value(GTK_SPIN_BUTTON(widget));
-	widget = glade_xml_get_widget(gladexml, "spcg_bl_swdb");
-	Spacings.Barlines.swdb = gtk_spin_button_get_value(GTK_SPIN_BUTTON(widget));
-	widget = glade_xml_get_widget(gladexml, "spcg_bl_sblad");
-	Spacings.Barlines.sblad = gtk_spin_button_get_value(GTK_SPIN_BUTTON(widget));
-	widget = glade_xml_get_widget(gladexml, "spcg_bl_sbd");
-	Spacings.Barlines.sbd = gtk_spin_button_get_value(GTK_SPIN_BUTTON(widget));
-	widget = glade_xml_get_widget(gladexml, "spcg_bl_sab");
-	Spacings.Barlines.sab = gtk_spin_button_get_value(GTK_SPIN_BUTTON(widget));
+/* 	/\* Barlines *\/ */
+/* 	widget = glade_xml_get_widget(gladexml, "spcg_bl_hlt"); */
+/* 	Spacings.Barlines.hlt = gtk_spin_button_get_value(GTK_SPIN_BUTTON(widget)); */
+/* 	widget = glade_xml_get_widget(gladexml, "spcg_bl_tlt"); */
+/* 	Spacings.Barlines.tlt = gtk_spin_button_get_value(GTK_SPIN_BUTTON(widget)); */
+/* 	widget = glade_xml_get_widget(gladexml, "spcg_bl_sbhatl"); */
+/* 	Spacings.Barlines.sbhatl = gtk_spin_button_get_value(GTK_SPIN_BUTTON(widget)); */
+/* 	widget = glade_xml_get_widget(gladexml, "spcg_bl_swdb"); */
+/* 	Spacings.Barlines.swdb = gtk_spin_button_get_value(GTK_SPIN_BUTTON(widget)); */
+/* 	widget = glade_xml_get_widget(gladexml, "spcg_bl_sblad"); */
+/* 	Spacings.Barlines.sblad = gtk_spin_button_get_value(GTK_SPIN_BUTTON(widget)); */
+/* 	widget = glade_xml_get_widget(gladexml, "spcg_bl_sbd"); */
+/* 	Spacings.Barlines.sbd = gtk_spin_button_get_value(GTK_SPIN_BUTTON(widget)); */
+/* 	widget = glade_xml_get_widget(gladexml, "spcg_bl_sab"); */
+/* 	Spacings.Barlines.sab = gtk_spin_button_get_value(GTK_SPIN_BUTTON(widget)); */
 
-	/* Clefs */
-	widget = glade_xml_get_widget(gladexml, "spcg_cl_sb");
-	Spacings.Clefs.sb = gtk_spin_button_get_value(GTK_SPIN_BUTTON(widget));
-	widget = glade_xml_get_widget(gladexml, "spcg_cl_sa");
-	Spacings.Clefs.sa = gtk_spin_button_get_value(GTK_SPIN_BUTTON(widget));
+/* 	/\* Clefs *\/ */
+/* 	widget = glade_xml_get_widget(gladexml, "spcg_cl_sb"); */
+/* 	Spacings.Clefs.sb = gtk_spin_button_get_value(GTK_SPIN_BUTTON(widget)); */
+/* 	widget = glade_xml_get_widget(gladexml, "spcg_cl_sa"); */
+/* 	Spacings.Clefs.sa = gtk_spin_button_get_value(GTK_SPIN_BUTTON(widget)); */
 
-	/* Key Signatures */
-	widget = glade_xml_get_widget(gladexml, "spcg_ks_sbksa");
-	Spacings.KeySignatures.sbksa = gtk_spin_button_get_value(GTK_SPIN_BUTTON(widget));
-	widget = glade_xml_get_widget(gladexml, "spcg_ks_saks");
-	Spacings.KeySignatures.saks = gtk_spin_button_get_value(GTK_SPIN_BUTTON(widget));
+/* 	/\* Key Signatures *\/ */
+/* 	widget = glade_xml_get_widget(gladexml, "spcg_ks_sbksa"); */
+/* 	Spacings.KeySignatures.sbksa = gtk_spin_button_get_value(GTK_SPIN_BUTTON(widget)); */
+/* 	widget = glade_xml_get_widget(gladexml, "spcg_ks_saks"); */
+/* 	Spacings.KeySignatures.saks = gtk_spin_button_get_value(GTK_SPIN_BUTTON(widget)); */
 
-        /* Measures */
-	widget = glade_xml_get_widget(gladexml, "spcg_m_xpsfm");
-	Spacings.Measures.xpsfm = gtk_spin_button_get_value(GTK_SPIN_BUTTON(widget));
-	widget = glade_xml_get_widget(gladexml, "spcg_m_ypsfm");
-	Spacings.Measures.ypsfm = gtk_spin_button_get_value(GTK_SPIN_BUTTON(widget));
-	widget = glade_xml_get_widget(gladexml, "spcg_m_slbm");
-	Spacings.Measures.slbm = gtk_spin_button_get_value(GTK_SPIN_BUTTON(widget));
+/*         /\* Measures *\/ */
+/* 	widget = glade_xml_get_widget(gladexml, "spcg_m_xpsfm"); */
+/* 	Spacings.Measures.xpsfm = gtk_spin_button_get_value(GTK_SPIN_BUTTON(widget)); */
+/* 	widget = glade_xml_get_widget(gladexml, "spcg_m_ypsfm"); */
+/* 	Spacings.Measures.ypsfm = gtk_spin_button_get_value(GTK_SPIN_BUTTON(widget)); */
+/* 	widget = glade_xml_get_widget(gladexml, "spcg_m_slbm"); */
+/* 	Spacings.Measures.slbm = gtk_spin_button_get_value(GTK_SPIN_BUTTON(widget)); */
 
 
-	/* Notes and Rests */
-	widget = glade_xml_get_widget(gladexml, "spcg_nr_doublewhole");
-	Spacings.NotesRests.sa_doublewhole = gtk_spin_button_get_value(GTK_SPIN_BUTTON(widget));
-	widget = glade_xml_get_widget(gladexml, "spcg_nr_doublewholerest");
-	Spacings.NotesRests.sa_doublewholerest  = gtk_spin_button_get_value(GTK_SPIN_BUTTON(widget));
-	widget = glade_xml_get_widget(gladexml, "spcg_nr_whole");
-	Spacings.NotesRests.sa_whole  = gtk_spin_button_get_value(GTK_SPIN_BUTTON(widget));
-	widget = glade_xml_get_widget(gladexml, "spcg_nr_wholerest");
-	Spacings.NotesRests.sa_wholerest  = gtk_spin_button_get_value(GTK_SPIN_BUTTON(widget));
-	widget = glade_xml_get_widget(gladexml, "spcg_nr_half");
-	Spacings.NotesRests.sa_half  = gtk_spin_button_get_value(GTK_SPIN_BUTTON(widget));
-	widget = glade_xml_get_widget(gladexml, "spcg_nr_halfrest");
-	Spacings.NotesRests.sa_halfrest  = gtk_spin_button_get_value(GTK_SPIN_BUTTON(widget));
-	widget = glade_xml_get_widget(gladexml, "spcg_nr_quarter");
-	Spacings.NotesRests.sa_quarter  = gtk_spin_button_get_value(GTK_SPIN_BUTTON(widget));
-	widget = glade_xml_get_widget(gladexml, "spcg_nr_quarterrest");
-	Spacings.NotesRests.sa_quarterrest = gtk_spin_button_get_value(GTK_SPIN_BUTTON(widget));
-	widget = glade_xml_get_widget(gladexml, "spcg_nr_eighth");
-	Spacings.NotesRests.sa_eighth  = gtk_spin_button_get_value(GTK_SPIN_BUTTON(widget));
-	widget = glade_xml_get_widget(gladexml, "spcg_nr_eighthrest");
-	Spacings.NotesRests.sa_eighthrest  = gtk_spin_button_get_value(GTK_SPIN_BUTTON(widget));
-	widget = glade_xml_get_widget(gladexml, "spcg_nr_sixteenth");
-	Spacings.NotesRests.sa_sixteenth  = gtk_spin_button_get_value(GTK_SPIN_BUTTON(widget));
-	widget = glade_xml_get_widget(gladexml, "spcg_nr_sixteenthrest");
-	Spacings.NotesRests.sa_sixteenthrest  = gtk_spin_button_get_value(GTK_SPIN_BUTTON(widget));
-	widget = glade_xml_get_widget(gladexml, "spcg_nr_thirtysecond");
-	Spacings.NotesRests.sa_thirtysecond  = gtk_spin_button_get_value(GTK_SPIN_BUTTON(widget));
-	widget = glade_xml_get_widget(gladexml, "spcg_nr_thirtysecondrest");
-	Spacings.NotesRests.sa_thirtysecondrest  = gtk_spin_button_get_value(GTK_SPIN_BUTTON(widget));
-	widget = glade_xml_get_widget(gladexml, "spcg_nr_sixtyfourth");
-	Spacings.NotesRests.sa_sixtyfourth  = gtk_spin_button_get_value(GTK_SPIN_BUTTON(widget));
-	widget = glade_xml_get_widget(gladexml, "spcg_nr_sixtyfourthrest");
-	Spacings.NotesRests.sa_sixtyfourthrest  = gtk_spin_button_get_value(GTK_SPIN_BUTTON(widget));
+/* 	/\* Notes and Rests *\/ */
+/* 	widget = glade_xml_get_widget(gladexml, "spcg_nr_doublewhole"); */
+/* 	Spacings.NotesRests.sa_doublewhole = gtk_spin_button_get_value(GTK_SPIN_BUTTON(widget)); */
+/* 	widget = glade_xml_get_widget(gladexml, "spcg_nr_doublewholerest"); */
+/* 	Spacings.NotesRests.sa_doublewholerest  = gtk_spin_button_get_value(GTK_SPIN_BUTTON(widget)); */
+/* 	widget = glade_xml_get_widget(gladexml, "spcg_nr_whole"); */
+/* 	Spacings.NotesRests.sa_whole  = gtk_spin_button_get_value(GTK_SPIN_BUTTON(widget)); */
+/* 	widget = glade_xml_get_widget(gladexml, "spcg_nr_wholerest"); */
+/* 	Spacings.NotesRests.sa_wholerest  = gtk_spin_button_get_value(GTK_SPIN_BUTTON(widget)); */
+/* 	widget = glade_xml_get_widget(gladexml, "spcg_nr_half"); */
+/* 	Spacings.NotesRests.sa_half  = gtk_spin_button_get_value(GTK_SPIN_BUTTON(widget)); */
+/* 	widget = glade_xml_get_widget(gladexml, "spcg_nr_halfrest"); */
+/* 	Spacings.NotesRests.sa_halfrest  = gtk_spin_button_get_value(GTK_SPIN_BUTTON(widget)); */
+/* 	widget = glade_xml_get_widget(gladexml, "spcg_nr_quarter"); */
+/* 	Spacings.NotesRests.sa_quarter  = gtk_spin_button_get_value(GTK_SPIN_BUTTON(widget)); */
+/* 	widget = glade_xml_get_widget(gladexml, "spcg_nr_quarterrest"); */
+/* 	Spacings.NotesRests.sa_quarterrest = gtk_spin_button_get_value(GTK_SPIN_BUTTON(widget)); */
+/* 	widget = glade_xml_get_widget(gladexml, "spcg_nr_eighth"); */
+/* 	Spacings.NotesRests.sa_eighth  = gtk_spin_button_get_value(GTK_SPIN_BUTTON(widget)); */
+/* 	widget = glade_xml_get_widget(gladexml, "spcg_nr_eighthrest"); */
+/* 	Spacings.NotesRests.sa_eighthrest  = gtk_spin_button_get_value(GTK_SPIN_BUTTON(widget)); */
+/* 	widget = glade_xml_get_widget(gladexml, "spcg_nr_sixteenth"); */
+/* 	Spacings.NotesRests.sa_sixteenth  = gtk_spin_button_get_value(GTK_SPIN_BUTTON(widget)); */
+/* 	widget = glade_xml_get_widget(gladexml, "spcg_nr_sixteenthrest"); */
+/* 	Spacings.NotesRests.sa_sixteenthrest  = gtk_spin_button_get_value(GTK_SPIN_BUTTON(widget)); */
+/* 	widget = glade_xml_get_widget(gladexml, "spcg_nr_thirtysecond"); */
+/* 	Spacings.NotesRests.sa_thirtysecond  = gtk_spin_button_get_value(GTK_SPIN_BUTTON(widget)); */
+/* 	widget = glade_xml_get_widget(gladexml, "spcg_nr_thirtysecondrest"); */
+/* 	Spacings.NotesRests.sa_thirtysecondrest  = gtk_spin_button_get_value(GTK_SPIN_BUTTON(widget)); */
+/* 	widget = glade_xml_get_widget(gladexml, "spcg_nr_sixtyfourth"); */
+/* 	Spacings.NotesRests.sa_sixtyfourth  = gtk_spin_button_get_value(GTK_SPIN_BUTTON(widget)); */
+/* 	widget = glade_xml_get_widget(gladexml, "spcg_nr_sixtyfourthrest"); */
+/* 	Spacings.NotesRests.sa_sixtyfourthrest  = gtk_spin_button_get_value(GTK_SPIN_BUTTON(widget)); */
 
-        /* Tempo */
-	widget = glade_xml_get_widget(gladexml, "spcg_t_xpfm");
-	Spacings.Tempo.xpfm  = gtk_spin_button_get_value(GTK_SPIN_BUTTON(widget));
-	widget = glade_xml_get_widget(gladexml, "spcg_t_ypfm");
-	Spacings.Tempo.ypfm  = gtk_spin_button_get_value(GTK_SPIN_BUTTON(widget));
+/*         /\* Tempo *\/ */
+/* 	widget = glade_xml_get_widget(gladexml, "spcg_t_xpfm"); */
+/* 	Spacings.Tempo.xpfm  = gtk_spin_button_get_value(GTK_SPIN_BUTTON(widget)); */
+/* 	widget = glade_xml_get_widget(gladexml, "spcg_t_ypfm"); */
+/* 	Spacings.Tempo.ypfm  = gtk_spin_button_get_value(GTK_SPIN_BUTTON(widget)); */
 
-	area = score_get_area_from_widget(widget);
+/* 	area = score_get_area_from_widget(widget); */
 	
-	refresh(area);
+/* 	refresh(area); */
 }
 
 
 extern
 void on_spcg_nr_nlwr_toggled (GtkWidget *widget, gpointer data)
 {
-	GtkWidget *display;
+/* 	GtkWidget *display; */
 
-	display = glade_xml_get_widget(gladexml, "spcg_rests");
-	gtk_widget_set_sensitive(display, !gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget)));
+/* 	display = glade_xml_get_widget(gladexml, "spcg_rests"); */
+/* 	gtk_widget_set_sensitive(display, !gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (widget))); */
 }
 
 
-extern
-void on_spcg_nr_doublewhole_changed(void)
-{
-	GtkWidget *togglew;
-	GtkWidget *widget;
-	GtkWidget *widgetrest;
+/* extern */
+/* void on_spcg_nr_doublewhole_changed(void) */
+/* { */
+/* 	GtkWidget *togglew; */
+/* 	GtkWidget *widget; */
+/* 	GtkWidget *widgetrest; */
 
-	togglew = glade_xml_get_widget(gladexml, "spcg_nr_nlwr");
+/* 	togglew = glade_xml_get_widget(gladexml, "spcg_nr_nlwr"); */
 
-	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (togglew))) {
-		widget = glade_xml_get_widget(gladexml, "spcg_nr_doublewhole");
-		widgetrest = glade_xml_get_widget(gladexml, "spcg_nr_doublewholerest");
+/* 	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (togglew))) { */
+/* 		widget = glade_xml_get_widget(gladexml, "spcg_nr_doublewhole"); */
+/* 		widgetrest = glade_xml_get_widget(gladexml, "spcg_nr_doublewholerest"); */
 
-		gtk_spin_button_set_value(GTK_SPIN_BUTTON(widgetrest), 
-					  gtk_spin_button_get_value(GTK_SPIN_BUTTON(widget)));
-	}
-}
+/* 		gtk_spin_button_set_value(GTK_SPIN_BUTTON(widgetrest),  */
+/* 					  gtk_spin_button_get_value(GTK_SPIN_BUTTON(widget))); */
+/* 	} */
+/* } */
 
-extern
-void on_spcg_nr_whole_changed(void)
-{
-	GtkWidget *togglew;
-	GtkWidget *widget;
-	GtkWidget *widgetrest;
+/* extern */
+/* void on_spcg_nr_whole_changed(void) */
+/* { */
+/* 	GtkWidget *togglew; */
+/* 	GtkWidget *widget; */
+/* 	GtkWidget *widgetrest; */
 
-	togglew = glade_xml_get_widget(gladexml, "spcg_nr_nlwr");
+/* 	togglew = glade_xml_get_widget(gladexml, "spcg_nr_nlwr"); */
 
-	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (togglew))) {
-		widget = glade_xml_get_widget(gladexml, "spcg_nr_whole");
-		widgetrest = glade_xml_get_widget(gladexml, "spcg_nr_wholerest");
+/* 	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (togglew))) { */
+/* 		widget = glade_xml_get_widget(gladexml, "spcg_nr_whole"); */
+/* 		widgetrest = glade_xml_get_widget(gladexml, "spcg_nr_wholerest"); */
 
-		gtk_spin_button_set_value(GTK_SPIN_BUTTON(widgetrest), 
-					  gtk_spin_button_get_value(GTK_SPIN_BUTTON(widget)));
-	}
-}
+/* 		gtk_spin_button_set_value(GTK_SPIN_BUTTON(widgetrest),  */
+/* 					  gtk_spin_button_get_value(GTK_SPIN_BUTTON(widget))); */
+/* 	} */
+/* } */
 
-extern
-void on_spcg_nr_half_changed(void)
-{
-	GtkWidget *togglew;
-	GtkWidget *widget;
-	GtkWidget *widgetrest;
+/* extern */
+/* void on_spcg_nr_half_changed(void) */
+/* { */
+/* 	GtkWidget *togglew; */
+/* 	GtkWidget *widget; */
+/* 	GtkWidget *widgetrest; */
 
-	togglew = glade_xml_get_widget(gladexml, "spcg_nr_nlwr");
+/* 	togglew = glade_xml_get_widget(gladexml, "spcg_nr_nlwr"); */
 
-	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (togglew))) {
-		widget = glade_xml_get_widget(gladexml, "spcg_nr_half");
-		widgetrest = glade_xml_get_widget(gladexml, "spcg_nr_halfrest");
+/* 	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (togglew))) { */
+/* 		widget = glade_xml_get_widget(gladexml, "spcg_nr_half"); */
+/* 		widgetrest = glade_xml_get_widget(gladexml, "spcg_nr_halfrest"); */
 
-		gtk_spin_button_set_value(GTK_SPIN_BUTTON(widgetrest), 
-					  gtk_spin_button_get_value(GTK_SPIN_BUTTON(widget)));
-	}
-}
+/* 		gtk_spin_button_set_value(GTK_SPIN_BUTTON(widgetrest),  */
+/* 					  gtk_spin_button_get_value(GTK_SPIN_BUTTON(widget))); */
+/* 	} */
+/* } */
 
-extern
-void on_spcg_nr_quarter_changed(void)
-{
-	GtkWidget *togglew;
-	GtkWidget *widget;
-	GtkWidget *widgetrest;
+/* extern */
+/* void on_spcg_nr_quarter_changed(void) */
+/* { */
+/* 	GtkWidget *togglew; */
+/* 	GtkWidget *widget; */
+/* 	GtkWidget *widgetrest; */
 
-	togglew = glade_xml_get_widget(gladexml, "spcg_nr_nlwr");
+/* 	togglew = glade_xml_get_widget(gladexml, "spcg_nr_nlwr"); */
 
-	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (togglew))) {
-		widget = glade_xml_get_widget(gladexml, "spcg_nr_quarter");
-		widgetrest = glade_xml_get_widget(gladexml, "spcg_nr_quarterrest");
+/* 	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (togglew))) { */
+/* 		widget = glade_xml_get_widget(gladexml, "spcg_nr_quarter"); */
+/* 		widgetrest = glade_xml_get_widget(gladexml, "spcg_nr_quarterrest"); */
 
-		gtk_spin_button_set_value(GTK_SPIN_BUTTON(widgetrest), 
-					  gtk_spin_button_get_value(GTK_SPIN_BUTTON(widget)));
-	}
-}
+/* 		gtk_spin_button_set_value(GTK_SPIN_BUTTON(widgetrest),  */
+/* 					  gtk_spin_button_get_value(GTK_SPIN_BUTTON(widget))); */
+/* 	} */
+/* } */
 
-extern
-void on_spcg_nr_eighth_changed(void)
-{
-	GtkWidget *togglew;
-	GtkWidget *widget;
-	GtkWidget *widgetrest;
+/* extern */
+/* void on_spcg_nr_eighth_changed(void) */
+/* { */
+/* 	GtkWidget *togglew; */
+/* 	GtkWidget *widget; */
+/* 	GtkWidget *widgetrest; */
 
-	togglew = glade_xml_get_widget(gladexml, "spcg_nr_nlwr");
+/* 	togglew = glade_xml_get_widget(gladexml, "spcg_nr_nlwr"); */
 
-	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (togglew))) {
-		widget = glade_xml_get_widget(gladexml, "spcg_nr_eighth");
-		widgetrest = glade_xml_get_widget(gladexml, "spcg_nr_eighthrest");
+/* 	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (togglew))) { */
+/* 		widget = glade_xml_get_widget(gladexml, "spcg_nr_eighth"); */
+/* 		widgetrest = glade_xml_get_widget(gladexml, "spcg_nr_eighthrest"); */
 
-		gtk_spin_button_set_value(GTK_SPIN_BUTTON(widgetrest), 
-					  gtk_spin_button_get_value(GTK_SPIN_BUTTON(widget)));
-	}
-}
+/* 		gtk_spin_button_set_value(GTK_SPIN_BUTTON(widgetrest),  */
+/* 					  gtk_spin_button_get_value(GTK_SPIN_BUTTON(widget))); */
+/* 	} */
+/* } */
 
-extern
-void on_spcg_nr_sixteenth_changed(void)
-{
-	GtkWidget *togglew;
-	GtkWidget *widget;
-	GtkWidget *widgetrest;
+/* extern */
+/* void on_spcg_nr_sixteenth_changed(void) */
+/* { */
+/* 	GtkWidget *togglew; */
+/* 	GtkWidget *widget; */
+/* 	GtkWidget *widgetrest; */
 
-	togglew = glade_xml_get_widget(gladexml, "spcg_nr_nlwr");
+/* 	togglew = glade_xml_get_widget(gladexml, "spcg_nr_nlwr"); */
 
-	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (togglew))) {
-		widget = glade_xml_get_widget(gladexml, "spcg_nr_sixteenth");
-		widgetrest = glade_xml_get_widget(gladexml, "spcg_nr_sixteenthrest");
+/* 	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (togglew))) { */
+/* 		widget = glade_xml_get_widget(gladexml, "spcg_nr_sixteenth"); */
+/* 		widgetrest = glade_xml_get_widget(gladexml, "spcg_nr_sixteenthrest"); */
 
-		gtk_spin_button_set_value(GTK_SPIN_BUTTON(widgetrest), 
-					  gtk_spin_button_get_value(GTK_SPIN_BUTTON(widget)));
-	}
-}
+/* 		gtk_spin_button_set_value(GTK_SPIN_BUTTON(widgetrest),  */
+/* 					  gtk_spin_button_get_value(GTK_SPIN_BUTTON(widget))); */
+/* 	} */
+/* } */
 
-extern
-void on_spcg_nr_thirtysecond_changed(void)
-{
-	GtkWidget *togglew;
-	GtkWidget *widget;
-	GtkWidget *widgetrest;
+/* extern */
+/* void on_spcg_nr_thirtysecond_changed(void) */
+/* { */
+/* 	GtkWidget *togglew; */
+/* 	GtkWidget *widget; */
+/* 	GtkWidget *widgetrest; */
 
-	togglew = glade_xml_get_widget(gladexml, "spcg_nr_nlwr");
+/* 	togglew = glade_xml_get_widget(gladexml, "spcg_nr_nlwr"); */
 
-	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (togglew))) {
-		widget = glade_xml_get_widget(gladexml, "spcg_nr_thirtysecond");
-		widgetrest = glade_xml_get_widget(gladexml, "spcg_nr_thirtysecondrest");
+/* 	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (togglew))) { */
+/* 		widget = glade_xml_get_widget(gladexml, "spcg_nr_thirtysecond"); */
+/* 		widgetrest = glade_xml_get_widget(gladexml, "spcg_nr_thirtysecondrest"); */
 
-		gtk_spin_button_set_value(GTK_SPIN_BUTTON(widgetrest), 
-					  gtk_spin_button_get_value(GTK_SPIN_BUTTON(widget)));
-	}
-}
+/* 		gtk_spin_button_set_value(GTK_SPIN_BUTTON(widgetrest),  */
+/* 					  gtk_spin_button_get_value(GTK_SPIN_BUTTON(widget))); */
+/* 	} */
+/* } */
 
-extern
-void on_spcg_nr_sixtyfourth_changed(void)
-{
-	GtkWidget *togglew;
-	GtkWidget *widget;
-	GtkWidget *widgetrest;
+/* extern */
+/* void on_spcg_nr_sixtyfourth_changed(void) */
+/* { */
+/* 	GtkWidget *togglew; */
+/* 	GtkWidget *widget; */
+/* 	GtkWidget *widgetrest; */
 
-	togglew = glade_xml_get_widget(gladexml, "spcg_nr_nlwr");
+/* 	togglew = glade_xml_get_widget(gladexml, "spcg_nr_nlwr"); */
 
-	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (togglew))) {
-		widget = glade_xml_get_widget(gladexml, "spcg_nr_sixtyfourth");
-		widgetrest = glade_xml_get_widget(gladexml, "spcg_nr_sixtyfourthrest");
+/* 	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (togglew))) { */
+/* 		widget = glade_xml_get_widget(gladexml, "spcg_nr_sixtyfourth"); */
+/* 		widgetrest = glade_xml_get_widget(gladexml, "spcg_nr_sixtyfourthrest"); */
 
-		gtk_spin_button_set_value(GTK_SPIN_BUTTON(widgetrest), 
-					  gtk_spin_button_get_value(GTK_SPIN_BUTTON(widget)));
-	}
-}
+/* 		gtk_spin_button_set_value(GTK_SPIN_BUTTON(widgetrest),  */
+/* 					  gtk_spin_button_get_value(GTK_SPIN_BUTTON(widget))); */
+/* 	} */
+/* } */

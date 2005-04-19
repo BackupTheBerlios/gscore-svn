@@ -83,102 +83,102 @@ measure_get_object(Staff_t *staff, guint measure_nb)
 extern void 
 edit_jump_to_measure_widget(GtkButton *widget, gpointer user_data)
 {
-        Score_t *score = score_get_from_widget(GTK_WIDGET(widget));
-        Staff_t *staff_data;
-        Object_t *object_data;
+/*         Score_t *score = score_get_from_widget(GTK_WIDGET(widget)); */
+/*         Staff_t *staff_data; */
+/*         Object_t *object_data; */
 
-        GList *objectrunner = NULL;
+/*         GList *objectrunner = NULL; */
 
-        guint nb_measures = 0;
+/*         guint nb_measures = 0; */
 
-        GtkWidget *dialog;
-        GtkWidget *hbox;
-        GtkWidget *label;
-        GtkWidget *spinbutton;
+/*         GtkWidget *dialog; */
+/*         GtkWidget *hbox; */
+/*         GtkWidget *label; */
+/*         GtkWidget *spinbutton; */
 
-        gint response;
+/*         gint response; */
 
-        Object_t *MO;           /* Measure Object */
-        gdouble x;
+/*         Object_t *MO;           /\* Measure Object *\/ */
+/*         gdouble x; */
 
-        /* First we need to know how many measures are on the staff selected */
-        staff_data = g_list_nth_data(score->Staff_list, get_staff_selected(score));
-        if ( ! staff_data ) {
-                g_warning("Gscore: no staff can be retrieved");
-                return;
-        }
+/*         /\* First we need to know how many measures are on the staff selected *\/ */
+/*         staff_data = g_list_nth_data(score->Staff_list, get_staff_selected(score)); */
+/*         if ( ! staff_data ) { */
+/*                 g_warning("Gscore: no staff can be retrieved"); */
+/*                 return; */
+/*         } */
 
-        objectrunner = g_list_first(staff_data->Object_list);
+/*         objectrunner = g_list_first(staff_data->Object_list); */
 
-        while ( objectrunner ) {
-                object_data = (Object_t *)objectrunner->data;
+/*         while ( objectrunner ) { */
+/*                 object_data = (Object_t *)objectrunner->data; */
 
-                if ( ! object_data ) {
-                        g_warning("Gscore: no object can be retrieved");
-                        return;
-                }
+/*                 if ( ! object_data ) { */
+/*                         g_warning("Gscore: no object can be retrieved"); */
+/*                         return; */
+/*                 } */
 
-                switch(object_data->type) {
-                case BARLINE:
-                case BARLINE_SINGLE:
-                case BARLINE_DOUBLE:
-                case BARLINE_OPENREPEAT:
-                case BARLINE_CLOSEREPEAT:
-                case BARLINE_OPENCLOSEREPEAT:
-                case BARLINE_OPEN:
-                case BARLINE_CLOSE:
-                        nb_measures++;
-                        break;
-                default:
-                        break;
-                }
+/*                 switch(object_data->type) { */
+/*                 case BARLINE: */
+/*                 case BARLINE_SINGLE: */
+/*                 case BARLINE_DOUBLE: */
+/*                 case BARLINE_OPENREPEAT: */
+/*                 case BARLINE_CLOSEREPEAT: */
+/*                 case BARLINE_OPENCLOSEREPEAT: */
+/*                 case BARLINE_OPEN: */
+/*                 case BARLINE_CLOSE: */
+/*                         nb_measures++; */
+/*                         break; */
+/*                 default: */
+/*                         break; */
+/*                 } */
 
-                objectrunner = g_list_next(objectrunner);
-        }
+/*                 objectrunner = g_list_next(objectrunner); */
+/*         } */
 
-        /* Now that we have the number of measures in the selected staff, we can set the spinbutton value */
-        dialog = gtk_dialog_new_with_buttons("Jump to measure", NULL,
-                                             GTK_DIALOG_MODAL, 
-                                             GTK_STOCK_CANCEL,
-                                             GTK_RESPONSE_REJECT,
-                                             GTK_STOCK_OK,
-                                             GTK_RESPONSE_ACCEPT,
-                                             NULL);
+/*         /\* Now that we have the number of measures in the selected staff, we can set the spinbutton value *\/ */
+/*         dialog = gtk_dialog_new_with_buttons("Jump to measure", NULL, */
+/*                                              GTK_DIALOG_MODAL,  */
+/*                                              GTK_STOCK_CANCEL, */
+/*                                              GTK_RESPONSE_REJECT, */
+/*                                              GTK_STOCK_OK, */
+/*                                              GTK_RESPONSE_ACCEPT, */
+/*                                              NULL); */
 
-        hbox = gtk_hbox_new(FALSE, 10);
-        gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog)->vbox), hbox,
-                           TRUE, TRUE, 0);
+/*         hbox = gtk_hbox_new(FALSE, 10); */
+/*         gtk_box_pack_start(GTK_BOX(GTK_DIALOG(dialog)->vbox), hbox, */
+/*                            TRUE, TRUE, 0); */
 
-        label = gtk_label_new("Jump to measure: ");
-        gtk_box_pack_start_defaults(GTK_BOX(hbox), label);
+/*         label = gtk_label_new("Jump to measure: "); */
+/*         gtk_box_pack_start_defaults(GTK_BOX(hbox), label); */
 
-        spinbutton = gtk_spin_button_new_with_range(1, nb_measures+1, 1);
-        gtk_box_pack_start_defaults(GTK_BOX(hbox), spinbutton);
+/*         spinbutton = gtk_spin_button_new_with_range(1, nb_measures+1, 1); */
+/*         gtk_box_pack_start_defaults(GTK_BOX(hbox), spinbutton); */
 
-        gtk_widget_show_all(dialog);
+/*         gtk_widget_show_all(dialog); */
 
-        response = gtk_dialog_run (GTK_DIALOG (dialog));
+/*         response = gtk_dialog_run (GTK_DIALOG (dialog)); */
 
-        if (response == GTK_RESPONSE_ACCEPT) {
+/*         if (response == GTK_RESPONSE_ACCEPT) { */
 
-                MO = measure_get_object(staff_data, gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(spinbutton)) - 2);
+/*                 MO = measure_get_object(staff_data, gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(spinbutton)) - 2); */
 
-                if ( ! MO ) {
-                        g_warning("Gscore: Cannot get the measure object.");
-                        position_set_adjustment_x(GTK_WIDGET(widget), staff_data->extremity_begin_x);
-                } else {
-                        x = object_get_x(staff_data, MO);
-                        if ( x < 0 )
-                                printf("Error getting the x position of the object");
-                        else
-                                position_set_adjustment_x(GTK_WIDGET(widget), x);
-                }
+/*                 if ( ! MO ) { */
+/*                         g_warning("Gscore: Cannot get the measure object."); */
+/*                         position_set_adjustment_x(GTK_WIDGET(widget), staff_data->extremity_begin_x); */
+/*                 } else { */
+/*                         x = object_get_x(staff_data, MO); */
+/*                         if ( x < 0 ) */
+/*                                 printf("Error getting the x position of the object"); */
+/*                         else */
+/*                                 position_set_adjustment_x(GTK_WIDGET(widget), x); */
+/*                 } */
 
-                refresh(score_get_area_from_widget(GTK_WIDGET(widget)));
+/*                 refresh(score_get_area_from_widget(GTK_WIDGET(widget))); */
 
-        }
+/*         } */
 
-        gtk_widget_destroy (dialog);
+/*         gtk_widget_destroy (dialog); */
 
 }
 

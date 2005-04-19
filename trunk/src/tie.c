@@ -38,47 +38,47 @@
 extern void
 tie_notes_selected(GtkWidget *widget, GdkEventExpose *event)
 {
-	Staff_t *staff_data;
-	Score_t *score = score_get_from_widget(widget);
-	GtkWidget *area = score_get_area_from_widget(widget);
+/* 	Staff_t *staff_data; */
+/* 	Score_t *score = score_get_from_widget(widget); */
+/* 	GtkWidget *area = score_get_area_from_widget(widget); */
 
-	GList *listrunner;
-	GList *listrunner_next;
+/* 	GList *listrunner; */
+/* 	GList *listrunner_next; */
 
-	staff_data = (Staff_t *) g_list_nth_data(score->Staff_list, get_staff_selected(score));
+/* 	staff_data = (Staff_t *) g_list_nth_data(score->Staff_list, get_staff_selected(score)); */
 
-	listrunner = g_list_first(staff_data->Object_list);
+/* 	listrunner = g_list_first(staff_data->Object_list); */
 
-	listrunner_next = g_list_next(listrunner);
+/* 	listrunner_next = g_list_next(listrunner); */
 
-	while (listrunner)
-		{
-			Object_t *note;
-			Object_t *next_note;
+/* 	while (listrunner) */
+/* 		{ */
+/* 			Object_t *note; */
+/* 			Object_t *next_note; */
 
-			note = (Object_t *)listrunner->data;
-			if (listrunner_next)
-				next_note = (Object_t *)listrunner_next->data;
+/* 			note = (Object_t *)listrunner->data; */
+/* 			if (listrunner_next) */
+/* 				next_note = (Object_t *)listrunner_next->data; */
 
-			if (note->is_selected)
-				{
-					note->nature |= O_TIE_START;
-					if (( ! next_note->is_selected ) || ( ! listrunner_next))
-						{
-							note->nature |= O_TIE_STOP;
-						}
-				}
+/* 			if (note->is_selected) */
+/* 				{ */
+/* 					note->nature |= O_TIE_START; */
+/* 					if (( ! next_note->is_selected ) || ( ! listrunner_next)) */
+/* 						{ */
+/* 							note->nature |= O_TIE_STOP; */
+/* 						} */
+/* 				} */
                                   
-			listrunner = g_list_next(listrunner);
+/* 			listrunner = g_list_next(listrunner); */
 
-			if (listrunner_next)
-				listrunner_next = g_list_next(listrunner);
-		}
+/* 			if (listrunner_next) */
+/* 				listrunner_next = g_list_next(listrunner); */
+/* 		} */
 
-	g_list_free(listrunner);
-	g_list_free(listrunner_next);
+/* 	g_list_free(listrunner); */
+/* 	g_list_free(listrunner_next); */
 
-	refresh(area);
+/* 	refresh(area); */
      
 }
 

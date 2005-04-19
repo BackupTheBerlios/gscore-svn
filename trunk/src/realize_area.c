@@ -560,845 +560,845 @@ static gboolean
 realize_object(GtkWidget *area, Staff_t *staff, Object_t *object, gboolean display_barlines, gboolean display_measure_number)
 {
 
-/*         Staff_t *tmpstaff; */
-/*         Object_t *tmpobj; */
+/* /\*         Staff_t *tmpstaff; *\/ */
+/* /\*         Object_t *tmpobj; *\/ */
 
-        Object_t *object_next;
-	Score_t *score = score_get_from_widget(area);
+/*         Object_t *object_next; */
+/* 	Score_t *score = score_get_from_widget(area); */
 	
-/* 	Object_t *object_previous; */
-	guint tmpx = 0;
-	gint y = 0;
-	gint ynext = 0;
-	gdouble extremity_end_y = 0;
-	gboolean is_selected = FALSE;
+/* /\* 	Object_t *object_previous; *\/ */
+/* 	guint tmpx = 0; */
+/* 	gint y = 0; */
+/* 	gint ynext = 0; */
+/* 	gdouble extremity_end_y = 0; */
+/* 	gboolean is_selected = FALSE; */
 
-	gboolean stemup = FALSE;
-	gboolean notehead_left = TRUE;
+/* 	gboolean stemup = FALSE; */
+/* 	gboolean notehead_left = TRUE; */
 
-	gint average = 0;
+/* 	gint average = 0; */
 
-	is_selected = object->is_selected;
-	y = get_y_from_position(staff->key, staff->extremity_begin_y, object->pitch);
+/* 	is_selected = object->is_selected; */
+/* 	y = get_y_from_position(staff->key, staff->extremity_begin_y, object->pitch); */
 
 
-	object_next = object_get_next(score, object);
-	if (object_next) {
-		ynext = get_y_from_position(staff->key, staff->extremity_begin_y, object_next->pitch);
-	}
-
-/* 	object_previous = object_get_previous(object); */
-/* 	if (object_previous) { */
+/* 	object_next = object_get_next(score, object); */
+/* 	if (object_next) { */
+/* 		ynext = get_y_from_position(staff->key, staff->extremity_begin_y, object_next->pitch); */
 /* 	} */
 
-	extremity_end_y =  staff->extremity_begin_y +(staff->nb_lines - 1) * staff->space_btw_lines + staff->nb_lines - 1;
-	average = (extremity_end_y - staff->extremity_begin_y) / 2;
+/* /\* 	object_previous = object_get_previous(object); *\/ */
+/* /\* 	if (object_previous) { *\/ */
+/* /\* 	} *\/ */
+
+/* 	extremity_end_y =  staff->extremity_begin_y +(staff->nb_lines - 1) * staff->space_btw_lines + staff->nb_lines - 1; */
+/* 	average = (extremity_end_y - staff->extremity_begin_y) / 2; */
 
 
-	if (object->group_id != 0) {	/* it means it's a chord */
+/* 	if (object->group_id != 0) {	/\* it means it's a chord *\/ */
 
-		tmpx = object_x;
-		object_x = make_chord(staff, object->id, object->group_id, object->pitch, &stemup, &notehead_left);
-/*                 printf("id = %d, notehead_left = %d\n", object->id, notehead_left); */
+/* 		tmpx = object_x; */
+/* 		object_x = make_chord(staff, object->id, object->group_id, object->pitch, &stemup, &notehead_left); */
+/* /\*                 printf("id = %d, notehead_left = %d\n", object->id, notehead_left); *\/ */
 
-	} else {
-		if ( (y < staff->extremity_begin_y + average) || object->nature & O_STEMDOWN )
-			stemup = FALSE;
-		else
-			stemup = TRUE;
+/* 	} else { */
+/* 		if ( (y < staff->extremity_begin_y + average) || object->nature & O_STEMDOWN ) */
+/* 			stemup = FALSE; */
+/* 		else */
+/* 			stemup = TRUE; */
 
-                if ( object->nature & O_STEMUP )
-                        stemup = TRUE;
-	}
+/*                 if ( object->nature & O_STEMUP ) */
+/*                         stemup = TRUE; */
+/* 	} */
 
 
-	switch(object->type) {
+/* 	switch(object->type) { */
 
-		/* NOTES */
-	case DOUBLEWHOLE:
-		debug_msg("DOUBLEWHOLE REALIZE CALLBACK\n");
+/* 		/\* NOTES *\/ */
+/* 	case DOUBLEWHOLE: */
+/* 		debug_msg("DOUBLEWHOLE REALIZE CALLBACK\n"); */
 
-		draw_staff_extension(area, staff, object->pitch, staff->start_x + object_x);
+/* 		draw_staff_extension(area, staff, object->pitch, staff->start_x + object_x); */
 
-		if ( object->accidentals & A_SHARP )
-			draw_note(area, SHARP_ACCIDENTAL, FALSE,
-				  staff->start_x + object_x - 10,
-				  y - 6, 0, 0, 0, 0);
+/* 		if ( object->accidentals & A_SHARP ) */
+/* 			draw_note(area, SHARP_ACCIDENTAL, FALSE, */
+/* 				  staff->start_x + object_x - 10, */
+/* 				  y - 6, 0, 0, 0, 0); */
 
-		if (object->accidentals & A_FLAT)
-			draw_note(area, FLAT_ACCIDENTAL, FALSE,
-				  staff->start_x + object_x - 10,
-				  y - 10, 0,0, 0,0);
+/* 		if (object->accidentals & A_FLAT) */
+/* 			draw_note(area, FLAT_ACCIDENTAL, FALSE, */
+/* 				  staff->start_x + object_x - 10, */
+/* 				  y - 10, 0,0, 0,0); */
 		
-		if (object->accidentals & A_NATURAL)
-			draw_note(area, NATURAL_ACCIDENTAL, FALSE,
-				  staff->start_x + object_x - 10,
-				  y - 6, 0,0, 0,0);
+/* 		if (object->accidentals & A_NATURAL) */
+/* 			draw_note(area, NATURAL_ACCIDENTAL, FALSE, */
+/* 				  staff->start_x + object_x - 10, */
+/* 				  y - 6, 0,0, 0,0); */
 
-		if ( object->nature & O_DURATION )
-			draw_point(area, staff->start_x + object_x + 12, y);
+/* 		if ( object->nature & O_DURATION ) */
+/* 			draw_point(area, staff->start_x + object_x + 12, y); */
 
-		draw_note(area, DOUBLEWHOLE_HEAD,
-			  is_selected,
-			  staff->start_x + object_x,
-			  y,
-			  0,0,
-			  0,0);
+/* 		draw_note(area, DOUBLEWHOLE_HEAD, */
+/* 			  is_selected, */
+/* 			  staff->start_x + object_x, */
+/* 			  y, */
+/* 			  0,0, */
+/* 			  0,0); */
 
-		object_x += Spacings.NotesRests.sa_doublewhole;
+/* 		object_x += Spacings.NotesRests.sa_doublewhole; */
 
-		break;
-	case WHOLE:
-		debug_msg("WHOLE REALIZE CALLBACK\n");
+/* 		break; */
+/* 	case WHOLE: */
+/* 		debug_msg("WHOLE REALIZE CALLBACK\n"); */
 
-		draw_staff_extension(area, staff, object->pitch, staff->start_x + object_x);
+/* 		draw_staff_extension(area, staff, object->pitch, staff->start_x + object_x); */
 
-		if ( object->accidentals & A_SHARP )
-			draw_note(area, SHARP_ACCIDENTAL, FALSE,
-				  staff->start_x + object_x - 10,
-				  y - 6, 0, 0, 0, 0);
+/* 		if ( object->accidentals & A_SHARP ) */
+/* 			draw_note(area, SHARP_ACCIDENTAL, FALSE, */
+/* 				  staff->start_x + object_x - 10, */
+/* 				  y - 6, 0, 0, 0, 0); */
 
-		if (object->accidentals & A_FLAT)
-			draw_note(area, FLAT_ACCIDENTAL, FALSE,
-				  staff->start_x + object_x - 10,
-				  y - 10, 0,0, 0,0);
+/* 		if (object->accidentals & A_FLAT) */
+/* 			draw_note(area, FLAT_ACCIDENTAL, FALSE, */
+/* 				  staff->start_x + object_x - 10, */
+/* 				  y - 10, 0,0, 0,0); */
 		
-		if (object->accidentals & A_NATURAL)
-			draw_note(area, NATURAL_ACCIDENTAL, FALSE,
-				  staff->start_x + object_x - 10,
-				  y - 6, 0,0, 0,0);
+/* 		if (object->accidentals & A_NATURAL) */
+/* 			draw_note(area, NATURAL_ACCIDENTAL, FALSE, */
+/* 				  staff->start_x + object_x - 10, */
+/* 				  y - 6, 0,0, 0,0); */
 
-		if ( object->nature & O_DURATION )
-			draw_point(area, staff->start_x + object_x + 12, y);
+/* 		if ( object->nature & O_DURATION ) */
+/* 			draw_point(area, staff->start_x + object_x + 12, y); */
 
-		draw_note(area, WHOLE_HEAD,
-			  is_selected,
-			  staff->start_x + object_x,
-			  y,
-			  0,0,
-			  0,0);
+/* 		draw_note(area, WHOLE_HEAD, */
+/* 			  is_selected, */
+/* 			  staff->start_x + object_x, */
+/* 			  y, */
+/* 			  0,0, */
+/* 			  0,0); */
 
-		object_x += Spacings.NotesRests.sa_whole;
+/* 		object_x += Spacings.NotesRests.sa_whole; */
 
-		break;
-	case HALF:
-		debug_msg("HALF REALIZE CALLBACK\n");
+/* 		break; */
+/* 	case HALF: */
+/* 		debug_msg("HALF REALIZE CALLBACK\n"); */
 
-		draw_staff_extension(area, staff, object->pitch, staff->start_x + object_x);
+/* 		draw_staff_extension(area, staff, object->pitch, staff->start_x + object_x); */
 
-		if ( object->accidentals & A_SHARP )
-			draw_note(area, SHARP_ACCIDENTAL, FALSE,
-				  staff->start_x + object_x - 10,
-				  y - 6, 0, 0, 0, 0);
+/* 		if ( object->accidentals & A_SHARP ) */
+/* 			draw_note(area, SHARP_ACCIDENTAL, FALSE, */
+/* 				  staff->start_x + object_x - 10, */
+/* 				  y - 6, 0, 0, 0, 0); */
 
-		if (object->accidentals & A_FLAT)
-			draw_note(area, FLAT_ACCIDENTAL, FALSE,
-				  staff->start_x + object_x - 10,
-				  y - 10, 0,0, 0,0);
+/* 		if (object->accidentals & A_FLAT) */
+/* 			draw_note(area, FLAT_ACCIDENTAL, FALSE, */
+/* 				  staff->start_x + object_x - 10, */
+/* 				  y - 10, 0,0, 0,0); */
 		
-		if (object->accidentals & A_NATURAL)
-			draw_note(area, NATURAL_ACCIDENTAL, FALSE,
-				  staff->start_x + object_x - 10,
-				  y - 6, 0,0, 0,0);
+/* 		if (object->accidentals & A_NATURAL) */
+/* 			draw_note(area, NATURAL_ACCIDENTAL, FALSE, */
+/* 				  staff->start_x + object_x - 10, */
+/* 				  y - 6, 0,0, 0,0); */
 
-		/* 12 means the width of a half note. It's not really nice (* FIXME *) */
-		if ( object->nature & O_DURATION )
-			draw_point(area, staff->start_x + object_x + 12, y);
+/* 		/\* 12 means the width of a half note. It's not really nice (* FIXME *) *\/ */
+/* 		if ( object->nature & O_DURATION ) */
+/* 			draw_point(area, staff->start_x + object_x + 12, y); */
 
-		if ( ! stemup ) {
-			/* The note has the stem down */
-			if ( object->nature & O_STACCATO )
-				draw_point(area, staff->start_x + object_x + 4, y - 8);
+/* 		if ( ! stemup ) { */
+/* 			/\* The note has the stem down *\/ */
+/* 			if ( object->nature & O_STACCATO ) */
+/* 				draw_point(area, staff->start_x + object_x + 4, y - 8); */
 
-			if ( object->nature & O_TENUTO )
-				draw_line(area, 0,0,0, staff->start_x + object_x, y - 8, staff->start_x + object_x + 8, y -8);
+/* 			if ( object->nature & O_TENUTO ) */
+/* 				draw_line(area, 0,0,0, staff->start_x + object_x, y - 8, staff->start_x + object_x + 8, y -8); */
 
-			draw_note(area, HALF_HEAD,
-				  is_selected,
-				  staff->start_x + object_x,
-				  y,
-				  staff->start_x + object_x,
-				  y + 25,
-				  staff->start_x + object_x,
-				  y + 3);
-		} else {
-			/* The note has the stem up */
-			if ( object->nature & O_STACCATO )
-				draw_point(area, staff->start_x + object_x + 3, y + 13);
+/* 			draw_note(area, HALF_HEAD, */
+/* 				  is_selected, */
+/* 				  staff->start_x + object_x, */
+/* 				  y, */
+/* 				  staff->start_x + object_x, */
+/* 				  y + 25, */
+/* 				  staff->start_x + object_x, */
+/* 				  y + 3); */
+/* 		} else { */
+/* 			/\* The note has the stem up *\/ */
+/* 			if ( object->nature & O_STACCATO ) */
+/* 				draw_point(area, staff->start_x + object_x + 3, y + 13); */
 
-			if ( object->nature & O_TENUTO )
-				draw_line(area, 0,0,0, staff->start_x + object_x, y + 13, staff->start_x + object_x + 8, y + 13);
+/* 			if ( object->nature & O_TENUTO ) */
+/* 				draw_line(area, 0,0,0, staff->start_x + object_x, y + 13, staff->start_x + object_x + 8, y + 13); */
 
-			draw_note(area, HALF_HEAD,
-				  is_selected,
-				  staff->start_x + object_x,
-				  y,
-				  staff->start_x + object_x + 9,
-				  y,
-				  staff->start_x + object_x + 9,
-				  y - 21);
-		}
-
-
-		object_x += Spacings.NotesRests.sa_half;
-
-		break;
-	case QUARTER:
-		debug_msg("QUARTER REALIZE CALLBACK\n");
-
-		draw_staff_extension(area, staff, object->pitch, staff->start_x + object_x);
-
-		if ( object->accidentals & A_SHARP )
-			draw_note(area, SHARP_ACCIDENTAL, FALSE,
-				  staff->start_x + object_x - 10,
-				  y - 6, 0, 0, 0, 0);
-
-		if (object->accidentals & A_FLAT)
-			draw_note(area, FLAT_ACCIDENTAL, FALSE,
-				  staff->start_x + object_x - 10,
-				  y - 10, 0,0, 0,0);
-		
-		if (object->accidentals & A_NATURAL)
-			draw_note(area, NATURAL_ACCIDENTAL, FALSE,
-				  staff->start_x + object_x - 10,
-				  y - 6, 0,0, 0,0);
-
-/* 		if ( object->nature & O_TIE_START ) { */
-/* 			tie_draw_tie(staff, object, object_x, y, ynext); */
+/* 			draw_note(area, HALF_HEAD, */
+/* 				  is_selected, */
+/* 				  staff->start_x + object_x, */
+/* 				  y, */
+/* 				  staff->start_x + object_x + 9, */
+/* 				  y, */
+/* 				  staff->start_x + object_x + 9, */
+/* 				  y - 21); */
 /* 		} */
 
-		/* 8 means the width of a quarter note. It's not really nice (* FIXME *) */
-		if ( object->nature & O_DURATION )
-			draw_point(area, staff->start_x + object_x + 8 + Spacings.AugmentationDots.sbdan, y);
+
+/* 		object_x += Spacings.NotesRests.sa_half; */
+
+/* 		break; */
+/* 	case QUARTER: */
+/* 		debug_msg("QUARTER REALIZE CALLBACK\n"); */
+
+/* 		draw_staff_extension(area, staff, object->pitch, staff->start_x + object_x); */
+
+/* 		if ( object->accidentals & A_SHARP ) */
+/* 			draw_note(area, SHARP_ACCIDENTAL, FALSE, */
+/* 				  staff->start_x + object_x - 10, */
+/* 				  y - 6, 0, 0, 0, 0); */
+
+/* 		if (object->accidentals & A_FLAT) */
+/* 			draw_note(area, FLAT_ACCIDENTAL, FALSE, */
+/* 				  staff->start_x + object_x - 10, */
+/* 				  y - 10, 0,0, 0,0); */
 		
-		if ( ! stemup ) {
-			/* The note has the stem down */
-			if ( object->nature & O_STACCATO )
-				draw_point(area, staff->start_x + object_x + 4, y - 8);
+/* 		if (object->accidentals & A_NATURAL) */
+/* 			draw_note(area, NATURAL_ACCIDENTAL, FALSE, */
+/* 				  staff->start_x + object_x - 10, */
+/* 				  y - 6, 0,0, 0,0); */
 
-			if ( object->nature & O_TENUTO )
-				draw_line(area, 0,0,0, staff->start_x + object_x, y - 8, staff->start_x + object_x + 8, y -8);
+/* /\* 		if ( object->nature & O_TIE_START ) { *\/ */
+/* /\* 			tie_draw_tie(staff, object, object_x, y, ynext); *\/ */
+/* /\* 		} *\/ */
 
-
-			draw_note(area, QUARTER_HEAD,
-				  is_selected,
-				  staff->start_x + object_x,
-				  y,
-				  staff->start_x + object_x,
-				  y + 25,
-				  staff->start_x + object_x,
-				  y + 3);
-		} else {
-			/* The note has the stem up */
-			if ( object->nature & O_STACCATO )
-				draw_point(area, staff->start_x + object_x + 3, y + 13);
-
-			if ( object->nature & O_TENUTO )
-				draw_line(area, 0,0,0, staff->start_x + object_x, y + 13, staff->start_x + object_x + 8, y + 13);
-
-			draw_note(area, QUARTER_HEAD,
-				  is_selected,
-				  staff->start_x + object_x,
-				  y,
-				  staff->start_x + object_x + 8,
-				  y,
-				  staff->start_x + object_x + 8,
-				  y - 21);
-		}
-
-
-		object_x += Spacings.NotesRests.sa_quarter;
-
-		break;
-	case EIGHTH:
-		debug_msg("EIGHTH REALIZE CALLBACK\n");
-
-		draw_staff_extension(area, staff, object->pitch, staff->start_x + object_x);
-
-		if ( object->accidentals & A_SHARP )
-			draw_note(area, SHARP_ACCIDENTAL, FALSE,
-				  staff->start_x + object_x - 10,
-				  y - 6, 0, 0, 0, 0);
-
-		if (object->accidentals & A_FLAT)
-			draw_note(area, FLAT_ACCIDENTAL, FALSE,
-				  staff->start_x + object_x - 10,
-				  y - 10, 0,0, 0,0);
+/* 		/\* 8 means the width of a quarter note. It's not really nice (* FIXME *) *\/ */
+/* 		if ( object->nature & O_DURATION ) */
+/* 			draw_point(area, staff->start_x + object_x + 8 + Spacings.AugmentationDots.sbdan, y); */
 		
-		if (object->accidentals & A_NATURAL)
-			draw_note(area, NATURAL_ACCIDENTAL, FALSE,
-				  staff->start_x + object_x - 10,
-				  y - 6, 0,0, 0,0);
+/* 		if ( ! stemup ) { */
+/* 			/\* The note has the stem down *\/ */
+/* 			if ( object->nature & O_STACCATO ) */
+/* 				draw_point(area, staff->start_x + object_x + 4, y - 8); */
 
-		if ( object->nature & O_DURATION )
-			draw_point(area, staff->start_x + object_x + 12, y);
+/* 			if ( object->nature & O_TENUTO ) */
+/* 				draw_line(area, 0,0,0, staff->start_x + object_x, y - 8, staff->start_x + object_x + 8, y -8); */
 
 
-		if ( object->nature & O_BEAMED ) {
-			if ( object->nature & O_LAST_BEAMED ) {
-				if ( ! stemup ) {
-					if ( object->nature & O_STACCATO )
-						draw_point(area, staff->start_x + object_x + 4, y - 8);
+/* 			draw_note(area, QUARTER_HEAD, */
+/* 				  is_selected, */
+/* 				  staff->start_x + object_x, */
+/* 				  y, */
+/* 				  staff->start_x + object_x, */
+/* 				  y + 25, */
+/* 				  staff->start_x + object_x, */
+/* 				  y + 3); */
+/* 		} else { */
+/* 			/\* The note has the stem up *\/ */
+/* 			if ( object->nature & O_STACCATO ) */
+/* 				draw_point(area, staff->start_x + object_x + 3, y + 13); */
+
+/* 			if ( object->nature & O_TENUTO ) */
+/* 				draw_line(area, 0,0,0, staff->start_x + object_x, y + 13, staff->start_x + object_x + 8, y + 13); */
+
+/* 			draw_note(area, QUARTER_HEAD, */
+/* 				  is_selected, */
+/* 				  staff->start_x + object_x, */
+/* 				  y, */
+/* 				  staff->start_x + object_x + 8, */
+/* 				  y, */
+/* 				  staff->start_x + object_x + 8, */
+/* 				  y - 21); */
+/* 		} */
+
+
+/* 		object_x += Spacings.NotesRests.sa_quarter; */
+
+/* 		break; */
+/* 	case EIGHTH: */
+/* 		debug_msg("EIGHTH REALIZE CALLBACK\n"); */
+
+/* 		draw_staff_extension(area, staff, object->pitch, staff->start_x + object_x); */
+
+/* 		if ( object->accidentals & A_SHARP ) */
+/* 			draw_note(area, SHARP_ACCIDENTAL, FALSE, */
+/* 				  staff->start_x + object_x - 10, */
+/* 				  y - 6, 0, 0, 0, 0); */
+
+/* 		if (object->accidentals & A_FLAT) */
+/* 			draw_note(area, FLAT_ACCIDENTAL, FALSE, */
+/* 				  staff->start_x + object_x - 10, */
+/* 				  y - 10, 0,0, 0,0); */
+		
+/* 		if (object->accidentals & A_NATURAL) */
+/* 			draw_note(area, NATURAL_ACCIDENTAL, FALSE, */
+/* 				  staff->start_x + object_x - 10, */
+/* 				  y - 6, 0,0, 0,0); */
+
+/* 		if ( object->nature & O_DURATION ) */
+/* 			draw_point(area, staff->start_x + object_x + 12, y); */
+
+
+/* 		if ( object->nature & O_BEAMED ) { */
+/* 			if ( object->nature & O_LAST_BEAMED ) { */
+/* 				if ( ! stemup ) { */
+/* 					if ( object->nature & O_STACCATO ) */
+/* 						draw_point(area, staff->start_x + object_x + 4, y - 8); */
 				
-					if ( object->nature & O_TENUTO )
-						draw_line(area, 0,0,0, staff->start_x + object_x, y - 8, staff->start_x + object_x + 8, y -8);
+/* 					if ( object->nature & O_TENUTO ) */
+/* 						draw_line(area, 0,0,0, staff->start_x + object_x, y - 8, staff->start_x + object_x + 8, y -8); */
 
-					draw_note(area, QUARTER_HEAD,
-						  is_selected,
-						  staff->start_x + object_x,
-						  y,
-						  staff->start_x + object_x,
-						  y + 25,
-						  staff->start_x + object_x,
-						  y + 3);
-				} else {
-					if ( object->nature & O_STACCATO )
-						draw_point(area, staff->start_x + object_x + 3, y + 13);
+/* 					draw_note(area, QUARTER_HEAD, */
+/* 						  is_selected, */
+/* 						  staff->start_x + object_x, */
+/* 						  y, */
+/* 						  staff->start_x + object_x, */
+/* 						  y + 25, */
+/* 						  staff->start_x + object_x, */
+/* 						  y + 3); */
+/* 				} else { */
+/* 					if ( object->nature & O_STACCATO ) */
+/* 						draw_point(area, staff->start_x + object_x + 3, y + 13); */
 				
-					if ( object->nature & O_TENUTO )
-						draw_line(area, 0,0,0, staff->start_x + object_x, y + 13, staff->start_x + object_x + 8, y + 13);
+/* 					if ( object->nature & O_TENUTO ) */
+/* 						draw_line(area, 0,0,0, staff->start_x + object_x, y + 13, staff->start_x + object_x + 8, y + 13); */
 
-					draw_note(area, QUARTER_HEAD,
-						  is_selected,
-						  staff->start_x + object_x,
-						  y,
-						  staff->start_x + object_x + 8,
-						  y,
-						  staff->start_x + object_x + 8,
-						  y - 21);
-				}
-			} else {
-				if ( ! stemup ) {
-					if ( object->nature & O_STACCATO )
-						draw_point(area, staff->start_x + object_x + 4, y - 8);
+/* 					draw_note(area, QUARTER_HEAD, */
+/* 						  is_selected, */
+/* 						  staff->start_x + object_x, */
+/* 						  y, */
+/* 						  staff->start_x + object_x + 8, */
+/* 						  y, */
+/* 						  staff->start_x + object_x + 8, */
+/* 						  y - 21); */
+/* 				} */
+/* 			} else { */
+/* 				if ( ! stemup ) { */
+/* 					if ( object->nature & O_STACCATO ) */
+/* 						draw_point(area, staff->start_x + object_x + 4, y - 8); */
 				
-					if ( object->nature & O_TENUTO )
-						draw_line(area, 0,0,0, staff->start_x + object_x, y - 8, staff->start_x + object_x + 8, y -8);
+/* 					if ( object->nature & O_TENUTO ) */
+/* 						draw_line(area, 0,0,0, staff->start_x + object_x, y - 8, staff->start_x + object_x + 8, y -8); */
 
-					draw_note(area, QUARTER_HEAD,
-						  is_selected,
-						  staff->start_x + object_x,
-						  y,
-						  staff->start_x + object_x,
-						  y + 25,
-						  staff->start_x + object_x,
-						  y + 3);
+/* 					draw_note(area, QUARTER_HEAD, */
+/* 						  is_selected, */
+/* 						  staff->start_x + object_x, */
+/* 						  y, */
+/* 						  staff->start_x + object_x, */
+/* 						  y + 25, */
+/* 						  staff->start_x + object_x, */
+/* 						  y + 3); */
 
-					beam_draw_beam(area, staff, object, object_x - 8, y + 25, ynext + 25);
-				} else {
-					if ( object->nature & O_STACCATO )
-						draw_point(area, staff->start_x + object_x + 3, y + 13);
+/* 					beam_draw_beam(area, staff, object, object_x - 8, y + 25, ynext + 25); */
+/* 				} else { */
+/* 					if ( object->nature & O_STACCATO ) */
+/* 						draw_point(area, staff->start_x + object_x + 3, y + 13); */
 				
-					if ( object->nature & O_TENUTO )
-						draw_line(area, 0,0,0, staff->start_x + object_x, y + 13, staff->start_x + object_x + 8, y + 13);
+/* 					if ( object->nature & O_TENUTO ) */
+/* 						draw_line(area, 0,0,0, staff->start_x + object_x, y + 13, staff->start_x + object_x + 8, y + 13); */
 
-					draw_note(area, QUARTER_HEAD,
-						  is_selected,
-						  staff->start_x + object_x,
-						  y,
-						  staff->start_x + object_x + 8,
-						  y,
-						  staff->start_x + object_x + 8,
-						  y - 21);
+/* 					draw_note(area, QUARTER_HEAD, */
+/* 						  is_selected, */
+/* 						  staff->start_x + object_x, */
+/* 						  y, */
+/* 						  staff->start_x + object_x + 8, */
+/* 						  y, */
+/* 						  staff->start_x + object_x + 8, */
+/* 						  y - 21); */
 					
-					beam_draw_beam(area, staff, object, object_x, y - 21, ynext - 21);
-				}
-			}
-		} else {
+/* 					beam_draw_beam(area, staff, object, object_x, y - 21, ynext - 21); */
+/* 				} */
+/* 			} */
+/* 		} else { */
 
-			if ( ! stemup ) {
-				/* The note has the stem down */
-				if ( object->nature & O_STACCATO )
-					draw_point(area, staff->start_x + object_x + 4, y - 8);
+/* 			if ( ! stemup ) { */
+/* 				/\* The note has the stem down *\/ */
+/* 				if ( object->nature & O_STACCATO ) */
+/* 					draw_point(area, staff->start_x + object_x + 4, y - 8); */
 				
-				if ( object->nature & O_TENUTO )
-					draw_line(area, 0,0,0, staff->start_x + object_x, y - 8, staff->start_x + object_x + 8, y -8);
+/* 				if ( object->nature & O_TENUTO ) */
+/* 					draw_line(area, 0,0,0, staff->start_x + object_x, y - 8, staff->start_x + object_x + 8, y -8); */
 				
-				draw_eighth_down(area, is_selected, staff->start_x + object_x, y - 21);
-			} else {
-				/* The note has the stem up */
-				if ( object->nature & O_STACCATO )
-					draw_point(area, staff->start_x + object_x + 3, y + 13);
+/* 				draw_eighth_down(area, is_selected, staff->start_x + object_x, y - 21); */
+/* 			} else { */
+/* 				/\* The note has the stem up *\/ */
+/* 				if ( object->nature & O_STACCATO ) */
+/* 					draw_point(area, staff->start_x + object_x + 3, y + 13); */
 				
-				if ( object->nature & O_TENUTO )
-					draw_line(area, 0,0,0, staff->start_x + object_x, y + 13, staff->start_x + object_x + 8, y + 13);
+/* 				if ( object->nature & O_TENUTO ) */
+/* 					draw_line(area, 0,0,0, staff->start_x + object_x, y + 13, staff->start_x + object_x + 8, y + 13); */
 
-				draw_eighth_up(area, is_selected, staff->start_x + object_x, y - 21);
-			}
+/* 				draw_eighth_up(area, is_selected, staff->start_x + object_x, y - 21); */
+/* 			} */
 
-		}
+/* 		} */
 
-		object_x += Spacings.NotesRests.sa_eighth;
+/* 		object_x += Spacings.NotesRests.sa_eighth; */
 
-		break;
-	case SIXTEENTH:
-		debug_msg("SIXTEENTH REALIZE CALLBACK\n");
+/* 		break; */
+/* 	case SIXTEENTH: */
+/* 		debug_msg("SIXTEENTH REALIZE CALLBACK\n"); */
 
-		draw_staff_extension(area, staff, object->pitch, staff->start_x + object_x);
-		if ( object->accidentals & A_SHARP )
-			draw_note(area, SHARP_ACCIDENTAL, FALSE,
-				  staff->start_x + object_x - 10,
-				  y - 6, 0, 0, 0, 0);
+/* 		draw_staff_extension(area, staff, object->pitch, staff->start_x + object_x); */
+/* 		if ( object->accidentals & A_SHARP ) */
+/* 			draw_note(area, SHARP_ACCIDENTAL, FALSE, */
+/* 				  staff->start_x + object_x - 10, */
+/* 				  y - 6, 0, 0, 0, 0); */
 
-		if (object->accidentals & A_FLAT)
-			draw_note(area, FLAT_ACCIDENTAL, FALSE,
-				  staff->start_x + object_x - 10,
-				  y - 10, 0,0, 0,0);
+/* 		if (object->accidentals & A_FLAT) */
+/* 			draw_note(area, FLAT_ACCIDENTAL, FALSE, */
+/* 				  staff->start_x + object_x - 10, */
+/* 				  y - 10, 0,0, 0,0); */
 		
-		if (object->accidentals & A_NATURAL)
-			draw_note(area, NATURAL_ACCIDENTAL, FALSE,
-				  staff->start_x + object_x - 10,
-				  y - 6, 0,0, 0,0);
+/* 		if (object->accidentals & A_NATURAL) */
+/* 			draw_note(area, NATURAL_ACCIDENTAL, FALSE, */
+/* 				  staff->start_x + object_x - 10, */
+/* 				  y - 6, 0,0, 0,0); */
 
-		if ( object->nature & O_DURATION )
-			draw_point(area, staff->start_x + object_x + 12, y);
+/* 		if ( object->nature & O_DURATION ) */
+/* 			draw_point(area, staff->start_x + object_x + 12, y); */
 
 
-		if ( object->nature & O_BEAMED ) {
-			if ( object->nature & O_LAST_BEAMED ) {
-				if ( ! stemup ) {
-					if ( object->nature & O_STACCATO )
-						draw_point(area, staff->start_x + object_x + 4, y - 8);
+/* 		if ( object->nature & O_BEAMED ) { */
+/* 			if ( object->nature & O_LAST_BEAMED ) { */
+/* 				if ( ! stemup ) { */
+/* 					if ( object->nature & O_STACCATO ) */
+/* 						draw_point(area, staff->start_x + object_x + 4, y - 8); */
 				
-					if ( object->nature & O_TENUTO )
-						draw_line(area, 0,0,0, staff->start_x + object_x, y - 8, staff->start_x + object_x + 8, y -8);
+/* 					if ( object->nature & O_TENUTO ) */
+/* 						draw_line(area, 0,0,0, staff->start_x + object_x, y - 8, staff->start_x + object_x + 8, y -8); */
 
-					draw_note(area, QUARTER_HEAD,
-						  is_selected,
-						  staff->start_x + object_x,
-						  y,
-						  staff->start_x + object_x,
-						  y + 25,
-						  staff->start_x + object_x,
-						  y + 3);
-				} else {
-					if ( object->nature & O_STACCATO )
-						draw_point(area, staff->start_x + object_x + 3, y + 13);
+/* 					draw_note(area, QUARTER_HEAD, */
+/* 						  is_selected, */
+/* 						  staff->start_x + object_x, */
+/* 						  y, */
+/* 						  staff->start_x + object_x, */
+/* 						  y + 25, */
+/* 						  staff->start_x + object_x, */
+/* 						  y + 3); */
+/* 				} else { */
+/* 					if ( object->nature & O_STACCATO ) */
+/* 						draw_point(area, staff->start_x + object_x + 3, y + 13); */
 
-					if ( object->nature & O_TENUTO )
-						draw_line(area, 0,0,0, staff->start_x + object_x, y + 13, staff->start_x + object_x + 8, y + 13);
+/* 					if ( object->nature & O_TENUTO ) */
+/* 						draw_line(area, 0,0,0, staff->start_x + object_x, y + 13, staff->start_x + object_x + 8, y + 13); */
 
-					draw_note(area, QUARTER_HEAD,
-						  is_selected,
-						  staff->start_x + object_x,
-						  y,
-						  staff->start_x + object_x + 8,
-						  y,
-						  staff->start_x + object_x + 8,
-						  y - 21);
-				}
-			} else {
-				if ( ! stemup ) {
-					if ( object->nature & O_STACCATO )
-						draw_point(area, staff->start_x + object_x + 4, y - 8);
+/* 					draw_note(area, QUARTER_HEAD, */
+/* 						  is_selected, */
+/* 						  staff->start_x + object_x, */
+/* 						  y, */
+/* 						  staff->start_x + object_x + 8, */
+/* 						  y, */
+/* 						  staff->start_x + object_x + 8, */
+/* 						  y - 21); */
+/* 				} */
+/* 			} else { */
+/* 				if ( ! stemup ) { */
+/* 					if ( object->nature & O_STACCATO ) */
+/* 						draw_point(area, staff->start_x + object_x + 4, y - 8); */
 				
-					if ( object->nature & O_TENUTO )
-						draw_line(area, 0,0,0, staff->start_x + object_x, y - 8, staff->start_x + object_x + 8, y -8);
+/* 					if ( object->nature & O_TENUTO ) */
+/* 						draw_line(area, 0,0,0, staff->start_x + object_x, y - 8, staff->start_x + object_x + 8, y -8); */
 
-					draw_note(area, QUARTER_HEAD,
-						  is_selected,
-						  staff->start_x + object_x,
-						  y,
-						  staff->start_x + object_x,
-						  y + 25,
-						  staff->start_x + object_x,
-						  y + 3);
+/* 					draw_note(area, QUARTER_HEAD, */
+/* 						  is_selected, */
+/* 						  staff->start_x + object_x, */
+/* 						  y, */
+/* 						  staff->start_x + object_x, */
+/* 						  y + 25, */
+/* 						  staff->start_x + object_x, */
+/* 						  y + 3); */
 
-					beam_draw_beam(area, staff, object, object_x - 8, y + 46, ynext + 46);
+/* 					beam_draw_beam(area, staff, object, object_x - 8, y + 46, ynext + 46); */
 
-				} else {
-					if ( object->nature & O_STACCATO )
-						draw_point(area, staff->start_x + object_x + 3, y + 13);
+/* 				} else { */
+/* 					if ( object->nature & O_STACCATO ) */
+/* 						draw_point(area, staff->start_x + object_x + 3, y + 13); */
 
-					if ( object->nature & O_TENUTO )
-						draw_line(area, 0,0,0, staff->start_x + object_x, y + 13, staff->start_x + object_x + 8, y + 13);
+/* 					if ( object->nature & O_TENUTO ) */
+/* 						draw_line(area, 0,0,0, staff->start_x + object_x, y + 13, staff->start_x + object_x + 8, y + 13); */
 
-					draw_note(area, QUARTER_HEAD,
-						  is_selected,
-						  staff->start_x + object_x,
-						  y,
-						  staff->start_x + object_x + 8,
-						  y,
-						  staff->start_x + object_x + 8,
-						  y - 21);
+/* 					draw_note(area, QUARTER_HEAD, */
+/* 						  is_selected, */
+/* 						  staff->start_x + object_x, */
+/* 						  y, */
+/* 						  staff->start_x + object_x + 8, */
+/* 						  y, */
+/* 						  staff->start_x + object_x + 8, */
+/* 						  y - 21); */
 
-					beam_draw_beam(area, staff, object, object_x, y, ynext);
-				}
+/* 					beam_draw_beam(area, staff, object, object_x, y, ynext); */
+/* 				} */
 				
-			}
-		} else {
+/* 			} */
+/* 		} else { */
 
-			if ( ! stemup ) {
-				/* The note has the stem down */
-				if ( object->nature & O_STACCATO )
-					draw_point(area, staff->start_x + object_x + 4, y - 8);
+/* 			if ( ! stemup ) { */
+/* 				/\* The note has the stem down *\/ */
+/* 				if ( object->nature & O_STACCATO ) */
+/* 					draw_point(area, staff->start_x + object_x + 4, y - 8); */
 				
-				if ( object->nature & O_TENUTO )
-					draw_line(area, 0,0,0, staff->start_x + object_x, y - 8, staff->start_x + object_x + 8, y -8);
+/* 				if ( object->nature & O_TENUTO ) */
+/* 					draw_line(area, 0,0,0, staff->start_x + object_x, y - 8, staff->start_x + object_x + 8, y -8); */
 
-				draw_sixteenth_down(area, is_selected, staff->start_x + object_x, y - 21);
-			} else {
-				/* The note has the stem up */
-				if ( object->nature & O_STACCATO )
-					draw_point(area, staff->start_x + object_x + 3, y + 13);
+/* 				draw_sixteenth_down(area, is_selected, staff->start_x + object_x, y - 21); */
+/* 			} else { */
+/* 				/\* The note has the stem up *\/ */
+/* 				if ( object->nature & O_STACCATO ) */
+/* 					draw_point(area, staff->start_x + object_x + 3, y + 13); */
 
-				if ( object->nature & O_TENUTO )
-					draw_line(area, 0,0,0, staff->start_x + object_x, y + 13, staff->start_x + object_x + 8, y + 13);
+/* 				if ( object->nature & O_TENUTO ) */
+/* 					draw_line(area, 0,0,0, staff->start_x + object_x, y + 13, staff->start_x + object_x + 8, y + 13); */
 
-				draw_sixteenth_up(area, is_selected, staff->start_x + object_x, y - 21);
-			}
+/* 				draw_sixteenth_up(area, is_selected, staff->start_x + object_x, y - 21); */
+/* 			} */
 
-		}
+/* 		} */
 
-		object_x += Spacings.NotesRests.sa_sixteenth;
+/* 		object_x += Spacings.NotesRests.sa_sixteenth; */
 
-		break;
+/* 		break; */
 
-		/* RESTS */
-	case DOUBLEWHOLEREST:
-		debug_msg("DOUBLEWHOLEREST REALIZE CALLBACK\n");
+/* 		/\* RESTS *\/ */
+/* 	case DOUBLEWHOLEREST: */
+/* 		debug_msg("DOUBLEWHOLEREST REALIZE CALLBACK\n"); */
 
-		if ( object->nature & O_DURATION )
-			draw_point(area, staff->start_x + object_x + 12, y);
+/* 		if ( object->nature & O_DURATION ) */
+/* 			draw_point(area, staff->start_x + object_x + 12, y); */
 
-		draw_pixmap(area->window, DOUBLEWHOLE_REST, 
-                            is_selected,
-			    staff->start_x + object_x, y); 
+/* 		draw_pixmap(area->window, DOUBLEWHOLE_REST,  */
+/*                             is_selected, */
+/* 			    staff->start_x + object_x, y);  */
 
-		object_x += Spacings.NotesRests.sa_doublewholerest;
+/* 		object_x += Spacings.NotesRests.sa_doublewholerest; */
 		
-		break;
-	case WHOLEREST:
-		debug_msg("WHOLEREST REALIZE CALLBACK\n");
+/* 		break; */
+/* 	case WHOLEREST: */
+/* 		debug_msg("WHOLEREST REALIZE CALLBACK\n"); */
 
-		if ( object->nature & O_DURATION )
-			draw_point(area, staff->start_x + object_x + 12, y);
+/* 		if ( object->nature & O_DURATION ) */
+/* 			draw_point(area, staff->start_x + object_x + 12, y); */
 
-		draw_pixmap(area->window, WHOLE_REST,
-                            is_selected,
-			    staff->start_x + object_x, y); 
+/* 		draw_pixmap(area->window, WHOLE_REST, */
+/*                             is_selected, */
+/* 			    staff->start_x + object_x, y);  */
 
-		object_x += Spacings.NotesRests.sa_wholerest;
+/* 		object_x += Spacings.NotesRests.sa_wholerest; */
 
-		break;
-	case HALFREST:
-		debug_msg("HALFREST REALIZE CALLBACK\n");
+/* 		break; */
+/* 	case HALFREST: */
+/* 		debug_msg("HALFREST REALIZE CALLBACK\n"); */
 
-		if ( object->nature & O_DURATION )
-			draw_point(area, staff->start_x + object_x + 12, y);
+/* 		if ( object->nature & O_DURATION ) */
+/* 			draw_point(area, staff->start_x + object_x + 12, y); */
 
-		draw_pixmap(area->window, HALF_REST,
-                            is_selected,
-			    staff->start_x + object_x, y); 
+/* 		draw_pixmap(area->window, HALF_REST, */
+/*                             is_selected, */
+/* 			    staff->start_x + object_x, y);  */
 
-		object_x += Spacings.NotesRests.sa_halfrest;
+/* 		object_x += Spacings.NotesRests.sa_halfrest; */
 
-		break;
-	case QUARTERREST:
-		debug_msg("QUARTERREST REALIZE CALLBACK\n");
+/* 		break; */
+/* 	case QUARTERREST: */
+/* 		debug_msg("QUARTERREST REALIZE CALLBACK\n"); */
 
-		if ( object->nature & O_DURATION )
-			draw_point(area, staff->start_x + object_x + 12, y);
+/* 		if ( object->nature & O_DURATION ) */
+/* 			draw_point(area, staff->start_x + object_x + 12, y); */
 
-		draw_pixmap(area->window, QUARTER_REST,
-                            is_selected,
-			    staff->start_x + object_x, staff->extremity_begin_y + 8); 
+/* 		draw_pixmap(area->window, QUARTER_REST, */
+/*                             is_selected, */
+/* 			    staff->start_x + object_x, staff->extremity_begin_y + 8);  */
 
-		object_x += Spacings.NotesRests.sa_quarterrest;
+/* 		object_x += Spacings.NotesRests.sa_quarterrest; */
 
-		break;
-	case EIGHTHREST:
-		debug_msg("EIGHTHREST REALIZE CALLBACK\n");
+/* 		break; */
+/* 	case EIGHTHREST: */
+/* 		debug_msg("EIGHTHREST REALIZE CALLBACK\n"); */
 
-		if ( object->nature & O_DURATION )
-			draw_point(area, staff->start_x + object_x + 12, y);
+/* 		if ( object->nature & O_DURATION ) */
+/* 			draw_point(area, staff->start_x + object_x + 12, y); */
 
-		draw_pixmap(area->window, EIGHTH_REST,
-                            is_selected,
-			    staff->start_x + object_x, y); 
+/* 		draw_pixmap(area->window, EIGHTH_REST, */
+/*                             is_selected, */
+/* 			    staff->start_x + object_x, y);  */
 
-		object_x += Spacings.NotesRests.sa_eighthrest;
+/* 		object_x += Spacings.NotesRests.sa_eighthrest; */
 
-		break;
-	case SIXTEENTHREST:
-		debug_msg("SIXTEENTHREST REALIZE CALLBACK\n");
+/* 		break; */
+/* 	case SIXTEENTHREST: */
+/* 		debug_msg("SIXTEENTHREST REALIZE CALLBACK\n"); */
 
-		if ( object->nature & O_DURATION )
-			draw_point(area, staff->start_x + object_x + 12, y);
+/* 		if ( object->nature & O_DURATION ) */
+/* 			draw_point(area, staff->start_x + object_x + 12, y); */
 
-		draw_pixmap(area->window, SIXTEENTH_REST,
-                            is_selected,
-			    staff->start_x + object_x, y); 
+/* 		draw_pixmap(area->window, SIXTEENTH_REST, */
+/*                             is_selected, */
+/* 			    staff->start_x + object_x, y);  */
 
-		object_x += Spacings.NotesRests.sa_sixteenthrest;
+/* 		object_x += Spacings.NotesRests.sa_sixteenthrest; */
 
-		break;
+/* 		break; */
 
-		/* BARLINES */
-	case BARLINE_SINGLE:
-		debug_msg("BARLINE_SINGLE REALIZE CALLBACK\n");
+/* 		/\* BARLINES *\/ */
+/* 	case BARLINE_SINGLE: */
+/* 		debug_msg("BARLINE_SINGLE REALIZE CALLBACK\n"); */
 
-		measure_number++;
+/* 		measure_number++; */
 
-		if (display_barlines) {
-			draw_barline_single(area, staff, staff->start_x + object_x);
+/* 		if (display_barlines) { */
+/* 			draw_barline_single(area, staff, staff->start_x + object_x); */
 
-			if (display_measure_number) {
-				set_text(area, g_strdup_printf("%d", measure_number), 
-					 staff->start_x + object_x,
-					 staff->extremity_begin_y - 17);
-			}
-		}
-		object_x += Spacings.Barlines.sab;
+/* 			if (display_measure_number) { */
+/* 				set_text(area, g_strdup_printf("%d", measure_number),  */
+/* 					 staff->start_x + object_x, */
+/* 					 staff->extremity_begin_y - 17); */
+/* 			} */
+/* 		} */
+/* 		object_x += Spacings.Barlines.sab; */
 
-		break;
-	case BARLINE_DOUBLE:
-		debug_msg("BARLINE_DOUBLE REALIZE CALLBACK\n");
+/* 		break; */
+/* 	case BARLINE_DOUBLE: */
+/* 		debug_msg("BARLINE_DOUBLE REALIZE CALLBACK\n"); */
 
-		measure_number++;
+/* 		measure_number++; */
 
-		if (display_barlines) {
-			draw_barline_double(area, staff, staff->start_x + object_x);
+/* 		if (display_barlines) { */
+/* 			draw_barline_double(area, staff, staff->start_x + object_x); */
 
-			if (display_measure_number) {
-				set_text(area, g_strdup_printf("%d", measure_number), 
-					 staff->start_x + object_x,
-					 staff->extremity_begin_y - 17);
-			}
-		}
-		object_x += Spacings.Barlines.sab;
+/* 			if (display_measure_number) { */
+/* 				set_text(area, g_strdup_printf("%d", measure_number),  */
+/* 					 staff->start_x + object_x, */
+/* 					 staff->extremity_begin_y - 17); */
+/* 			} */
+/* 		} */
+/* 		object_x += Spacings.Barlines.sab; */
 
-		break;
-	case BARLINE_OPENREPEAT:
-		debug_msg("BARLINE_OPENREPEAT REALIZE CALLBACK\n");
+/* 		break; */
+/* 	case BARLINE_OPENREPEAT: */
+/* 		debug_msg("BARLINE_OPENREPEAT REALIZE CALLBACK\n"); */
 
-		measure_number++;
+/* 		measure_number++; */
 
-		if (display_barlines) {
-			draw_barline_openrepeat(area, staff, staff->start_x + object_x);
+/* 		if (display_barlines) { */
+/* 			draw_barline_openrepeat(area, staff, staff->start_x + object_x); */
 
-			if (display_measure_number) {
-				set_text(area, g_strdup_printf("%d", measure_number), 
-					 staff->start_x + object_x,
-					 staff->extremity_begin_y - 17);
-			}
-		}
-		object_x += Spacings.Barlines.sab;
+/* 			if (display_measure_number) { */
+/* 				set_text(area, g_strdup_printf("%d", measure_number),  */
+/* 					 staff->start_x + object_x, */
+/* 					 staff->extremity_begin_y - 17); */
+/* 			} */
+/* 		} */
+/* 		object_x += Spacings.Barlines.sab; */
 
-		break;
-	case BARLINE_CLOSEREPEAT:
-		debug_msg("BARLINE_CLOSEREPEAT REALIZE CALLBACK\n");
+/* 		break; */
+/* 	case BARLINE_CLOSEREPEAT: */
+/* 		debug_msg("BARLINE_CLOSEREPEAT REALIZE CALLBACK\n"); */
 
-		measure_number++;
+/* 		measure_number++; */
 
-		if (display_barlines) {
-			draw_barline_closerepeat(area, staff, staff->start_x + object_x);
+/* 		if (display_barlines) { */
+/* 			draw_barline_closerepeat(area, staff, staff->start_x + object_x); */
 
-			if (display_measure_number) {
-				set_text(area, g_strdup_printf("%d", measure_number), 
-					 staff->start_x + object_x,
-					 staff->extremity_begin_y - 17);
-			}
-		}
+/* 			if (display_measure_number) { */
+/* 				set_text(area, g_strdup_printf("%d", measure_number),  */
+/* 					 staff->start_x + object_x, */
+/* 					 staff->extremity_begin_y - 17); */
+/* 			} */
+/* 		} */
 
-		object_x += Spacings.Barlines.sab;
+/* 		object_x += Spacings.Barlines.sab; */
 
-		break;
-	case BARLINE_OPENCLOSEREPEAT:
-		debug_msg("BARLINE_OPENCLOSEREPEAT REALIZE CALLBACK\n");
+/* 		break; */
+/* 	case BARLINE_OPENCLOSEREPEAT: */
+/* 		debug_msg("BARLINE_OPENCLOSEREPEAT REALIZE CALLBACK\n"); */
 
-		measure_number++;
+/* 		measure_number++; */
 
-		if (display_barlines) {
-			draw_barline_opencloserepeat(area, staff, staff->start_x + object_x);
+/* 		if (display_barlines) { */
+/* 			draw_barline_opencloserepeat(area, staff, staff->start_x + object_x); */
 
-			if (display_measure_number) {
-				set_text(area, g_strdup_printf("%d", measure_number), 
-					 staff->start_x + object_x,
-					 staff->extremity_begin_y - 17);
-			}
-		}
-		object_x += Spacings.Barlines.sab;
+/* 			if (display_measure_number) { */
+/* 				set_text(area, g_strdup_printf("%d", measure_number),  */
+/* 					 staff->start_x + object_x, */
+/* 					 staff->extremity_begin_y - 17); */
+/* 			} */
+/* 		} */
+/* 		object_x += Spacings.Barlines.sab; */
 
-		break;
+/* 		break; */
 
-		/* DYNAMICS */
-	case DYNAMIC_PPPP:
-		set_dynamic_text(area, "pppp", object->x, extremity_end_y + 10);
-		break;
-	case DYNAMIC_PPP:
-		set_dynamic_text(area, "ppp", object->x, extremity_end_y + 10);
-		break;
-	case DYNAMIC_PP:
-		set_dynamic_text(area, "pp", object->x, extremity_end_y + 10);
-		break;
-	case DYNAMIC_P:
-		set_dynamic_text(area, "p", object->x, extremity_end_y + 10);
-		break;
-	case DYNAMIC_MP:
-		set_dynamic_text(area, "mp", object->x, extremity_end_y + 10);
-		break;
-	case DYNAMIC_MF:
-		set_dynamic_text(area, "mf", object->x, extremity_end_y + 10);
-		break;
-	case DYNAMIC_F:
-		set_dynamic_text(area, "f", object->x, extremity_end_y + 10);
-		break;
-	case DYNAMIC_FF:
-		set_dynamic_text(area, "ff", object->x, extremity_end_y + 10);
-		break;
-	case DYNAMIC_FFF:
-		set_dynamic_text(area, "fff", object->x, extremity_end_y + 10);
-		break;
+/* 		/\* DYNAMICS *\/ */
+/* 	case DYNAMIC_PPPP: */
+/* 		set_dynamic_text(area, "pppp", object->x, extremity_end_y + 10); */
+/* 		break; */
+/* 	case DYNAMIC_PPP: */
+/* 		set_dynamic_text(area, "ppp", object->x, extremity_end_y + 10); */
+/* 		break; */
+/* 	case DYNAMIC_PP: */
+/* 		set_dynamic_text(area, "pp", object->x, extremity_end_y + 10); */
+/* 		break; */
+/* 	case DYNAMIC_P: */
+/* 		set_dynamic_text(area, "p", object->x, extremity_end_y + 10); */
+/* 		break; */
+/* 	case DYNAMIC_MP: */
+/* 		set_dynamic_text(area, "mp", object->x, extremity_end_y + 10); */
+/* 		break; */
+/* 	case DYNAMIC_MF: */
+/* 		set_dynamic_text(area, "mf", object->x, extremity_end_y + 10); */
+/* 		break; */
+/* 	case DYNAMIC_F: */
+/* 		set_dynamic_text(area, "f", object->x, extremity_end_y + 10); */
+/* 		break; */
+/* 	case DYNAMIC_FF: */
+/* 		set_dynamic_text(area, "ff", object->x, extremity_end_y + 10); */
+/* 		break; */
+/* 	case DYNAMIC_FFF: */
+/* 		set_dynamic_text(area, "fff", object->x, extremity_end_y + 10); */
+/* 		break; */
 
-		/* CHANGE KEY */
-	case TREBLE_KEY:
-		draw_pixmap(area->window, CLEF_G,
-                            is_selected,
-			    staff->start_x + object_x,
-			    staff->extremity_begin_y - 8);
+/* 		/\* CHANGE KEY *\/ */
+/* 	case TREBLE_KEY: */
+/* 		draw_pixmap(area->window, CLEF_G, */
+/*                             is_selected, */
+/* 			    staff->start_x + object_x, */
+/* 			    staff->extremity_begin_y - 8); */
 
-		object_x += STANDARD_KEY_SIZE + Spacings.Clefs.sa;
+/* 		object_x += STANDARD_KEY_SIZE + Spacings.Clefs.sa; */
 
-		break;
-	case BASS_KEY:
-		draw_pixmap(area->window, CLEF_F,
-                            is_selected,
-			    staff->start_x + object_x,
-			    staff->extremity_begin_y + 1);
+/* 		break; */
+/* 	case BASS_KEY: */
+/* 		draw_pixmap(area->window, CLEF_F, */
+/*                             is_selected, */
+/* 			    staff->start_x + object_x, */
+/* 			    staff->extremity_begin_y + 1); */
 
-		object_x += STANDARD_KEY_SIZE + Spacings.Clefs.sa;
+/* 		object_x += STANDARD_KEY_SIZE + Spacings.Clefs.sa; */
 
-		break;
-	case ALTO_KEY:
-		draw_pixmap(area->window, CLEF_C,
-                            is_selected,
-			    staff->start_x + object_x,
-			    staff->extremity_begin_y + 5);
+/* 		break; */
+/* 	case ALTO_KEY: */
+/* 		draw_pixmap(area->window, CLEF_C, */
+/*                             is_selected, */
+/* 			    staff->start_x + object_x, */
+/* 			    staff->extremity_begin_y + 5); */
 
-		object_x += STANDARD_KEY_SIZE + Spacings.Clefs.sa;
+/* 		object_x += STANDARD_KEY_SIZE + Spacings.Clefs.sa; */
 
-		break;
-	case TAB_KEY:
-		draw_pixmap(area->window, CLEF_TAB,
-                            is_selected,
-			    staff->start_x + object_x,
-			    staff->extremity_begin_y + 7);
+/* 		break; */
+/* 	case TAB_KEY: */
+/* 		draw_pixmap(area->window, CLEF_TAB, */
+/*                             is_selected, */
+/* 			    staff->start_x + object_x, */
+/* 			    staff->extremity_begin_y + 7); */
 
-		object_x += STANDARD_KEY_SIZE + Spacings.Clefs.sa;
+/* 		object_x += STANDARD_KEY_SIZE + Spacings.Clefs.sa; */
 
-		break;
+/* 		break; */
 		
-	}
+/* 	} */
 
-	if (object->group_id != 0) {	/* it means it's a chord */
+/* 	if (object->group_id != 0) {	/\* it means it's a chord *\/ */
 
-		object_x = tmpx;
+/* 		object_x = tmpx; */
 
-	}
+/* 	} */
 
-	return FALSE;
+/* 	return FALSE; */
 
 }
 
 gboolean score_area_callback(GtkWidget *widget, GdkEventExpose *event, gpointer data)
 {
 
-	GList *listrunner_staff;
-	GList *listrunner_object;
-	Score_t *score = score_get_from_widget(widget);
-	GtkWidget *area = score_get_area_from_widget(widget);
-	Display_t * display = score_get_display_from_widget(widget);
-	KeyCursor_t *cursor = score_get_cursor_from_widget(widget);
+/* 	GList *listrunner_staff; */
+/* 	GList *listrunner_object; */
+/* 	Score_t *score = score_get_from_widget(widget); */
+/* 	GtkWidget *area = score_get_area_from_widget(widget); */
+/* 	Display_t * display = score_get_display_from_widget(widget); */
+/* 	KeyCursor_t *cursor = score_get_cursor_from_widget(widget); */
 
-        if ( ! score ) return FALSE;
+/*         if ( ! score ) return FALSE; */
 	
-	draw_page_limit(area, score->staff_extremity_end_x);
+/* 	draw_page_limit(area, score->staff_extremity_end_x); */
 
-	staff_update_statusbar(glade_get_widget_tree(widget));
-
-
-	/* BEGIN: Display the Tempo */
-	if (display->tempo) {
-		draw_pixmap(area->window, "pixmaps/tb_quarter.xpm",
-                            FALSE,
-			    get_staff_extremity_begin_x(score,0) + Spacings.Tempo.xpfm,
-			    get_staff_extremity_begin_y(score, 0) - Spacings.Tempo.ypfm);
-
-		if (g_str_equal(score->tempo_text->str,""))
-			set_text(area, g_strdup_printf("= %d", score->tempo),
-				 get_staff_extremity_begin_x(score, 0) + Spacings.Tempo.xpfm + 20,
-				 get_staff_extremity_begin_y(score, 0) - Spacings.Tempo.ypfm + 5);
-		else
-			set_text(area, g_strdup_printf("= %d (%s)", score->tempo, score->tempo_text->str),
-				 get_staff_extremity_begin_x(score, 0) + Spacings.Tempo.xpfm + 20,
-				 get_staff_extremity_begin_y(score, 0) - Spacings.Tempo.ypfm + 5);
-	}
-	/* END: Display the Tempo */
+/* 	staff_update_statusbar(glade_get_widget_tree(widget)); */
 
 
-	/* BEGIN: Walk through staves */
-	listrunner_staff = g_list_first(score->Staff_list);
-	while ( listrunner_staff ) {
-		/* That value is used to reinit the x position of the elements: very important */
-		object_x = 0;
-		measure_number = 1;
+/* 	/\* BEGIN: Display the Tempo *\/ */
+/* 	if (display->tempo) { */
+/* 		draw_pixmap(area->window, "pixmaps/tb_quarter.xpm", */
+/*                             FALSE, */
+/* 			    get_staff_extremity_begin_x(score,0) + Spacings.Tempo.xpfm, */
+/* 			    get_staff_extremity_begin_y(score, 0) - Spacings.Tempo.ypfm); */
 
-		Staff_t *staff;
-		staff = (Staff_t *)listrunner_staff->data;
+/* 		if (g_str_equal(score->tempo_text->str,"")) */
+/* 			set_text(area, g_strdup_printf("= %d", score->tempo), */
+/* 				 get_staff_extremity_begin_x(score, 0) + Spacings.Tempo.xpfm + 20, */
+/* 				 get_staff_extremity_begin_y(score, 0) - Spacings.Tempo.ypfm + 5); */
+/* 		else */
+/* 			set_text(area, g_strdup_printf("= %d (%s)", score->tempo, score->tempo_text->str), */
+/* 				 get_staff_extremity_begin_x(score, 0) + Spacings.Tempo.xpfm + 20, */
+/* 				 get_staff_extremity_begin_y(score, 0) - Spacings.Tempo.ypfm + 5); */
+/* 	} */
+/* 	/\* END: Display the Tempo *\/ */
 
-		/* BEGIN: Draw the staff */
-		draw_staff(area, staff->nb_lines, staff->space_btw_lines,
-			   staff->extremity_begin_x, staff->extremity_begin_y,
-			   score->staff_extremity_end_x, TRUE, staff->is_selected);
-		/* END: Draw the staff */
 
-		draw_staff_extension(area, staff, get_key_cursor_position(cursor), staff->current_x);
+/* 	/\* BEGIN: Walk through staves *\/ */
+/* 	listrunner_staff = g_list_first(score->Staff_list); */
+/* 	while ( listrunner_staff ) { */
+/* 		/\* That value is used to reinit the x position of the elements: very important *\/ */
+/* 		object_x = 0; */
+/* 		measure_number = 1; */
 
-		/* BEGIN: Draw the key cursor */
-		if ( staff->is_selected )
-			draw_key_cursor(area, get_key_cursor_position(cursor), staff->current_x, staff->extremity_begin_y);
-		/* END: Draw the key cursor */
+/* 		Staff_t *staff; */
+/* 		staff = (Staff_t *)listrunner_staff->data; */
 
-		/* BEGIN: Draw the key */
-		if ( display->clefs )
-			realize_key(area, staff);
-		/* END: Draw the key */
+/* 		/\* BEGIN: Draw the staff *\/ */
+/* 		draw_staff(area, staff->nb_lines, staff->space_btw_lines, */
+/* 			   staff->extremity_begin_x, staff->extremity_begin_y, */
+/* 			   score->staff_extremity_end_x, TRUE, staff->is_selected); */
+/* 		/\* END: Draw the staff *\/ */
 
-		/* BEGIN: Draw the ending bar */
-/* 		if ( display->ending_bar ) */
-/* 			draw_barline_endstaff(get_staff_selected()); */
-		/* END: Draw the ending bar */
+/* 		draw_staff_extension(area, staff, get_key_cursor_position(cursor), staff->current_x); */
 
-		if ( display->key_signature )
-			realize_key_signature(area, staff);
+/* 		/\* BEGIN: Draw the key cursor *\/ */
+/* 		if ( staff->is_selected ) */
+/* 			draw_key_cursor(area, get_key_cursor_position(cursor), staff->current_x, staff->extremity_begin_y); */
+/* 		/\* END: Draw the key cursor *\/ */
 
-		/* Time Signature of the staff */
-		if ( display->time_signature )
-			realize_timesignature(area, staff);
+/* 		/\* BEGIN: Draw the key *\/ */
+/* 		if ( display->clefs ) */
+/* 			realize_key(area, staff); */
+/* 		/\* END: Draw the key *\/ */
 
-		/* Parsing Objects structure */
-		listrunner_object = g_list_first(staff->Object_list);
-		while ( listrunner_object ) {
-			Object_t *object;
-			object = (Object_t *)listrunner_object->data;
+/* 		/\* BEGIN: Draw the ending bar *\/ */
+/* /\* 		if ( display->ending_bar ) *\/ */
+/* /\* 			draw_barline_endstaff(get_staff_selected()); *\/ */
+/* 		/\* END: Draw the ending bar *\/ */
 
-/* 			draw_staff(2, 5, 5, 5, 40, TRUE, FALSE); */
-/* 			tie_draw_tie(staff, object, 20, 20, 20); */
+/* 		if ( display->key_signature ) */
+/* 			realize_key_signature(area, staff); */
 
-			if (object)
-				realize_object(area, staff, object, display->barlines, display->measure_number);
+/* 		/\* Time Signature of the staff *\/ */
+/* 		if ( display->time_signature ) */
+/* 			realize_timesignature(area, staff); */
 
-			listrunner_object = g_list_next(listrunner_object);
-		}
+/* 		/\* Parsing Objects structure *\/ */
+/* 		listrunner_object = g_list_first(staff->Object_list); */
+/* 		while ( listrunner_object ) { */
+/* 			Object_t *object; */
+/* 			object = (Object_t *)listrunner_object->data; */
+
+/* /\* 			draw_staff(2, 5, 5, 5, 40, TRUE, FALSE); *\/ */
+/* /\* 			tie_draw_tie(staff, object, 20, 20, 20); *\/ */
+
+/* 			if (object) */
+/* 				realize_object(area, staff, object, display->barlines, display->measure_number); */
+
+/* 			listrunner_object = g_list_next(listrunner_object); */
+/* 		} */
 		
-		listrunner_staff = g_list_next(listrunner_staff);
-	} /* while ( listrunner_staff ) */
+/* 		listrunner_staff = g_list_next(listrunner_staff); */
+/* 	} /\* while ( listrunner_staff ) *\/ */
 
-        /* END: Walk through staves */
+/*         /\* END: Walk through staves *\/ */
 
 
-        return FALSE;
+/*         return FALSE; */
 }
 
 
