@@ -24,18 +24,32 @@ draw_staff(cairo_t *cr,
            gboolean selected)
 {
 
+        const gdouble cairo_padding = 0.5;
+        gdouble offset = 0;
+	gint16 i = 0;
+
         cairo_set_rgb_color (cr, 0, 0, 0);
 
-        cairo_move_to (cr, 5, 50.5);
-        cairo_rel_line_to (cr, 800, 0);
-        cairo_move_to (cr, 5, 58.5);
-        cairo_rel_line_to (cr, 800, 0);
-        cairo_move_to (cr, 5, 66.5);
-        cairo_rel_line_to (cr, 800.5, 0);
-        cairo_move_to (cr, 5, 74.5);
-        cairo_rel_line_to (cr, 800.5, 0);
-        cairo_move_to (cr, 5, 82.5);
-        cairo_rel_line_to (cr, 800, 0);
+        while ( i < nb_lines ) {
+                cairo_move_to(cr, x1, y1 + offset + cairo_padding);
+                cairo_rel_line_to(cr, x2, 0);
+
+                offset += space_btwn_lines;
+
+                i++;
+        }
+
+/*         cairo_move_to (cr, x1, y1 + cairo_padding); */
+/*         cairo_rel_line_to (cr, x2, 0); */
+/*         cairo_move_to (cr, x1, 58.5); */
+/*         cairo_rel_line_to (cr, x2, 0); */
+/*         cairo_move_to (cr, x1, 66.5); */
+/*         cairo_rel_line_to (cr, x2, 0); */
+/*         cairo_move_to (cr, x1, 74.5); */
+/*         cairo_rel_line_to (cr, x2, 0); */
+/*         cairo_move_to (cr, x1, 82.5); */
+/*         cairo_rel_line_to (cr, x2, 0); */
+
         cairo_set_line_width(cr, 1);
         cairo_stroke(cr);
 

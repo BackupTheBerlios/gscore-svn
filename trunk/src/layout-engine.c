@@ -65,95 +65,64 @@ void layout_paint(GtkWidget *widget,
          * font size
          */
         cairo_save (cr);
-/*         cairo_scale_font (cr, 40); */
-/*         cairo_move_to (cr, 40, 60); */
-/*         cairo_set_rgb_color (cr, 0,0,0); */
-/*         cairo_show_text (cr, "Hello World"); */
-/*         cairo_restore (cr); */
-
-/*         cairo_set_rgb_color (cr, 1,0,0); */
-/*         cairo_scale_font (cr, 20); */
-/*         cairo_move_to (cr, 50, 100); */
-/*         cairo_show_text (cr, "greetings from gtk and cairo"); */
 
 
-        draw_staff(cr, 0, 0, 0, 0, 0, 0);
-/*         cairo_set_rgb_color (cr, 0,0,0); */
+        /***************
+         * Draw Staves *
+         ***************/
+        draw_staff(cr, 5, 8, 5, 50, 300, 0);
 
-/*         cairo_move_to (cr, 5, 50.5); */
-/*         cairo_rel_line_to (cr, 800, 0); */
-/*         cairo_move_to (cr, 5, 58.5); */
-/*         cairo_rel_line_to (cr, 800, 0); */
-/*         cairo_move_to (cr, 5, 66.5); */
-/*         cairo_rel_line_to (cr, 800.5, 0); */
-/*         cairo_move_to (cr, 5, 74.5); */
-/*         cairo_rel_line_to (cr, 800.5, 0); */
-/*         cairo_move_to (cr, 5, 82.5); */
-/*         cairo_rel_line_to (cr, 800, 0); */
-/*         cairo_set_line_width(cr, 1); */
-/*         cairo_stroke(cr); */
 
+        cairo_set_rgb_color (cr, 0, 0, 0);
 
         /* Show the quarter note head */
-        cairo_select_font (cr, "gscore", CAIRO_FONT_SLANT_NORMAL,
-                           CAIRO_FONT_WEIGHT_BOLD);
-        cairo_save (cr);
-        cairo_scale_font (cr, 30);
-        cairo_move_to (cr, 100.5, 54);
-        cairo_set_rgb_color (cr, 0,0,0);
-        cairo_show_text (cr, QUARTER_GLYPH);
-        /*      cairo_restore (cr); */
+/*         cairo_select_font (cr, "gscore", CAIRO_FONT_SLANT_NORMAL, */
+/*                            CAIRO_FONT_WEIGHT_BOLD); */
+/*         cairo_save (cr); */
+/*         cairo_scale_font (cr, 30); */
+/*         cairo_move_to (cr, 100.5, 54); */
+/*         cairo_set_rgb_color (cr, 0,0,0); */
+/*         cairo_show_text (cr, QUARTER_GLYPH); */
 
         /* Show the stem */
         /* Line */
-        cairo_move_to(cr, 100.5, 54);
-        cairo_rel_line_to(cr, 0, 30.5);
-        cairo_stroke(cr);
-        /* Sixteenth */
-        cairo_move_to (cr, 101, 84.5);
-        cairo_show_text (cr, SIXTEENTH_STEM_DOWN_GLYPH);
+/*         cairo_move_to(cr, 100.5, 54); */
+/*         cairo_rel_line_to(cr, 0, 30.5); */
+/*         cairo_stroke(cr); */
+/*         /\* Sixteenth *\/ */
+/*         cairo_move_to (cr, 101, 84.5); */
+/*         cairo_show_text (cr, SIXTEENTH_STEM_DOWN_GLYPH); */
 
 
-        /* Add a sharp to the note */
-        cairo_move_to (cr, 90, 54);
-        cairo_scale_font (cr, 1);
-        cairo_set_rgb_color (cr, 0,0,0);
-        cairo_show_text (cr, SHARP_GLYPH);
-        cairo_stroke(cr);
+/*         /\* Add a sharp to the note *\/ */
+/*         cairo_move_to (cr, 90, 54); */
+/*         cairo_scale_font (cr, 1); */
+/*         cairo_set_rgb_color (cr, 0,0,0); */
+/*         cairo_show_text (cr, SHARP_GLYPH); */
+/*         cairo_stroke(cr); */
 
-        /* Show the key */
-        cairo_move_to (cr, 15.5, 75);
-        cairo_scale_font (cr, 1);
-        cairo_set_rgb_color (cr, 0,0,0);
-        cairo_show_text (cr, TREBLE_GLYPH);
-        cairo_stroke(cr);
+/*         /\* Show the key *\/ */
+/*         cairo_move_to (cr, 15.5, 75); */
+/*         cairo_scale_font (cr, 1); */
+/*         cairo_set_rgb_color (cr, 0,0,0); */
+/*         cairo_show_text (cr, TREBLE_GLYPH); */
+/*         cairo_stroke(cr); */
 
-        /* Add 2/4 */
-        cairo_move_to (cr, 40, 66.5);
-        cairo_scale_font (cr, 0.5);
-        cairo_show_text (cr, "2");
+/*         /\* Add 2/4 *\/ */
+/*         cairo_move_to (cr, 40, 66.5); */
+/*         cairo_scale_font (cr, 0.5); */
+/*         cairo_show_text (cr, "2"); */
 
-        cairo_move_to (cr, 40, 82.5);
-        cairo_show_text (cr, "4");
-
-
-        cairo_restore (cr);
-
-        cairo_set_rgb_color (cr, 1,0,0);
-        cairo_scale_font (cr, 15);
-        cairo_move_to (cr, 50, 100);
+/*         cairo_move_to (cr, 40, 82.5); */
+/*         cairo_show_text (cr, "4"); */
 
 
+/*         cairo_restore (cr); */
 
-/*         cairo_move_to (cr, 0.5, 0.5); */
-/*         cairo_rel_line_to(cr, 20, 20); */
+/*         cairo_set_rgb_color (cr, 1,0,0); */
+/*         cairo_scale_font (cr, 15); */
+/*         cairo_move_to (cr, 50, 100); */
 
-
-/*         for (i=0; i< width/10; i++) */
-/*                 { */
-/*                         cairo_rel_line_to (cr, 5,  10); */
-/*                         cairo_rel_line_to (cr, 5, -10); */
-/*                 } */
 
         cairo_stroke (cr);
 
