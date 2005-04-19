@@ -39,6 +39,8 @@ void layout_paint(GtkWidget *widget,
                   cairo_t   *cr,
                   GtkRange  *range)
 {
+        Score_t *score = score_get_from_widget(widget);
+
         gint width, height;
         gint i;
 
@@ -70,7 +72,7 @@ void layout_paint(GtkWidget *widget,
         /***************
          * Draw Staves *
          ***************/
-        draw_staff(cr, 5, 8, 20, 50, 300, 1);
+        draw_staff(score, cr, 5, 8, 20, 50, 300, 1);
 
 
         cairo_set_rgb_color (cr, 0, 0, 0);

@@ -96,66 +96,6 @@ void gscore_init(void)
 	Selection.object_type = CURSOR;
 }
 
-/*** 
- *** Events on the drawing area
- ***/
-
-/* static gboolean */
-/* drawing_area_events(GtkWidget *canvas, GdkEvent  *ev) */
-/* { */
-
-/*         GdkEventButton *event_btn; */
-/* 	Score_t *score = score_get_from_widget(canvas); */
-
-/* 	switch (ev->type) */
-/* 		{ */
-		
-/* 		case GDK_MOTION_NOTIFY: */
-/* /\* 			return mouse_motion_event(canvas, (GdkEventMotion *)ev, NULL); *\/ */
-
-/* 		case GDK_KEY_PRESS: */
-/* 			printf("Key press\n"); */
-/* 			break; */
-
-/* 		case GDK_KEY_RELEASE: */
-/* 			printf("Key Realeased\n"); */
-/* 			break; */
-
-/* 			/\* 		return key_event(canvas, (GdkEventKey *)ev); *\/ */
-		
-/* 		case GDK_BUTTON_PRESS: */
-/* 			switch(ev->button.button) */
-/* 				{ */
-/* 				case 1: */
-/* 					/\* Select the staff with which you want to work *\/ */
-/* 					event_btn = (GdkEventButton *)ev; */
-/* 					printf("A2: %.0f\n", event_btn->y); */
-/* 					set_staff_selected(score, get_staff_id(score, event_btn->y)); */
-/* 					/\* For the selection *\/ */
-/* 					return set_selection_origin(canvas, (GdkEventButton *)ev); */
-/* 				case 3: */
-/* 					/\* 			return popup_action(canvas, (GdkEventButton *)ev); *\/ */
-/* 					break; */
-/* 				} */
-/* 			break; */
-		
-/* 		case GDK_BUTTON_RELEASE: */
-/* 			switch(ev->button.button) */
-/* 				{ */
-/* 				case 1: */
-/* 					return mouse_button_release_event(canvas, (GdkEventButton *)ev, NULL); */
-/* 				} */
-/* 			break; */
-		
-/* 		case GDK_EXPOSE: */
-/* 			return score_area_callback(canvas, (GdkEventExpose *)ev, NULL); */
-
-/* 		default: */
-/* 			return FALSE; */
-/* 		} */
-
-/* 	return FALSE; */
-/* } */
 
 gboolean load_plugin_from_command_line(gchar *filename)
 {

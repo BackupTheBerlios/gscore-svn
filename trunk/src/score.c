@@ -100,6 +100,7 @@ score_new(void)
                 return NULL;
         }
 
+        /* By default, everything is black */
         score->ColorObject->staves->red = 0;
         score->ColorObject->staves->green = 0;
         score->ColorObject->staves->blue = 0;
@@ -256,7 +257,7 @@ score_window_new(Score_t *score)
 
         gtk_container_add(GTK_CONTAINER(viewport), sw);
 
-
+        score_set_to_widget(score, score_window);
 
         gtk_widget_show_all(score_window);
   

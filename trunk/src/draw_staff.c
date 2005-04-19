@@ -25,6 +25,8 @@
 #include <gtk/gtk.h>
 #include <cairo.h>
 
+#include "gscore.h"
+
 /**
  * draw_staff:
  * @sw: #ScoreWidget object
@@ -38,10 +40,10 @@
  *
  * Draws a staff on the score widget and fills the cairo structure
  * 
- * Returns: 0 if success, -1 if failed.
+ * Returns: TRUE if success, FALSE if failed.
  */
-extern gint 
-draw_staff(cairo_t *cr, 
+extern gboolean
+draw_staff(Score_t *score, cairo_t *cr, 
            guint16 nb_lines, gdouble space_btwn_lines,
            gdouble x1, gdouble y1, gdouble x2,
            gboolean selected)
@@ -51,7 +53,8 @@ draw_staff(cairo_t *cr,
         gdouble offset = 0;
 	gint16 i = 0;
 
-        cairo_set_rgb_color (cr, 0, 0, selected ? 1 : 0);
+        cairo_set_rgb_color (cr, 
+                             score->ColorObject->staves->red, score->ColorObject->staves->green, score->ColorObject->staves->blue);
 
         while ( i < nb_lines ) {
                 cairo_move_to(cr, x1, y1 + offset + cairo_padding);
@@ -65,4 +68,5 @@ draw_staff(cairo_t *cr,
         cairo_set_line_width(cr, 1);
         cairo_stroke(cr);
 
+        return TRUE;
 }
