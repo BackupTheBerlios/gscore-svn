@@ -9,7 +9,7 @@ DEFS = -I$(top_srcdir)/ -I$(srcdir)/include/	\
 
 bin_PROGRAMS = gscore
 gscore_LDFLAGS = -export-dynamic
-gscore_LDADD = $(LIBGLADE2_LIBS) $(CAIRO_LIBS) -l$(top_srcdir)/libgscore/libgscore.la
+gscore_LDADD = $(LIBGLADE2_LIBS) $(CAIRO_LIBS) -lgscore
 
 gscore_SOURCES =				\
 	articulation.c				\
@@ -29,6 +29,7 @@ gscore_SOURCES =				\
 	insert.c				\
 	key_cursor.c				\
 	key_event.c				\
+	layout-engine.c				\
 	libglade-garbage.c			\
 	main.c					\
 	Makefile.am				\

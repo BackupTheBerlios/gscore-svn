@@ -1,3 +1,8 @@
+2005-04-19 Toady <toady@gscore.org>
+
+	* src/layout-engine.c, src/include/layout-engine.c: added
+	* src/score.c: modified
+	
 2005-04-18 Toady <toady@gscore.org>
 
 	* src/draw_staff.c, src/include/draw_staff.h: creation to draw a cairo staff

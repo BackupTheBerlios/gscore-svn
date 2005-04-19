@@ -24,7 +24,7 @@ draw_staff(cairo_t *cr,
            gboolean selected)
 {
 
-        cairo_set_rgb_color (cr, 0,0,0);
+        cairo_set_rgb_color (cr, 0, 0, 0);
 
         cairo_move_to (cr, 5, 50.5);
         cairo_rel_line_to (cr, 800, 0);
