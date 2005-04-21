@@ -33,7 +33,11 @@
 #include "macros.h"
 #include "draw_barline.h"
 #include "draw_staff.h"
+#include "draw_key.h"
 #include "gscore-font-constants.h"
+
+guint object_x = 0;
+guint measure_number = 1;
 
 void layout_paint(GtkWidget *widget,
                   cairo_t   *cr,
@@ -41,8 +45,14 @@ void layout_paint(GtkWidget *widget,
 {
         Score_t *score = score_get_from_widget(widget);
 
+        GList * listrunner_staff = NULL;
+        GList * listrunner_object = NULL;
+
         gint width, height;
         gint i;
+
+
+        if ( ! score ) return;
 
         width  = widget->allocation.width;
         height = widget->allocation.height;
@@ -72,7 +82,25 @@ void layout_paint(GtkWidget *widget,
         /***************
          * Draw Staves *
          ***************/
-        draw_staff(score, cr, 5, 8, 20, 50, 300, 1);
+/*         draw_staff(score, cr, 5, 8, 20, 50, 300, 1); */
+        /* We walk through staves */
+        listrunner_staff = g_list_first(score->Staff_list);
+        while ( listrunner_staff ) {
+                object_x = 0;
+                measure_number = 1;
+
+                Staff_t *staff;
+                staff = (Staff_t *)listrunner_staff->data;
+
+                draw_staff(score, cr, 
+                           staff->nb_lines, staff->space_btw_lines,
+                           staff->extremity_begin_x, staff->extremity_begin_y,
+                           score->staff_extremity_end_x, staff->is_selected);
+                
+                draw_key(score, staff, cr, FALSE);
+
+                listrunner_staff = g_list_next(listrunner_staff);
+        } /* while ( listrunner_staff ) */
 
 
         cairo_set_rgb_color (cr, 0, 0, 0);

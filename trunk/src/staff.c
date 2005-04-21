@@ -353,16 +353,16 @@ gboolean staff_set_start_x(Score_t *score, gint staff, gint start_x)
 
 gboolean staff_set_key(Score_t *score, gint staff, gint key)
 {
-/*         Staff_t *staff_data; */
+        Staff_t *staff_data;
 
-/*         staff_data = (Staff_t *)g_list_nth_data(score->Staff_list, staff); */
+        staff_data = (Staff_t *)g_list_nth_data(score->Staff_list, staff);
         
-/*         if ( staff_data ) { */
-/*                 staff_data->key = key; */
-/* 		return TRUE; */
-/* 	} */
+        if ( staff_data ) {
+                staff_data->key = key;
+		return TRUE;
+	}
 
-/* 	return FALSE; */
+	return FALSE;
 }
 
 extern void 

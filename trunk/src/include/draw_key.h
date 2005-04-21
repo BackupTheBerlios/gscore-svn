@@ -1,6 +1,6 @@
 /* -*- mode:C; tab-width:8; c-default-style:linux; c-basic-offset:8; indent-tabs-mode:nil -*- */
 /*
- * draw_staff.h
+ * draw_key.h
  * gscore - a musical score editor
  *
  * (C) Copyright 2001-2005 Sebastien Tricaud
@@ -22,4 +22,4 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-gboolean draw_staff(Score_t *score, cairo_t *cr, guint16 nb_lines, gdouble space_btwn_lines, gdouble x1, gdouble y1, gdouble x2, gboolean selected);
+gboolean draw_key(Score_t *score, Staff_t *staff, cairo_t *cr, gboolean selected);

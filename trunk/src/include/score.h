@@ -28,21 +28,6 @@
 
 Score_t *score_new(void);
 
-gint score_add_tab (gpointer callback_data, guint callback_action,
-                    GtkWidget * widget);
-
-void remove_score (gpointer callback_data, guint callback_action,
-	    GtkWidget * widget);
-
-void score2tab (gpointer callback_data, guint callback_action,
-		GtkWidget * widget);
-
-void properties (gpointer callback_data, guint callback_action,
-	    GtkWidget * widget);
-
-void score_midi_play (gpointer callback_data, guint callback_action,
-                      GtkWidget * widget);
-
 Score_t *score_get_from_widget(GtkWidget *widget);
 
 gboolean score_set_to_widget(Score_t *score, GtkWidget *widget);

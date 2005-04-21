@@ -53,8 +53,18 @@ draw_staff(Score_t *score, cairo_t *cr,
         gdouble offset = 0;
 	gint16 i = 0;
 
-        cairo_set_rgb_color (cr, 
-                             score->ColorObject->staves->red, score->ColorObject->staves->green, score->ColorObject->staves->blue);
+        if ( ! selected ) {
+                cairo_set_rgb_color (cr, 
+                                     score->ColorObject->staves->red, score->ColorObject->staves->green, score->ColorObject->staves->blue);
+        } else {                /* The following just checks you didn't choose to have a blue colored staff */
+                if (( score->ColorObject->staves->red == 0 ) && 
+                    ( score->ColorObject->staves->green == 0 ) && 
+                    ( score->ColorObject->staves->blue == 1 )) {
+                        cairo_set_rgb_color (cr, 1, 0, 0);
+                } else {
+                        cairo_set_rgb_color (cr, 0, 0, 1);
+                }
+        }
 
         while ( i < nb_lines ) {
                 cairo_move_to(cr, x1, y1 + offset + cairo_padding);

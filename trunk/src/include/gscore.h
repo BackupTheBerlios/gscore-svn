@@ -238,6 +238,7 @@ typedef struct GscoreColorObject_t
 {
 
         struct GscoreColor_t *staves;
+        struct GscoreColor_t *clefs;
         struct GscoreColor_t *objects;
 
 } GscoreColors_t;

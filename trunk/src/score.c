@@ -30,11 +30,12 @@
 #include <libgscore.h>
 
 #include "gscore.h"
+#include "score.h"
+
 #include "display.h"
 #include "draw.h"
 #include "draw_barline.h"
 #include "constants.h"
-#include "score.h"
 #include "staff.h"
 #include "tab_transposition.h"
 #include "common.h"
@@ -53,10 +54,12 @@
 
 extern Score_t *score_new(void);
 extern gboolean score_staff_add(Score_t *score, Staff_t *staff);
+extern Score_t *score_get_from_widget(GtkWidget *widget);
+extern gboolean score_set_to_widget(Score_t *score, GtkWidget *widget);
 extern gboolean score_window_new(Score_t *score);
+extern gboolean score_staff_set_extremity_end_x(Score_t *score, gdouble extremity_end_x);
 
-
-GladeXML  *score_xml;
+static GladeXML  *score_xml;
 
 /**
  * score_new:
@@ -94,6 +97,11 @@ score_new(void)
                 g_print("Memory exhausted: cannot allocate new staves color\n");
                 return NULL;
         }
+        score->ColorObject->clefs = g_malloc(sizeof(struct GscoreColor_t));
+        if ( ! score->ColorObject->clefs ) {
+                g_print("Memory exhausted: cannot allocate new clefs color\n");
+                return NULL;
+        }
         score->ColorObject->objects = g_malloc(sizeof(struct GscoreColor_t));
         if ( ! score->ColorObject->staves ) {
                 g_print("Memory exhausted: cannot allocate new objects color\n");
@@ -104,6 +112,9 @@ score_new(void)
         score->ColorObject->staves->red = 0;
         score->ColorObject->staves->green = 0;
         score->ColorObject->staves->blue = 0;
+        score->ColorObject->clefs->red = 0;
+        score->ColorObject->clefs->green = 0;
+        score->ColorObject->clefs->blue = 0;
         score->ColorObject->objects->red = 0;
         score->ColorObject->objects->green = 0;
         score->ColorObject->objects->blue = 0;
@@ -263,7 +274,8 @@ score_window_new(Score_t *score)
   
 }
 
-gboolean score_set_staff_extremity_end_x(Score_t *score, gdouble extremity_end_x)
+extern gboolean 
+score_staff_set_extremity_end_x(Score_t *score, gdouble extremity_end_x)
 {
         score->staff_extremity_end_x = extremity_end_x;
 

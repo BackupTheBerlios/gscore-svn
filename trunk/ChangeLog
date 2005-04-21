@@ -1,3 +1,8 @@
+2005-04-21 Toady <toady@gscore.org>
+
+	* src/draw_key.c, src/include/draw_key.h: added
+	* src/layout-engine.c: support for cairoized clefs
+	
 2005-04-20 Toady <toady@gscore.org>
 
 	* src/score.c: cleaned and added functions to work with scores better

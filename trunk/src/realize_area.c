@@ -55,506 +55,506 @@
 #include "score.h"
 #include "realize_area.h"
 
-guint timesignature_x = 0;
-guint object_x = 0;
-guint measure_number = 1;
+/* guint timesignature_x = 0; */
+/* guint object_x = 0; */
+/* guint measure_number = 1; */
 
-static void 
-realize_key(GtkWidget *area, Staff_t *staff)
-{
+/* static void  */
+/* realize_key(GtkWidget *area, Staff_t *staff) */
+/* { */
 
-        gboolean is_selected = FALSE;
+/*         gboolean is_selected = FALSE; */
 
-	switch ( staff->key )
-		{
-		case TREBLE_KEY:
-			draw_pixmap(area->window, CLEF_G,
-                                    is_selected,
-				    staff->extremity_begin_x + Spacings.Clefs.sb,
-				    staff->extremity_begin_y - 8);
-			break;
-		case BASS_KEY:
-			draw_pixmap(area->window, CLEF_F,
-                                    is_selected,
-				    staff->extremity_begin_x + Spacings.Clefs.sb,
-				    staff->extremity_begin_y + 1);
-			break;
-		case ALTO_KEY:
-			draw_pixmap(area->window, CLEF_C,
-                                    is_selected,
-				    staff->extremity_begin_x + Spacings.Clefs.sb,
-				    staff->extremity_begin_y + 5);
-			break;
-		case TAB_KEY:
-			draw_pixmap(area->window, CLEF_TAB,
-                                    is_selected,
-				    staff->extremity_begin_x + Spacings.Clefs.sb,
-				    staff->extremity_begin_y + 7);
-			break;
-		}
-}
+/* 	switch ( staff->key ) */
+/* 		{ */
+/* 		case TREBLE_KEY: */
+/* 			draw_pixmap(area->window, CLEF_G, */
+/*                                     is_selected, */
+/* 				    staff->extremity_begin_x + Spacings.Clefs.sb, */
+/* 				    staff->extremity_begin_y - 8); */
+/* 			break; */
+/* 		case BASS_KEY: */
+/* 			draw_pixmap(area->window, CLEF_F, */
+/*                                     is_selected, */
+/* 				    staff->extremity_begin_x + Spacings.Clefs.sb, */
+/* 				    staff->extremity_begin_y + 1); */
+/* 			break; */
+/* 		case ALTO_KEY: */
+/* 			draw_pixmap(area->window, CLEF_C, */
+/*                                     is_selected, */
+/* 				    staff->extremity_begin_x + Spacings.Clefs.sb, */
+/* 				    staff->extremity_begin_y + 5); */
+/* 			break; */
+/* 		case TAB_KEY: */
+/* 			draw_pixmap(area->window, CLEF_TAB, */
+/*                                     is_selected, */
+/* 				    staff->extremity_begin_x + Spacings.Clefs.sb, */
+/* 				    staff->extremity_begin_y + 7); */
+/* 			break; */
+/* 		} */
+/* } */
 
-/** Returns the position where the time signatures/or objects should be  */
-static gdouble 
-realize_key_signature(GtkWidget *area, Staff_t *staff)
-{
-        Score_t *score = score_get_from_widget(area);
+/* /\** Returns the position where the time signatures/or objects should be  *\/ */
+/* static gdouble  */
+/* realize_key_signature(GtkWidget *area, Staff_t *staff) */
+/* { */
+/*         Score_t *score = score_get_from_widget(area); */
   
-	guint keysignature_x = staff->extremity_begin_x + Spacings.Clefs.sb + STANDARD_KEY_SIZE + Spacings.Clefs.sa;
+/* 	guint keysignature_x = staff->extremity_begin_x + Spacings.Clefs.sb + STANDARD_KEY_SIZE + Spacings.Clefs.sa; */
 
-        gboolean is_selected = FALSE;
+/*         gboolean is_selected = FALSE; */
 
-	/* Key Signature */
-	/* There're a few issues here. Actualy, the hard coded numbers, like: */
-	/* staff->extremity_begin_y + 4 is really bad! it only works for TREBLE_KEY and with the pixmaps */
-	switch (staff->key_signature) {
+/* 	/\* Key Signature *\/ */
+/* 	/\* There're a few issues here. Actualy, the hard coded numbers, like: *\/ */
+/* 	/\* staff->extremity_begin_y + 4 is really bad! it only works for TREBLE_KEY and with the pixmaps *\/ */
+/* 	switch (staff->key_signature) { */
 
-	case KEY_SIGNATURE_TREBLE_EMPTY:
-		timesignature_x = keysignature_x;
-		break;
-	case KEY_SIGNATURE_TREBLE_A_SHARP:
-		draw_pixmap(area->window,
-			    ACCIDENTAL_SHARP,
-                            is_selected,
-			    keysignature_x,
-			    staff->extremity_begin_y - 10);
-		draw_pixmap(area->window,
-			    ACCIDENTAL_SHARP,
-                            is_selected,
-			    keysignature_x + Spacings.KeySignatures.sbksa,
-			    staff->extremity_begin_y + 4);
-		draw_pixmap(area->window,
-			    ACCIDENTAL_SHARP,
-                            is_selected,
-			    keysignature_x + ( 2 * Spacings.KeySignatures.sbksa ),
-			    staff->extremity_begin_y - 13);
-		draw_pixmap(area->window,
-			    ACCIDENTAL_SHARP,
-                            is_selected,
-			    keysignature_x + ( 3 * Spacings.KeySignatures.sbksa ),
-			    staff->extremity_begin_y - 1);
-		draw_pixmap(area->window,
-			    ACCIDENTAL_SHARP,
-                            is_selected,
-			    keysignature_x + ( 4 * Spacings.KeySignatures.sbksa ),
-			    staff->extremity_begin_y + 13);
+/* 	case KEY_SIGNATURE_TREBLE_EMPTY: */
+/* 		timesignature_x = keysignature_x; */
+/* 		break; */
+/* 	case KEY_SIGNATURE_TREBLE_A_SHARP: */
+/* 		draw_pixmap(area->window, */
+/* 			    ACCIDENTAL_SHARP, */
+/*                             is_selected, */
+/* 			    keysignature_x, */
+/* 			    staff->extremity_begin_y - 10); */
+/* 		draw_pixmap(area->window, */
+/* 			    ACCIDENTAL_SHARP, */
+/*                             is_selected, */
+/* 			    keysignature_x + Spacings.KeySignatures.sbksa, */
+/* 			    staff->extremity_begin_y + 4); */
+/* 		draw_pixmap(area->window, */
+/* 			    ACCIDENTAL_SHARP, */
+/*                             is_selected, */
+/* 			    keysignature_x + ( 2 * Spacings.KeySignatures.sbksa ), */
+/* 			    staff->extremity_begin_y - 13); */
+/* 		draw_pixmap(area->window, */
+/* 			    ACCIDENTAL_SHARP, */
+/*                             is_selected, */
+/* 			    keysignature_x + ( 3 * Spacings.KeySignatures.sbksa ), */
+/* 			    staff->extremity_begin_y - 1); */
+/* 		draw_pixmap(area->window, */
+/* 			    ACCIDENTAL_SHARP, */
+/*                             is_selected, */
+/* 			    keysignature_x + ( 4 * Spacings.KeySignatures.sbksa ), */
+/* 			    staff->extremity_begin_y + 13); */
 		
-		timesignature_x = 
-			keysignature_x + 
-			4 * Spacings.KeySignatures.sbksa + 
-                        /* 			5 * STANDARD_ACCIDENTAL_SIZE + */
-			Spacings.KeySignatures.saks;
+/* 		timesignature_x =  */
+/* 			keysignature_x +  */
+/* 			4 * Spacings.KeySignatures.sbksa +  */
+/*                         /\* 			5 * STANDARD_ACCIDENTAL_SIZE + *\/ */
+/* 			Spacings.KeySignatures.saks; */
 
-		break;
-	case KEY_SIGNATURE_TREBLE_A_FLAT:
-		draw_pixmap(area->window,
-			    ACCIDENTAL_FLAT,
-                            is_selected,
-			    keysignature_x,
-			    staff->extremity_begin_y + 5);
-		draw_pixmap(area->window,
-			    ACCIDENTAL_FLAT,
-                            is_selected,
-			    keysignature_x + Spacings.KeySignatures.sbksa,
-			    staff->extremity_begin_y - 9);
-		draw_pixmap(area->window,
-			    ACCIDENTAL_FLAT,
-                            is_selected,
-			    keysignature_x + ( 2 * Spacings.KeySignatures.sbksa ),
-			    staff->extremity_begin_y + 9);
+/* 		break; */
+/* 	case KEY_SIGNATURE_TREBLE_A_FLAT: */
+/* 		draw_pixmap(area->window, */
+/* 			    ACCIDENTAL_FLAT, */
+/*                             is_selected, */
+/* 			    keysignature_x, */
+/* 			    staff->extremity_begin_y + 5); */
+/* 		draw_pixmap(area->window, */
+/* 			    ACCIDENTAL_FLAT, */
+/*                             is_selected, */
+/* 			    keysignature_x + Spacings.KeySignatures.sbksa, */
+/* 			    staff->extremity_begin_y - 9); */
+/* 		draw_pixmap(area->window, */
+/* 			    ACCIDENTAL_FLAT, */
+/*                             is_selected, */
+/* 			    keysignature_x + ( 2 * Spacings.KeySignatures.sbksa ), */
+/* 			    staff->extremity_begin_y + 9); */
 		
-		timesignature_x = 
-			keysignature_x + 
-			2 * Spacings.KeySignatures.sbksa + 
-                        /* 			3 * STANDARD_ACCIDENTAL_SIZE +  */
-			Spacings.KeySignatures.saks;
+/* 		timesignature_x =  */
+/* 			keysignature_x +  */
+/* 			2 * Spacings.KeySignatures.sbksa +  */
+/*                         /\* 			3 * STANDARD_ACCIDENTAL_SIZE +  *\/ */
+/* 			Spacings.KeySignatures.saks; */
 
-		break;
-	case KEY_SIGNATURE_TREBLE_B_SHARP:
-		draw_pixmap(area->window,
-			    ACCIDENTAL_SHARP,
-                            is_selected,
-			    keysignature_x,
-			    staff->extremity_begin_y - 10);
-		draw_pixmap(area->window,
-			    ACCIDENTAL_SHARP,
-                            is_selected,
-			    keysignature_x + Spacings.KeySignatures.sbksa,
-			    staff->extremity_begin_y + 4);
-		draw_pixmap(area->window,
-			    ACCIDENTAL_SHARP,
-                            is_selected,
-			    keysignature_x + ( 2 * Spacings.KeySignatures.sbksa ),
-			    staff->extremity_begin_y - 13);
-		draw_pixmap(area->window,
-			    ACCIDENTAL_SHARP,
-                            is_selected,
-			    keysignature_x + ( 3 * Spacings.KeySignatures.sbksa ),
-			    staff->extremity_begin_y - 1);
-		draw_pixmap(area->window,
-			    ACCIDENTAL_SHARP,
-                            is_selected,
-			    keysignature_x + ( 4 * Spacings.KeySignatures.sbksa ),
-			    staff->extremity_begin_y + 13);
-		draw_pixmap(area->window,
-			    ACCIDENTAL_SHARP,
-                            is_selected,
-			    keysignature_x + ( 5 * Spacings.KeySignatures.sbksa),
-			    staff->extremity_begin_y - 5);
-		draw_pixmap(area->window,
-			    ACCIDENTAL_SHARP,
-                            is_selected,
-			    keysignature_x + ( 6 * Spacings.KeySignatures.sbksa ),
-			    staff->extremity_begin_y + Spacings.KeySignatures.sbksa); /* Weird!!! ? but it works! I did that ? I dunno! */
+/* 		break; */
+/* 	case KEY_SIGNATURE_TREBLE_B_SHARP: */
+/* 		draw_pixmap(area->window, */
+/* 			    ACCIDENTAL_SHARP, */
+/*                             is_selected, */
+/* 			    keysignature_x, */
+/* 			    staff->extremity_begin_y - 10); */
+/* 		draw_pixmap(area->window, */
+/* 			    ACCIDENTAL_SHARP, */
+/*                             is_selected, */
+/* 			    keysignature_x + Spacings.KeySignatures.sbksa, */
+/* 			    staff->extremity_begin_y + 4); */
+/* 		draw_pixmap(area->window, */
+/* 			    ACCIDENTAL_SHARP, */
+/*                             is_selected, */
+/* 			    keysignature_x + ( 2 * Spacings.KeySignatures.sbksa ), */
+/* 			    staff->extremity_begin_y - 13); */
+/* 		draw_pixmap(area->window, */
+/* 			    ACCIDENTAL_SHARP, */
+/*                             is_selected, */
+/* 			    keysignature_x + ( 3 * Spacings.KeySignatures.sbksa ), */
+/* 			    staff->extremity_begin_y - 1); */
+/* 		draw_pixmap(area->window, */
+/* 			    ACCIDENTAL_SHARP, */
+/*                             is_selected, */
+/* 			    keysignature_x + ( 4 * Spacings.KeySignatures.sbksa ), */
+/* 			    staff->extremity_begin_y + 13); */
+/* 		draw_pixmap(area->window, */
+/* 			    ACCIDENTAL_SHARP, */
+/*                             is_selected, */
+/* 			    keysignature_x + ( 5 * Spacings.KeySignatures.sbksa), */
+/* 			    staff->extremity_begin_y - 5); */
+/* 		draw_pixmap(area->window, */
+/* 			    ACCIDENTAL_SHARP, */
+/*                             is_selected, */
+/* 			    keysignature_x + ( 6 * Spacings.KeySignatures.sbksa ), */
+/* 			    staff->extremity_begin_y + Spacings.KeySignatures.sbksa); /\* Weird!!! ? but it works! I did that ? I dunno! *\/ */
 		
-		timesignature_x = 
-			keysignature_x + 
-			6 * Spacings.KeySignatures.sbksa + 
-                        /* 			7 * STANDARD_ACCIDENTAL_SIZE +  */
-			Spacings.KeySignatures.saks;
+/* 		timesignature_x =  */
+/* 			keysignature_x +  */
+/* 			6 * Spacings.KeySignatures.sbksa +  */
+/*                         /\* 			7 * STANDARD_ACCIDENTAL_SIZE +  *\/ */
+/* 			Spacings.KeySignatures.saks; */
 
-		break;
-	case KEY_SIGNATURE_TREBLE_B_FLAT:
-		draw_pixmap(area->window,
-			    ACCIDENTAL_FLAT,
-                            is_selected,
-			    keysignature_x,
-			    staff->extremity_begin_y + 5);
+/* 		break; */
+/* 	case KEY_SIGNATURE_TREBLE_B_FLAT: */
+/* 		draw_pixmap(area->window, */
+/* 			    ACCIDENTAL_FLAT, */
+/*                             is_selected, */
+/* 			    keysignature_x, */
+/* 			    staff->extremity_begin_y + 5); */
 
-		timesignature_x = 
-			keysignature_x + 
-                        /* 			STANDARD_ACCIDENTAL_SIZE +  */
-			Spacings.KeySignatures.saks;
+/* 		timesignature_x =  */
+/* 			keysignature_x +  */
+/*                         /\* 			STANDARD_ACCIDENTAL_SIZE +  *\/ */
+/* 			Spacings.KeySignatures.saks; */
 
-		break;
-	case KEY_SIGNATURE_TREBLE_C_SHARP:
-		draw_pixmap(area->window,
-			    ACCIDENTAL_SHARP,
-                            is_selected,
-			    keysignature_x,
-			    staff->extremity_begin_y - 10);
-		draw_pixmap(area->window,
-			    ACCIDENTAL_SHARP,
-                            is_selected,
-			    keysignature_x + Spacings.KeySignatures.sbksa,
-			    staff->extremity_begin_y + 4);
+/* 		break; */
+/* 	case KEY_SIGNATURE_TREBLE_C_SHARP: */
+/* 		draw_pixmap(area->window, */
+/* 			    ACCIDENTAL_SHARP, */
+/*                             is_selected, */
+/* 			    keysignature_x, */
+/* 			    staff->extremity_begin_y - 10); */
+/* 		draw_pixmap(area->window, */
+/* 			    ACCIDENTAL_SHARP, */
+/*                             is_selected, */
+/* 			    keysignature_x + Spacings.KeySignatures.sbksa, */
+/* 			    staff->extremity_begin_y + 4); */
 		
-		timesignature_x = 
-			keysignature_x + 
-			4 * Spacings.KeySignatures.sbksa + 
-                        /* 			5 * STANDARD_ACCIDENTAL_SIZE + */
-			Spacings.KeySignatures.saks;
+/* 		timesignature_x =  */
+/* 			keysignature_x +  */
+/* 			4 * Spacings.KeySignatures.sbksa +  */
+/*                         /\* 			5 * STANDARD_ACCIDENTAL_SIZE + *\/ */
+/* 			Spacings.KeySignatures.saks; */
 
-		break;
-	case KEY_SIGNATURE_TREBLE_C_FLAT:
-		draw_pixmap(area->window,
-			    ACCIDENTAL_FLAT,
-                            is_selected,
-			    keysignature_x,
-			    staff->extremity_begin_y + 5);
-		draw_pixmap(area->window,
-			    ACCIDENTAL_FLAT,
-                            is_selected,
-			    keysignature_x + Spacings.KeySignatures.sbksa,
-			    staff->extremity_begin_y - 9);
-		draw_pixmap(area->window,
-			    ACCIDENTAL_FLAT,
-                            is_selected,
-			    keysignature_x + ( 2 * Spacings.KeySignatures.sbksa ),
-			    staff->extremity_begin_y + 9);
-		draw_pixmap(area->window,
-			    ACCIDENTAL_FLAT,
-                            is_selected,
-			    keysignature_x + ( 3 * Spacings.KeySignatures.sbksa ),
-			    staff->extremity_begin_y - 4);
-		draw_pixmap(area->window,
-			    ACCIDENTAL_FLAT,
-                            is_selected,
-			    keysignature_x + ( 4 * Spacings.KeySignatures.sbksa ),
-			    staff->extremity_begin_y + 14);
-		draw_pixmap(area->window,
-			    ACCIDENTAL_FLAT,
-                            is_selected,
-			    keysignature_x + ( 5 * Spacings.KeySignatures.sbksa),
-			    staff->extremity_begin_y);
+/* 		break; */
+/* 	case KEY_SIGNATURE_TREBLE_C_FLAT: */
+/* 		draw_pixmap(area->window, */
+/* 			    ACCIDENTAL_FLAT, */
+/*                             is_selected, */
+/* 			    keysignature_x, */
+/* 			    staff->extremity_begin_y + 5); */
+/* 		draw_pixmap(area->window, */
+/* 			    ACCIDENTAL_FLAT, */
+/*                             is_selected, */
+/* 			    keysignature_x + Spacings.KeySignatures.sbksa, */
+/* 			    staff->extremity_begin_y - 9); */
+/* 		draw_pixmap(area->window, */
+/* 			    ACCIDENTAL_FLAT, */
+/*                             is_selected, */
+/* 			    keysignature_x + ( 2 * Spacings.KeySignatures.sbksa ), */
+/* 			    staff->extremity_begin_y + 9); */
+/* 		draw_pixmap(area->window, */
+/* 			    ACCIDENTAL_FLAT, */
+/*                             is_selected, */
+/* 			    keysignature_x + ( 3 * Spacings.KeySignatures.sbksa ), */
+/* 			    staff->extremity_begin_y - 4); */
+/* 		draw_pixmap(area->window, */
+/* 			    ACCIDENTAL_FLAT, */
+/*                             is_selected, */
+/* 			    keysignature_x + ( 4 * Spacings.KeySignatures.sbksa ), */
+/* 			    staff->extremity_begin_y + 14); */
+/* 		draw_pixmap(area->window, */
+/* 			    ACCIDENTAL_FLAT, */
+/*                             is_selected, */
+/* 			    keysignature_x + ( 5 * Spacings.KeySignatures.sbksa), */
+/* 			    staff->extremity_begin_y); */
 		
-		timesignature_x = 
-			keysignature_x + 
-			5 * Spacings.KeySignatures.sbksa + 
-                        /* 			6 * STANDARD_ACCIDENTAL_SIZE +  */
-			Spacings.KeySignatures.saks;
+/* 		timesignature_x =  */
+/* 			keysignature_x +  */
+/* 			5 * Spacings.KeySignatures.sbksa +  */
+/*                         /\* 			6 * STANDARD_ACCIDENTAL_SIZE +  *\/ */
+/* 			Spacings.KeySignatures.saks; */
 
-		break;
-	case KEY_SIGNATURE_TREBLE_D_SHARP:
-		draw_pixmap(area->window,
-			    ACCIDENTAL_SHARP,
-                            is_selected,
-			    keysignature_x,
-			    staff->extremity_begin_y - 10);
-		draw_pixmap(area->window,
-			    ACCIDENTAL_SHARP,
-                            is_selected,
-			    keysignature_x + Spacings.KeySignatures.sbksa,
-			    staff->extremity_begin_y + 4);
-		draw_pixmap(area->window,
-			    ACCIDENTAL_SHARP,
-                            is_selected,
-			    keysignature_x + ( 2 * Spacings.KeySignatures.sbksa ),
-			    staff->extremity_begin_y - 13);
-		draw_pixmap(area->window,
-			    ACCIDENTAL_SHARP,
-                            is_selected,
-			    keysignature_x + ( 3 * Spacings.KeySignatures.sbksa ),
-			    staff->extremity_begin_y - 1);
+/* 		break; */
+/* 	case KEY_SIGNATURE_TREBLE_D_SHARP: */
+/* 		draw_pixmap(area->window, */
+/* 			    ACCIDENTAL_SHARP, */
+/*                             is_selected, */
+/* 			    keysignature_x, */
+/* 			    staff->extremity_begin_y - 10); */
+/* 		draw_pixmap(area->window, */
+/* 			    ACCIDENTAL_SHARP, */
+/*                             is_selected, */
+/* 			    keysignature_x + Spacings.KeySignatures.sbksa, */
+/* 			    staff->extremity_begin_y + 4); */
+/* 		draw_pixmap(area->window, */
+/* 			    ACCIDENTAL_SHARP, */
+/*                             is_selected, */
+/* 			    keysignature_x + ( 2 * Spacings.KeySignatures.sbksa ), */
+/* 			    staff->extremity_begin_y - 13); */
+/* 		draw_pixmap(area->window, */
+/* 			    ACCIDENTAL_SHARP, */
+/*                             is_selected, */
+/* 			    keysignature_x + ( 3 * Spacings.KeySignatures.sbksa ), */
+/* 			    staff->extremity_begin_y - 1); */
 		
-		timesignature_x = 
-			keysignature_x + 
-			3 * Spacings.KeySignatures.sbksa + 
-                        /* 			4 * STANDARD_ACCIDENTAL_SIZE + */
-			Spacings.KeySignatures.saks;
+/* 		timesignature_x =  */
+/* 			keysignature_x +  */
+/* 			3 * Spacings.KeySignatures.sbksa +  */
+/*                         /\* 			4 * STANDARD_ACCIDENTAL_SIZE + *\/ */
+/* 			Spacings.KeySignatures.saks; */
 
-		break;
-	case KEY_SIGNATURE_TREBLE_D_FLAT:
-		draw_pixmap(area->window,
-			    ACCIDENTAL_FLAT,
-                            is_selected,
-			    keysignature_x,
-			    staff->extremity_begin_y + 5);
-		draw_pixmap(area->window,
-			    ACCIDENTAL_FLAT,
-                            is_selected,
-			    keysignature_x + Spacings.KeySignatures.sbksa,
-			    staff->extremity_begin_y - 9);
-		draw_pixmap(area->window,
-			    ACCIDENTAL_FLAT,
-                            is_selected,
-			    keysignature_x + ( 2 * Spacings.KeySignatures.sbksa ),
-			    staff->extremity_begin_y + 9);
-		draw_pixmap(area->window,
-			    ACCIDENTAL_FLAT,
-                            is_selected,
-			    keysignature_x + ( 3 * Spacings.KeySignatures.sbksa),
-			    staff->extremity_begin_y - 4);
+/* 		break; */
+/* 	case KEY_SIGNATURE_TREBLE_D_FLAT: */
+/* 		draw_pixmap(area->window, */
+/* 			    ACCIDENTAL_FLAT, */
+/*                             is_selected, */
+/* 			    keysignature_x, */
+/* 			    staff->extremity_begin_y + 5); */
+/* 		draw_pixmap(area->window, */
+/* 			    ACCIDENTAL_FLAT, */
+/*                             is_selected, */
+/* 			    keysignature_x + Spacings.KeySignatures.sbksa, */
+/* 			    staff->extremity_begin_y - 9); */
+/* 		draw_pixmap(area->window, */
+/* 			    ACCIDENTAL_FLAT, */
+/*                             is_selected, */
+/* 			    keysignature_x + ( 2 * Spacings.KeySignatures.sbksa ), */
+/* 			    staff->extremity_begin_y + 9); */
+/* 		draw_pixmap(area->window, */
+/* 			    ACCIDENTAL_FLAT, */
+/*                             is_selected, */
+/* 			    keysignature_x + ( 3 * Spacings.KeySignatures.sbksa), */
+/* 			    staff->extremity_begin_y - 4); */
 
-		timesignature_x = 
-			keysignature_x + 
-			3 * Spacings.KeySignatures.sbksa + 
-                        /* 			4 * STANDARD_ACCIDENTAL_SIZE +  */
-			Spacings.KeySignatures.saks;
+/* 		timesignature_x =  */
+/* 			keysignature_x +  */
+/* 			3 * Spacings.KeySignatures.sbksa +  */
+/*                         /\* 			4 * STANDARD_ACCIDENTAL_SIZE +  *\/ */
+/* 			Spacings.KeySignatures.saks; */
 
-		break;
-	case KEY_SIGNATURE_TREBLE_E_SHARP:
-		draw_pixmap(area->window,
-			    ACCIDENTAL_SHARP,
-                            is_selected,
-			    keysignature_x,
-			    staff->extremity_begin_y - 10);
-		draw_pixmap(area->window,
-			    ACCIDENTAL_SHARP,
-                            is_selected,
-			    keysignature_x + Spacings.KeySignatures.sbksa,
-			    staff->extremity_begin_y + 4);
-		draw_pixmap(area->window,
-			    ACCIDENTAL_SHARP,
-                            is_selected,
-			    keysignature_x + ( 2 * Spacings.KeySignatures.sbksa ),
-			    staff->extremity_begin_y - 13);
-		draw_pixmap(area->window,
-			    ACCIDENTAL_SHARP,
-                            is_selected,
-			    keysignature_x + ( 3 * Spacings.KeySignatures.sbksa),
-			    staff->extremity_begin_y - 1);
-		draw_pixmap(area->window,
-			    ACCIDENTAL_SHARP,
-                            is_selected,
-			    keysignature_x + ( 4 * Spacings.KeySignatures.sbksa),
-			    staff->extremity_begin_y + 13);
-		draw_pixmap(area->window,
-			    ACCIDENTAL_SHARP,
-                            is_selected,
-			    keysignature_x + ( 5 * Spacings.KeySignatures.sbksa ),
-			    staff->extremity_begin_y - 5);
+/* 		break; */
+/* 	case KEY_SIGNATURE_TREBLE_E_SHARP: */
+/* 		draw_pixmap(area->window, */
+/* 			    ACCIDENTAL_SHARP, */
+/*                             is_selected, */
+/* 			    keysignature_x, */
+/* 			    staff->extremity_begin_y - 10); */
+/* 		draw_pixmap(area->window, */
+/* 			    ACCIDENTAL_SHARP, */
+/*                             is_selected, */
+/* 			    keysignature_x + Spacings.KeySignatures.sbksa, */
+/* 			    staff->extremity_begin_y + 4); */
+/* 		draw_pixmap(area->window, */
+/* 			    ACCIDENTAL_SHARP, */
+/*                             is_selected, */
+/* 			    keysignature_x + ( 2 * Spacings.KeySignatures.sbksa ), */
+/* 			    staff->extremity_begin_y - 13); */
+/* 		draw_pixmap(area->window, */
+/* 			    ACCIDENTAL_SHARP, */
+/*                             is_selected, */
+/* 			    keysignature_x + ( 3 * Spacings.KeySignatures.sbksa), */
+/* 			    staff->extremity_begin_y - 1); */
+/* 		draw_pixmap(area->window, */
+/* 			    ACCIDENTAL_SHARP, */
+/*                             is_selected, */
+/* 			    keysignature_x + ( 4 * Spacings.KeySignatures.sbksa), */
+/* 			    staff->extremity_begin_y + 13); */
+/* 		draw_pixmap(area->window, */
+/* 			    ACCIDENTAL_SHARP, */
+/*                             is_selected, */
+/* 			    keysignature_x + ( 5 * Spacings.KeySignatures.sbksa ), */
+/* 			    staff->extremity_begin_y - 5); */
 		
-		timesignature_x = 
-			keysignature_x + 
-			5 * Spacings.KeySignatures.sbksa + 
-                        /* 			6 * STANDARD_ACCIDENTAL_SIZE + */
-			Spacings.KeySignatures.saks;
+/* 		timesignature_x =  */
+/* 			keysignature_x +  */
+/* 			5 * Spacings.KeySignatures.sbksa +  */
+/*                         /\* 			6 * STANDARD_ACCIDENTAL_SIZE + *\/ */
+/* 			Spacings.KeySignatures.saks; */
 
-		break;
-	case KEY_SIGNATURE_TREBLE_E_FLAT:
-		draw_pixmap(area->window,
-			    ACCIDENTAL_FLAT,
-                            is_selected,
-			    keysignature_x,
-			    staff->extremity_begin_y + 5);
-		draw_pixmap(area->window,
-			    ACCIDENTAL_FLAT,
-                            is_selected,
-			    keysignature_x + Spacings.KeySignatures.sbksa,
-			    staff->extremity_begin_y - 9);
+/* 		break; */
+/* 	case KEY_SIGNATURE_TREBLE_E_FLAT: */
+/* 		draw_pixmap(area->window, */
+/* 			    ACCIDENTAL_FLAT, */
+/*                             is_selected, */
+/* 			    keysignature_x, */
+/* 			    staff->extremity_begin_y + 5); */
+/* 		draw_pixmap(area->window, */
+/* 			    ACCIDENTAL_FLAT, */
+/*                             is_selected, */
+/* 			    keysignature_x + Spacings.KeySignatures.sbksa, */
+/* 			    staff->extremity_begin_y - 9); */
 		
-		timesignature_x = 
-			keysignature_x + 
-			Spacings.KeySignatures.sbksa +
-                        /* 			2 * STANDARD_ACCIDENTAL_SIZE +  */
-			Spacings.KeySignatures.saks;
+/* 		timesignature_x =  */
+/* 			keysignature_x +  */
+/* 			Spacings.KeySignatures.sbksa + */
+/*                         /\* 			2 * STANDARD_ACCIDENTAL_SIZE +  *\/ */
+/* 			Spacings.KeySignatures.saks; */
 
-		break;
-	case KEY_SIGNATURE_TREBLE_F_SHARP:
-		draw_pixmap(area->window,
-			    ACCIDENTAL_SHARP,
-                            is_selected,
-			    keysignature_x,
-			    staff->extremity_begin_y - 10);
+/* 		break; */
+/* 	case KEY_SIGNATURE_TREBLE_F_SHARP: */
+/* 		draw_pixmap(area->window, */
+/* 			    ACCIDENTAL_SHARP, */
+/*                             is_selected, */
+/* 			    keysignature_x, */
+/* 			    staff->extremity_begin_y - 10); */
 
-		timesignature_x = 
-			keysignature_x +
-                        /* 			STANDARD_ACCIDENTAL_SIZE + */
-			Spacings.KeySignatures.saks;
+/* 		timesignature_x =  */
+/* 			keysignature_x + */
+/*                         /\* 			STANDARD_ACCIDENTAL_SIZE + *\/ */
+/* 			Spacings.KeySignatures.saks; */
 		
-		break;
-	case KEY_SIGNATURE_TREBLE_F_FLAT:
-		draw_pixmap(area->window,
-			    ACCIDENTAL_FLAT,
-                            is_selected,
-			    keysignature_x,
-			    staff->extremity_begin_y + 5);
-		draw_pixmap(area->window,
-			    ACCIDENTAL_FLAT,
-                            is_selected,
-			    keysignature_x + Spacings.KeySignatures.sbksa,
-			    staff->extremity_begin_y - 9);
-		draw_pixmap(area->window,
-			    ACCIDENTAL_FLAT,
-                            is_selected,
-			    keysignature_x + ( 2 * Spacings.KeySignatures.sbksa ),
-			    staff->extremity_begin_y + 9);
-		draw_pixmap(area->window,
-			    ACCIDENTAL_FLAT,
-                            is_selected,
-			    keysignature_x + ( 3 * Spacings.KeySignatures.sbksa ),
-			    staff->extremity_begin_y - 4);
-		draw_pixmap(area->window,
-			    ACCIDENTAL_FLAT,
-                            is_selected,
-			    keysignature_x + ( 4 * Spacings.KeySignatures.sbksa ),
-			    staff->extremity_begin_y + 14);
-		draw_pixmap(area->window,
-			    ACCIDENTAL_FLAT,
-                            is_selected,
-			    keysignature_x + ( 5 * Spacings.KeySignatures.sbksa ),
-			    staff->extremity_begin_y);
-		draw_pixmap(area->window,
-			    ACCIDENTAL_FLAT,
-                            is_selected,
-			    keysignature_x + ( 6 * Spacings.KeySignatures.sbksa),
-			    staff->extremity_begin_y + 18);
+/* 		break; */
+/* 	case KEY_SIGNATURE_TREBLE_F_FLAT: */
+/* 		draw_pixmap(area->window, */
+/* 			    ACCIDENTAL_FLAT, */
+/*                             is_selected, */
+/* 			    keysignature_x, */
+/* 			    staff->extremity_begin_y + 5); */
+/* 		draw_pixmap(area->window, */
+/* 			    ACCIDENTAL_FLAT, */
+/*                             is_selected, */
+/* 			    keysignature_x + Spacings.KeySignatures.sbksa, */
+/* 			    staff->extremity_begin_y - 9); */
+/* 		draw_pixmap(area->window, */
+/* 			    ACCIDENTAL_FLAT, */
+/*                             is_selected, */
+/* 			    keysignature_x + ( 2 * Spacings.KeySignatures.sbksa ), */
+/* 			    staff->extremity_begin_y + 9); */
+/* 		draw_pixmap(area->window, */
+/* 			    ACCIDENTAL_FLAT, */
+/*                             is_selected, */
+/* 			    keysignature_x + ( 3 * Spacings.KeySignatures.sbksa ), */
+/* 			    staff->extremity_begin_y - 4); */
+/* 		draw_pixmap(area->window, */
+/* 			    ACCIDENTAL_FLAT, */
+/*                             is_selected, */
+/* 			    keysignature_x + ( 4 * Spacings.KeySignatures.sbksa ), */
+/* 			    staff->extremity_begin_y + 14); */
+/* 		draw_pixmap(area->window, */
+/* 			    ACCIDENTAL_FLAT, */
+/*                             is_selected, */
+/* 			    keysignature_x + ( 5 * Spacings.KeySignatures.sbksa ), */
+/* 			    staff->extremity_begin_y); */
+/* 		draw_pixmap(area->window, */
+/* 			    ACCIDENTAL_FLAT, */
+/*                             is_selected, */
+/* 			    keysignature_x + ( 6 * Spacings.KeySignatures.sbksa), */
+/* 			    staff->extremity_begin_y + 18); */
 		
-		timesignature_x = 
-			keysignature_x + 
-			6 * Spacings.KeySignatures.sbksa +
-                        /* 			7 * STANDARD_ACCIDENTAL_SIZE + */
-			Spacings.KeySignatures.saks;
+/* 		timesignature_x =  */
+/* 			keysignature_x +  */
+/* 			6 * Spacings.KeySignatures.sbksa + */
+/*                         /\* 			7 * STANDARD_ACCIDENTAL_SIZE + *\/ */
+/* 			Spacings.KeySignatures.saks; */
 
-		break;
-	case KEY_SIGNATURE_TREBLE_G_SHARP:
-		draw_pixmap(area->window,
-			    ACCIDENTAL_SHARP,
-                            is_selected,
-			    keysignature_x,
-			    staff->extremity_begin_y - 10);
-		draw_pixmap(area->window,
-			    ACCIDENTAL_SHARP,
-                            is_selected,
-			    keysignature_x + Spacings.KeySignatures.sbksa,
-			    staff->extremity_begin_y + 4);
-		draw_pixmap(area->window,
-			    ACCIDENTAL_SHARP,
-                            is_selected,
-			    keysignature_x + ( 2 * Spacings.KeySignatures.sbksa),
-			    staff->extremity_begin_y - 13);
+/* 		break; */
+/* 	case KEY_SIGNATURE_TREBLE_G_SHARP: */
+/* 		draw_pixmap(area->window, */
+/* 			    ACCIDENTAL_SHARP, */
+/*                             is_selected, */
+/* 			    keysignature_x, */
+/* 			    staff->extremity_begin_y - 10); */
+/* 		draw_pixmap(area->window, */
+/* 			    ACCIDENTAL_SHARP, */
+/*                             is_selected, */
+/* 			    keysignature_x + Spacings.KeySignatures.sbksa, */
+/* 			    staff->extremity_begin_y + 4); */
+/* 		draw_pixmap(area->window, */
+/* 			    ACCIDENTAL_SHARP, */
+/*                             is_selected, */
+/* 			    keysignature_x + ( 2 * Spacings.KeySignatures.sbksa), */
+/* 			    staff->extremity_begin_y - 13); */
 		
-		timesignature_x = 
-			keysignature_x + 
-			2 * Spacings.KeySignatures.sbksa +
-                        /* 			3 * STANDARD_ACCIDENTAL_SIZE + */
-			Spacings.KeySignatures.saks;
+/* 		timesignature_x =  */
+/* 			keysignature_x +  */
+/* 			2 * Spacings.KeySignatures.sbksa + */
+/*                         /\* 			3 * STANDARD_ACCIDENTAL_SIZE + *\/ */
+/* 			Spacings.KeySignatures.saks; */
 
-		break;
-	case KEY_SIGNATURE_TREBLE_G_FLAT:
-		draw_pixmap(area->window,
-			    ACCIDENTAL_FLAT,
-                            is_selected,
-			    keysignature_x,
-			    staff->extremity_begin_y + 5);
-		draw_pixmap(area->window,
-			    ACCIDENTAL_FLAT,
-                            is_selected,
-			    keysignature_x + Spacings.KeySignatures.sbksa,
-			    staff->extremity_begin_y - 9);
-		draw_pixmap(area->window,
-			    ACCIDENTAL_FLAT,
-                            is_selected,
-			    keysignature_x + ( 2 * Spacings.KeySignatures.sbksa ),
-			    staff->extremity_begin_y + 9);
-		draw_pixmap(area->window,
-			    ACCIDENTAL_FLAT,
-                            is_selected,
-			    keysignature_x + ( 3 * Spacings.KeySignatures.sbksa ),
-			    staff->extremity_begin_y - 4);
-		draw_pixmap(area->window,
-			    ACCIDENTAL_FLAT,
-                            is_selected,
-			    keysignature_x + ( 4 * Spacings.KeySignatures.sbksa ),
-			    staff->extremity_begin_y + 14);
+/* 		break; */
+/* 	case KEY_SIGNATURE_TREBLE_G_FLAT: */
+/* 		draw_pixmap(area->window, */
+/* 			    ACCIDENTAL_FLAT, */
+/*                             is_selected, */
+/* 			    keysignature_x, */
+/* 			    staff->extremity_begin_y + 5); */
+/* 		draw_pixmap(area->window, */
+/* 			    ACCIDENTAL_FLAT, */
+/*                             is_selected, */
+/* 			    keysignature_x + Spacings.KeySignatures.sbksa, */
+/* 			    staff->extremity_begin_y - 9); */
+/* 		draw_pixmap(area->window, */
+/* 			    ACCIDENTAL_FLAT, */
+/*                             is_selected, */
+/* 			    keysignature_x + ( 2 * Spacings.KeySignatures.sbksa ), */
+/* 			    staff->extremity_begin_y + 9); */
+/* 		draw_pixmap(area->window, */
+/* 			    ACCIDENTAL_FLAT, */
+/*                             is_selected, */
+/* 			    keysignature_x + ( 3 * Spacings.KeySignatures.sbksa ), */
+/* 			    staff->extremity_begin_y - 4); */
+/* 		draw_pixmap(area->window, */
+/* 			    ACCIDENTAL_FLAT, */
+/*                             is_selected, */
+/* 			    keysignature_x + ( 4 * Spacings.KeySignatures.sbksa ), */
+/* 			    staff->extremity_begin_y + 14); */
 		
-		timesignature_x = 
-			keysignature_x + 
-			4 * Spacings.KeySignatures.sbksa +
-                        /* 			5 * STANDARD_ACCIDENTAL_SIZE + */
-			Spacings.KeySignatures.saks;
+/* 		timesignature_x =  */
+/* 			keysignature_x +  */
+/* 			4 * Spacings.KeySignatures.sbksa + */
+/*                         /\* 			5 * STANDARD_ACCIDENTAL_SIZE + *\/ */
+/* 			Spacings.KeySignatures.saks; */
 
-		break;
+/* 		break; */
 
-	}
+/* 	} */
 
-	/* I do *NOT* like that: what will happen if you decide not to see the keysignature ?!!! */
-	staff_set_start_x(score, get_staff_selected(score),
-			  timesignature_x);
+/* 	/\* I do *NOT* like that: what will happen if you decide not to see the keysignature ?!!! *\/ */
+/* 	staff_set_start_x(score, get_staff_selected(score), */
+/* 			  timesignature_x); */
 
-	return 0;
-}
+/* 	return 0; */
+/* } */
 
-static gdouble 
-realize_timesignature(GtkWidget *area, Staff_t *staff)
-{
+/* static gdouble  */
+/* realize_timesignature(GtkWidget *area, Staff_t *staff) */
+/* { */
 
-        gboolean is_selected = FALSE;
+/*         gboolean is_selected = FALSE; */
 
-	switch (staff->time_signature[0])
-		{
-		case TIME_SIGNATURE_COMMON_TIME:
-			draw_pixmap(area->window, TIME_SIG_CT,
-                                    is_selected,
-				    timesignature_x,
-				    staff->extremity_begin_y + 9);
+/* 	switch (staff->time_signature[0]) */
+/* 		{ */
+/* 		case TIME_SIGNATURE_COMMON_TIME: */
+/* 			draw_pixmap(area->window, TIME_SIG_CT, */
+/*                                     is_selected, */
+/* 				    timesignature_x, */
+/* 				    staff->extremity_begin_y + 9); */
 
 
-			break;
-		case TIME_SIGNATURE_ALLA_BREVE:
-			draw_pixmap(area->window, TIME_SIG_AB,
-                                    is_selected,
-				    timesignature_x,
-				    staff->extremity_begin_y + 6);
+/* 			break; */
+/* 		case TIME_SIGNATURE_ALLA_BREVE: */
+/* 			draw_pixmap(area->window, TIME_SIG_AB, */
+/*                                     is_selected, */
+/* 				    timesignature_x, */
+/* 				    staff->extremity_begin_y + 6); */
 
-			break;
-		default:
-			break;
-		}
+/* 			break; */
+/* 		default: */
+/* 			break; */
+/* 		} */
 
-	return 0;
-}
+/* 	return 0; */
+/* } */
 
 static gboolean
 realize_object(GtkWidget *area, Staff_t *staff, Object_t *object, gboolean display_barlines, gboolean display_measure_number)
