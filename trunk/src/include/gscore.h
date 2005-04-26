@@ -262,6 +262,8 @@ typedef struct Score_t
         gboolean      is_modified;  
 	/** How many staves in the score */
         gint          nb_staves; 
+        /** Zoom applied to score */
+        gdouble       zoom;
 	/** How wide is the drawing area (score) widget ? */     
         gdouble       width;     
 	/** How high is the drawing area (score) widget ? */

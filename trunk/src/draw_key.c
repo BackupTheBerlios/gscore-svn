@@ -44,7 +44,7 @@ draw_key(Score_t *score, Staff_t *staff, cairo_t *cr, gboolean selected)
         case TREBLE_KEY:
                 cairo_move_to(cr, staff->extremity_begin_x + Spacings.Clefs.sb,
                               staff->extremity_begin_y + 25);
-                cairo_scale_font (cr, 30);
+                cairo_scale_font (cr, score->zoom);
                 cairo_show_text (cr, TREBLE_GLYPH);
                 cairo_stroke(cr);
                 break;
@@ -58,14 +58,14 @@ draw_key(Score_t *score, Staff_t *staff, cairo_t *cr, gboolean selected)
         case TENOR_KEY:
                 cairo_move_to(cr, staff->extremity_begin_x + Spacings.Clefs.sb,
                               staff->extremity_begin_y + 9);
-                cairo_scale_font (cr, 30);
+                cairo_scale_font (cr, score->zoom);
                 cairo_show_text (cr, TENOR_GLYPH);
                 cairo_stroke(cr);
                 break;
         case BASS_KEY:
                 cairo_move_to(cr, staff->extremity_begin_x + Spacings.Clefs.sb,
                               staff->extremity_begin_y + 9);
-                cairo_scale_font (cr, 30);
+                cairo_scale_font (cr, score->zoom);
                 cairo_show_text (cr, BASS_GLYPH);
                 cairo_stroke(cr);
                 break;
@@ -100,7 +100,7 @@ draw_key(Score_t *score, Staff_t *staff, cairo_t *cr, gboolean selected)
         case TAB_KEY:
                 cairo_move_to(cr, staff->extremity_begin_x + Spacings.Clefs.sb,
                               staff->extremity_begin_y + 20);
-                cairo_scale_font (cr, 30);
+                cairo_scale_font (cr, score->zoom);
                 cairo_show_text (cr, TAB_GLYPH);
                 cairo_stroke(cr);
                 break;

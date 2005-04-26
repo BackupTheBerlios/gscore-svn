@@ -26,6 +26,7 @@
 
 #include <glib.h>
 
+#define TREBLE_CLEF_WIDTH_FACTOR 0.63  /* Cairo factor of the treble clef width */
 
 gint get_key_signature_spacing(gint key_signature);
 void set_spacings_init(void);

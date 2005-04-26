@@ -221,7 +221,7 @@ static gchar *get_char_from_chord(Staff_t *staff, Object_t *object)
 
         retstr = g_strconcat(retstr,
                              get_char_from_pitch(0, staff->key, object->type, object->pitch),
-                             get_char_for_duration(object_data->type),
+                             get_char_for_duration(object->type),
                              NULL);
 
         listrunner_object = g_list_first(staff->Object_list);

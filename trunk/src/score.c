@@ -86,6 +86,7 @@ score_new(void)
         score->object_id = 0;
         score->tempo = 60;
         score->tempo_text = g_string_new("");
+        score->zoom = 30;
 
         score->ColorObject = g_malloc(sizeof(struct GscoreColorObject_t));
         if ( ! score->ColorObject ) {
@@ -129,7 +130,7 @@ score_new(void)
         score->Identity->subtitle = g_string_new(_("made with gscore"));
         score->Identity->composer = g_string_new(_("gscore's user"));
 
-        score->staff_extremity_end_x = 100; /* Just a value to start, nothing really important */
+        score->staff_extremity_end_x = 300; /* Just a value to start, nothing really important */
         score->staff_startx = Spacings.Clefs.sb + STANDARD_KEY_SIZE + Spacings.Clefs.sa + 
                 get_key_signature_spacing(KEY_SIGNATURE_TREBLE_EMPTY) + Spacings.KeySignatures.saks +
                 STANDARD_TIME_SIGNATURE_SIZE + Spacings.TimeSignatures.sats;
@@ -143,9 +144,9 @@ score_new(void)
 
         set_staff_selected(score, 0);
 
-        staff_set_key(score, get_staff_selected(score), TREBLE_KEY);
+        staff_set_key(score, get_staff_selected(score), BASS_KEY);
 
-        staff_set_key_signature(score, get_staff_selected(score), KEY_SIGNATURE_TREBLE_EMPTY);
+        staff_set_key_signature(score, get_staff_selected(score), KEY_SIGNATURE_BASS_B_FLAT);
 
 
         return score;

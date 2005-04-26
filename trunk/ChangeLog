@@ -1,3 +1,8 @@
+2005-04-26 Toady <toady@gscore.org>
+
+	* src/draw_key_signature.c, src/include/draw_key_signature.h: added
+	* plugins/midi/*: works with simili
+
 2005-04-21 Toady <toady@gscore.org>
 
 	* src/draw_key.c, src/include/draw_key.h: added

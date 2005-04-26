@@ -82,6 +82,7 @@ extern
 void set_spacings_init(void)
 {
 	/* The values are set in pixels, then converted in inches/cm/whatever if requested */
+        /* Full description in include/spacings.h */
 
 	/* Augmentation Dots */
 	Spacings.AugmentationDots.sbdan = 4;
@@ -102,10 +103,10 @@ void set_spacings_init(void)
 
 	/* Clefs */
 	Spacings.Clefs.sb = 5;
-	Spacings.Clefs.sa = 30;
+	Spacings.Clefs.sa = 10;
 
 	/* Key Signatures */
-	Spacings.KeySignatures.sbksa = 8;
+	Spacings.KeySignatures.sbksa = 10;
 	Spacings.KeySignatures.saks = 20;
 
         /* Measures */

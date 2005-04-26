@@ -34,6 +34,7 @@
 #include "draw_barline.h"
 #include "draw_staff.h"
 #include "draw_key.h"
+#include "draw_key_signature.h"
 #include "gscore-font-constants.h"
 
 guint object_x = 0;
@@ -98,6 +99,8 @@ void layout_paint(GtkWidget *widget,
                            score->staff_extremity_end_x, staff->is_selected);
                 
                 draw_key(score, staff, cr, FALSE);
+
+                draw_key_signature(score, staff, cr, FALSE);
 
                 listrunner_staff = g_list_next(listrunner_staff);
         } /* while ( listrunner_staff ) */
