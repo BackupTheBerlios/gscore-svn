@@ -18,13 +18,19 @@ pixmapsfiles = \
 	alla_breve.xpm \
 	bass_empty.xpm \
 	bass_A_sharp.xpm \
+	bass_A_flat.xpm \
 	bass_B_flat.xpm \
 	bass_B_sharp.xpm \
 	bass_C_sharp.xpm \
+	bass_C_flat.xpm \
 	bass_D_sharp.xpm \
+	bass_D_flat.xpm \
 	bass_E_sharp.xpm \
+	bass_E_flat.xpm \
 	bass_F_sharp.xpm \
+	bass_F_flat.xpm \
 	bass_G_sharp.xpm \
+	bass_G_flat.xpm \
 	clefs-C.xpm \
 	clefs-C_change.xpm \
 	clefs-F.xpm \
