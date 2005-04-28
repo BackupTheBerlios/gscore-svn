@@ -1787,77 +1787,77 @@ extern
 void update_key_signature(GtkButton *widget, gpointer user_data)
 {
 
-/*         Score_t *score; */
-/*         Staff_t *staff_data; */
-/* 	GtkWidget *area; */
+        Score_t *score;
+        Staff_t *staff_data;
+        /* 	GtkWidget *area; */
 
-/*         score = score_get_from_widget(widget); */
-/*         area  = score_get_area_from_widget(widget); */
+        score = score_get_from_widget(widget);
+        /*         area  = score_get_area_from_widget(widget); */
 
-/* 	gint offset = 0; */
+	gint offset = 0;
 
 
-/*         staff_data = g_list_nth_data(score->Staff_list, get_staff_selected(score)); */
+        staff_data = g_list_nth_data(score->Staff_list, get_staff_selected(score));
 
-/*         if ( ! staff_data ) return; */
+        if ( ! staff_data ) return;
 
-/* 	staff_data->key_signature = key_signature; */
+	staff_data->key_signature = key_signature;
 
-/* 	switch(key_signature) { */
-/* 	case KEY_SIGNATURE_TREBLE_EMPTY: */
-/* 		/\* We don't need to update the spacing here :) *\/ */
-/* 		break; */
-/* 	case KEY_SIGNATURE_TREBLE_A_SHARP: */
-/* 		offset += (5 * Spacings.KeySignatures.sbksa) + Spacings.KeySignatures.saks; */
-/* 		break; */
-/* 	case KEY_SIGNATURE_TREBLE_B_SHARP: */
-/* 		offset += (7 * Spacings.KeySignatures.sbksa) + Spacings.KeySignatures.saks; */
-/* 		break; */
-/* 	case KEY_SIGNATURE_TREBLE_C_SHARP: */
-/* 		offset += (2 * Spacings.KeySignatures.sbksa) + Spacings.KeySignatures.saks; */
-/* 		break; */
-/* 	case KEY_SIGNATURE_TREBLE_D_SHARP: */
-/* 		offset += (6 * Spacings.KeySignatures.sbksa) + Spacings.KeySignatures.saks; */
-/* 		break; */
-/* 	case KEY_SIGNATURE_TREBLE_E_SHARP: */
-/* 		offset += (4 * Spacings.KeySignatures.sbksa) + Spacings.KeySignatures.saks; */
-/* 		break; */
-/* 	case KEY_SIGNATURE_TREBLE_F_SHARP: */
-/* 		offset += (1 * Spacings.KeySignatures.sbksa) + Spacings.KeySignatures.saks; */
-/* 		break; */
-/* 	case KEY_SIGNATURE_TREBLE_G_SHARP: */
-/* 		offset += (3 * Spacings.KeySignatures.sbksa) + Spacings.KeySignatures.saks; */
-/* 		break; */
-/* 	case KEY_SIGNATURE_TREBLE_A_FLAT: */
-/* 		offset += (3 * Spacings.KeySignatures.sbksa) + Spacings.KeySignatures.saks; */
-/* 		break; */
-/* 	case KEY_SIGNATURE_TREBLE_B_FLAT: */
-/* 		offset += (1 * Spacings.KeySignatures.sbksa) + Spacings.KeySignatures.saks; */
-/* 		break; */
-/* 	case KEY_SIGNATURE_TREBLE_C_FLAT: */
-/* 		offset += (6 * Spacings.KeySignatures.sbksa) + Spacings.KeySignatures.saks; */
-/* 		break; */
-/* 	case KEY_SIGNATURE_TREBLE_D_FLAT: */
-/* 		offset += (4 * Spacings.KeySignatures.sbksa) + Spacings.KeySignatures.saks; */
-/* 		break; */
-/* 	case KEY_SIGNATURE_TREBLE_E_FLAT: */
-/* 		offset += (2 * Spacings.KeySignatures.sbksa) + Spacings.KeySignatures.saks; */
-/* 		break; */
-/* 	case KEY_SIGNATURE_TREBLE_F_FLAT: */
-/* 		offset += (7 * Spacings.KeySignatures.sbksa) + Spacings.KeySignatures.saks; */
-/* 		break; */
-/* 	case KEY_SIGNATURE_TREBLE_G_FLAT: */
-/* 		offset += (5 * Spacings.KeySignatures.sbksa) + Spacings.KeySignatures.saks; */
-/* 		break; */
-/* 	} */
+	switch(key_signature) {
+	case KEY_SIGNATURE_TREBLE_EMPTY:
+		/* We don't need to update the spacing here :) */
+		break;
+	case KEY_SIGNATURE_TREBLE_A_SHARP:
+		offset += (5 * Spacings.KeySignatures.sbksa) + Spacings.KeySignatures.saks;
+		break;
+	case KEY_SIGNATURE_TREBLE_B_SHARP:
+		offset += (7 * Spacings.KeySignatures.sbksa) + Spacings.KeySignatures.saks;
+		break;
+	case KEY_SIGNATURE_TREBLE_C_SHARP:
+		offset += (2 * Spacings.KeySignatures.sbksa) + Spacings.KeySignatures.saks;
+		break;
+	case KEY_SIGNATURE_TREBLE_D_SHARP:
+		offset += (6 * Spacings.KeySignatures.sbksa) + Spacings.KeySignatures.saks;
+		break;
+	case KEY_SIGNATURE_TREBLE_E_SHARP:
+		offset += (4 * Spacings.KeySignatures.sbksa) + Spacings.KeySignatures.saks;
+		break;
+	case KEY_SIGNATURE_TREBLE_F_SHARP:
+		offset += (1 * Spacings.KeySignatures.sbksa) + Spacings.KeySignatures.saks;
+		break;
+	case KEY_SIGNATURE_TREBLE_G_SHARP:
+		offset += (3 * Spacings.KeySignatures.sbksa) + Spacings.KeySignatures.saks;
+		break;
+	case KEY_SIGNATURE_TREBLE_A_FLAT:
+		offset += (3 * Spacings.KeySignatures.sbksa) + Spacings.KeySignatures.saks;
+		break;
+	case KEY_SIGNATURE_TREBLE_B_FLAT:
+		offset += (1 * Spacings.KeySignatures.sbksa) + Spacings.KeySignatures.saks;
+		break;
+	case KEY_SIGNATURE_TREBLE_C_FLAT:
+		offset += (6 * Spacings.KeySignatures.sbksa) + Spacings.KeySignatures.saks;
+		break;
+	case KEY_SIGNATURE_TREBLE_D_FLAT:
+		offset += (4 * Spacings.KeySignatures.sbksa) + Spacings.KeySignatures.saks;
+		break;
+	case KEY_SIGNATURE_TREBLE_E_FLAT:
+		offset += (2 * Spacings.KeySignatures.sbksa) + Spacings.KeySignatures.saks;
+		break;
+	case KEY_SIGNATURE_TREBLE_F_FLAT:
+		offset += (7 * Spacings.KeySignatures.sbksa) + Spacings.KeySignatures.saks;
+		break;
+	case KEY_SIGNATURE_TREBLE_G_FLAT:
+		offset += (5 * Spacings.KeySignatures.sbksa) + Spacings.KeySignatures.saks;
+		break;
+	}
 
-/* 	score->staff_extremity_end_x += offset; */
-/*         staff_set_current_x(score, get_staff_selected(score), */
-/* 			    staff_get_current_x(score, get_staff_selected(score)) + offset); */
-/* 	staff_set_start_x(score, get_staff_selected(score), offset); */
+	score->staff_extremity_end_x += offset;
+        staff_set_current_x(score, get_staff_selected(score),
+			    staff_get_current_x(score, get_staff_selected(score)) + offset);
+	staff_set_start_x(score, get_staff_selected(score), offset);
 
-/* 	/\* TODO: find a way to refresh ALL drawing areas displaying score *\/ */
-/* 	refresh(area); */
+	/* TODO: find a way to refresh ALL drawing areas displaying score */
+        /* 	refresh(area); */
 }
 
 extern

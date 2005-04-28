@@ -144,9 +144,9 @@ score_new(void)
 
         set_staff_selected(score, 0);
 
-        staff_set_key(score, get_staff_selected(score), BASS_KEY);
+        staff_set_key(score, get_staff_selected(score), TREBLE_KEY);
 
-        staff_set_key_signature(score, get_staff_selected(score), KEY_SIGNATURE_BASS_F_FLAT);
+        staff_set_key_signature(score, get_staff_selected(score), KEY_SIGNATURE_TREBLE_B_SHARP);
 
 
         return score;
