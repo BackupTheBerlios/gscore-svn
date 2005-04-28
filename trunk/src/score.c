@@ -146,7 +146,7 @@ score_new(void)
 
         staff_set_key(score, get_staff_selected(score), BASS_KEY);
 
-        staff_set_key_signature(score, get_staff_selected(score), KEY_SIGNATURE_BASS_B_FLAT);
+        staff_set_key_signature(score, get_staff_selected(score), KEY_SIGNATURE_BASS_C_SHARP);
 
 
         return score;

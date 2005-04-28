@@ -834,7 +834,6 @@
 		      <property name="label" translatable="yes">Key signature</property>
 		      <property name="use_underline">True</property>
 		      <signal name="activate" handler="on_key_signature_activate" last_modification_time="Fri, 15 Oct 2004 13:24:06 GMT"/>
-		      <signal name="activate" handler="gtk_widget_show" object="set_key_signature" last_modification_time="Fri, 09 Apr 2004 07:49:42 GMT"/>
 
 		      <child internal-child="image">
 			<widget class="GtkImage" id="image28">

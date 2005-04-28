@@ -553,6 +553,7 @@ void on_key_signature_activate(GtkWidget *widget)
 	GtkAdjustment *adj;
 	Score_t *score = score_get_from_widget(widget);
 
+        GtkWidget *sks_window = glade_xml_get_widget(gladexml, "set_key_signature");
         GtkWidget *sks_clef_label = glade_xml_get_widget(gladexml, "sks_clef_label");
         GtkWidget *sks_image = glade_xml_get_widget(gladexml, "sks_image");
         GtkWidget *sks_hbox = glade_xml_get_widget(gladexml, "sks_hbox");
@@ -563,8 +564,9 @@ void on_key_signature_activate(GtkWidget *widget)
 
 	gint value_adj = 0;
 
-        /* The adjustment */
+        gtk_widget_show(sks_window);
 
+        /* The adjustment */
 	switch(staff_get_key_signature(score, get_staff_selected(score))) {
 	case KEY_SIGNATURE_TREBLE_EMPTY:
 		gtk_label_set_text(GTK_LABEL(sks_clef_label), "C Major or A minor");
@@ -655,7 +657,63 @@ void on_key_signature_activate(GtkWidget *widget)
 		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/treble_G_flat.xpm"));
 
 		value_adj = -5;
+
+
 		break;
+	case KEY_SIGNATURE_BASS_EMPTY:
+		gtk_label_set_text(GTK_LABEL(sks_clef_label), "plop");
+		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/bass_empty.xpm"));
+
+		value_adj = 0;
+                break;
+	case KEY_SIGNATURE_BASS_A_SHARP:
+		gtk_label_set_text(GTK_LABEL(sks_clef_label), "plop");
+		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/bass_A_sharp.xpm"));
+
+		value_adj = 5;
+                break;
+	case KEY_SIGNATURE_BASS_B_FLAT:
+		gtk_label_set_text(GTK_LABEL(sks_clef_label), "plop");
+		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/bass_B_flat.xpm"));
+
+		value_adj = -1;
+                break;
+	case KEY_SIGNATURE_BASS_B_SHARP:
+		gtk_label_set_text(GTK_LABEL(sks_clef_label), "plop");
+		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/bass_B_sharp.xpm"));
+
+		value_adj = 7;
+                break;
+	case KEY_SIGNATURE_BASS_C_SHARP:
+		gtk_label_set_text(GTK_LABEL(sks_clef_label), "plop");
+		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/bass_C_sharp.xpm"));
+
+		value_adj = 2;
+                break;
+	case KEY_SIGNATURE_BASS_D_SHARP:
+		gtk_label_set_text(GTK_LABEL(sks_clef_label), "plop");
+		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/bass_D_sharp.xpm"));
+
+		value_adj = 4;
+                break;
+	case KEY_SIGNATURE_BASS_E_SHARP:
+		gtk_label_set_text(GTK_LABEL(sks_clef_label), "plop");
+		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/bass_E_sharp.xpm"));
+
+		value_adj = 5;
+                break;
+	case KEY_SIGNATURE_BASS_F_SHARP:
+		gtk_label_set_text(GTK_LABEL(sks_clef_label), "plop");
+		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/bass_F_sharp.xpm"));
+
+		value_adj = 1;
+                break;
+	case KEY_SIGNATURE_BASS_G_SHARP:
+		gtk_label_set_text(GTK_LABEL(sks_clef_label), "plop");
+		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/bass_G_sharp.xpm"));
+
+		value_adj = 3;
+                break;
 	}
 
 
@@ -711,6 +769,7 @@ void on_key_signature_activate(GtkWidget *widget)
 
 void ValueOfRange (GtkAdjustment *adj, gpointer user_data)
 {
+	Score_t *score = score_get_from_widget(adj);
 
         GtkWidget *widget = (GtkWidget *) user_data;
 
@@ -720,7 +779,7 @@ void ValueOfRange (GtkAdjustment *adj, gpointer user_data)
 	gint i;
 
 	i = adj->value;
-	
+
 	switch (i) {
 		
 	case -1:
