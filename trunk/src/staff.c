@@ -657,8 +657,6 @@ void on_key_signature_activate(GtkWidget *widget)
 		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/treble_G_flat.xpm"));
 
 		value_adj = -5;
-
-
 		break;
 	case KEY_SIGNATURE_BASS_EMPTY:
 		gtk_label_set_text(GTK_LABEL(sks_clef_label), "plop");
@@ -672,11 +670,11 @@ void on_key_signature_activate(GtkWidget *widget)
 
 		value_adj = 5;
                 break;
-	case KEY_SIGNATURE_BASS_B_FLAT:
+	case KEY_SIGNATURE_BASS_A_FLAT:
 		gtk_label_set_text(GTK_LABEL(sks_clef_label), "plop");
-		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/bass_B_flat.xpm"));
+		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/bass_A_flat.xpm"));
 
-		value_adj = -1;
+		value_adj = -3;
                 break;
 	case KEY_SIGNATURE_BASS_B_SHARP:
 		gtk_label_set_text(GTK_LABEL(sks_clef_label), "plop");
@@ -684,11 +682,23 @@ void on_key_signature_activate(GtkWidget *widget)
 
 		value_adj = 7;
                 break;
+	case KEY_SIGNATURE_BASS_B_FLAT:
+		gtk_label_set_text(GTK_LABEL(sks_clef_label), "plop");
+		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/bass_B_flat.xpm"));
+
+		value_adj = -1;
+                break;
 	case KEY_SIGNATURE_BASS_C_SHARP:
 		gtk_label_set_text(GTK_LABEL(sks_clef_label), "plop");
 		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/bass_C_sharp.xpm"));
 
 		value_adj = 2;
+                break;
+	case KEY_SIGNATURE_BASS_C_FLAT:
+		gtk_label_set_text(GTK_LABEL(sks_clef_label), "plop");
+		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/bass_C_flat.xpm"));
+
+		value_adj = -6;
                 break;
 	case KEY_SIGNATURE_BASS_D_SHARP:
 		gtk_label_set_text(GTK_LABEL(sks_clef_label), "plop");
@@ -696,11 +706,23 @@ void on_key_signature_activate(GtkWidget *widget)
 
 		value_adj = 4;
                 break;
+	case KEY_SIGNATURE_BASS_D_FLAT:
+		gtk_label_set_text(GTK_LABEL(sks_clef_label), "plop");
+		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/bass_D_flat.xpm"));
+
+		value_adj = -4;
+                break;
 	case KEY_SIGNATURE_BASS_E_SHARP:
 		gtk_label_set_text(GTK_LABEL(sks_clef_label), "plop");
 		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/bass_E_sharp.xpm"));
 
-		value_adj = 5;
+		value_adj = 6;
+                break;
+	case KEY_SIGNATURE_BASS_E_FLAT:
+		gtk_label_set_text(GTK_LABEL(sks_clef_label), "plop");
+		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/bass_E_flat.xpm"));
+
+		value_adj = -2;
                 break;
 	case KEY_SIGNATURE_BASS_F_SHARP:
 		gtk_label_set_text(GTK_LABEL(sks_clef_label), "plop");
@@ -708,11 +730,23 @@ void on_key_signature_activate(GtkWidget *widget)
 
 		value_adj = 1;
                 break;
+	case KEY_SIGNATURE_BASS_F_FLAT:
+		gtk_label_set_text(GTK_LABEL(sks_clef_label), "plop");
+		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/bass_F_flat.xpm"));
+
+		value_adj = -7;
+                break;
 	case KEY_SIGNATURE_BASS_G_SHARP:
 		gtk_label_set_text(GTK_LABEL(sks_clef_label), "plop");
 		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/bass_G_sharp.xpm"));
 
 		value_adj = 3;
+                break;
+	case KEY_SIGNATURE_BASS_G_FLAT:
+		gtk_label_set_text(GTK_LABEL(sks_clef_label), "plop");
+		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/bass_G_flat.xpm"));
+
+		value_adj = 5;
                 break;
 	}
 
@@ -780,115 +814,259 @@ void ValueOfRange (GtkAdjustment *adj, gpointer user_data)
 
 	i = adj->value;
 
-	switch (i) {
+	switch(staff_get_key_signature(score, get_staff_selected(score))) {
+
+        case KEY_SIGNATURE_TREBLE_EMPTY:
+        case KEY_SIGNATURE_TREBLE_A_SHARP:
+        case KEY_SIGNATURE_TREBLE_B_SHARP:
+        case KEY_SIGNATURE_TREBLE_C_SHARP:
+        case KEY_SIGNATURE_TREBLE_D_SHARP:
+        case KEY_SIGNATURE_TREBLE_E_SHARP:
+        case KEY_SIGNATURE_TREBLE_F_SHARP:
+        case KEY_SIGNATURE_TREBLE_G_SHARP:
+        case KEY_SIGNATURE_TREBLE_A_FLAT:
+        case KEY_SIGNATURE_TREBLE_B_FLAT:
+        case KEY_SIGNATURE_TREBLE_C_FLAT:
+        case KEY_SIGNATURE_TREBLE_D_FLAT:
+        case KEY_SIGNATURE_TREBLE_E_FLAT:
+        case KEY_SIGNATURE_TREBLE_F_FLAT:
+        case KEY_SIGNATURE_TREBLE_G_FLAT:
+                switch (i) {
 		
-	case -1:
-		/* 		score->Staff[get_staff_selected()].key_signature = */
-		key_signature = KEY_SIGNATURE_TREBLE_B_FLAT;
+                case -1:
+                        /* 		score->Staff[get_staff_selected()].key_signature = */
+                        key_signature = KEY_SIGNATURE_TREBLE_B_FLAT;
 		
-		gtk_label_set_text(GTK_LABEL(sks_clef_label), "F Major or D minor");
-		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/treble_B_flat.xpm"));
+                        gtk_label_set_text(GTK_LABEL(sks_clef_label), "F Major or D minor");
+                        gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/treble_B_flat.xpm"));
 
-		break;
-	case -2:
-		key_signature = KEY_SIGNATURE_TREBLE_E_FLAT;
+                        break;
+                case -2:
+                        key_signature = KEY_SIGNATURE_TREBLE_E_FLAT;
 
-		gtk_label_set_text(GTK_LABEL(sks_clef_label), "B flat Major or G minor");
-		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/treble_E_flat.xpm"));
+                        gtk_label_set_text(GTK_LABEL(sks_clef_label), "B flat Major or G minor");
+                        gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/treble_E_flat.xpm"));
 
-		break;
-	case -3:
-		key_signature = KEY_SIGNATURE_TREBLE_A_FLAT;
+                        break;
+                case -3:
+                        key_signature = KEY_SIGNATURE_TREBLE_A_FLAT;
 
-		gtk_label_set_text(GTK_LABEL(sks_clef_label), "E flat Major or C minor");
-		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/treble_A_flat.xpm"));
+                        gtk_label_set_text(GTK_LABEL(sks_clef_label), "E flat Major or C minor");
+                        gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/treble_A_flat.xpm"));
 
-		break;
-	case -4:
-		key_signature = KEY_SIGNATURE_TREBLE_D_FLAT;
+                        break;
+                case -4:
+                        key_signature = KEY_SIGNATURE_TREBLE_D_FLAT;
 
-		gtk_label_set_text(GTK_LABEL(sks_clef_label), "A flat Major or F minor");
-		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/treble_D_flat.xpm"));
+                        gtk_label_set_text(GTK_LABEL(sks_clef_label), "A flat Major or F minor");
+                        gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/treble_D_flat.xpm"));
 
-		break;
-	case -5:
-		key_signature = KEY_SIGNATURE_TREBLE_G_FLAT;
+                        break;
+                case -5:
+                        key_signature = KEY_SIGNATURE_TREBLE_G_FLAT;
 
-		gtk_label_set_text(GTK_LABEL(sks_clef_label), "D flat Major or B minor");
-		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/treble_G_flat.xpm"));
+                        gtk_label_set_text(GTK_LABEL(sks_clef_label), "D flat Major or B minor");
+                        gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/treble_G_flat.xpm"));
 
-		break;
-	case -6:
-		key_signature = KEY_SIGNATURE_TREBLE_C_FLAT;
+                        break;
+                case -6:
+                        key_signature = KEY_SIGNATURE_TREBLE_C_FLAT;
 
-		gtk_label_set_text(GTK_LABEL(sks_clef_label), "G flat Major or E flat minor");
-		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/treble_C_flat.xpm"));
+                        gtk_label_set_text(GTK_LABEL(sks_clef_label), "G flat Major or E flat minor");
+                        gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/treble_C_flat.xpm"));
 
-		break;
-	case -7:
-		key_signature = KEY_SIGNATURE_TREBLE_F_FLAT;
+                        break;
+                case -7:
+                        key_signature = KEY_SIGNATURE_TREBLE_F_FLAT;
 
-		gtk_label_set_text(GTK_LABEL(sks_clef_label), "C flat Major or A flat minor");
-		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/treble_F_flat.xpm"));
+                        gtk_label_set_text(GTK_LABEL(sks_clef_label), "C flat Major or A flat minor");
+                        gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/treble_F_flat.xpm"));
 
-		break;
-	case 0:
-		key_signature = KEY_SIGNATURE_TREBLE_EMPTY;
+                        break;
+                case 0:
+                        key_signature = KEY_SIGNATURE_TREBLE_EMPTY;
 
-		gtk_label_set_text(GTK_LABEL(sks_clef_label), "C Major or A minor");
-		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/treble_empty.xpm"));
+                        gtk_label_set_text(GTK_LABEL(sks_clef_label), "C Major or A minor");
+                        gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/treble_empty.xpm"));
 
-		break;
-	case 1:
-		key_signature = KEY_SIGNATURE_TREBLE_F_SHARP;
+                        break;
+                case 1:
+                        key_signature = KEY_SIGNATURE_TREBLE_F_SHARP;
 
-		gtk_label_set_text(GTK_LABEL(sks_clef_label), "G Major or E minor");
-		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/treble_F_sharp.xpm"));
+                        gtk_label_set_text(GTK_LABEL(sks_clef_label), "G Major or E minor");
+                        gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/treble_F_sharp.xpm"));
 
-		break;
-	case 2:
-		key_signature = KEY_SIGNATURE_TREBLE_C_SHARP;
+                        break;
+                case 2:
+                        key_signature = KEY_SIGNATURE_TREBLE_C_SHARP;
 
-		gtk_label_set_text(GTK_LABEL(sks_clef_label), "D Major or B minor");
-		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/treble_C_sharp.xpm"));
+                        gtk_label_set_text(GTK_LABEL(sks_clef_label), "D Major or B minor");
+                        gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/treble_C_sharp.xpm"));
 
-		break;
-	case 3:
-		key_signature = KEY_SIGNATURE_TREBLE_G_SHARP;
+                        break;
+                case 3:
+                        key_signature = KEY_SIGNATURE_TREBLE_G_SHARP;
 
-		gtk_label_set_text(GTK_LABEL(sks_clef_label), "A Major or F sharp minor");
-		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/treble_G_sharp.xpm"));
+                        gtk_label_set_text(GTK_LABEL(sks_clef_label), "A Major or F sharp minor");
+                        gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/treble_G_sharp.xpm"));
 
-		break;
-	case 4:
-		key_signature = KEY_SIGNATURE_TREBLE_D_SHARP;
+                        break;
+                case 4:
+                        key_signature = KEY_SIGNATURE_TREBLE_D_SHARP;
 
-		gtk_label_set_text(GTK_LABEL(sks_clef_label), "E Major or C sharp minor");
-		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/treble_D_sharp.xpm"));
+                        gtk_label_set_text(GTK_LABEL(sks_clef_label), "E Major or C sharp minor");
+                        gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/treble_D_sharp.xpm"));
 
-		break;
-	case 5:
-		key_signature = KEY_SIGNATURE_TREBLE_A_SHARP;
+                        break;
+                case 5:
+                        key_signature = KEY_SIGNATURE_TREBLE_A_SHARP;
 
-		gtk_label_set_text(GTK_LABEL(sks_clef_label), "B Major or G sharp minor");
-		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/treble_A_sharp.xpm"));
+                        gtk_label_set_text(GTK_LABEL(sks_clef_label), "B Major or G sharp minor");
+                        gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/treble_A_sharp.xpm"));
 
-		break;
-	case 6:
-		key_signature = KEY_SIGNATURE_TREBLE_E_SHARP;
+                        break;
+                case 6:
+                        key_signature = KEY_SIGNATURE_TREBLE_E_SHARP;
 
-		gtk_label_set_text(GTK_LABEL(sks_clef_label), "F sharp Major or  D sharp minor");
-		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/treble_E_sharp.xpm"));
+                        gtk_label_set_text(GTK_LABEL(sks_clef_label), "F sharp Major or  D sharp minor");
+                        gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/treble_E_sharp.xpm"));
 
-		break;
-	case 7:
-		key_signature = KEY_SIGNATURE_TREBLE_B_SHARP;
+                        break;
+                case 7:
+                        key_signature = KEY_SIGNATURE_TREBLE_B_SHARP;
 
-		gtk_label_set_text(GTK_LABEL(sks_clef_label), "C sharp Major or A sharp minor");
-		gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/treble_B_sharp.xpm"));
+                        gtk_label_set_text(GTK_LABEL(sks_clef_label), "C sharp Major or A sharp minor");
+                        gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/treble_B_sharp.xpm"));
 
-		break;
-	}
+                        break;
+                }
+                break;
+        case KEY_SIGNATURE_BASS_EMPTY:
+        case KEY_SIGNATURE_BASS_A_SHARP:
+        case KEY_SIGNATURE_BASS_B_SHARP:
+        case KEY_SIGNATURE_BASS_C_SHARP:
+        case KEY_SIGNATURE_BASS_D_SHARP:
+        case KEY_SIGNATURE_BASS_E_SHARP:
+        case KEY_SIGNATURE_BASS_F_SHARP:
+        case KEY_SIGNATURE_BASS_G_SHARP:
+        case KEY_SIGNATURE_BASS_A_FLAT:
+        case KEY_SIGNATURE_BASS_B_FLAT:
+        case KEY_SIGNATURE_BASS_C_FLAT:
+        case KEY_SIGNATURE_BASS_D_FLAT:
+        case KEY_SIGNATURE_BASS_E_FLAT:
+        case KEY_SIGNATURE_BASS_F_FLAT:
+        case KEY_SIGNATURE_BASS_G_FLAT:
+                switch (i) {
+		
+                case -1:
+                        /* 		score->Staff[get_staff_selected()].key_signature = */
+                        key_signature = KEY_SIGNATURE_BASS_B_FLAT;
+		
+                        gtk_label_set_text(GTK_LABEL(sks_clef_label), "F Major or D minor");
+                        gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/bass_B_flat.xpm"));
+
+                        break;
+                case -2:
+                        key_signature = KEY_SIGNATURE_BASS_E_FLAT;
+
+                        gtk_label_set_text(GTK_LABEL(sks_clef_label), "B flat Major or G minor");
+                        gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/bass_E_flat.xpm"));
+
+                        break;
+                case -3:
+                        key_signature = KEY_SIGNATURE_BASS_A_FLAT;
+
+                        gtk_label_set_text(GTK_LABEL(sks_clef_label), "E flat Major or C minor");
+                        gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/bass_A_flat.xpm"));
+
+                        break;
+                case -4:
+                        key_signature = KEY_SIGNATURE_BASS_D_FLAT;
+
+                        gtk_label_set_text(GTK_LABEL(sks_clef_label), "A flat Major or F minor");
+                        gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/bass_D_flat.xpm"));
+
+                        break;
+                case -5:
+                        key_signature = KEY_SIGNATURE_BASS_G_FLAT;
+
+                        gtk_label_set_text(GTK_LABEL(sks_clef_label), "D flat Major or B minor");
+                        gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/bass_G_flat.xpm"));
+
+                        break;
+                case -6:
+                        key_signature = KEY_SIGNATURE_BASS_C_FLAT;
+
+                        gtk_label_set_text(GTK_LABEL(sks_clef_label), "G flat Major or E flat minor");
+                        gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/bass_C_flat.xpm"));
+
+                        break;
+                case -7:
+                        key_signature = KEY_SIGNATURE_BASS_F_FLAT;
+
+                        gtk_label_set_text(GTK_LABEL(sks_clef_label), "C flat Major or A flat minor");
+                        gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/bass_F_flat.xpm"));
+
+                        break;
+                case 0:
+                        key_signature = KEY_SIGNATURE_BASS_EMPTY;
+
+                        gtk_label_set_text(GTK_LABEL(sks_clef_label), "C Major or A minor");
+                        gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/bass_empty.xpm"));
+
+                        break;
+                case 1:
+                        key_signature = KEY_SIGNATURE_BASS_F_SHARP;
+
+                        gtk_label_set_text(GTK_LABEL(sks_clef_label), "G Major or E minor");
+                        gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/bass_F_sharp.xpm"));
+
+                        break;
+                case 2:
+                        key_signature = KEY_SIGNATURE_BASS_C_SHARP;
+
+                        gtk_label_set_text(GTK_LABEL(sks_clef_label), "D Major or B minor");
+                        gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/bass_C_sharp.xpm"));
+
+                        break;
+                case 3:
+                        key_signature = KEY_SIGNATURE_BASS_G_SHARP;
+
+                        gtk_label_set_text(GTK_LABEL(sks_clef_label), "A Major or F sharp minor");
+                        gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/bass_G_sharp.xpm"));
+
+                        break;
+                case 4:
+                        key_signature = KEY_SIGNATURE_BASS_D_SHARP;
+
+                        gtk_label_set_text(GTK_LABEL(sks_clef_label), "E Major or C sharp minor");
+                        gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/bass_D_sharp.xpm"));
+
+                        break;
+                case 5:
+                        key_signature = KEY_SIGNATURE_BASS_A_SHARP;
+
+                        gtk_label_set_text(GTK_LABEL(sks_clef_label), "B Major or G sharp minor");
+                        gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/bass_A_sharp.xpm"));
+
+                        break;
+                case 6:
+                        key_signature = KEY_SIGNATURE_BASS_E_SHARP;
+
+                        gtk_label_set_text(GTK_LABEL(sks_clef_label), "F sharp Major or  D sharp minor");
+                        gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/bass_E_sharp.xpm"));
+
+                        break;
+                case 7:
+                        key_signature = KEY_SIGNATURE_BASS_B_SHARP;
+
+                        gtk_label_set_text(GTK_LABEL(sks_clef_label), "C sharp Major or A sharp minor");
+                        gtk_image_set_from_file(GTK_IMAGE(sks_image), get_file_from_data_dir("pixmaps/bass_B_sharp.xpm"));
+
+                        break;
+                }
+                break;
+        }
 }
 
 
