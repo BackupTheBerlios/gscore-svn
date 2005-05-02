@@ -1,3 +1,7 @@
+2005-05-02 Toady <toady@gscore.org>
+
+	* src/draw_time_signature.c, src/include/draw_time_signature.h: added
+	
 2005-04-28 Toady <toady@gscore.org>
 
 	* src/staff.c: improved key signature

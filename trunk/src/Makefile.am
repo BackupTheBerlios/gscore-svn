@@ -22,6 +22,7 @@ gscore_SOURCES =				\
 	draw_staff.c 				\
 	draw_key.c				\
 	draw_key_signature.c			\
+	draw_time_signature.c			\
 	draw.c					\
 	edit.c					\
 	error.c					\

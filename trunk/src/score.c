@@ -209,7 +209,7 @@ score_set_to_widget(Score_t *score, GtkWidget *widget)
         
         return TRUE;
 }
-  
+
 
 /**
  * score_window_new:

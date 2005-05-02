@@ -71,9 +71,6 @@ void layout_paint(GtkWidget *widget,
         cairo_fill (cr);
 
 
-/*         cairo_select_font (cr, "Sans", CAIRO_FONT_SLANT_NORMAL, */
-/*                            CAIRO_FONT_WEIGHT_BOLD); */
-
         /* enclosing in a save/restore pair since we alter the
          * font size
          */
@@ -83,7 +80,6 @@ void layout_paint(GtkWidget *widget,
         /***************
          * Draw Staves *
          ***************/
-/*         draw_staff(score, cr, 5, 8, 20, 50, 300, 1); */
         /* We walk through staves */
         listrunner_staff = g_list_first(score->Staff_list);
         while ( listrunner_staff ) {
@@ -101,6 +97,8 @@ void layout_paint(GtkWidget *widget,
                 draw_key(score, staff, cr, FALSE);
 
                 draw_key_signature(score, staff, cr, FALSE);
+
+                draw_time_signature(score, staff, cr, FALSE);
 
                 listrunner_staff = g_list_next(listrunner_staff);
         } /* while ( listrunner_staff ) */
