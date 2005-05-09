@@ -131,8 +131,7 @@ score_new(void)
         score->Identity->composer = g_string_new(_("gscore's user"));
 
         score->staff_extremity_end_x = 300; /* Just a value to start, nothing really important */
-        score->staff_startx = Spacings.Clefs.sb + STANDARD_KEY_SIZE + Spacings.Clefs.sa + 
-                get_key_signature_spacing(KEY_SIGNATURE_TREBLE_EMPTY) + Spacings.KeySignatures.saks +
+        score->staff_startx = Spacings.Clefs.sb + STANDARD_KEY_SIZE + Spacings.Clefs.sa + Spacings.KeySignatures.saks +
                 STANDARD_TIME_SIGNATURE_SIZE + Spacings.TimeSignatures.sats;
 
 

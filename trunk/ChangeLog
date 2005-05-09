@@ -1,3 +1,7 @@
+2005-05-10 Toady <toady@gscore.org>
+
+	* src/spacings, src/draw_time_signature.c, src/score.c: better time signature
+	
 2005-05-02 Toady <toady@gscore.org>
 
 	* src/draw_time_signature.c, src/include/draw_time_signature.h: added

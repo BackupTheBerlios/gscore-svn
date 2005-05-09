@@ -35,6 +35,7 @@
 #include "draw_staff.h"
 #include "draw_key.h"
 #include "draw_key_signature.h"
+#include "draw_time_signature.h"
 #include "gscore-font-constants.h"
 
 guint object_x = 0;

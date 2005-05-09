@@ -32,44 +32,73 @@
 
 Spacings_t Spacings;
 
-extern gint
-get_key_signature_spacing(gint key_signature)
+extern gdouble
+get_key_signature_spacing(Score_t *score, Staff_t *staff)
 {
+        gdouble retval = 0;
 
-        gint retval = 0;
 
-        switch(key_signature)
+        switch(staff->key_signature)
                 {
                 case KEY_SIGNATURE_TREBLE_EMPTY:
+                case KEY_SIGNATURE_BASS_EMPTY:
                         retval = 0;
                         break;
                 case KEY_SIGNATURE_TREBLE_A_SHARP:
+                case KEY_SIGNATURE_BASS_A_SHARP:
+                        retval = 5 * Spacings.KeySignatures.sbksa;
                         break;
                 case KEY_SIGNATURE_TREBLE_B_SHARP:
+                case KEY_SIGNATURE_BASS_B_SHARP:
+                        retval = 7 * Spacings.KeySignatures.sbksa;
                         break;
                 case KEY_SIGNATURE_TREBLE_C_SHARP:
+                case KEY_SIGNATURE_BASS_C_SHARP:
+                        retval = 2 * Spacings.KeySignatures.sbksa;
                         break;
                 case KEY_SIGNATURE_TREBLE_D_SHARP:
+                case KEY_SIGNATURE_BASS_D_SHARP:
+                        retval = 4 * Spacings.KeySignatures.sbksa;
                         break;
                 case KEY_SIGNATURE_TREBLE_E_SHARP:
+                case KEY_SIGNATURE_BASS_E_SHARP:
+                        retval = 6 * Spacings.KeySignatures.sbksa;
                         break;
                 case KEY_SIGNATURE_TREBLE_F_SHARP:
+                case KEY_SIGNATURE_BASS_F_SHARP:
+                        retval = Spacings.KeySignatures.sbksa;
                         break;
                 case KEY_SIGNATURE_TREBLE_G_SHARP:
+                case KEY_SIGNATURE_BASS_G_SHARP:
+                        retval = 3 * Spacings.KeySignatures.sbksa;
                         break;
                 case KEY_SIGNATURE_TREBLE_A_FLAT:
+                case KEY_SIGNATURE_BASS_A_FLAT:
+                        retval = 3 * Spacings.KeySignatures.sbksa;
                         break;
                 case KEY_SIGNATURE_TREBLE_B_FLAT:
+                case KEY_SIGNATURE_BASS_B_FLAT:
+                        retval = Spacings.KeySignatures.sbksa;
                         break;
                 case KEY_SIGNATURE_TREBLE_C_FLAT:
+                case KEY_SIGNATURE_BASS_C_FLAT:
+                        retval = 6 * Spacings.KeySignatures.sbksa;
                         break;
                 case KEY_SIGNATURE_TREBLE_D_FLAT:
+                case KEY_SIGNATURE_BASS_D_FLAT:
+                        retval = 4 * Spacings.KeySignatures.sbksa;
                         break;
                 case KEY_SIGNATURE_TREBLE_E_FLAT:
+                case KEY_SIGNATURE_BASS_E_FLAT:
+                        retval = 2 * Spacings.KeySignatures.sbksa;
                         break;
                 case KEY_SIGNATURE_TREBLE_F_FLAT:
+                case KEY_SIGNATURE_BASS_F_FLAT:
+                        retval = 7 * Spacings.KeySignatures.sbksa;
                         break;
                 case KEY_SIGNATURE_TREBLE_G_FLAT:
+                case KEY_SIGNATURE_BASS_G_FLAT:
+                        retval = 5 * Spacings.KeySignatures.sbksa;
                         break;
                 default:
                         g_critical("Cannot guess the spacing of the key signature!");
