@@ -854,7 +854,6 @@
 		      <property name="label" translatable="yes">Time signature</property>
 		      <property name="use_underline">True</property>
 		      <signal name="activate" handler="on_time_signature_activate" last_modification_time="Fri, 15 Oct 2004 13:24:34 GMT"/>
-		      <signal name="activate" handler="gtk_widget_show" object="set_time" last_modification_time="Tue, 29 Jun 2004 01:09:21 GMT"/>
 
 		      <child internal-child="image">
 			<widget class="GtkImage" id="image29">

@@ -2,10 +2,6 @@
 #include "libglade-garbage.h"
 
 
-void on_time_signature_activate(void)
-{
-}
-
 void on_close_activate(void)
 {
 }

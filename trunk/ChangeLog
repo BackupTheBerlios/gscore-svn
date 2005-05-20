@@ -1,3 +1,7 @@
+2005-05-20 Toady <toady@gscore.org>
+
+	* src/staff.c, glade/gscore.glade: time signature fully working
+	
 2005-05-10 Toady <toady@gscore.org>
 
 	* src/spacings, src/draw_time_signature.c, src/score.c: better time signature

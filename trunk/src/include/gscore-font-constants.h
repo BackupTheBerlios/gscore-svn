@@ -35,7 +35,7 @@
 #define DOT_GLYPH ":"
 
 
-/* Keys */
+/* Clefs */
 #define TREBLE_GLYPH "e"
 #define TREBLE_CHANGE_GLYPH "f"
 #define BASS_GLYPH "c"
@@ -44,4 +44,8 @@
 #define TENOR_CHANGE_GLYPH "b"
 #define TAB_GLYPH "g"
 #define TAB_CHANGE_GLYPH "h"
+
+/* Clef Signature */
+#define COMMON_TIME_GLYPH "i"
+#define ALLA_BREVE_GLYPH "j"
 

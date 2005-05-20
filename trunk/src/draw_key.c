@@ -40,6 +40,7 @@ draw_key(Score_t *score, Staff_t *staff, cairo_t *cr, gboolean selected)
         cairo_set_rgb_color (cr, 
                              score->ColorObject->clefs->red, score->ColorObject->clefs->green, score->ColorObject->clefs->blue);
 
+	
         switch ( staff->key ) {
         case TREBLE_KEY:
                 cairo_move_to(cr, staff->extremity_begin_x + Spacings.Clefs.sb,

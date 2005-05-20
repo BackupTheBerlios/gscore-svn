@@ -493,10 +493,11 @@ gboolean staff_set_key_signature(Score_t *score, gint staff, gint key_signature)
 
 }
 
+/*
 gboolean staff_set_time_signature(Score_t *score, gint staff,
 				  gint signature_type, gint number_of_beats,
 				  gint beat_duration)
-{
+{*/
 /*         Staff_t *staff_data; */
         
 /*         staff_data = g_list_nth_data(score->Staff_list, staff); */
@@ -509,7 +510,7 @@ gboolean staff_set_time_signature(Score_t *score, gint staff,
 /*         } */
 
 /*         return FALSE; */
-}
+/*}*/
 
 gboolean staff_set_midi_instrument(Score_t *score, gint staff, gint midi_instrument)
 {
@@ -1217,8 +1218,8 @@ void staff_key_signature(gpointer callback_data, guint callback_action, GtkWidge
 
 }
 
-void staff_time_signature(gpointer callback_data, guint callback_action, GtkWidget *widget)
-{
+/* void staff_time_signature(gpointer callback_data, guint callback_action, GtkWidget *widget) */
+/* { */
 
 /*      static GtkWidget * time_signature_dialog = NULL; */
 
@@ -1361,7 +1362,7 @@ void staff_time_signature(gpointer callback_data, guint callback_action, GtkWidg
 /*           gtk_widget_destroy(time_signature_dialog); */
 /*      } */
 
-}
+/* } */
 
 void staff_display_measures_numbers(gpointer callback_data, guint callback_action, GtkWidget *widget)
 {
@@ -1906,3 +1907,52 @@ Staff_t *staff_selected_get_from_score(Score_t *score)
 
         return tmpstaff;
 }
+
+void on_time_signature_activate(GtkWidget *widget)
+{
+	Score_t *score = score_get_from_widget(widget);
+
+        GtkWidget *sts_window = glade_xml_get_widget(gladexml, "set_time_signature");
+  
+	gtk_widget_show(sts_window);
+	
+}
+
+void staff_set_time_signature(GtkWidget *widget)
+{
+	Score_t *score = score_get_from_widget(widget);
+        Staff_t *staff_data;
+	
+	GtkWidget *sts_standard_rb = glade_xml_get_widget(gladexml, "sts_standard_rb");
+	GtkWidget *sts_commontime_rb = glade_xml_get_widget(gladexml, "sts_commontime_rb");
+	GtkWidget *sts_allabreve_rb = glade_xml_get_widget(gladexml, "sts_allabreve_rb");
+
+	GtkWidget *sts_denominator_sb = glade_xml_get_widget(gladexml, "sts_denominator_sb");
+	GtkWidget *sts_numerator_sb = glade_xml_get_widget(gladexml, "sts_numerator_sb");
+ 
+	
+	staff_data = g_list_nth_data(score->Staff_list, get_staff_selected(score));
+        if ( ! staff_data ) return;
+
+	if ( gtk_toggle_button_get_active(sts_standard_rb) ) {
+		staff_data->time_signature[0] = TIME_SIGNATURE_NORMAL;
+		staff_data->time_signature[1] = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(sts_numerator_sb));
+		staff_data->time_signature[2] = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(sts_denominator_sb));
+	}
+
+	if ( gtk_toggle_button_get_active(sts_commontime_rb) ) {
+		staff_data->time_signature[0] = TIME_SIGNATURE_COMMON_TIME;
+		staff_data->time_signature[1] = 4;
+		staff_data->time_signature[2] = 4;
+	}
+	
+	if ( gtk_toggle_button_get_active(sts_allabreve_rb) ) {
+		staff_data->time_signature[0] = TIME_SIGNATURE_ALLA_BREVE;
+		staff_data->time_signature[1] = 2;
+		staff_data->time_signature[2] = 2;
+	}
+	
+}
+
+
+

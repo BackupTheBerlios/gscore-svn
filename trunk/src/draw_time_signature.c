@@ -59,8 +59,16 @@ draw_time_signature(Score_t *score, Staff_t *staff, cairo_t *cr, gboolean select
                 cairo_show_text (cr, g_strdup_printf("%d", staff->time_signature[2]));
                 break;
         case TIME_SIGNATURE_COMMON_TIME:
+                cairo_move_to(cr, key_signature_start_x + get_key_signature_spacing(score, staff) + Spacings.KeySignatures.saks,
+                              staff->extremity_begin_y + 16);
+                cairo_scale_font (cr, score->zoom);
+                cairo_show_text (cr, COMMON_TIME_GLYPH);
                 break;
         case TIME_SIGNATURE_ALLA_BREVE:
+                cairo_move_to(cr, key_signature_start_x + get_key_signature_spacing(score, staff) + Spacings.KeySignatures.saks,
+                              staff->extremity_begin_y + 16);
+                cairo_scale_font (cr, score->zoom);
+                cairo_show_text (cr, ALLA_BREVE_GLYPH);
                 break;
         }
 

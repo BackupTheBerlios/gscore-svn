@@ -53,8 +53,10 @@ gdouble get_staff_extremity_begin_x(const Score_t *score, gint staff);
 gdouble get_staff_extremity_begin_y(const Score_t *score, gint staff);
 
 gboolean staff_set_key_signature(Score_t *score, gint staff, gint key_signature);
-
+/*
 gboolean staff_set_time_signature(Score_t *score, gint staff, gint signature_type, gint number_of_beats, gint beat_duration);
+*/
+void staff_set_time_signature(GtkWidget *widget);
 
 gboolean staff_set_midi_instrument(Score_t *score, gint staff, gint midi_instrument);
 

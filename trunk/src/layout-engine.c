@@ -59,7 +59,8 @@ void layout_paint(GtkWidget *widget,
         width  = widget->allocation.width;
         height = widget->allocation.height;
 
-        /* enclosing the painting function in a save/restore pair is a
+        /*
+	 * enclosing the painting function in a save/restore pair is a
          * good idea since we'll return to a sane state then
          */
 
@@ -95,12 +96,29 @@ void layout_paint(GtkWidget *widget,
                            staff->extremity_begin_x, staff->extremity_begin_y,
                            score->staff_extremity_end_x, staff->is_selected);
                 
-                draw_key(score, staff, cr, FALSE);
+/*                 if ( display->clefs ) */
+                        draw_key(score, staff, cr, FALSE);
 
-                draw_key_signature(score, staff, cr, FALSE);
+/*                 if ( display->key_signature ) */
+                        draw_key_signature(score, staff, cr, FALSE);
 
-                draw_time_signature(score, staff, cr, FALSE);
+/*                 if ( display->time_signature ) */
+                        draw_time_signature(score, staff, cr, FALSE);
 
+		listrunner_object = g_list_first(staff->Object_list);
+ 		while ( listrunner_object ) { 
+ 			Object_t *object = NULL;
+ 			object = (Object_t *)listrunner_object->data;
+
+			if (object) {
+				switch(object->type) {
+					
+				}
+			}
+			
+			listrunner_object = g_list_next(listrunner_object);
+		}
+		
                 listrunner_staff = g_list_next(listrunner_staff);
         } /* while ( listrunner_staff ) */
 
