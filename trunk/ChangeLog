@@ -1,3 +1,8 @@
+2005-05-21 Toady <toady@gscore.org>
+
+	* src/draw_pitch_cursor.c, src/include/draw_pitch/cursor.h: added
+	* src/include/constants.h, src/staff.c, src/layout-engine.c: support of the pitch cursor
+
 2005-05-20 Toady <toady@gscore.org>
 
 	* src/staff.c, glade/gscore.glade: time signature fully working

@@ -89,30 +89,31 @@
 #define TIME_SIG_CT "pixmaps/common_time.xpm"
 #define TIME_SIG_AB "pixmaps/alla_breve.xpm"
 
-/* CURSOR */
-#define CURSOR 0
+/* CURSORS */
+#define CURSOR 0 /* Mouse cursor */
+#define PITCH_CURSOR 1
 
 /* KEYS */
-#define NO_KEY 1
-#define TREBLE_KEY 2
-#define ALTO_KEY 3
-#define TENOR_KEY 4
-#define BASS_KEY 5
-#define PERCUSSION_KEY 6
-#define TREBLE_8VB_KEY 7
-#define BASS_8VB_KEY 8
-#define BARITONE_KEY 9
-#define TAB_KEY 10
+#define NO_KEY 2
+#define TREBLE_KEY 3
+#define ALTO_KEY 4
+#define TENOR_KEY 5
+#define BASS_KEY 6
+#define PERCUSSION_KEY 7
+#define TREBLE_8VB_KEY 8
+#define BASS_8VB_KEY 9
+#define BARITONE_KEY 10
+#define TAB_KEY 11
 
 /* NOTES */
-#define DOUBLEWHOLE 11
-#define WHOLE 12
-#define HALF 13
-#define QUARTER 14
-#define EIGHTH 15
-#define SIXTEENTH 16
-#define THIRTYSECOND 17
-#define SIXTYFOURTH 18
+#define DOUBLEWHOLE 15
+#define WHOLE 16
+#define HALF 17
+#define QUARTER 18
+#define EIGHTH 19
+#define SIXTEENTH 20
+#define THIRTYSECOND 21
+#define SIXTYFOURTH 22
 
 /* ACCIDENTALS  */
 #define NATURAL 30

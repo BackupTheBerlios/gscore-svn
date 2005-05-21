@@ -28,6 +28,7 @@
 #include "layout-engine.h"
 
 #include "gscore.h"
+#include "constants.h"
 #include "display.h"
 #include "common.h"
 #include "macros.h"
@@ -109,9 +110,21 @@ void layout_paint(GtkWidget *widget,
  		while ( listrunner_object ) { 
  			Object_t *object = NULL;
  			object = (Object_t *)listrunner_object->data;
-
+			
 			if (object) {
 				switch(object->type) {
+
+				case PITCH_CURSOR:
+					draw_pitch_cursor(score, staff, cr);
+				/*
+				case DOUBLEWHOLE:
+				case WHOLE:
+				case HALF:
+				case QUARTER:
+				case EIGHTH:
+				case SIXTEENTH:
+					draw_note();
+				*/
 					
 				}
 			}

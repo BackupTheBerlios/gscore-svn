@@ -97,6 +97,26 @@ gboolean create_staff(Score_t *score, guint8 nb_lines, guint8 space_btw_lines,
         score->Staff->midi_instrument = MIDI_GRAND_PIANO;
         score->Staff->Object_list = NULL;
 
+	score->Staff->Object = g_malloc(sizeof(Object_t));
+
+	score->Staff->Object->id = ++score->object_id;
+        score->Staff->Object->type = PITCH_CURSOR;
+        score->Staff->Object->nature = 0;
+        score->Staff->Object->accidentals = 0;
+        score->Staff->Object->group_id = 0;
+        score->Staff->Object->x = 0;
+        score->Staff->Object->y = 0;
+        score->Staff->Object->x2 = 0;
+        score->Staff->Object->y2 = 0;
+        score->Staff->Object->x3 = 0;
+        score->Staff->Object->y3 = 0;
+        score->Staff->Object->pitch = 0;
+        score->Staff->Object->tab_number = 0;
+        score->Staff->Object->is_selected = FALSE;
+
+        score->Staff->Object_list =
+                g_list_append(score->Staff->Object_list, score->Staff->Object);
+	
         score->Staff_list =
                 g_list_append(score->Staff_list, score->Staff);
 
