@@ -1,3 +1,8 @@
+2005-06-10 Toady <toady@gscore.org>
+
+	* src/draw_note.c, src/include/draw_note.h: added
+	* src/layout-engine.c: start to handle notes
+	
 2005-05-21 Toady <toady@gscore.org>
 
 	* src/draw_pitch_cursor.c, src/include/draw_pitch/cursor.h: added

@@ -53,6 +53,7 @@ draw_staff(Score_t *score, cairo_t *cr,
         gdouble offset = 0;
 	gint16 i = 0;
 
+
         if ( ! selected ) {
                 cairo_set_rgb_color (cr, 
                                      score->ColorObject->staves->red, score->ColorObject->staves->green, score->ColorObject->staves->blue);
@@ -70,7 +71,7 @@ draw_staff(Score_t *score, cairo_t *cr,
                 cairo_move_to(cr, x1, y1 + offset + cairo_padding);
                 cairo_rel_line_to(cr, x2, 0);
 
-                offset += space_btwn_lines;
+                offset += space_btwn_lines + 1.0;
 
                 i++;
         }

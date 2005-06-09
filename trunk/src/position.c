@@ -176,6 +176,9 @@ gdouble get_y_from_position_no_key(guint16 space_btwn_lines, gint zero, gdouble 
 
      gint i = 0;
 
+     g_print("\n*** Parameters =\nspace_btwn_lines:%d\nzero:%d\nstaff_begin_y:%f\nheight:%f\nposition:%d\n\n", 
+             space_btwn_lines, zero, staff_begin_y, height, position);
+
      /***
       *** if it is an even number, the object _is_ on a line and its height should be divided by two
       *** to return the correct y position
@@ -186,10 +189,13 @@ gdouble get_y_from_position_no_key(guint16 space_btwn_lines, gint zero, gdouble 
       ***/
      starty_position = staff_begin_y + (zero - 1) + ((zero - 1) * space_btwn_lines);
 
-     debug_msg(g_strdup_printf("starty_position = %f\n", starty_position));
+     g_print("starty_position = %f\n", starty_position);
 
      value = starty_position;
 
+     g_print("value = %f\n", value);
+
+/*      g_print("value = %f\n", value); */
 
      if ( position >= 0 ) {
           while ( i <= position ) {
@@ -235,9 +241,9 @@ gdouble get_y_from_position_no_key(guint16 space_btwn_lines, gint zero, gdouble 
           }
      }
 
-     if (DEBUG == 1)
-          g_print("value = %f\n", value);
+/*      g_print("value = %f\n", value); */
 
+     g_print("value to return:%f\n",value);
      return value;
 }
 

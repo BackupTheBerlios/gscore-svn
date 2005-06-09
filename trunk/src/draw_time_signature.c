@@ -1,6 +1,6 @@
 /* -*- mode:C; tab-width:8; c-default-style:linux; c-basic-offset:8; indent-tabs-mode:nil -*- */
 /*
- * draw_key_signature.c
+ * draw_time_signature.c
  * gscore - a musical score editor
  *
  * (C) Copyright 2001-2005 Sebastien Tricaud
@@ -36,11 +36,10 @@ draw_time_signature(Score_t *score, Staff_t *staff, cairo_t *cr, gboolean select
 {
 
         gdouble key_signature_start_x;
+        gchar *tmp;
+
 
         key_signature_start_x = staff->extremity_begin_x + Spacings.Clefs.sb + (score->zoom * TREBLE_CLEF_WIDTH_FACTOR) + Spacings.Clefs.sa;
-
-        g_print("staff->ts[0] = %d,staff->ts[1] = %d,staff->ts[2] = %d\n",
-                staff->time_signature[0],staff->time_signature[1],staff->time_signature[2]);
 
         cairo_select_font (cr, "gscore", CAIRO_FONT_SLANT_NORMAL,
                            CAIRO_FONT_WEIGHT_BOLD);
@@ -53,7 +52,9 @@ draw_time_signature(Score_t *score, Staff_t *staff, cairo_t *cr, gboolean select
                 cairo_move_to(cr, key_signature_start_x + get_key_signature_spacing(score, staff) + Spacings.KeySignatures.saks,
                               staff->extremity_begin_y + 16);
                 cairo_scale_font (cr, 16);
-                cairo_show_text (cr, g_strdup_printf("%d", staff->time_signature[1]));
+                tmp  = g_strdup_printf("%d", staff->time_signature[1]);
+                cairo_show_text (cr, tmp);
+                g_free(tmp);
                 cairo_move_to(cr, key_signature_start_x + get_key_signature_spacing(score, staff) + Spacings.KeySignatures.saks,
                               staff->extremity_begin_y + 32);
                 cairo_show_text (cr, g_strdup_printf("%d", staff->time_signature[2]));

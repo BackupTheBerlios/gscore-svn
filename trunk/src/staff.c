@@ -579,10 +579,6 @@ void on_key_signature_activate(GtkWidget *widget)
         GtkWidget *sks_image = glade_xml_get_widget(gladexml, "sks_image");
         GtkWidget *sks_hbox = glade_xml_get_widget(gladexml, "sks_hbox");
 
-/*         GtkWidget *sks_clef_label = score_get_sks_clef_label_from_widget(widget); */
-/*         GtkWidget *sks_image = score_get_sks_image_from_widget(widget); */
-/*         GtkWidget *sks_hbox = score_get_sks_hbox_from_widget(widget); */
-
 	gint value_adj = 0;
 
         gtk_widget_show(sks_window);
@@ -796,31 +792,6 @@ void on_key_signature_activate(GtkWidget *widget)
 
 	}
 }
-
-/* void on_key_signature_value_changed(void) */
-/* { */
-/* 	GtkWidget *widget; */
-
-/* 	gint i = -1; */
-
-/* 	switch (i) */
-/* 	{ */
-/* 	case -1: */
-/* 		score->Staff[get_staff_selected()].key_signature = */
-/* 			KEY_SIGNATURE_TREBLE_B_FLAT; */
-		
-/* 		widget = glade_xml_get_widget (gladexml, "sks_clef_label"); */
-/* 		gtk_label_set_text(GTK_LABEL(widget), "F Major or D minor"); */
-
-/* 		widget = glade_xml_get_widget (gladexml, "sks_image"); */
-/* 		gtk_image_set_from_file(GTK_IMAGE(widget), get_file_from_data_dir("pixmaps/key_signature/treble_B_flat.xpm")); */
-/* 		break; */
-/* 	} */
-/* } */
-
-/* END: glade stuff */
-
-/* gint get_staff_selected(void); */
 
 void ValueOfRange (GtkAdjustment *adj, gpointer user_data)
 {
@@ -1810,10 +1781,10 @@ void update_key_signature(GtkButton *widget, gpointer user_data)
 
         Score_t *score;
         Staff_t *staff_data;
-        /* 	GtkWidget *area; */
+/*         GtkWidget *layout; */
 
         score = score_get_from_widget(widget);
-        /*         area  = score_get_area_from_widget(widget); */
+/*         layout = layout_get_from_widget(widget); */
 
 	gint offset = 0;
 
@@ -1878,7 +1849,7 @@ void update_key_signature(GtkButton *widget, gpointer user_data)
 	staff_set_start_x(score, get_staff_selected(score), offset);
 
 	/* TODO: find a way to refresh ALL drawing areas displaying score */
-        /* 	refresh(area); */
+/*         refresh(layout); */
 }
 
 extern

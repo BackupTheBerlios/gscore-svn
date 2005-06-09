@@ -126,7 +126,7 @@ score_new(void)
                 return NULL;
         }
 
-        score->Identity->title = g_string_new(_("My Score"));
+        score->Identity->title    = g_string_new(_("My Score"));
         score->Identity->subtitle = g_string_new(_("made with gscore"));
         score->Identity->composer = g_string_new(_("gscore's user"));
 
@@ -171,7 +171,7 @@ score_staff_add(Score_t *score, Staff_t *staff)
 
 /**
  * score_get_from_widget:
- * @widget: widget to want to get score from
+ * @widget: widget you want to get score from
  *
  * Gets the score object from widget
  *
@@ -180,9 +180,11 @@ score_staff_add(Score_t *score, Staff_t *staff)
 extern Score_t * 
 score_get_from_widget(GtkWidget *widget)
 {
+        /* FIXME: WTF? widget is useless :'( */
         GtkWidget *swidget;
 
         swidget = glade_xml_get_widget(score_xml, "score");
+
         if ( ! swidget ) return NULL;
 
         return (Score_t *) g_object_get_data(G_OBJECT(swidget), "score");
@@ -190,21 +192,56 @@ score_get_from_widget(GtkWidget *widget)
 
 /**
  * score_set_to_widget:
- * @widget: widget to want to set score to
+ * @widget: widget you want to set score to
  *
- * Sets the score object from widget
+ * Sets the score object to widget
  *
  * Returns: TRUE if success, FALSE if failed
  */
 extern gboolean
 score_set_to_widget(Score_t *score, GtkWidget *widget)
 {
-        GtkWidget *swidget;
 
-        swidget = glade_xml_get_widget(score_xml, "score");
-        if ( ! swidget ) return FALSE;
+        if ( ! widget ) return FALSE;
 
-        g_object_set_data(G_OBJECT(swidget), "score", score);
+        g_object_set_data(G_OBJECT(widget), "score", score);
+        
+        return TRUE;
+}
+
+/** 
+ * layout_set_to_widget:
+ * @widget: widget you want to set the layout to
+ *
+ * Sets the layout to widget
+ *
+ * Returns: TRUE if success, FALSE if failed
+ */
+extern GtkWidget *
+layout_get_from_widget(GtkWidget *widget)
+{
+
+        if ( ! widget ) return FALSE;
+
+        return (GtkWidget *) g_object_get_data(G_OBJECT(widget), "layout");
+
+}
+
+/** 
+ * layout_set_to_widget:
+ * @widget: widget you want to set the layout to
+ *
+ * Sets the layout to widget
+ *
+ * Returns: TRUE if success, FALSE if failed
+ */
+extern gboolean
+layout_set_to_widget(GtkWidget *layout, GtkWidget *widget)
+{
+
+        if ( ! layout ) return FALSE;
+
+        g_object_set_data(G_OBJECT(widget), "layout", layout);
         
         return TRUE;
 }
@@ -269,6 +306,7 @@ score_window_new(Score_t *score)
         gtk_container_add(GTK_CONTAINER(viewport), sw);
 
         score_set_to_widget(score, score_window);
+        layout_set_to_widget(sw, score_window);
 
         gtk_widget_show_all(score_window);
   

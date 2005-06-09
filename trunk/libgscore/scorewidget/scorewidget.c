@@ -116,7 +116,7 @@ score_widget_class_init (ScoreWidgetClass * class)
 
         signals[NEW_STAFF] = g_signal_new ("new_staff",
                                            TYPE_SCORE_WIDGET,
-                                           G_SIGNAL_RUN_LAST,
+                                           G_SIGNAL_RUN_LAST|G_SIGNAL_ACTION,
                                            G_STRUCT_OFFSET (ScoreWidgetClass, new_staff),
                                            NULL, NULL,
                                            g_cclosure_marshal_VOID__POINTER,

@@ -99,58 +99,58 @@ gint x_space(GList *list, gint index)
 
 }
 
-gint draw_note(GtkWidget *area, gchar *file, gboolean selected, gint x, gint y, gint line_x1, gint line_y1,
-               gint line_x2, gint line_y2)
-{
-	/***
-	 *** Originaly, there were a piece of DindinX code here,
-	 *** but gtk 2.2 became cooler dealing with pixmaps and
-	 *** his piece of code has been droped :P
-	 ***/
+/* gint draw_note(GtkWidget *area, gchar *file, gboolean selected, gint x, gint y, gint line_x1, gint line_y1, */
+/*                gint line_x2, gint line_y2) */
+/* { */
+/* 	/\*** */
+/* 	 *** Originaly, there were a piece of DindinX code here, */
+/* 	 *** but gtk 2.2 became cooler dealing with pixmaps and */
+/* 	 *** his piece of code has been droped :P */
+/* 	 ***\/ */
 
-        GtkWidget *scrolled_window;
-        GtkAdjustment *adj;
-	GladeXML *xml = glade_get_widget_tree(area);
+/*         GtkWidget *scrolled_window; */
+/*         GtkAdjustment *adj; */
+/* 	GladeXML *xml = glade_get_widget_tree(area); */
 
-	GdkPixbuf *pixbuf;
+/* 	GdkPixbuf *pixbuf; */
 
-        scrolled_window = glade_xml_get_widget(xml, "sw_score_sw");
-        adj = gtk_scrolled_window_get_hadjustment(GTK_SCROLLED_WINDOW(scrolled_window));
+/*         scrolled_window = glade_xml_get_widget(xml, "sw_score_sw"); */
+/*         adj = gtk_scrolled_window_get_hadjustment(GTK_SCROLLED_WINDOW(scrolled_window)); */
 
-        if (x < adj->value - 50) return -1; /* -50 is a dummy stuff */
-        if (x > adj->value + 2000) return -1; /* +2000 too */
+/*         if (x < adj->value - 50) return -1; /\* -50 is a dummy stuff *\/ */
+/*         if (x > adj->value + 2000) return -1; /\* +2000 too *\/ */
 
-	pixbuf = gdk_pixbuf_new_from_file(get_file_from_data_dir(g_strdup(file)), NULL);
+/* 	pixbuf = gdk_pixbuf_new_from_file(get_file_from_data_dir(g_strdup(file)), NULL); */
 
 
-	if (selected == TRUE)
-		gdk_pixbuf_fill(pixbuf, 0xff000fff);
+/* 	if (selected == TRUE) */
+/* 		gdk_pixbuf_fill(pixbuf, 0xff000fff); */
 
-	if (pixbuf)
-		{
-			GdkGC *gc;
-			GdkBitmap *mask = NULL;
+/* 	if (pixbuf) */
+/* 		{ */
+/* 			GdkGC *gc; */
+/* 			GdkBitmap *mask = NULL; */
 
-			gc = gdk_gc_new(area->window);
+/* 			gc = gdk_gc_new(area->window); */
 
-			gdk_draw_line(area->window, gc,
-				      line_x1,line_y1, line_x2,line_y2);
+/* 			gdk_draw_line(area->window, gc, */
+/* 				      line_x1,line_y1, line_x2,line_y2); */
           
-			gdk_gc_set_clip_mask(gc, mask);
-			gdk_gc_set_clip_origin(gc, x,y);
+/* 			gdk_gc_set_clip_mask(gc, mask); */
+/* 			gdk_gc_set_clip_origin(gc, x,y); */
 
-			gdk_draw_pixbuf(area->window, NULL,
-					pixbuf,
-					0, 0, x, y, -1, -1, GDK_RGB_DITHER_NONE, 0, 0);
+/* 			gdk_draw_pixbuf(area->window, NULL, */
+/* 					pixbuf, */
+/* 					0, 0, x, y, -1, -1, GDK_RGB_DITHER_NONE, 0, 0); */
 
-			g_free(gc);
-			g_free(mask);
-		}
+/* 			g_free(gc); */
+/* 			g_free(mask); */
+/* 		} */
 
-	/*      g_free(pixbuf); */
+/* 	/\*      g_free(pixbuf); *\/ */
      
-	return 0;
-}
+/* 	return 0; */
+/* } */
 
 gint draw_pixmap(GdkWindow *window, gchar *file, gboolean is_selected, gdouble x, gdouble y)
 {
@@ -206,29 +206,29 @@ void draw_red_rectangle(GtkWidget *area, gint x1, gint y1, gint x2, gint y2)
 }
 
 
-void draw_eighth_up(GtkWidget *area, gboolean selected, gint x, gint y)
-{
-     draw_note(area, QUARTER_HEAD, selected, x, y+21, x+8, y+21, x+8, y);
-     draw_note(area, EIGHTH_UP, FALSE, x+8, y, 0, 0, 0, 0);
-}
+/* void draw_eighth_up(GtkWidget *area, gboolean selected, gint x, gint y) */
+/* { */
+/*      draw_note(area, QUARTER_HEAD, selected, x, y+21, x+8, y+21, x+8, y); */
+/*      draw_note(area, EIGHTH_UP, FALSE, x+8, y, 0, 0, 0, 0); */
+/* } */
 
-void draw_eighth_down(GtkWidget *area, gboolean selected, gint x, gint y)
-{
-     draw_note(area, QUARTER_HEAD, selected, x, y + 21, x, y + 46, x, y + 25);
-     draw_note(area, EIGHTH_DOWN, FALSE, x, y + 30, 0, 0, 0, 0);
-}
+/* void draw_eighth_down(GtkWidget *area, gboolean selected, gint x, gint y) */
+/* { */
+/*      draw_note(area, QUARTER_HEAD, selected, x, y + 21, x, y + 46, x, y + 25); */
+/*      draw_note(area, EIGHTH_DOWN, FALSE, x, y + 30, 0, 0, 0, 0); */
+/* } */
 
-void draw_sixteenth_up(GtkWidget *area, gboolean selected, gint x, gint y)
-{
-     draw_note(area, QUARTER_HEAD, selected, x,y+21, x+8,y+21, x+8,y);
-     draw_note(area, SIXTEENTH_UP, FALSE, x+8, y, 0,0, 0,0);
-}
+/* void draw_sixteenth_up(GtkWidget *area, gboolean selected, gint x, gint y) */
+/* { */
+/*      draw_note(area, QUARTER_HEAD, selected, x,y+21, x+8,y+21, x+8,y); */
+/*      draw_note(area, SIXTEENTH_UP, FALSE, x+8, y, 0,0, 0,0); */
+/* } */
 
-void draw_sixteenth_down(GtkWidget *area, gboolean selected, gint x, gint y)
-{
-     draw_note(area, QUARTER_HEAD, selected, x,y+21, x,y+46, x,y+25);
-     draw_note(area, SIXTEENTH_DOWN, FALSE, x, y+30, 0,0, 0,0);
-}
+/* void draw_sixteenth_down(GtkWidget *area, gboolean selected, gint x, gint y) */
+/* { */
+/*      draw_note(area, QUARTER_HEAD, selected, x,y+21, x,y+46, x,y+25); */
+/*      draw_note(area, SIXTEENTH_DOWN, FALSE, x, y+30, 0,0, 0,0); */
+/* } */
 
 gint average(gint staff)
 {

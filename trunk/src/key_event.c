@@ -48,15 +48,19 @@ static Score_t *ur_score = NULL;
 extern gboolean
 score_key_press_event(GtkWidget *widget, GdkEventKey *event)
 {
-/*         Score_t *score = NULL; */
-/*         Staff_t *staffobj = NULL; */
+
+        Score_t *score = NULL;
+        Staff_t *staffobj = NULL;
+        
+        GList *listrunner_object = NULL;
+
 /*         Object_t *tmpobj = NULL; */
 /*         GtkWidget *area; */
 /*         KeyCursor_t *cursor = NULL; */
 
 /*         Object_t *tmpo = NULL; */
 
-/*         score = score_get_from_widget(widget); */
+        score = score_get_from_widget(widget);
 /*         area = score_get_area_from_widget(widget); */
 /*         cursor = score_get_cursor_from_widget(widget); */
 
@@ -65,9 +69,19 @@ score_key_press_event(GtkWidget *widget, GdkEventKey *event)
 /*                 return FALSE; */
 /*         } */
         
-/*         switch (event->keyval) { */
+        switch (event->keyval) {
                         
-/*         case GDK_space: /\* We add the object selected *\/ */
+        case GDK_space: /* We add the object selected */
+                staffobj = (Staff_t *)
+                        g_list_nth_data(score->Staff_list,
+                                        get_staff_selected(score));
+
+                add_object(score, get_staff_selected(score),
+                           QUARTER,
+                           0, 0, 2,
+                           0, 0, 0, 0, 0, 0, 1, 0, FALSE);
+
+                break;
 /*                 switch ( Selection.object_type ) { */
 /*                 case CURSOR: */
 /*                         gw_message_error("No object selected"); */
@@ -184,12 +198,41 @@ score_key_press_event(GtkWidget *widget, GdkEventKey *event)
 /*                 remove_object_selected(score); */
 /*                 refresh(area); */
 /*                 break; */
-/*         case GDK_Up: */
-/*                 object_selected_pitch_up(score); */
-/*                 cursor->position++; */
+        case GDK_Up:
+                staffobj = (Staff_t *)
+                        g_list_nth_data(score->Staff_list,
+                                        get_staff_selected(score));
+
+                listrunner_object = g_list_first(staffobj->Object_list);
+                while ( listrunner_object ) {
+                        Object_t *object = (Object_t *)listrunner_object->data;
+                        
+                        if ( (object) && (object->type == PITCH_CURSOR) ) {
+                                object->pitch++;
+                                g_print("object->pitch = %d\n", object->pitch);
+                        }
+
+                        listrunner_object = g_list_next(listrunner_object);
+                }
 /*                 refresh(area); */
-/*                 break; */
-/*         case GDK_Down: */
+                break;
+        case GDK_Down:
+                staffobj = (Staff_t *)
+                        g_list_nth_data(score->Staff_list,
+                                        get_staff_selected(score));
+
+                listrunner_object = g_list_first(staffobj->Object_list);
+                while ( listrunner_object ) {
+                        Object_t *object = (Object_t *)listrunner_object->data;
+                        
+                        if ( (object) && (object->type == PITCH_CURSOR) ) {
+                                object->pitch--;
+                                g_print("object->pitch = %d\n", object->pitch);
+                        }
+
+                        listrunner_object = g_list_next(listrunner_object);
+                }
+                break;
 /*                 object_selected_pitch_down(score); */
 /*                 cursor->position--; */
 /*                 refresh(area); */
@@ -332,10 +375,10 @@ score_key_press_event(GtkWidget *widget, GdkEventKey *event)
 /*                 break; */
 
                 
-/*         } */
+        }
 
 
-/*         return FALSE; */
+        return FALSE;
 }
 
 extern gboolean

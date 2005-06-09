@@ -36,11 +36,13 @@
 #include "draw_staff.h"
 #include "draw_key.h"
 #include "draw_key_signature.h"
+#include "draw_note.h"
+#include "draw_pitch_cursor.h"
 #include "draw_time_signature.h"
 #include "gscore-font-constants.h"
 
-guint object_x = 0;
-guint measure_number = 1;
+static guint object_x = 0;
+static guint measure_number = 1;
 
 void layout_paint(GtkWidget *widget,
                   cairo_t   *cr,
@@ -110,21 +112,22 @@ void layout_paint(GtkWidget *widget,
  		while ( listrunner_object ) { 
  			Object_t *object = NULL;
  			object = (Object_t *)listrunner_object->data;
+
+                        g_print("object->pitch = %d \n", object->pitch);
 			
 			if (object) {
 				switch(object->type) {
 
 				case PITCH_CURSOR:
-					draw_pitch_cursor(score, staff, cr);
-				/*
+					object_x = draw_pitch_cursor(score, staff, cr, object_x, object->pitch);
+				        break;
 				case DOUBLEWHOLE:
 				case WHOLE:
 				case HALF:
 				case QUARTER:
 				case EIGHTH:
 				case SIXTEENTH:
-					draw_note();
-				*/
+                                        object_x = draw_note(score, staff, cr, object->type, FALSE, object_x, object->pitch);
 					
 				}
 			}

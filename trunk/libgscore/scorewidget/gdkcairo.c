@@ -26,9 +26,9 @@
 #include "gdkcairo.h"
 #include <string.h>
 
-#ifdef CAIRO_HAS_XLIB_SURFACE
-#include <cairo-xlib.h>
-#endif
+/* #ifdef CAIRO_HAS_XLIB_SURFACE */
+/* #include <cairo-xlib.h> */
+/* #endif */
 
 static void
 gdkcairo_init (gdkcairo_t *self,

@@ -22,5 +22,5 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
  
-gboolean draw_pitch_cursor(Score_t *score, Staff_t *staff, cairo_t *cr);
+gdouble draw_pitch_cursor(Score_t *score, Staff_t *staff, cairo_t *cr, gdouble x, gint pitch);
 

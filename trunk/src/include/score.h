@@ -32,6 +32,10 @@ Score_t *score_get_from_widget(GtkWidget *widget);
 
 gboolean score_set_to_widget(Score_t *score, GtkWidget *widget);
 
+GtkWidget *layout_get_from_widget(GtkWidget *widget);
+
+gboolean layout_set_to_widget(GtkWidget *layout, GtkWidget *widget);
+
 GtkWidget *score_get_area_from_widget(GtkWidget *widget);
 
 Display_t *score_get_display_from_widget(GtkWidget *widget);
