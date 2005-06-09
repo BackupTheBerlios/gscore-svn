@@ -14,25 +14,59 @@ myenv=env.Copy()
 
 # The sources for our program - only .ui, .skel and .cpp are accepted
 sources="""
-abc.c
-export-abc.c
-import-abc.c
+./key_cursor.c
+./debug.c
+./draw_barline.c
+./display.c
+./rests.c
+./tie.c
+./score.c
+./splash.c
+./error.c
+./selection.c
+./position.c
+./articulation.c
+./staff.c
+./beam.c
+./common.c
+./edit.c
+./draw.c
+./chords.c
+./file.c
+./help.c
+./libglade-garbage.c
+./main.c
+./mode.c
+./notes.c
+./text.c
+./objects.c
+./tab_transposition.c
+./view.c
+./score_callbacks.c
+./key_event.c
+./objects_callbacks.c
+./mouse_event.c
+./realize_area.c
+./spacings.c
+./insert.c
+./plugin.c
 """
 
-myenv.G_shlib( "abc", sources )
+# Our main program
+# G_program add the file to the install targets automatically,
+# so you do not need to write G_install('BINDIR', '', test1, myenv)
+myenv.G_program( "gscore", sources )
 
 ############################
 ## Customization
 
-myenv.G_addpaths_includes('#/src/include/ #/src #/ #/plugins/abc')
+myenv.G_addpaths_includes('#/src/include/ #/src #/')
 
 ## Necessary libraries to link against
 #myenv.KDEaddlibs( 't' )
 
 ## This shows how to add other link flags to the program
-myenv.G_addflags_link('-labcp -avoid-version -module')
-
-myenv.AppendUnique(RPATH = [env['PREFIX']+'/lib/gscore'])
+myenv.G_addflags_link('-export-dynamic')
 
 #############################
 ## Data to install
