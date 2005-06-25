@@ -47,90 +47,96 @@
 
 /* } */
 
-/* void object_doublewhole_callback(GtkWidget *widget, GdkEventExpose *event) */
-/* { */
-/*   Score_t *score = score_get_from_widget(widget); */
+void object_doublewhole_callback(GtkWidget *widget, GdkEventExpose *event)
+{
+  Score_t *score = score_get_from_widget(widget);
 /*   GtkWidget *area = score_get_area_from_widget(widget); */
   
-/* 	if ( object_selected_change_type(score, DOUBLEWHOLE) ) { */
+	if ( object_selected_change_type(score, DOUBLEWHOLE) ) {
+                gtk_widget_queue_draw(widget);
 /* 		refresh(area); */
-/* 	} else { */
-/* 		draw_cursor(area, cursor_doublewhole_bits, cursor_doublewhole_mask_bits, 16, 8); */
-/* 		Selection.object_type = DOUBLEWHOLE; */
-/* 	} */
+	} else {
+		draw_cursor(widget, cursor_doublewhole_bits, cursor_doublewhole_mask_bits, 16, 8);
+		Selection.object_type = DOUBLEWHOLE;
+	}
 
-/* } */
+}
 
-/* void object_whole_callback(GtkWidget *widget, GdkEventExpose *event) */
-/* { */
-/*   Score_t *score = score_get_from_widget(widget); */
+void object_whole_callback(GtkWidget *widget, GdkEventExpose *event)
+{
+  Score_t *score = score_get_from_widget(widget);
 /*   GtkWidget *area = score_get_area_from_widget(widget); */
 
-/* 	if ( object_selected_change_type(score, WHOLE) ) { */
+	if ( object_selected_change_type(score, WHOLE) ) {
+                gtk_widget_queue_draw(widget);
 /* 		refresh(area); */
-/* 	} else { */
-/* 		draw_cursor(area, cursor_whole_bits, cursor_whole_mask_bits, 14, 8); */
-/* 		Selection.object_type = WHOLE; */
-/* 	} */
+	} else {
+		draw_cursor(widget, cursor_whole_bits, cursor_whole_mask_bits, 14, 8);
+		Selection.object_type = WHOLE;
+	}
 
-/* } */
+}
 
-/* void object_half_callback(GtkWidget *widget, GdkEventExpose *event) */
-/* { */
-/*   Score_t *score = score_get_from_widget(widget); */
+void object_half_callback(GtkWidget *widget, GdkEventExpose *event)
+{
+  Score_t *score = score_get_from_widget(widget);
 /*   GtkWidget *area = score_get_area_from_widget(widget); */
   
-/* 	if ( object_selected_change_type(score, HALF) ) { */
+	if ( object_selected_change_type(score, HALF) ) {
+                gtk_widget_queue_draw(widget);
 /* 		refresh(area); */
-/* 	} else { */
-/* 		draw_cursor(area, cursor_half_bits, cursor_half_bits, 10, 29); */
-/* 		Selection.object_type = HALF; */
-/* 	} */
+	} else {
+		draw_cursor(widget, cursor_half_bits, cursor_half_bits, 10, 29);
+		Selection.object_type = HALF;
+	}
   
-/* } */
+}
 
-/* void object_quarter_callback(GtkWidget *widget, GdkEventExpose *event) */
-/* { */
-/*   Score_t *score = score_get_from_widget(widget); */
+void object_quarter_callback(GtkWidget *widget, GdkEventExpose *event)
+{
+        Score_t *score = score_get_from_widget(widget);
+/*         GtkWidget *area = score_get_area_from_widget(widget); */
+
+	if ( object_selected_change_type(score, QUARTER) ) {
+                gtk_widget_queue_draw(widget);
+/* 		refresh(area); */
+	} else {
+                draw_cursor(widget, cursor_quarter_bits, cursor_quarter_mask_bits, 9, 29);
+                Selection.object_type = QUARTER;
+	}
+
+}
+
+
+void object_eighth_callback(GtkWidget *widget, GdkEventExpose *event)
+{
+  Score_t *score = score_get_from_widget(widget);
 /*   GtkWidget *area = score_get_area_from_widget(widget); */
 
-/* 	if ( object_selected_change_type(score, QUARTER) ) { */
+	if ( object_selected_change_type(score, EIGHTH) ) {
+                gtk_widget_queue_draw(widget);
 /* 		refresh(area); */
-/* 	} else { */
-/*         draw_cursor(area, cursor_quarter_bits, cursor_quarter_mask_bits, 9, 29); */
-/* 	Selection.object_type = QUARTER; */
-/* 	} */
+	} else {
+		draw_cursor(widget, cursor_eighth_bits, cursor_eighth_mask_bits, 15, 29);
+		Selection.object_type = EIGHTH;
+	}
 
-/* } */
+}
 
-
-/* void object_eighth_callback(GtkWidget *widget, GdkEventExpose *event) */
-/* { */
-/*   Score_t *score = score_get_from_widget(widget); */
+void object_sixteenth_callback(GtkWidget *widget, GdkEventExpose *event)
+{
+  Score_t *score = score_get_from_widget(widget);
 /*   GtkWidget *area = score_get_area_from_widget(widget); */
 
-/* 	if ( object_selected_change_type(score, EIGHTH) ) { */
+	if ( object_selected_change_type(score, SIXTEENTH) ) {
+                gtk_widget_queue_draw(widget);
 /* 		refresh(area); */
-/* 	} else { */
-/* 		draw_cursor(area, cursor_eighth_bits, cursor_eighth_mask_bits, 15, 29); */
-/* 		Selection.object_type = EIGHTH; */
-/* 	} */
+	} else {
+		draw_cursor(widget, cursor_sixteenth_bits, cursor_sixteenth_mask_bits, 15, 29);
+		Selection.object_type = SIXTEENTH;
+	}
 
-/* } */
-
-/* void object_sixteenth_callback(GtkWidget *widget, GdkEventExpose *event) */
-/* { */
-/*   Score_t *score = score_get_from_widget(widget); */
-/*   GtkWidget *area = score_get_area_from_widget(widget); */
-
-/* 	if ( object_selected_change_type(score, SIXTEENTH) ) { */
-/* 		refresh(area); */
-/* 	} else { */
-/* 		draw_cursor(area, cursor_sixteenth_bits, cursor_sixteenth_mask_bits, 15, 29); */
-/* 		Selection.object_type = SIXTEENTH; */
-/* 	} */
-
-/* } */
+}
 
 /* void object_thirtysecond_callback(GtkWidget *widget, GdkEventExpose *event) */
 /* { */

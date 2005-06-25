@@ -107,8 +107,8 @@ AC_ARG_ENABLE(gl,
 
 if test "x$use_gl" = "xyes"; then
   PKG_CHECK_MODULES(GL, glitz-glx >= 0.4.0, [
-  GTKCAIRO_CFLAGS="$GTKCAIRO_CFLAGS $GL_CFLAGS -DUSE_GL" 
-  GTKCAIRO_LIBS="$GTKCAIRO_LIBS $GL_LIBS"
+  CAIRO_CFLAGS="$CAIRO_CFLAGS $GL_CFLAGS -DUSE_GL" 
+  CAIRO_LIBS="$CAIRO_LIBS $GL_LIBS"
   use_gl=yes], [use_gl="no (bitrotted at the moment)"])
 fi
 

@@ -122,10 +122,10 @@ gint object_get_spacing(gint type)
         return retval;
 }
 
-extern gboolean
-add_object(Score_t *score, gint staff, gint type, accidentals_e accidentals, object_e nature, gulong group_id,
-           gint x, gint y, gint x2, gint y2, gint x3, gint y3, 
-           gint pitch, gint tab_number, gboolean is_selected)
+extern 
+Object_t *add_object(Score_t *score, gint staff, gint type, accidentals_e accidentals, object_e nature, gulong group_id,
+                     gint x, gint y, gint x2, gint y2, gint x3, gint y3, 
+                     gint pitch, gint tab_number, gboolean is_selected)
 {
         Staff_t *staff_data;
 
@@ -138,7 +138,7 @@ add_object(Score_t *score, gint staff, gint type, accidentals_e accidentals, obj
 
         if ( ! staff_data->Object ) {
                 g_printf("Cannot add object, memory exhausted\n");
-                return FALSE;
+                return NULL;
         }
 
         staff_data->Object->id = ++score->object_id;
@@ -165,7 +165,7 @@ add_object(Score_t *score, gint staff, gint type, accidentals_e accidentals, obj
 		score->staff_extremity_end_x += object_get_spacing(type);
         }
 
-        return TRUE;
+        return staff_data->Object;
 }
 
 extern gboolean

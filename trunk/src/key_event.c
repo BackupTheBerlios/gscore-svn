@@ -40,6 +40,7 @@
 #include "notes.h"
 #include "rests.h"
 #include "position.h"
+#include "pitch_cursor.h"
 
 static gboolean debug_mode = FALSE;
 
@@ -51,6 +52,7 @@ score_key_press_event(GtkWidget *widget, GdkEventKey *event)
 
         Score_t *score = NULL;
         Staff_t *staffobj = NULL;
+        Object_t *object_tmp = NULL;
         
         GList *listrunner_object = NULL;
 
@@ -76,10 +78,23 @@ score_key_press_event(GtkWidget *widget, GdkEventKey *event)
                         g_list_nth_data(score->Staff_list,
                                         get_staff_selected(score));
 
-                add_object(score, get_staff_selected(score),
-                           QUARTER,
-                           0, 0, 2,
-                           0, 0, 0, 0, 0, 0, 1, 0, FALSE);
+
+                if ( Selection.object_type == CURSOR ) {
+                        gw_message_error("No object selected");
+                        break;
+                }
+
+                if (is_note(Selection.object_type)) {
+                        object_tmp = add_object(score, get_staff_selected(score),
+                                                Selection.object_type,
+                                                0, 0, 0,
+                                                0, 0, 0, 0, 0, 0, staffobj->cursor_pitch, 0, FALSE);
+
+                        pitch_cursor_move_after(score, staffobj, object_tmp);
+
+                }
+
+                gtk_widget_queue_draw(widget);
 
                 break;
 /*                 switch ( Selection.object_type ) { */
@@ -209,11 +224,14 @@ score_key_press_event(GtkWidget *widget, GdkEventKey *event)
                         
                         if ( (object) && (object->type == PITCH_CURSOR) ) {
                                 object->pitch++;
-                                g_print("object->pitch = %d\n", object->pitch);
+                                staffobj->cursor_pitch++;
+/*                                 g_print("object->pitch = %d\n", object->pitch); */
                         }
 
                         listrunner_object = g_list_next(listrunner_object);
                 }
+
+                gtk_widget_queue_draw(widget);
 /*                 refresh(area); */
                 break;
         case GDK_Down:
@@ -227,11 +245,15 @@ score_key_press_event(GtkWidget *widget, GdkEventKey *event)
                         
                         if ( (object) && (object->type == PITCH_CURSOR) ) {
                                 object->pitch--;
-                                g_print("object->pitch = %d\n", object->pitch);
+                                staffobj->cursor_pitch--;
+/*                                 g_print("object->pitch = %d\n", object->pitch); */
                         }
 
                         listrunner_object = g_list_next(listrunner_object);
                 }
+
+                gtk_widget_queue_draw(widget);
+
                 break;
 /*                 object_selected_pitch_down(score); */
 /*                 cursor->position--; */

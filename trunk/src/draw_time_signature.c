@@ -36,39 +36,80 @@ draw_time_signature(Score_t *score, Staff_t *staff, cairo_t *cr, gboolean select
 {
 
         gdouble key_signature_start_x;
-        gchar *tmp;
+        guchar *text;
+/*         PangoGlyphString *glyph; */
+/*         PangoContext *context; */
+/*         PangoFontDescription *font_desc; */
+/*         PangoLayout  *layout; */
 
+/*         PangoRectangle physical_rectangle; */
+/*         PangoRectangle logical_rectangle; */
+
+/*         font_desc = pango_font_description_new(); */
+/*         pango_font_description_set_family(font_desc, "gscore"); */
+/*         pango_font_description_set_size(font_desc, 12); */
+
+/*         context = pango_context_new(); */
+/*         pango_context_set_font_description(context, font_desc); */
+
+/*         layout = pango_layout_new(context); */
+/* /\*         pango_layout_set_font_description(layout, font_desc); *\/ */
+/*         pango_layout_set_text(layout, "a", -1); */
+/* /\*         pango_context_set_font_map(context, font_map); *\/ */
+
+/*         pango_layout_get_pixel_extents(layout,  */
+/*                                        &physical_rectangle, */
+/*                                        &logical_rectangle); */
+
+/*         g_print("===== physical_rectangle.width = %d\n", physical_rectangle.width); */
+/*         g_print("===== logical_rectangle.width = %d\n", logical_rectangle.width); */
 
         key_signature_start_x = staff->extremity_begin_x + Spacings.Clefs.sb + (score->zoom * TREBLE_CLEF_WIDTH_FACTOR) + Spacings.Clefs.sa;
 
-        cairo_select_font (cr, "gscore", CAIRO_FONT_SLANT_NORMAL,
-                           CAIRO_FONT_WEIGHT_BOLD);
+        cairo_select_font_face (cr, "gscore", CAIRO_FONT_SLANT_NORMAL,
+                                CAIRO_FONT_WEIGHT_BOLD);
 
-        cairo_set_rgb_color (cr, 
-                             score->ColorObject->clefs->red, score->ColorObject->clefs->green, score->ColorObject->clefs->blue);
+        cairo_set_source_rgb (cr, 
+                              score->ColorObject->clefs->red, score->ColorObject->clefs->green, score->ColorObject->clefs->blue);
 
         switch ( staff->time_signature[0] ) {
         case TIME_SIGNATURE_NORMAL:
                 cairo_move_to(cr, key_signature_start_x + get_key_signature_spacing(score, staff) + Spacings.KeySignatures.saks,
-                              staff->extremity_begin_y + 16);
-                cairo_scale_font (cr, 16);
-                tmp  = g_strdup_printf("%d", staff->time_signature[1]);
-                cairo_show_text (cr, tmp);
-                g_free(tmp);
+                              staff->extremity_begin_y + 18);
+                cairo_set_font_size (cr, 18);
+                text  = (guchar *)g_strdup_printf("%d", staff->time_signature[1]);
+                cairo_show_text (cr, text);
+                g_free(text);
                 cairo_move_to(cr, key_signature_start_x + get_key_signature_spacing(score, staff) + Spacings.KeySignatures.saks,
-                              staff->extremity_begin_y + 32);
-                cairo_show_text (cr, g_strdup_printf("%d", staff->time_signature[2]));
+                              staff->extremity_begin_y + 36);
+                text = g_strdup_printf("%d", staff->time_signature[2]);
+                cairo_show_text (cr, text);
+                g_free(text);
                 break;
         case TIME_SIGNATURE_COMMON_TIME:
                 cairo_move_to(cr, key_signature_start_x + get_key_signature_spacing(score, staff) + Spacings.KeySignatures.saks,
-                              staff->extremity_begin_y + 16);
-                cairo_scale_font (cr, score->zoom);
+                              staff->extremity_begin_y + 18);
+                cairo_set_font_size (cr, score->zoom);
                 cairo_show_text (cr, COMMON_TIME_GLYPH);
+
+
+/*                 pango_shape */
+/*                         (const gchar *text, */
+/*                          gint length, */
+/*                          PangoAnalysis *analysis, */
+/*                          &glyph); */
+/*                 pango_glyph_string_get_logical_widths */
+/*                         (PangoGlyphString *glyphs, */
+/*                          const char *text, */
+/*                          int length, */
+/*                          int embedding_level, */
+/*                          int *logical_widths); */
+
                 break;
         case TIME_SIGNATURE_ALLA_BREVE:
                 cairo_move_to(cr, key_signature_start_x + get_key_signature_spacing(score, staff) + Spacings.KeySignatures.saks,
-                              staff->extremity_begin_y + 16);
-                cairo_scale_font (cr, score->zoom);
+                              staff->extremity_begin_y + 18);
+                cairo_set_font_size (cr, score->zoom);
                 cairo_show_text (cr, ALLA_BREVE_GLYPH);
                 break;
         }

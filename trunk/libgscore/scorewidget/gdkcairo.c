@@ -35,7 +35,7 @@ gdkcairo_init (gdkcairo_t *self,
                GtkWidget  *widget)
 {
         self->widget = widget;
-        self->cr = cairo_create ();
+        self->cr = cairo_create (NULL); /* FIXME: NULL will segfault */
 
 
         self->backend = GDKCAIRO_BACKEND_IMAGE;
@@ -361,7 +361,7 @@ gdkcairo_expose (gdkcairo_t     *self,
                                 gdk_window_get_internal_paint_info (widget->window,
                                                                     &gdkdrawable, &x_off, &y_off);
 
-                                cairo_set_target_drawable (self->cr,
+                                cairo_xlib_surface_create (self->cr,
                                                            gdk_x11_drawable_get_xdisplay
                                                            (gdkdrawable),
                                                            gdk_x11_drawable_get_xid (gdkdrawable));

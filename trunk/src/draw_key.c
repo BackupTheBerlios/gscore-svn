@@ -34,74 +34,74 @@ extern gboolean
 draw_key(Score_t *score, Staff_t *staff, cairo_t *cr, gboolean selected)
 {
 
-        cairo_select_font (cr, "gscore", CAIRO_FONT_SLANT_NORMAL,
-                           CAIRO_FONT_WEIGHT_BOLD);
+        cairo_select_font_face (cr, "gscore", CAIRO_FONT_SLANT_NORMAL,
+                                CAIRO_FONT_WEIGHT_BOLD);
 
-        cairo_set_rgb_color (cr, 
+        cairo_set_source_rgb (cr, 
                              score->ColorObject->clefs->red, score->ColorObject->clefs->green, score->ColorObject->clefs->blue);
 
 	
         switch ( staff->key ) {
         case TREBLE_KEY:
                 cairo_move_to(cr, staff->extremity_begin_x + Spacings.Clefs.sb,
-                              staff->extremity_begin_y + 25);
-                cairo_scale_font (cr, score->zoom);
+                              staff->extremity_begin_y + 29);
+                cairo_set_font_size (cr, score->zoom);
                 cairo_show_text (cr, TREBLE_GLYPH);
                 cairo_stroke(cr);
                 break;
         case ALTO_KEY:
 /*                 cairo_move_to(cr, staff->extremity_begin_x + Spacings.Clefs.sb, */
 /*                               staff->extremity_begin_y + 9); */
-/*                 cairo_scale_font (cr, 30); */
+/*                 cairo_set_font_size (cr, 30); */
 /*                 cairo_show_text (cr, ALTO_GLYPH); */
 /*                 cairo_stroke(cr); */
                 break;
         case TENOR_KEY:
                 cairo_move_to(cr, staff->extremity_begin_x + Spacings.Clefs.sb,
                               staff->extremity_begin_y + 9);
-                cairo_scale_font (cr, score->zoom);
+                cairo_set_font_size (cr, score->zoom);
                 cairo_show_text (cr, TENOR_GLYPH);
                 cairo_stroke(cr);
                 break;
         case BASS_KEY:
                 cairo_move_to(cr, staff->extremity_begin_x + Spacings.Clefs.sb,
                               staff->extremity_begin_y + 9);
-                cairo_scale_font (cr, score->zoom);
+                cairo_set_font_size (cr, score->zoom);
                 cairo_show_text (cr, BASS_GLYPH);
                 cairo_stroke(cr);
                 break;
         case PERCUSSION_KEY:
 /*                 cairo_move_to(cr, staff->extremity_begin_x + Spacings.Clefs.sb, */
 /*                               staff->extremity_begin_y + 9); */
-/*                 cairo_scale_font (cr, 30); */
+/*                 cairo_set_font_size (cr, 30); */
 /*                 cairo_show_text (cr, BASS_GLYPH); */
 /*                 cairo_stroke(cr); */
                 break;
         case TREBLE_8VB_KEY:
 /*                 cairo_move_to(cr, staff->extremity_begin_x + Spacings.Clefs.sb, */
 /*                               staff->extremity_begin_y + 9); */
-/*                 cairo_scale_font (cr, 30); */
+/*                 cairo_set_font_size (cr, 30); */
 /*                 cairo_show_text (cr, BASS_GLYPH); */
 /*                 cairo_stroke(cr); */
                 break;
         case BASS_8VB_KEY:
 /*                 cairo_move_to(cr, staff->extremity_begin_x + Spacings.Clefs.sb, */
 /*                               staff->extremity_begin_y + 9); */
-/*                 cairo_scale_font (cr, 30); */
+/*                 cairo_set_font_size (cr, 30); */
 /*                 cairo_show_text (cr, BASS_GLYPH); */
 /*                 cairo_stroke(cr); */
                 break;
         case BARITONE_KEY:
 /*                 cairo_move_to(cr, staff->extremity_begin_x + Spacings.Clefs.sb, */
 /*                               staff->extremity_begin_y + 9); */
-/*                 cairo_scale_font (cr, 30); */
+/*                 cairo_set_font_size (cr, 30); */
 /*                 cairo_show_text (cr, BASS_GLYPH); */
 /*                 cairo_stroke(cr); */
                 break;
         case TAB_KEY:
                 cairo_move_to(cr, staff->extremity_begin_x + Spacings.Clefs.sb,
                               staff->extremity_begin_y + 20);
-                cairo_scale_font (cr, score->zoom);
+                cairo_set_font_size (cr, score->zoom);
                 cairo_show_text (cr, TAB_GLYPH);
                 cairo_stroke(cr);
                 break;

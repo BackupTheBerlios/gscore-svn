@@ -226,7 +226,7 @@ cairo_gdk_color (cairo_t  *cr,
         green = color->green / 65535.0;
         blue = color->blue / 65535.0;
 
-        cairo_set_rgb_color (cr, red, green, blue);
+        cairo_set_source_rgb (cr, red, green, blue);
 }
 
 int

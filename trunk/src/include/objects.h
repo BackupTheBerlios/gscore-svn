@@ -29,11 +29,11 @@
 
 gint object_get_spacing(gint type);
 
-gboolean add_object(Score_t *score, gint staff, gint type,
-		    accidentals_e accidentals, object_e nature,
-		    gulong group_id, gint x, gint y, gint x2, gint y2,
-		    gint x3, gint y3, gint pitch, gint tab_number,
-		    gboolean is_selected);
+Object_t *add_object(Score_t *score, gint staff, gint type,
+                     accidentals_e accidentals, object_e nature,
+                     gulong group_id, gint x, gint y, gint x2, gint y2,
+                     gint x3, gint y3, gint pitch, gint tab_number,
+                     gboolean is_selected);
 
 gboolean object_insert(Score_t *score, Object_t *rightobj, gint staff, gint type, accidentals_e accidentals, object_e nature, gulong group_id, gint pitch, gint tab_number, gboolean is_selected);
 

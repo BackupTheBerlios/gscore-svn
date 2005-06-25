@@ -24,10 +24,11 @@
 
 #include <gtk/gtk.h>
 #include <libgscore.h>
-
-#include "layout-engine.h"
+#include <cairo.h>
 
 #include "gscore.h"
+#include "layout-engine.h"
+
 #include "constants.h"
 #include "display.h"
 #include "common.h"
@@ -36,7 +37,7 @@
 #include "draw_staff.h"
 #include "draw_key.h"
 #include "draw_key_signature.h"
-#include "draw_note.h"
+#include "draw_note_rest.h"
 #include "draw_pitch_cursor.h"
 #include "draw_time_signature.h"
 #include "gscore-font-constants.h"
@@ -72,7 +73,7 @@ void layout_paint(GtkWidget *widget,
         /* clear background */
 
         cairo_rectangle (cr, 0, 0, width, height);
-        cairo_set_rgb_color (cr, 1,1,1);
+        cairo_set_source_rgb (cr, 1,1,1);
         cairo_fill (cr);
 
 
@@ -127,7 +128,7 @@ void layout_paint(GtkWidget *widget,
 				case QUARTER:
 				case EIGHTH:
 				case SIXTEENTH:
-                                        object_x = draw_note(score, staff, cr, object->type, FALSE, object_x, object->pitch);
+                                        object_x = draw_note_rest(score, staff, cr, object->type, FALSE, object_x, object->pitch);
 					
 				}
 			}
@@ -139,7 +140,7 @@ void layout_paint(GtkWidget *widget,
         } /* while ( listrunner_staff ) */
 
 
-        cairo_set_rgb_color (cr, 0, 0, 0);
+        cairo_set_source_rgb (cr, 0, 0, 0);
 
         /* Show the quarter note head */
 /*         cairo_select_font (cr, "gscore", CAIRO_FONT_SLANT_NORMAL, */

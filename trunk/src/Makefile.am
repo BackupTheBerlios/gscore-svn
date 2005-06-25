@@ -22,7 +22,7 @@ gscore_SOURCES =				\
 	draw_staff.c 				\
 	draw_key.c				\
 	draw_key_signature.c			\
-	draw_note.c 				\
+	draw_note_rest.c			\
 	draw_pitch_cursor.c			\
 	draw_time_signature.c			\
 	draw.c					\
@@ -43,6 +43,7 @@ gscore_SOURCES =				\
 	notes.c					\
 	objects.c				\
 	objects_callbacks.c			\
+	pitch_cursor.c				\
 	plugin.c				\
 	position.c				\
 	realize_area.c				\

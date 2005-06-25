@@ -80,10 +80,11 @@ gboolean create_staff(Score_t *score, guint8 nb_lines, guint8 space_btw_lines,
  
         score->Staff->nb_lines = nb_lines;
         score->Staff->space_btw_lines = space_btw_lines;
+        score->Staff->cursor_pitch = 0;
         score->Staff->is_selected = FALSE;
         score->Staff->key = NO_KEY;
         score->Staff->key_signature = KEY_SIGNATURE_EMPTY;
-        score->Staff->time_signature[0] = TIME_SIGNATURE_NORMAL;
+        score->Staff->time_signature[0] = TIME_SIGNATURE_COMMON_TIME;
         score->Staff->time_signature[1] = 4;
         score->Staff->time_signature[2] = 4;
         score->Staff->measure_number = 1;
@@ -1847,6 +1848,7 @@ void update_key_signature(GtkButton *widget, gpointer user_data)
         staff_set_current_x(score, get_staff_selected(score),
 			    staff_get_current_x(score, get_staff_selected(score)) + offset);
 	staff_set_start_x(score, get_staff_selected(score), offset);
+
 
 	/* TODO: find a way to refresh ALL drawing areas displaying score */
 /*         refresh(layout); */

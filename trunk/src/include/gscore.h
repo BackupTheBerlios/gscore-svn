@@ -175,6 +175,9 @@ typedef struct Staff_t
         /** TRUE if the staff is selected */
         gboolean   is_selected; 
 
+        /** Current cursor pitch (this avoid parsing the objects list to know this) */
+        gint8      cursor_pitch;
+
         /** The key for the staff */
         gint       key;        
         /** The key signature for the staff */ 

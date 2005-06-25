@@ -76,3 +76,4 @@ void get_key_cursor_action(gint staff)
 {
 	/*      action_type = APPEND_NOTE; */
 }
+

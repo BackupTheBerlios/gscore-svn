@@ -176,8 +176,8 @@ gdouble get_y_from_position_no_key(guint16 space_btwn_lines, gint zero, gdouble 
 
      gint i = 0;
 
-     g_print("\n*** Parameters =\nspace_btwn_lines:%d\nzero:%d\nstaff_begin_y:%f\nheight:%f\nposition:%d\n\n", 
-             space_btwn_lines, zero, staff_begin_y, height, position);
+/*      g_print("\n*** Parameters =\nspace_btwn_lines:%d\nzero:%d\nstaff_begin_y:%f\nheight:%f\nposition:%d\n\n",  */
+/*              space_btwn_lines, zero, staff_begin_y, height, position); */
 
      /***
       *** if it is an even number, the object _is_ on a line and its height should be divided by two
