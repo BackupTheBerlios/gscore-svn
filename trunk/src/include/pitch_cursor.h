@@ -1,6 +1,6 @@
 /* -*- mode:C; tab-width:8; c-default-style:linux; c-basic-offset:8; indent-tabs-mode:nil -*- */
 /*
- * draw_note.h
+ * pitch_cursor.h
  * gscore - a musical score editor
  *
  * (C) Copyright 2001-2005 Sebastien Tricaud
@@ -20,6 +20,6 @@
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
- */
+*/
 
-gboolean draw_note(Score_t *score, Staff_t *staff, cairo_t *cr, gint type, gboolean selected, gdouble x, gint pitch);
+void pitch_cursor_move_after(Score_t *score, Staff_t *staff, Object_t *object);
