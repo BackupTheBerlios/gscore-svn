@@ -26,10 +26,11 @@
 #define _OBJECTS_H_
 
 #include <gscore.h>
+#include <score-object-manager.h>
 
 gint object_get_spacing(gint type);
 
-Object_t *add_object(Score_t *score, gint staff, gint type,
+Object_t *add_object(SOMType somtype, GdkEvent *event, Score_t *score, gint staff, gint type,
                      accidentals_e accidentals, object_e nature,
                      gulong group_id, gint x, gint y, gint x2, gint y2,
                      gint x3, gint y3, gint pitch, gint tab_number,

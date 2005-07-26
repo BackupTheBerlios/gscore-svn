@@ -24,18 +24,42 @@
 
 #include <gdk/gdkx.h>
 #include "gdkcairo.h"
+#include <cairo-xlib.h>
 #include <string.h>
 
 /* #ifdef CAIRO_HAS_XLIB_SURFACE */
 /* #include <cairo-xlib.h> */
 /* #endif */
 
+#define SIZE 100
+
 static void
 gdkcairo_init (gdkcairo_t *self,
                GtkWidget  *widget)
 {
+        Display *dpy;
+        Drawable drawable;
+        Visual *visual;
+        cairo_surface_t *surface;
+        GdkDrawable *real_drawable;
+        gint x_off, y_off;
+
+
+
+
+        /* Unabstract X from GTK+ */
+/*         gdk_window_get_internal_paint_info (widget->window, &real_drawable, &x_off, &y_off); */
+        dpy = gdk_x11_drawable_get_xdisplay (widget);
+        drawable = gdk_x11_drawable_get_xid (widget);
+
+        /* Ignore GTK+ and use Cairo for drawing. */
+        visual = GDK_VISUAL_XVISUAL (gdk_drawable_get_visual (widget));
+        surface = cairo_xlib_surface_create (dpy, drawable, visual,
+                                             widget->allocation.width,
+                                             widget->allocation.height);
+
         self->widget = widget;
-        self->cr = cairo_create (NULL); /* FIXME: NULL will segfault */
+        self->cr = cairo_create (surface); /* FIXME: NULL will segfault */
 
 
         self->backend = GDKCAIRO_BACKEND_IMAGE;
@@ -318,6 +342,8 @@ gdkcairo_expose (gdkcairo_t     *self,
                  GdkEventExpose *event)
 {
         GtkWidget *widget = self->widget;
+        Display *dpy = XOpenDisplay (NULL);
+        int screen = DefaultScreen (dpy);
 
         g_return_val_if_fail (widget != NULL, FALSE);
         g_return_val_if_fail (event != NULL, FALSE);
@@ -361,10 +387,11 @@ gdkcairo_expose (gdkcairo_t     *self,
                                 gdk_window_get_internal_paint_info (widget->window,
                                                                     &gdkdrawable, &x_off, &y_off);
 
-                                cairo_xlib_surface_create (self->cr,
-                                                           gdk_x11_drawable_get_xdisplay
-                                                           (gdkdrawable),
-                                                           gdk_x11_drawable_get_xid (gdkdrawable));
+/*                                 cairo_xlib_surface_create (self->cr, */
+/*                                                            gdk_x11_drawable_get_xdisplay(gdkdrawable), */
+/*                                                            DefaultVisual(dpy, screen), */
+/*                                                            SIZE, SIZE); */
+/*                                                            gdk_x11_drawable_get_xid (gdkdrawable)); */
 
                                 /* counter offset of expose */
                                 if (x_off || y_off)

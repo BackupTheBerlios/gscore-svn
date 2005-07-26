@@ -50,6 +50,7 @@ gscore_SOURCES =				\
 	rests.c					\
 	score.c					\
 	score_callbacks.c			\
+	score-object-manager.c 			\
 	selection.c				\
 	spacings.c				\
 	splash.c				\

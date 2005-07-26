@@ -261,7 +261,8 @@ score_window_new(Score_t *score)
         Display_t *Display;
         Score_selection_t *selection;
         KeyCursor_t *KeyCursor;
-        ScoreWidget *sw;
+        /*        ScoreWidget *sw;  */
+        GtkWidget *drawingarea;
 
         GtkWidget *score_window;
 
@@ -296,6 +297,7 @@ score_window_new(Score_t *score)
 
         viewport = glade_xml_get_widget(score_xml, "score_viewport");
 
+        /*
         sw = score_widget_new();
         score->height = 500;
         score->width = 500;
@@ -304,9 +306,22 @@ score_window_new(Score_t *score)
         g_signal_connect (G_OBJECT (sw), "paint", G_CALLBACK (layout_paint), NULL);
 
         gtk_container_add(GTK_CONTAINER(viewport), sw);
+        */
+        
+        drawingarea = gtk_drawing_area_new();
+        score->height = 500;
+        score->width = 500;
+
+        gtk_widget_set_usize(GTK_WIDGET(drawingarea), score->width, score->height);
+        g_signal_connect(G_OBJECT(drawingarea), "expose-event", G_CALLBACK(layout_expose), NULL);
+
+        gtk_container_add(GTK_CONTAINER(viewport), drawingarea);
 
         score_set_to_widget(score, score_window);
+
+        /*
         layout_set_to_widget(sw, score_window);
+        */
 
         gtk_widget_show_all(score_window);
   

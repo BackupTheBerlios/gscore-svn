@@ -1,6 +1,16 @@
 /* -*- mode:C; tab-width:8; c-default-style:linux; c-basic-offset:8; indent-tabs-mode:nil -*- */
 /*
- * layout_engine.h
+ * score-object-manager.h: manages all actions between everything.
+ * When you enter a note, you can set up a plugin or script to do something with it,
+ * the SOM allows this, since everything is passed throught SOM functions.
+ *
+ *                  +--------+-----------+
+ *                  | Action | Scripting |
+ *                  | Plugin | Manager   |
+ *                  +--------------------+
+ *   ----- foo -->  |  Score Object Mgr  | ------ bar ----->
+ *                  +--------------------+
+ *
  * gscore - a musical score editor
  *
  * (C) Copyright 2001-2005 Sebastien Tricaud
@@ -20,10 +30,22 @@
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
- */
-
-/*
-void layout_paint(GtkWidget *widget, cairo_t   *cr, GtkRange  *range);
 */
 
-gboolean layout_expose(GtkWidget *widget, GdkEventExpose *event, gpointer data);
+#include <gtk/gtk.h>
+
+typedef enum SOMType
+{
+
+        MOUSE,
+        KEYBOARD,
+        DATASTRUCTURE_TO_CAIRO,
+        CAIRO_TO_DATASTRUCTURE,
+        FILTER_TO_DATASTRUCTURE,
+        DATASTRUCTURE_TO_FILTER,
+        CAIRO_TO_LAYOUT,
+        CAIRO_TO_PRINTER
+
+} SOMType;
+
+void score_object_manager(SOMType type, GdkEvent *event, gpointer data, gpointer user_data);

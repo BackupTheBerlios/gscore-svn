@@ -53,7 +53,9 @@ score_key_press_event(GtkWidget *widget, GdkEventKey *event)
         Score_t *score = NULL;
         Staff_t *staffobj = NULL;
         Object_t *object_tmp = NULL;
-        
+
+
+
         GList *listrunner_object = NULL;
 
 /*         Object_t *tmpobj = NULL; */
@@ -85,7 +87,7 @@ score_key_press_event(GtkWidget *widget, GdkEventKey *event)
                 }
 
                 if (is_note(Selection.object_type)) {
-                        object_tmp = add_object(score, get_staff_selected(score),
+                        object_tmp = add_object(KEYBOARD, event, score, get_staff_selected(score),
                                                 Selection.object_type,
                                                 0, 0, 0,
                                                 0, 0, 0, 0, 0, 0, staffobj->cursor_pitch, 0, FALSE);

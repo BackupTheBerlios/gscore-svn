@@ -35,6 +35,7 @@
 #include "staff.h"
 #include "objects.h"
 
+
 gint object_get_spacing(gint type)
 {
         gint retval = 0;
@@ -123,7 +124,7 @@ gint object_get_spacing(gint type)
 }
 
 extern 
-Object_t *add_object(Score_t *score, gint staff, gint type, accidentals_e accidentals, object_e nature, gulong group_id,
+Object_t *add_object(SOMType somtype, GdkEvent *event, Score_t *score, gint staff, gint type, accidentals_e accidentals, object_e nature, gulong group_id,
                      gint x, gint y, gint x2, gint y2, gint x3, gint y3, 
                      gint pitch, gint tab_number, gboolean is_selected)
 {
@@ -158,6 +159,8 @@ Object_t *add_object(Score_t *score, gint staff, gint type, accidentals_e accide
 
         staff_data->Object_list =
                 g_list_append(staff_data->Object_list, staff_data->Object);
+
+        score_object_manager(somtype, event, (Score_t *)score, NULL);
 
         if (group_id == 0) {
                 staff_set_current_x(score, staff, staff_get_current_x(score, staff) + object_get_spacing(type));

@@ -80,6 +80,8 @@ void score_create_window(Score_t *score);
 
 gboolean score_set_staff_extremity_end_x(Score_t *score, gdouble extremity_end_x);
 
+gboolean score_window_new(Score_t *score);
+
 /*
 void keybindings (gpointer callback_data,
 		  guint callback_action, GtkWidget * widget);

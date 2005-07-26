@@ -50,6 +50,7 @@
 #include "staff.h"
 #include "common.h"
 #include "score.h"
+#include "score-object-manager.h"
 
 GladeXML *gladexml;
 
@@ -77,14 +78,9 @@ print_gpl(void)
 
 
 
-/***
- *** gives the right value to variables on starting
- ***/
-
 static 
 void gscore_init(void)
 {
-	// Global variables initializations
 
 	print_gpl();
 

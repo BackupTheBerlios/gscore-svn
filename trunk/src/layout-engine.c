@@ -45,10 +45,17 @@
 static guint object_x = 0;
 static guint measure_number = 1;
 
+/*
 void layout_paint(GtkWidget *widget,
                   cairo_t   *cr,
                   GtkRange  *range)
+*/
+extern gboolean 
+layout_expose(GtkWidget *widget,
+              GdkEventExpose *event,
+              gpointer data)
 {
+        cairo_t *cr = gdk_cairo_create(widget->window);
         Score_t *score = score_get_from_widget(widget);
 
         GList * listrunner_staff = NULL;
