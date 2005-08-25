@@ -112,6 +112,7 @@ typedef struct Tempo_t
 
 typedef struct TimeSignatures_t
 {
+        gdouble width;
 	gdouble sats;		/* Space after time signature */
 } TimeSignatures_t;
 

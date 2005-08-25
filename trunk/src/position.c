@@ -189,11 +189,9 @@ gdouble get_y_from_position_no_key(guint16 space_btwn_lines, gint zero, gdouble 
       ***/
      starty_position = staff_begin_y + (zero - 1) + ((zero - 1) * space_btwn_lines);
 
-     g_print("starty_position = %f\n", starty_position);
+/*      g_print("starty_position = %f\n", starty_position); */
 
      value = starty_position;
-
-     g_print("value = %f\n", value);
 
 /*      g_print("value = %f\n", value); */
 
@@ -243,7 +241,7 @@ gdouble get_y_from_position_no_key(guint16 space_btwn_lines, gint zero, gdouble 
 
 /*      g_print("value = %f\n", value); */
 
-     g_print("value to return:%f\n",value);
+/*      g_print("value to return:%f\n",value); */
      return value;
 }
 

@@ -35,8 +35,9 @@
 extern gboolean
 draw_note_rest(Score_t *score, Staff_t *staff, cairo_t *cr, gint type, gboolean selected, gdouble x, gint pitch)
 {
-        gdouble note_x = 0;
         gdouble y = 0;
+
+/*         g_print("%s:%d: x = %f\n", __FILE__, __LINE__, x); */
 
         cairo_select_font_face (cr, "gscore", CAIRO_FONT_SLANT_NORMAL,
                                 CAIRO_FONT_WEIGHT_BOLD);
@@ -48,49 +49,79 @@ draw_note_rest(Score_t *score, Staff_t *staff, cairo_t *cr, gint type, gboolean 
 
         switch (type) {
         case DOUBLEWHOLE:
-                note_x = x;
-                cairo_move_to(cr, note_x, y + 4);
+                cairo_move_to(cr, x, y + 4);
                 cairo_set_font_size (cr, score->zoom);
                 cairo_show_text (cr, DOUBLEWHOLE_GLYPH);
-                note_x += Spacings.NotesRests.sa_doublewhole;
+                x += Spacings.NotesRests.sa_doublewhole;
+        break;
+        case DOUBLEWHOLEREST:
+                cairo_move_to(cr, x, y + 4);
+                cairo_set_font_size (cr, score->zoom);
+                cairo_show_text (cr, DOUBLEWHOLE_REST_GLYPH);
+                x += Spacings.NotesRests.sa_doublewhole;
         break;
         case WHOLE:
-                note_x = x;
-                cairo_move_to(cr, note_x, y + 4);
+                cairo_move_to(cr, x, y + 4);
                 cairo_set_font_size (cr, score->zoom);
                 cairo_show_text (cr, WHOLE_GLYPH);
-                note_x += Spacings.NotesRests.sa_whole;
+                x += Spacings.NotesRests.sa_whole;
+        break;
+        case WHOLEREST:
+                cairo_move_to(cr, x, y + 4);
+                cairo_set_font_size (cr, score->zoom);
+                cairo_show_text (cr, WHOLE_REST_GLYPH);
+                x += Spacings.NotesRests.sa_whole;
         break;
         case HALF:
-                note_x = x;
-                cairo_move_to(cr, note_x, y + 4);
+                cairo_move_to(cr, x, y + 4);
                 cairo_set_font_size (cr, score->zoom);
                 cairo_show_text (cr, HALF_GLYPH);
-                note_x += Spacings.NotesRests.sa_half;
+                x += Spacings.NotesRests.sa_half;
+        break;
+        case HALFREST:
+                cairo_move_to(cr, x, y + 4);
+                cairo_set_font_size (cr, score->zoom);
+                cairo_show_text (cr, HALF_GLYPH);
+                x += Spacings.NotesRests.sa_half;
         break;
         case QUARTER:
-                note_x = x;
-                cairo_move_to(cr, note_x, y + 4);
+                cairo_move_to(cr, x, y + 4);
                 cairo_set_font_size (cr, score->zoom);
                 cairo_show_text (cr, QUARTER_GLYPH);
-                note_x += Spacings.NotesRests.sa_quarter;
+                x += Spacings.NotesRests.sa_quarter;
+        break;
+        case QUARTERREST:
+                cairo_move_to(cr, x, y + 4);
+                cairo_set_font_size (cr, score->zoom);
+                cairo_show_text (cr, QUARTER_REST_GLYPH);
+                x += Spacings.NotesRests.sa_quarter;
         break;
         case EIGHTH:
-                note_x = x;
-                cairo_move_to(cr, note_x, y + 4);
+                cairo_move_to(cr, x, y + 4);
                 cairo_set_font_size (cr, score->zoom);
                 cairo_show_text (cr, QUARTER_GLYPH);
-                note_x += Spacings.NotesRests.sa_eighth;
+                x += Spacings.NotesRests.sa_eighth;
+        break;
+        case EIGHTHREST:
+                cairo_move_to(cr, x, y + 4);
+                cairo_set_font_size (cr, score->zoom);
+                cairo_show_text (cr, EIGHTH_REST_GLYPH);
+                x += Spacings.NotesRests.sa_eighth;
         break;
         case SIXTEENTH:
-                note_x = x;
-                cairo_move_to(cr, note_x, y + 4);
+                cairo_move_to(cr, x, y + 4);
                 cairo_set_font_size (cr, score->zoom);
                 cairo_show_text (cr, QUARTER_GLYPH);
-                note_x += Spacings.NotesRests.sa_sixteenth;
+                x += Spacings.NotesRests.sa_sixteenth;
+        break;
+        case SIXTEENTHREST:
+                cairo_move_to(cr, x, y + 4);
+                cairo_set_font_size (cr, score->zoom);
+                cairo_show_text (cr, SIXTEENTH_REST_GLYPH);
+                x += Spacings.NotesRests.sa_sixteenth;
         break;
         }
 
 
-        return note_x;
+        return x;
 }

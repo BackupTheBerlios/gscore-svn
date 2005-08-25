@@ -1,6 +1,6 @@
 /* -*- mode:C; tab-width:8; c-default-style:linux; c-basic-offset:8; indent-tabs-mode:nil -*- */
 /*
- * key_cursor.c
+ * draw_pitch_cursor.c
  * gscore - a musical score editor
  *
  * (C) Copyright 2001-2005 Sebastien Tricaud
@@ -36,8 +36,9 @@ draw_pitch_cursor(Score_t *score, Staff_t *staff, cairo_t *cr, gdouble x, gint p
 {
 	gdouble y = 0;
 	
-	
-	x += staff->extremity_begin_x + Spacings.Clefs.sb + (score->zoom * TREBLE_CLEF_WIDTH_FACTOR) + Spacings.Clefs.sa + get_key_signature_spacing(score, staff) + Spacings.KeySignatures.saks + 20;
+/* 	x += 10; */
+
+/* 	x += staff->extremity_begin_x + Spacings.Clefs.sb + (score->zoom * TREBLE_CLEF_WIDTH_FACTOR) + Spacings.Clefs.sa + get_key_signature_spacing(score, staff) + Spacings.KeySignatures.saks + 20; */
 	
 	cairo_set_source_rgb(cr, 0, 0.5, 0);
 

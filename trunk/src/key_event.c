@@ -87,6 +87,7 @@ score_key_press_event(GtkWidget *widget, GdkEventKey *event)
                 }
 
                 if (is_note(Selection.object_type)) {
+/*                         g_print("staffobj->cursor_pitch = %d\n", staffobj->cursor_pitch); */
                         object_tmp = add_object(KEYBOARD, event, score, get_staff_selected(score),
                                                 Selection.object_type,
                                                 0, 0, 0,

@@ -1,6 +1,6 @@
 /* -*- mode:C; tab-width:8; c-default-style:linux; c-basic-offset:8; indent-tabs-mode:nil -*- */
 /*
- * pitch_cursor.c
+ * pitch_cursor.c: functions dealing with the pitch cursor
  * gscore - a musical score editor
  *
  * (C) Copyright 2001-2005 Sebastien Tricaud
@@ -27,53 +27,22 @@
 #include "gscore.h"
 #include "pitch_cursor.h"
 
+#include "debug.h"
 #include "constants.h"
 #include "spacings.h"
+#include "objects.h"
 
 extern 
 void pitch_cursor_move_after(Score_t *score, Staff_t *staff, Object_t *object)
 {
-/*         GList *listrunner_object = NULL; */
-/*         Object_t *object_tmp = NULL; */
-/*         gdouble pcu_id; */
-/*         gint index; */
+        Object_t *object_data;
+        gint oid;
 
-/*         listrunner_object = g_list_first(staff->Object_list); */
-/*         while ( listrunner_object ) { */
-/*                 Object_t *object_data = NULL; */
-/*                 object_data = (Object_t *)listrunner_object->data; */
+        object_data = object_get_pitch_cursor(score, staff);
 
-/*                 if ( (object_data) && (object_data->type == PITCH_CURSOR) ) { */
-/*                         pcu_id = object_data->id; */
-/*                         listrunner_object = g_list_remove(listrunner_object, object_data); */
-/*                 } */
+        staff->Object_list = g_list_remove(staff->Object_list, object_data);
 
-/*                 listrunner_object = g_list_next(listrunner_object); */
-/*         } */
-
-/*         object_tmp = malloc(sizeof(struct Object_t)); */
-
-/*         object_tmp->id = pcu_id; */
-/*         object_tmp->type = PITCH_CURSOR; */
-/*         object_tmp->nature = 0; */
-/*         object_tmp->accidentals = 0; */
-/*         object_tmp->group_id = 0; */
-/*         object_tmp->x = 0; */
-/*         object_tmp->y = 0; */
-/*         object_tmp->x2 = 0; */
-/*         object_tmp->y2 = 0; */
-/*         object_tmp->x3 = 0; */
-/*         object_tmp->y3 = 0; */
-/*         object_tmp->pitch = 0; */
-/*         object_tmp->tab_number = 0; */
-/*         object_tmp->is_selected = FALSE; */
-
-/*         index = g_list_index(listrunner_object, object); */
-
-/*         g_print("Index object = %d\n", index); */
-                        
-/*         listrunner_object = g_list_insert(listrunner_object, object_tmp, index); */
-
-/*         g_free(object_tmp); */
+        oid = object_get_id(staff, object);
+        staff->Object_list = g_list_insert(staff->Object_list, object_data, oid + 1);
 
 }

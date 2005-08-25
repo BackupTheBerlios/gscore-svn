@@ -1,3 +1,7 @@
+2005-08-25 Toady <toady@gscore.org>
+
+	* src/pitch_cursor.c, src/objects.c, src/layout-engine.c: handling the pitch cursor moving anytime you add an object
+	
 2005-07-26 Toady <toady@gscore.org>
 
 	* src/score.c, src/layout-engine.c: droped the score widget in favor of the drawing area, since it is the hell to follow the cairo developement, I prefer letting gtk+ folks doing this job. I might come back on this widget latter, but I don't want to be too late (well, I am already!).

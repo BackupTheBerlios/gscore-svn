@@ -586,3 +586,27 @@ object_selected_pitch_down(Score_t *score)
         return something_selected;
 }
 
+Object_t *
+object_get_pitch_cursor(Score_t *score, Staff_t *staff)
+{
+        GList *listrunner_object = NULL;
+ 
+        listrunner_object = g_list_first(staff->Object_list);
+        while ( listrunner_object ) {
+                Object_t *object_data = NULL;
+                object_data = (Object_t *)listrunner_object->data;
+
+                if ( object_data->type == PITCH_CURSOR )
+                        return object_data;
+
+                listrunner_object = g_list_next(listrunner_object);
+        }
+
+        return NULL;
+}
+
+gint
+object_get_id(Staff_t *staff, Object_t *object)
+{
+        return g_list_index(staff->Object_list, object);
+}

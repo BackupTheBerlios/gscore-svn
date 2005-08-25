@@ -166,7 +166,8 @@ void set_spacings_init(void)
         Spacings.Tempo.ypfm = 40;
 
 	/* Time Signatures */
-	Spacings.TimeSignatures.sats = 5;
+        Spacings.TimeSignatures.width = 10;
+	Spacings.TimeSignatures.sats = 15;
 }
 
 extern 

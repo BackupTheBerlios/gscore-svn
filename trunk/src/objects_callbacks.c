@@ -92,6 +92,20 @@ void object_half_callback(GtkWidget *widget, GdkEventExpose *event)
   
 }
 
+void object_halfrest_callback(GtkWidget *widget, GdkEventExpose *event)
+{
+        Score_t *score = score_get_from_widget(widget);
+
+        if ( object_selected_change_type(score, HALFREST) ) {
+                gtk_widget_queue_draw(widget);
+        } else {
+                draw_cursor(widget, cursor_halfrest_bits, cursor_halfrest_mask_bits, 20, 6);
+                Selection.object_type = HALFREST;
+        }
+	
+	/* 	clean_statusbar(); */
+}
+
 void object_quarter_callback(GtkWidget *widget, GdkEventExpose *event)
 {
         Score_t *score = score_get_from_widget(widget);

@@ -41,6 +41,7 @@
 #include "draw_pitch_cursor.h"
 #include "draw_time_signature.h"
 #include "gscore-font-constants.h"
+#include "spacings.h"
 
 static guint object_x = 0;
 static guint measure_number = 1;
@@ -65,7 +66,7 @@ layout_expose(GtkWidget *widget,
         gint i;
 
 
-        if ( ! score ) return;
+        g_assert( score );
 
         width  = widget->allocation.width;
         height = widget->allocation.height;
@@ -96,11 +97,12 @@ layout_expose(GtkWidget *widget,
         /* We walk through staves */
         listrunner_staff = g_list_first(score->Staff_list);
         while ( listrunner_staff ) {
-                object_x = 0;
                 measure_number = 1;
 
                 Staff_t *staff;
                 staff = (Staff_t *)listrunner_staff->data;
+
+                object_x = staff->extremity_begin_x + Spacings.Clefs.sb + (score->zoom * TREBLE_CLEF_WIDTH_FACTOR) + Spacings.Clefs.sa + get_key_signature_spacing(score, staff) + Spacings.KeySignatures.saks + Spacings.TimeSignatures.width + Spacings.TimeSignatures.sats;
 
                 draw_staff(score, cr, 
                            staff->nb_lines, staff->space_btw_lines,
@@ -121,22 +123,35 @@ layout_expose(GtkWidget *widget,
  			Object_t *object = NULL;
  			object = (Object_t *)listrunner_object->data;
 
-                        g_print("object->pitch = %d \n", object->pitch);
+/*                         g_print("object->pitch = %d \n", object->pitch); */
+/*                         g_print("%s:%d: x = %f\n", __FILE__, __LINE__, object_x); */
 			
 			if (object) {
+
+/*                                 g_print("layout engine, object_type = %d\n", object->type); */
+
 				switch(object->type) {
 
 				case PITCH_CURSOR:
 					object_x = draw_pitch_cursor(score, staff, cr, object_x, object->pitch);
 				        break;
 				case DOUBLEWHOLE:
+                                case DOUBLEWHOLEREST:
 				case WHOLE:
+                                case WHOLEREST:
 				case HALF:
+                                case HALFREST:
 				case QUARTER:
+                                case QUARTERREST:
 				case EIGHTH:
+                                case EIGHTHREST:
 				case SIXTEENTH:
+                                case SIXTEENTHREST:
                                         object_x = draw_note_rest(score, staff, cr, object->type, FALSE, object_x, object->pitch);
-					
+					break;
+                                default:
+                                        g_print("Unknown object type: %d\n", object->type);
+
 				}
 			}
 			
