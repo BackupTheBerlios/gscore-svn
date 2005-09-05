@@ -73,6 +73,6 @@ gboolean object_selected_pitch_down(Score_t *score);
 
 Object_t *object_get_pitch_cursor(Score_t *score, Staff_t *staff);
 
-gint object_get_id(Staff_t *staff, Object_t *object);
+gint object_get_index(Staff_t *staff, Object_t *object);
 
 #endif

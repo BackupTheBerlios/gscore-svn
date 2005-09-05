@@ -49,7 +49,7 @@
 
 void object_doublewhole_callback(GtkWidget *widget, GdkEventExpose *event)
 {
-  Score_t *score = score_get_from_widget(widget);
+        Score_t *score = score_get_from_widget(widget);
 /*   GtkWidget *area = score_get_area_from_widget(widget); */
   
 	if ( object_selected_change_type(score, DOUBLEWHOLE) ) {
@@ -62,9 +62,21 @@ void object_doublewhole_callback(GtkWidget *widget, GdkEventExpose *event)
 
 }
 
+void object_doublewholerest_callback(GtkWidget *widget, GdkEventExpose *event)
+{
+        Score_t *score = score_get_from_widget(widget);
+
+	if ( object_selected_change_type(score, DOUBLEWHOLEREST) ) {
+                gtk_widget_queue_draw(widget);
+	} else {
+                draw_cursor(widget, cursor_doublewholerest_bits, cursor_doublewholerest_mask_bits, 20, 10);
+                Selection.object_type = DOUBLEWHOLEREST;
+        }
+}
+
 void object_whole_callback(GtkWidget *widget, GdkEventExpose *event)
 {
-  Score_t *score = score_get_from_widget(widget);
+        Score_t *score = score_get_from_widget(widget);
 /*   GtkWidget *area = score_get_area_from_widget(widget); */
 
 	if ( object_selected_change_type(score, WHOLE) ) {
@@ -75,6 +87,18 @@ void object_whole_callback(GtkWidget *widget, GdkEventExpose *event)
 		Selection.object_type = WHOLE;
 	}
 
+}
+
+void object_wholerest_callback(GtkWidget *widget, GdkEventExpose *event)
+{
+        Score_t *score = score_get_from_widget(widget);
+
+	if ( object_selected_change_type(score, WHOLEREST) ) {
+                gtk_widget_queue_draw(widget);
+	} else {
+                draw_cursor(widget, cursor_wholerest_bits, cursor_wholerest_mask_bits, 20, 6);
+                Selection.object_type = WHOLEREST;
+        }
 }
 
 void object_half_callback(GtkWidget *widget, GdkEventExpose *event)
@@ -122,6 +146,20 @@ void object_quarter_callback(GtkWidget *widget, GdkEventExpose *event)
 }
 
 
+void object_quarterrest_callback(GtkWidget *widget, GdkEventExpose *event)
+{
+
+        Score_t *score = score_get_from_widget(widget);
+
+	if ( object_selected_change_type(score, QUARTERREST) ) {
+                gtk_widget_queue_draw(widget);
+	} else {
+                draw_cursor(widget, cursor_quarterrest_bits, cursor_quarterrest_mask_bits, 8, 20);
+                Selection.object_type = QUARTERREST;
+        }
+
+}
+
 void object_eighth_callback(GtkWidget *widget, GdkEventExpose *event)
 {
   Score_t *score = score_get_from_widget(widget);
@@ -134,6 +172,20 @@ void object_eighth_callback(GtkWidget *widget, GdkEventExpose *event)
 		draw_cursor(widget, cursor_eighth_bits, cursor_eighth_mask_bits, 15, 29);
 		Selection.object_type = EIGHTH;
 	}
+
+}
+
+void object_eighthrest_callback(GtkWidget *widget, GdkEventExpose *event)
+{
+
+        Score_t *score = score_get_from_widget(widget);
+
+	if ( object_selected_change_type(score, EIGHTHREST) ) {
+                gtk_widget_queue_draw(widget);
+	} else {
+                draw_cursor(widget, cursor_eighthrest_bits, cursor_eighthrest_mask_bits, 7, 13);
+                Selection.object_type = EIGHTHREST;
+        }
 
 }
 
@@ -151,6 +203,25 @@ void object_sixteenth_callback(GtkWidget *widget, GdkEventExpose *event)
 	}
 
 }
+
+
+void object_sixteenthrest_callback(GtkWidget *widget, GdkEventExpose *event)
+{
+
+        Score_t *score = score_get_from_widget(widget);
+
+	if ( object_selected_change_type(score, SIXTEENTHREST) ) {
+                gtk_widget_queue_draw(widget);
+	} else {
+                draw_cursor(widget, cursor_sixteenthrest_bits, cursor_sixteenthrest_mask_bits, 10, 20);
+                Selection.object_type = SIXTEENTHREST;
+        }
+
+}
+
+
+
+
 
 /* void object_thirtysecond_callback(GtkWidget *widget, GdkEventExpose *event) */
 /* { */
@@ -175,76 +246,8 @@ void object_sixteenth_callback(GtkWidget *widget, GdkEventExpose *event)
 /* 	/\*      clean_statusbar(); *\/ */
 /* } */
 
-/* void object_doublewholerest_callback(GtkWidget *widget, GdkEventExpose *event) */
-/* { */
-/*   GtkWidget *area = score_get_area_from_widget(widget); */
 
-/* 	draw_cursor(area, cursor_doublewholerest_bits, cursor_doublewholerest_mask_bits, 20, 10); */
 
-/* 	/\*      Selection.object = DOUBLEWHOLEREST; *\/ */
-/* 	Selection.object_type = DOUBLEWHOLEREST; */
-
-/* 	/\*      clean_statusbar(); *\/ */
-/* } */
-
-/* void object_wholerest_callback(GtkWidget *widget, GdkEventExpose *event) */
-/* { */
-/*   GtkWidget *area = score_get_area_from_widget(widget); */
-
-/* 	draw_cursor(area, cursor_wholerest_bits, cursor_wholerest_mask_bits, 20, 6); */
-
-/* 	/\*      Selection.object = WHOLEREST; *\/ */
-/* 	Selection.object_type = WHOLEREST; */
-
-/* 	/\*      clean_statusbar(); *\/ */
-/* } */
-
-/* void object_halfrest_callback(GtkWidget *widget, GdkEventExpose *event) */
-/* { */
-/*   GtkWidget *area = score_get_area_from_widget(widget); */
-
-/* 	draw_cursor(area, cursor_halfrest_bits, cursor_halfrest_mask_bits, 20, 6); */
-	
-/* 	Selection.object_type = HALFREST; */
-	
-/* 	/\* 	clean_statusbar(); *\/ */
-/* } */
-
-/* void object_quarterrest_callback(GtkWidget *widget, GdkEventExpose *event) */
-/* { */
-/*   GtkWidget *area = score_get_area_from_widget(widget); */
-
-/* 	draw_cursor(area, cursor_quarterrest_bits, cursor_quarterrest_mask_bits, 8, 20); */
-
-/* 	Selection.object_type = QUARTERREST; */
-	
-/* 	/\* 	clean_statusbar(); *\/ */
-
-/* 	/\* 	update_statusbar("toolbar","Click where you want to put the quarter rest"); *\/ */
-
-/* } */
-
-/* void object_eighthrest_callback(GtkWidget *widget, GdkEventExpose *event) */
-/* { */
-/*   GtkWidget *area = score_get_area_from_widget(widget); */
-
-/* 	draw_cursor(area, cursor_eighthrest_bits, cursor_eighthrest_mask_bits, 7, 13); */
-	
-/* 	Selection.object_type = EIGHTHREST; */
-	
-/* 	/\* 	clean_statusbar(); *\/ */
-/* } */
-
-/* void object_sixteenthrest_callback(GtkWidget *widget, GdkEventExpose *event) */
-/* { */
-/*   GtkWidget *area = score_get_area_from_widget(widget); */
-
-/* 	draw_cursor(area, cursor_sixteenthrest_bits, cursor_sixteenthrest_mask_bits, 10, 20); */
-
-/* 	Selection.object_type = SIXTEENTHREST; */
-
-/* 	/\*   clean_statusbar(); *\/ */
-/* } */
 
 /* void object_thirtysecondrest_callback(GtkWidget *widget, GdkEventExpose *event) */
 /* { */

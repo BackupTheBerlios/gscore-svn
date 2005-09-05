@@ -21,6 +21,26 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
+#ifndef _SELECTION_H_
+#define _SELECTION_H_
+
+#include "gscore.h"
+
+
+gboolean selection_btn_press(GtkWidget      *widget,
+                             GdkEventButton *bev,
+                             Score_t *score);
+
+gboolean selection_btn_release(GtkWidget      *widget,
+                               GdkEventButton *bev,
+                               Score_t *score);
+
+gboolean selection_btn_motion(GtkWidget      *widget,
+                              GdkEventMotion *mev,
+                              Score_t *score);
+
+void selection_paint(cairo_t *cr, Score_t *score);
+
 void set_selection_accidentals(accidentals_e selection);
 
 accidentals_e get_selection_accidentals(void);
@@ -48,3 +68,5 @@ gboolean get_selection_with_sharp(gint x, gint y, gint staff);
 gboolean get_selection_with_flat(gint x, gint y, gint staff);
 
 gboolean get_selection_with_natural(gint x, gint y, gint staff);
+
+#endif /* _SELECTION_H_ */

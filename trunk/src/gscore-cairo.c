@@ -1,10 +1,10 @@
 /* -*- mode:C; tab-width:8; c-default-style:linux; c-basic-offset:8; indent-tabs-mode:nil -*- */
 /*
- * note.c
+ * draw_barline.c
  * gscore - a musical score editor
  *
- * (C) Copyright 2001-2005 Sebastien Tricaud
- * e-mail : toady@gscore.og
+ * (C) Copyright 2001-2004 Sebastien Tricaud
+ * e-mail : toady@gscore.org
  * URL    : http://www.gscore.org
  *
  * This program is free software; you can redistribute it and/or modify
@@ -25,49 +25,22 @@
 #include <gtk/gtk.h>
 
 #include "gscore.h"
-#include "constants.h"
+#include "gscore-cairo.h"
 
-/* Returns TRUE if the type is a note */
-extern gboolean 
-is_note(gint type)
+
+extern void 
+gscore_cairo_object_colorize(Score_t *score, Object_t *object, cairo_t *cr)
 {
-        switch(type) {
 
-        case DOUBLEWHOLE:
-        case WHOLE:
-        case HALF:
-        case QUARTER:
-        case EIGHTH:
-        case SIXTEENTH:
-        case THIRTYSECOND:
-        case SIXTYFOURTH:
-                return TRUE;
-        default:
-                return FALSE;
+        if ( object->is_selected )
+                cairo_set_source_rgb (cr, 
+                                      1, 
+                                      0, 
+                                      0);
+        else
+                cairo_set_source_rgb (cr, 
+                                      score->ColorObject->objects->red, 
+                                      score->ColorObject->objects->green, 
+                                      score->ColorObject->objects->blue);
 
-        }
-
-        return FALSE;
-}
-
-extern gboolean
-is_barline(gint type)
-{
-        switch(type) {
-
-        case BARLINE:
-        case BARLINE_SINGLE:
-        case BARLINE_DOUBLE:
-        case BARLINE_OPENREPEAT:
-        case BARLINE_CLOSEREPEAT:
-        case BARLINE_OPENCLOSEREPEAT:
-        case BARLINE_OPEN:
-        case BARLINE_CLOSE:
-                return TRUE;
-        default:
-                return FALSE;
-
-        }
-
-        return FALSE;
 }

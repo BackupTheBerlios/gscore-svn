@@ -32,6 +32,72 @@
 #include "score.h"
 #include "selection.h"
 
+
+gboolean selection_btn_press(GtkWidget      *widget,
+                             GdkEventButton *bev,
+                             Score_t  *score)
+{
+/*         g_print("button pressed\n"); */
+        score->sel_area->active = TRUE;
+
+        score->sel_area->x      = bev->x;
+        score->sel_area->y      = bev->y;
+        score->sel_area->width  = 0;
+        score->sel_area->height = 0;
+
+        undo_selection(score);
+
+        gtk_widget_queue_draw (widget);
+
+        return TRUE;
+}
+
+gboolean selection_btn_release(GtkWidget      *widget,
+                               GdkEventButton *bev,
+                               Score_t  *score)
+{
+
+        score->sel_area->active = FALSE;
+
+        highlight_selection(score, score->sel_area->x, score->sel_area->y, 
+                            score->sel_area->x + score->sel_area->width, score->sel_area->y + score->sel_area->height);
+        
+        gtk_widget_queue_draw (widget);
+
+        return TRUE;
+}
+
+gboolean selection_btn_motion(GtkWidget      *widget,
+                              GdkEventMotion *mev,
+                              Score_t  *score)
+{
+/*         g_print("button in motion\n"); */
+        score->sel_area->width  = mev->x - score->sel_area->x;
+        score->sel_area->height = mev->y - score->sel_area->y;
+
+        /* tell the gtkcairo widget that it needs to redraw itself */
+        gtk_widget_queue_draw (widget);
+        return TRUE;
+
+}
+
+extern void
+selection_paint (cairo_t *cr,
+                 Score_t *score)
+{
+        if ( ! score->sel_area->active )
+                return;
+        cairo_save (cr);
+        cairo_rectangle (cr, score->sel_area->x, score->sel_area->y,
+                         score->sel_area->width, score->sel_area->height);
+        cairo_save (cr);
+        cairo_set_source_rgba (cr, 1, 0, 0, 0.3);
+        cairo_fill (cr);
+        cairo_restore (cr);
+
+}
+
+
 gint set_selection_origin(GtkWidget *widget, GdkEventButton *event)
 {
 
@@ -317,7 +383,7 @@ highlight_selection(Score_t *score, gdouble x_origin, gdouble y_origin, gdouble 
                 }
 
 		/* Now, we now the x position where the object should be ;) */
-		if ( ((object_x + start_x - 30) >= x_origin) && ((object_x + start_x - 30) <= x) )
+		if ( ((object_x + start_x) >= x_origin) && ((object_x + start_x) <= x) )
 			object->is_selected = TRUE;
 
 

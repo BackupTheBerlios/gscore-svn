@@ -37,7 +37,7 @@
 /* Set debug to 0 to avoid the g_messages */
 #define DEBUG 0
 
-#define VERSION "0.0.9"
+#define VERSION "0.1"
 
 /* Few extern variables */
 extern GladeXML *gladexml;
@@ -45,13 +45,23 @@ extern GList    *plugins_list;
 extern gint      nb_plugins;
 
 /* extern struct Score_t         Score; */
-extern struct Staff_t         Staff;
-extern struct Object_t        Object;
-extern struct Selection_t     Selection;
-extern struct Clipboard_t     Clipboard;
-extern struct Display_t       Display;
-extern enum   ActionType_t    ActionType;
+extern struct Staff_t          Staff;
+extern struct Object_t         Object;
+extern struct Selection_t      Selection;
+extern struct Clipboard_t      Clipboard;
+extern struct Display_t        Display;
+extern enum   ActionType_t     ActionType;
 
+
+
+/* This structure keeps information about the selection area */
+typedef struct SelectionArea_t {
+        gboolean active;
+        gdouble  x, y;
+        gdouble  width;
+        gdouble  height;
+} 
+SelectionArea_t;
 
 /* What we should display on the score */
 typedef enum accidentals_e
@@ -277,13 +287,17 @@ typedef struct Score_t
         gdouble       staff_extremity_end_x;
 	/** Where we start to put the notes */
         gdouble       staff_startx;
+
         struct Identity_t  * Identity; /* Useful informations */
         struct GscoreColorObject_t * ColorObject;
 /*         struct Display_t   * Display; */
 
-        /** Staves tracked in a list, to have many staves as your memory allow you to have */
+        /* Staves */
         GList       * Staff_list;
         Staff_t     * Staff;
+
+        /* Selection Area */
+        struct SelectionArea_t * sel_area;
 
 } Score_t;
 

@@ -37,7 +37,6 @@
 #include "draw_barline.h"
 #include "constants.h"
 #include "staff.h"
-#include "tab_transposition.h"
 #include "common.h"
 #include "macros.h"
 #include "spacings.h"
@@ -46,6 +45,7 @@
 #include "realize_area.h"
 #include "mouse_event.h"
 #include "layout-engine.h"
+#include "selection.h"
 
 
 #define OK     "OK"
@@ -87,6 +87,18 @@ score_new(void)
         score->tempo = 60;
         score->tempo_text = g_string_new("");
         score->zoom = 30;
+
+        score->sel_area = g_malloc(sizeof(SelectionArea_t));
+        if ( ! score->sel_area ) {
+                printf("Memory exhausted!\n");
+                return NULL;
+        }
+        score->sel_area->active = FALSE;
+        score->sel_area->x      = 0;
+        score->sel_area->y      = 0;
+        score->sel_area->width  = 0;
+        score->sel_area->height = 0;
+
 
         score->ColorObject = g_malloc(sizeof(struct GscoreColorObject_t));
         if ( ! score->ColorObject ) {
@@ -145,7 +157,7 @@ score_new(void)
 
         staff_set_key(score, get_staff_selected(score), TREBLE_KEY);
 
-        staff_set_key_signature(score, get_staff_selected(score), KEY_SIGNATURE_TREBLE_B_SHARP);
+        staff_set_key_signature(score, get_staff_selected(score), KEY_SIGNATURE_EMPTY);
 
 
         return score;
@@ -288,7 +300,7 @@ score_window_new(Score_t *score)
         Display = gscore_display_new();
 
         score_xml = glade_xml_new(get_file_from_data_dir("glade/score-ui.glade"),
-                            NULL, NULL);
+                                  NULL, NULL);
 
         score_window = glade_xml_get_widget(score_xml, "score");
         glade_xml_signal_autoconnect(score_xml);
@@ -313,7 +325,25 @@ score_window_new(Score_t *score)
         score->width = 500;
 
         gtk_widget_set_usize(GTK_WIDGET(drawingarea), score->width, score->height);
-        g_signal_connect(G_OBJECT(drawingarea), "expose-event", G_CALLBACK(layout_expose), NULL);
+        g_signal_connect(G_OBJECT(drawingarea), "expose-event", G_CALLBACK(layout_expose), score);
+
+        gtk_widget_add_events (GTK_WIDGET(drawingarea),
+                               GDK_BUTTON1_MOTION_MASK |
+                               GDK_BUTTON_PRESS_MASK   |
+                               GDK_BUTTON_RELEASE_MASK);
+        g_signal_connect (G_OBJECT (drawingarea), "button_press_event",
+                          G_CALLBACK (selection_btn_press),
+                          score
+                          );
+        g_signal_connect (G_OBJECT (drawingarea), "button_release_event",
+                          G_CALLBACK (selection_btn_release),
+                          score
+                          );
+        g_signal_connect (G_OBJECT (drawingarea), "motion_notify_event",
+                          G_CALLBACK (selection_btn_motion),
+                          score
+                          );
+
 
         gtk_container_add(GTK_CONTAINER(viewport), drawingarea);
 

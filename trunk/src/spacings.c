@@ -40,6 +40,7 @@ get_key_signature_spacing(Score_t *score, Staff_t *staff)
 
         switch(staff->key_signature)
                 {
+                case KEY_SIGNATURE_EMPTY:
                 case KEY_SIGNATURE_TREBLE_EMPTY:
                 case KEY_SIGNATURE_BASS_EMPTY:
                         retval = 0;

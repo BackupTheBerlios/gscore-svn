@@ -29,6 +29,7 @@ gscore_SOURCES =				\
 	edit.c					\
 	error.c					\
 	file.c					\
+	gscore-cairo.c 				\
 	help.c					\
 	include					\
 	insert.c				\
@@ -55,7 +56,6 @@ gscore_SOURCES =				\
 	spacings.c				\
 	splash.c				\
 	staff.c					\
-	tab_transposition.c			\
 	text.c					\
 	tie.c					\
 	view.c

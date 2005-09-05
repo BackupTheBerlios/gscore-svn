@@ -98,4 +98,6 @@ Staff_t *staff_selected_get_from_score(Score_t *score);
 
 void update_key_signature(GtkButton *widget, gpointer user_data);
 
+gdouble staff_get_y_for_line(Staff_t *staff, gint line);
+
 #endif

@@ -1947,5 +1947,27 @@ void staff_set_time_signature(GtkWidget *widget)
 	
 }
 
+/* Returns the y pos, according to the line you want to be */
+/* line 0: --------------- */
+/* line 1: --------------- */
 
+extern gdouble
+staff_get_y_for_line(Staff_t *staff, gint line)
+{
+        gdouble offset = 0;
+        gint16 i = 0;
+        gdouble retval = 0;
+
+        while ( i < line ) {
+
+                offset += staff->space_btw_lines + 1.0;
+
+                i++;
+        }
+
+        retval = staff->extremity_begin_y + offset;
+
+        return retval;
+
+}
 

@@ -22,4 +22,4 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-gboolean draw_note_rest(Score_t *score, Staff_t *staff, cairo_t *cr, gint type, gboolean selected, gdouble x, gint pitch);
+guint draw_note_rest(Score_t *score, Staff_t *staff, Object_t *object, cairo_t *cr, gdouble x);

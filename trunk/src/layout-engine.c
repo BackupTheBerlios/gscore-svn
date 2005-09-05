@@ -42,6 +42,7 @@
 #include "draw_time_signature.h"
 #include "gscore-font-constants.h"
 #include "spacings.h"
+#include "selection.h"
 
 static guint object_x = 0;
 static guint measure_number = 1;
@@ -54,10 +55,9 @@ void layout_paint(GtkWidget *widget,
 extern gboolean 
 layout_expose(GtkWidget *widget,
               GdkEventExpose *event,
-              gpointer data)
+              Score_t *score)
 {
         cairo_t *cr = gdk_cairo_create(widget->window);
-        Score_t *score = score_get_from_widget(widget);
 
         GList * listrunner_staff = NULL;
         GList * listrunner_object = NULL;
@@ -135,6 +135,9 @@ layout_expose(GtkWidget *widget,
 				case PITCH_CURSOR:
 					object_x = draw_pitch_cursor(score, staff, cr, object_x, object->pitch);
 				        break;
+                                case BARLINE_SINGLE:
+                                        object_x = draw_barline_single(score, staff, object, cr, object_x);
+                                        break;
 				case DOUBLEWHOLE:
                                 case DOUBLEWHOLEREST:
 				case WHOLE:
@@ -147,7 +150,7 @@ layout_expose(GtkWidget *widget,
                                 case EIGHTHREST:
 				case SIXTEENTH:
                                 case SIXTEENTHREST:
-                                        object_x = draw_note_rest(score, staff, cr, object->type, FALSE, object_x, object->pitch);
+                                        object_x = draw_note_rest(score, staff, object, cr, object_x);
 					break;
                                 default:
                                         g_print("Unknown object type: %d\n", object->type);
@@ -217,6 +220,7 @@ layout_expose(GtkWidget *widget,
 
         cairo_restore (cr);
 
+        selection_paint(cr, score);
 }
 
 

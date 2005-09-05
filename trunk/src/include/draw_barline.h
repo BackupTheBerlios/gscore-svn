@@ -24,7 +24,8 @@
 #ifndef _DRAW_BARLINE_H_
 #define _DRAW_BARLINE_H_
 
-gint draw_barline_single(GtkWidget *area, Staff_t *staff, gint x);
+/* gint draw_barline_single(GtkWidget *area, Staff_t *staff, gint x); */
+guint draw_barline_single(Score_t *score, Staff_t *staff, Object_t *object, cairo_t *cr, gdouble x);
 
 gint draw_barline_double(GtkWidget *area, Staff_t *staff, gint x);
 

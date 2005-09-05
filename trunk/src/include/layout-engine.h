@@ -26,4 +26,4 @@
 void layout_paint(GtkWidget *widget, cairo_t   *cr, GtkRange  *range);
 */
 
-gboolean layout_expose(GtkWidget *widget, GdkEventExpose *event, gpointer data);
+gboolean layout_expose(GtkWidget *widget, GdkEventExpose *event, Score_t *score);

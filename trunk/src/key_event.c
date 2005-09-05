@@ -50,44 +50,27 @@ extern gboolean
 score_key_press_event(GtkWidget *widget, GdkEventKey *event)
 {
 
-        Score_t *score = NULL;
+        Score_t *score = score_get_from_widget(widget);
         Staff_t *staffobj = NULL;
         Object_t *object_tmp = NULL;
 
-
-
         GList *listrunner_object = NULL;
-
-/*         Object_t *tmpobj = NULL; */
-/*         GtkWidget *area; */
-/*         KeyCursor_t *cursor = NULL; */
-
-/*         Object_t *tmpo = NULL; */
-
-        score = score_get_from_widget(widget);
-/*         area = score_get_area_from_widget(widget); */
-/*         cursor = score_get_cursor_from_widget(widget); */
-
-/*         if ( ! cursor ) { */
-/*                 printf("No Cursor!\n"); */
-/*                 return FALSE; */
-/*         } */
         
         switch (event->keyval) {
-                        
-        case GDK_space: /* We add the object selected */
+
+        /* We add the object selected */                        
+        case GDK_space: 
                 staffobj = (Staff_t *)
                         g_list_nth_data(score->Staff_list,
                                         get_staff_selected(score));
-
 
                 if ( Selection.object_type == CURSOR ) {
                         gw_message_error("No object selected");
                         break;
                 }
 
-                if (is_note(Selection.object_type)) {
-/*                         g_print("staffobj->cursor_pitch = %d\n", staffobj->cursor_pitch); */
+                if ( is_note(Selection.object_type) || is_rest(Selection.object_type) ) {
+
                         object_tmp = add_object(KEYBOARD, event, score, get_staff_selected(score),
                                                 Selection.object_type,
                                                 0, 0, 0,
@@ -100,6 +83,26 @@ score_key_press_event(GtkWidget *widget, GdkEventKey *event)
                 gtk_widget_queue_draw(widget);
 
                 break;
+        case GDK_Tab:           /* The TAB Key simply adds the single barline */
+                staffobj = (Staff_t *)
+                        g_list_nth_data(score->Staff_list,
+                                        get_staff_selected(score));
+
+                object_tmp = add_object(KEYBOARD, event, 
+                                        score, get_staff_selected(score),
+                                        BARLINE_SINGLE, 
+                                        0, 0, 0, 
+                                        0, 0, 0, 0, 0, 0, 0, 0, FALSE);
+                
+/*                 gtk_widget_set_size_request(GTK_WIDGET(area), score->width, score->height); */
+
+                pitch_cursor_move_after(score, staffobj, object_tmp);
+
+                gtk_widget_queue_draw(widget);
+                
+                break;
+
+
 /*                 switch ( Selection.object_type ) { */
 /*                 case CURSOR: */
 /*                         gw_message_error("No object selected"); */

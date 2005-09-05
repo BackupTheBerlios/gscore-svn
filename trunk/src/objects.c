@@ -124,13 +124,16 @@ gint object_get_spacing(gint type)
 }
 
 extern 
-Object_t *add_object(SOMType somtype, GdkEvent *event, Score_t *score, gint staff, gint type, accidentals_e accidentals, object_e nature, gulong group_id,
+Object_t *add_object(SOMType somtype, GdkEvent *event, Score_t *score, gint staff, gint type, 
+                     accidentals_e accidentals, object_e nature, gulong group_id,
                      gint x, gint y, gint x2, gint y2, gint x3, gint y3, 
                      gint pitch, gint tab_number, gboolean is_selected)
 {
         Staff_t *staff_data;
 
 /*      printf("staff_selected: %d\n", staff); */
+
+        g_print("add_object: type = %d\n", type);
 
         staff_data = g_list_nth_data(score->Staff_list, staff);
 
@@ -606,7 +609,7 @@ object_get_pitch_cursor(Score_t *score, Staff_t *staff)
 }
 
 gint
-object_get_id(Staff_t *staff, Object_t *object)
+object_get_index(Staff_t *staff, Object_t *object)
 {
         return g_list_index(staff->Object_list, object);
 }

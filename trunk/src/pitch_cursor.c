@@ -42,7 +42,7 @@ void pitch_cursor_move_after(Score_t *score, Staff_t *staff, Object_t *object)
 
         staff->Object_list = g_list_remove(staff->Object_list, object_data);
 
-        oid = object_get_id(staff, object);
+        oid = object_get_index(staff, object);
         staff->Object_list = g_list_insert(staff->Object_list, object_data, oid + 1);
 
 }

@@ -1,3 +1,19 @@
+2005-09-05 Toady <toady@gscore.org>
+
+	* src/gscore-cairo.c, src/include/gscore-cairo.h: added
+	* src/tab-transposition.c, src/include/tab-transposition.h: removed
+	* src/score.c, src/layout-engine.c, src/include/gscore.h, src/selection.c, src/include/selection.h: object selection rewritten
+	* src/draw_note_rest.c: Stem up/down handled
+	* src/objects_callbacks.c: more callbacks handled
+	* src/objects.c: get pitch cursor function added, get index for an object too
+	* src/draw_barline.c: draw barlines
+	* src/key_event.c: manage tab key
+	* src/staff.c: staff_get_y_for_line function added
+	
+2005-08-29 Toady <toady@gscore.org>
+
+	* src/layout-engine.c, src/selection.c: rewrote selection
+
 2005-08-25 Toady <toady@gscore.org>
 
 	* src/pitch_cursor.c, src/objects.c, src/layout-engine.c: handling the pitch cursor moving anytime you add an object

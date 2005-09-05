@@ -23,33 +23,59 @@
  */
 
 #include <gtk/gtk.h>
+#include <cairo.h>
 
 #include "gscore.h"
+#include "draw_barline.h"
+#include "constants.h"
+#include "position.h"
 #include "common.h"
 #include "spacings.h"
-#include "draw_barline.h"
+#include "gscore-cairo.h"
+#include "staff.h"
 
-gint draw_barline_single(GtkWidget *area, Staff_t *staff, gint x)
+extern guint
+draw_barline_single(Score_t *score, Staff_t *staff, Object_t *object, cairo_t *cr, gdouble x)
 {
-	GdkGC * gc;
 
-	guint8 thickness = 0;
-	gdouble extremity_end_y = 0;
+        const gdouble cairo_padding = 0.5;
+        gdouble yline = 0;
 
-	extremity_end_y =  staff->extremity_begin_y +(staff->nb_lines - 1) * staff->space_btw_lines + staff->nb_lines - 1;
+        gscore_cairo_object_colorize(score, object, cr);
 
-	gc = gdk_gc_new(area->window);
+        yline = staff_get_y_for_line(staff, staff->nb_lines - 1);
 
-	for ( thickness = 0; thickness < Spacings.Barlines.tlt; thickness++ ) {
-		gdk_draw_line(area->window, gc,
-			      x + thickness, 
-			      staff->extremity_begin_y, 
-			      x + thickness, 
-			      extremity_end_y);
-	}
-     
-	return 0;
+        cairo_move_to(cr, x + cairo_padding, staff->extremity_begin_y);
+        cairo_line_to(cr, x + cairo_padding, yline);
+
+        cairo_stroke(cr);
+
+        x += Spacings.Barlines.sab;
+
+        return x;
 }
+
+/* gint draw_barline_single(GtkWidget *area, Staff_t *staff, gint x) */
+/* { */
+/* 	GdkGC * gc; */
+
+/* 	guint8 thickness = 0; */
+/* 	gdouble extremity_end_y = 0; */
+
+/* 	extremity_end_y =  staff->extremity_begin_y +(staff->nb_lines - 1) * staff->space_btw_lines + staff->nb_lines - 1; */
+
+/* 	gc = gdk_gc_new(area->window); */
+
+/* 	for ( thickness = 0; thickness < Spacings.Barlines.tlt; thickness++ ) { */
+/* 		gdk_draw_line(area->window, gc, */
+/* 			      x + thickness,  */
+/* 			      staff->extremity_begin_y,  */
+/* 			      x + thickness,  */
+/* 			      extremity_end_y); */
+/* 	} */
+     
+/* 	return 0; */
+/* } */
 
 gint draw_barline_double(GtkWidget *area, Staff_t *staff, gint x)
 {
