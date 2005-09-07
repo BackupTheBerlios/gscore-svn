@@ -1,3 +1,8 @@
+2005-09-07 Toady <toady@gscore.org>
+
+	* src/draw.c, src/draw_staff.c: cairoized and moved to the appropriate file the function draw_staff_extension
+	* src/layout-engine.c: use of draw_staff_extension function
+	
 2005-09-05 Toady <toady@gscore.org>
 
 	* src/gscore-cairo.c, src/include/gscore-cairo.h: added

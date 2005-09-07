@@ -23,3 +23,5 @@
  */
 
 gboolean draw_staff(Score_t *score, cairo_t *cr, guint16 nb_lines, gdouble space_btwn_lines, gdouble x1, gdouble y1, gdouble x2, gboolean selected);
+
+void draw_staff_extension(Score_t *score, Staff_t *staff, cairo_t *cr, gint pitch, gdouble x);

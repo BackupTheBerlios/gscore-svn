@@ -28,6 +28,8 @@
 #include "gscore.h"
 #include "draw_staff.h"
 
+#include "constants.h"
+
 /**
  * draw_staff:
  * @sw: #ScoreWidget object
@@ -81,4 +83,54 @@ draw_staff(Score_t *score, cairo_t *cr,
         cairo_stroke(cr);
 
         return TRUE;
+}
+
+/* That will draw the extension needed for notes on staff */
+/* It's usefull when you need to see where the note is placed out from the staff */
+extern void 
+draw_staff_extension(Score_t *score, Staff_t *staff, cairo_t *cr, gint pitch, gdouble x)
+{
+        const gdouble cairo_padding = 0.5;
+	gint draw_dash_helper = 0;
+	gint i = 0;
+
+	gdouble extremity_end_y = 0;
+	extremity_end_y =  staff->extremity_begin_y + (staff->nb_lines - 1) * staff->space_btw_lines + staff->nb_lines - 1;
+
+	switch(staff->key) {
+	case NO_KEY:
+	case TREBLE_KEY:
+		if (pitch > 7) {
+			draw_dash_helper = pitch - 6;
+
+			for ( i = 1; i <= draw_dash_helper / 2; i ++ ) {
+                                cairo_move_to(cr, 
+                                              x - 4, 
+                                              cairo_padding + staff->extremity_begin_y - (i * staff->space_btw_lines) - i);
+                                cairo_line_to(cr, 
+                                              x + 13, 
+                                              cairo_padding + staff->extremity_begin_y - (i * staff->space_btw_lines) - i);
+			}
+		}
+
+		if (pitch < -3) {
+
+			draw_dash_helper = pitch + 2;
+
+			draw_dash_helper = -draw_dash_helper;
+
+			for ( i = 1; i <= draw_dash_helper / 2; i++ ) {
+                                cairo_move_to(cr,
+                                              x - 4,
+                                              extremity_end_y - 0.5 + (i * staff->space_btw_lines) - i);
+                                cairo_line_to(cr,
+                                              x + 13,
+                                              extremity_end_y - 0.5 + (i * staff->space_btw_lines) - i);
+			}
+		}
+
+                cairo_stroke(cr);
+
+		break;
+	}
 }

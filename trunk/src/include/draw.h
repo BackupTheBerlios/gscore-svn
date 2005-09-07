@@ -72,6 +72,5 @@ void draw_line(GtkWidget *area, gint red, gint green, gint blue, gint x1, gint y
 
 void draw_page_limit(GtkWidget *area, gint x);
 
-void draw_staff_extension(GtkWidget *area, Staff_t *staff, gint position, gdouble x);
 
 #endif

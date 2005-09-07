@@ -128,6 +128,7 @@ layout_expose(GtkWidget *widget,
 			
 			if (object) {
 
+                                draw_staff_extension(score, staff, cr, object->pitch, object_x);
 /*                                 g_print("layout engine, object_type = %d\n", object->type); */
 
 				switch(object->type) {

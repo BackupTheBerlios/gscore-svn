@@ -31,93 +31,194 @@
 #include "constants.h"
 #include "position.h"
 #include "gscore-font-constants.h"
+#include "staff.h"
+#include "gscore-cairo.h"
 
-extern gboolean
-draw_note_rest(Score_t *score, Staff_t *staff, cairo_t *cr, gint type, gboolean selected, gdouble x, gint pitch)
+
+extern guint
+draw_note_rest(Score_t *score, Staff_t *staff, Object_t *object, cairo_t *cr, gdouble x)
 {
-        gdouble y = 0;
+        gboolean stemup;
+        gdouble average;
 
-/*         g_print("%s:%d: x = %f\n", __FILE__, __LINE__, x); */
+        gdouble y = 0;
+        gdouble yline = 0;
+
+        cairo_text_extents_t *extents = NULL;
+
+
+        /* *FIXME*: '-5' is here for the height of the note, this is dirty */
+        average = (staff_get_y_for_line(staff, staff->nb_lines) - staff->extremity_begin_y) / 2 - 5;
 
         cairo_select_font_face (cr, "gscore", CAIRO_FONT_SLANT_NORMAL,
                                 CAIRO_FONT_WEIGHT_BOLD);
 
-        cairo_set_source_rgb (cr, 
-                              score->ColorObject->objects->red, score->ColorObject->objects->green, score->ColorObject->objects->blue);
+        gscore_cairo_object_colorize(score, object, cr);
 
-	y = get_y_from_position_no_key(8, 4, staff->extremity_begin_y, 8, pitch); 
+	y = get_y_from_position_no_key(8, 4, staff->extremity_begin_y, 8, object->pitch); 
 
-        switch (type) {
+        /* BEGIN: Get the stem direction */
+        if ( (y < staff->extremity_begin_y + average) || object->nature & O_STEMDOWN )
+                stemup = FALSE;
+        else
+                stemup = TRUE;
+        
+        if ( object->nature & O_STEMUP )
+                stemup = TRUE;
+        /* END: Get the stem direction */
+
+        switch (object->type) {
         case DOUBLEWHOLE:
                 cairo_move_to(cr, x, y + 4);
                 cairo_set_font_size (cr, score->zoom);
                 cairo_show_text (cr, DOUBLEWHOLE_GLYPH);
+
                 x += Spacings.NotesRests.sa_doublewhole;
         break;
         case DOUBLEWHOLEREST:
-                cairo_move_to(cr, x, y + 4);
+                yline = staff_get_y_for_line(staff, 2);
+                yline -= staff->space_btw_lines / 4;
+
+                cairo_move_to(cr, x, yline);
                 cairo_set_font_size (cr, score->zoom);
+                /* *FIXME*: According to Gardner Read, the glyph is not correct */
                 cairo_show_text (cr, DOUBLEWHOLE_REST_GLYPH);
+
                 x += Spacings.NotesRests.sa_doublewhole;
         break;
         case WHOLE:
                 cairo_move_to(cr, x, y + 4);
                 cairo_set_font_size (cr, score->zoom);
                 cairo_show_text (cr, WHOLE_GLYPH);
+
                 x += Spacings.NotesRests.sa_whole;
         break;
         case WHOLEREST:
-                cairo_move_to(cr, x, y + 4);
+                yline = staff_get_y_for_line(staff, 2);
+                yline -= staff->space_btw_lines;
+
+                cairo_move_to(cr, x, yline);
                 cairo_set_font_size (cr, score->zoom);
                 cairo_show_text (cr, WHOLE_REST_GLYPH);
+
                 x += Spacings.NotesRests.sa_whole;
         break;
         case HALF:
+/*                 cairo_text_extents(cr, HALF_GLYPH, extents); */
+
+                if (stemup) {
+                        cairo_move_to(cr, x + 10.5, y + 4);
+                        cairo_line_to(cr, x + 10.5, y - 25);
+                        cairo_stroke(cr);
+                } else {
+                        cairo_move_to(cr, x + 0.5, y + 4);
+                        cairo_line_to(cr, x + 0.5, y + 29);
+                        cairo_stroke(cr);
+                }
+
                 cairo_move_to(cr, x, y + 4);
                 cairo_set_font_size (cr, score->zoom);
                 cairo_show_text (cr, HALF_GLYPH);
+
                 x += Spacings.NotesRests.sa_half;
         break;
         case HALFREST:
-                cairo_move_to(cr, x, y + 4);
+                yline = staff_get_y_for_line(staff, 2);
+
+                cairo_move_to(cr, x, yline);
                 cairo_set_font_size (cr, score->zoom);
-                cairo_show_text (cr, HALF_GLYPH);
+                cairo_show_text (cr, HALF_REST_GLYPH);
+
                 x += Spacings.NotesRests.sa_half;
         break;
         case QUARTER:
+                if (stemup) {
+                        cairo_move_to(cr, x + 9.5, y + 4);
+                        cairo_line_to(cr, x + 9.5, y - 25);
+                        cairo_stroke(cr);
+                } else {
+                        cairo_move_to(cr, x + 0.5, y + 4);
+                        cairo_line_to(cr, x + 0.5, y + 29);
+                        cairo_stroke(cr);
+                }
+
                 cairo_move_to(cr, x, y + 4);
                 cairo_set_font_size (cr, score->zoom);
                 cairo_show_text (cr, QUARTER_GLYPH);
+
                 x += Spacings.NotesRests.sa_quarter;
         break;
         case QUARTERREST:
-                cairo_move_to(cr, x, y + 4);
+                yline = staff_get_y_for_line(staff, 2);
+
+                cairo_move_to(cr, x, yline);
                 cairo_set_font_size (cr, score->zoom);
                 cairo_show_text (cr, QUARTER_REST_GLYPH);
+
                 x += Spacings.NotesRests.sa_quarter;
         break;
         case EIGHTH:
+                if (stemup) {
+                        cairo_move_to(cr, x + 9.5, y + 4);
+                        cairo_line_to(cr, x + 9.5, y - 25);
+                        cairo_stroke(cr);
+                        cairo_move_to(cr, x + 9.5, y - 25);
+                        cairo_set_font_size (cr, score->zoom);
+                        cairo_show_text (cr, EIGHT_STEM_UP_GLYPH);
+                } else {
+                        cairo_move_to(cr, x + 0.5, y + 4);
+                        cairo_line_to(cr, x + 0.5, y + 29);
+                        cairo_stroke(cr);
+                        cairo_move_to(cr, x + 0.5, y + 29);
+                        cairo_set_font_size (cr, score->zoom);
+                        cairo_show_text (cr, EIGHT_STEM_DOWN_GLYPH);
+                }
+
                 cairo_move_to(cr, x, y + 4);
                 cairo_set_font_size (cr, score->zoom);
                 cairo_show_text (cr, QUARTER_GLYPH);
+
                 x += Spacings.NotesRests.sa_eighth;
         break;
         case EIGHTHREST:
-                cairo_move_to(cr, x, y + 4);
+                yline = staff_get_y_for_line(staff, 2);
+
+                cairo_move_to(cr, x, yline);
                 cairo_set_font_size (cr, score->zoom);
                 cairo_show_text (cr, EIGHTH_REST_GLYPH);
+
                 x += Spacings.NotesRests.sa_eighth;
         break;
         case SIXTEENTH:
+                if (stemup) {
+                        cairo_move_to(cr, x + 9.5, y + 4);
+                        cairo_line_to(cr, x + 9.5, y - 25);
+                        cairo_stroke(cr);
+                        cairo_move_to(cr, x + 9.5, y - 25);
+                        cairo_set_font_size (cr, score->zoom);
+                        cairo_show_text (cr, SIXTEENTH_STEM_UP_GLYPH);
+                } else {
+                        cairo_move_to(cr, x + 0.5, y + 4);
+                        cairo_line_to(cr, x + 0.5, y + 29);
+                        cairo_stroke(cr);
+                        cairo_move_to(cr, x + 0.5, y + 29);
+                        cairo_set_font_size (cr, score->zoom);
+                        cairo_show_text (cr, SIXTEENTH_STEM_DOWN_GLYPH);
+                }
+
                 cairo_move_to(cr, x, y + 4);
                 cairo_set_font_size (cr, score->zoom);
                 cairo_show_text (cr, QUARTER_GLYPH);
+
                 x += Spacings.NotesRests.sa_sixteenth;
         break;
         case SIXTEENTHREST:
-                cairo_move_to(cr, x, y + 4);
+                yline = staff_get_y_for_line(staff, 2);
+
+                cairo_move_to(cr, x, yline);
                 cairo_set_font_size (cr, score->zoom);
                 cairo_show_text (cr, SIXTEENTH_REST_GLYPH);
+
                 x += Spacings.NotesRests.sa_sixteenth;
         break;
         }
