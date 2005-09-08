@@ -1413,7 +1413,7 @@ void staff_display_measures_numbers(gpointer callback_data, guint callback_actio
 }
 
 
-gdouble get_staff_extremity_end_y(const Score_t *score, gint staff_id)
+gdouble staff_from_id_get_extremity_end_y(const Score_t *score, gint staff_id)
 {
         Staff_t *staff_data;
         gdouble retval = 0;
@@ -1427,6 +1427,18 @@ gdouble get_staff_extremity_end_y(const Score_t *score, gint staff_id)
         }
 
         return 0;
+}
+
+gdouble staff_from_object_get_extremity_end_y(const Score_t *score, const Staff_t *staff)
+{
+
+        gdouble retval = 0;
+
+        retval += staff->extremity_begin_y;
+        retval += (staff->nb_lines - 1) * staff->space_btw_lines + staff->nb_lines;
+
+        return retval;
+
 }
 
 /* Accordingly to the y position of the cursor, this function returns the staff number */
@@ -1450,7 +1462,7 @@ gint get_staff_id(Score_t *score, gdouble y)
 		}
 
 		if ( y >= staff_data->extremity_begin_y ) {
-			if ( y <= get_staff_extremity_end_y(score, staff_counter) ) {
+			if ( y <= staff_from_id_get_extremity_end_y(score, staff_counter) ) {
 				staff_id = staff_counter;
 			}
 		}

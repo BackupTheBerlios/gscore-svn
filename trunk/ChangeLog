@@ -1,5 +1,9 @@
 2005-09-07 Toady <toady@gscore.org>
 
+	* src/draw_staff.c: fixed draw_staff_extension wrong behavior
+	
+2005-09-07 Toady <toady@gscore.org>
+
 	* src/draw.c, src/draw_staff.c: cairoized and moved to the appropriate file the function draw_staff_extension
 	* src/layout-engine.c: use of draw_staff_extension function
 	

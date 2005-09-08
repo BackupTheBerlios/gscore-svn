@@ -94,8 +94,12 @@ draw_staff_extension(Score_t *score, Staff_t *staff, cairo_t *cr, gint pitch, gd
 	gint draw_dash_helper = 0;
 	gint i = 0;
 
-	gdouble extremity_end_y = 0;
-	extremity_end_y =  staff->extremity_begin_y + (staff->nb_lines - 1) * staff->space_btw_lines + staff->nb_lines - 1;
+        gdouble extremity_end_y = 0;
+
+        extremity_end_y += staff->extremity_begin_y;
+        extremity_end_y += (staff->nb_lines - 1) * staff->space_btw_lines + staff->nb_lines;
+
+/* 	gdouble extremity_end_y = staff_from_object_get_extremity_end_y(score, staff); */
 
 	switch(staff->key) {
 	case NO_KEY:
@@ -122,10 +126,10 @@ draw_staff_extension(Score_t *score, Staff_t *staff, cairo_t *cr, gint pitch, gd
 			for ( i = 1; i <= draw_dash_helper / 2; i++ ) {
                                 cairo_move_to(cr,
                                               x - 4,
-                                              extremity_end_y - 0.5 + (i * staff->space_btw_lines) - i);
+                                              -1 + cairo_padding + extremity_end_y + (i * staff->space_btw_lines) + i);
                                 cairo_line_to(cr,
                                               x + 13,
-                                              extremity_end_y - 0.5 + (i * staff->space_btw_lines) - i);
+                                              -1 + cairo_padding + extremity_end_y + (i * staff->space_btw_lines) + i);
 			}
 		}
 

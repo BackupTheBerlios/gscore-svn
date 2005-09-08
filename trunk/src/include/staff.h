@@ -92,7 +92,9 @@ void test_remove(void);
 
 void staff_add_staff (gpointer callback_data, guint callback_action, GtkWidget * widget);
 
-gdouble get_staff_extremity_end_y(const Score_t *score, gint staff_id);
+gdouble staff_from_id_get_extremity_end_y(const Score_t *score, gint staff_id);
+
+gdouble staff_from_object_get_extremity_end_y(const Score_t *score, const Staff_t *staff);
 
 Staff_t *staff_selected_get_from_score(Score_t *score);
 
