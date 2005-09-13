@@ -87,12 +87,20 @@ selection_paint (cairo_t *cr,
 {
         if ( ! score->sel_area->active )
                 return;
+
         cairo_save (cr);
+        cairo_set_source_rgba (cr, 1, 0, 0, 0.6);
+        cairo_set_line_width(cr, 0.5);
         cairo_rectangle (cr, score->sel_area->x, score->sel_area->y,
                          score->sel_area->width, score->sel_area->height);
+        cairo_stroke(cr);
+
+        cairo_rectangle (cr, score->sel_area->x + 1, score->sel_area->y + 1,
+                         score->sel_area->width - 1, score->sel_area->height - 1);
         cairo_save (cr);
         cairo_set_source_rgba (cr, 1, 0, 0, 0.3);
         cairo_fill (cr);
+
         cairo_restore (cr);
 
 }
