@@ -1,0 +1,17 @@
+
+if [ -f conf/$1.cfg ] ; then
+
+  cat conf/$1.cfg >  perfect/Makefile
+  cat conf/perfect.mkf >> perfect/Makefile
+
+  cat conf/$1.cfg >  src/Makefile
+  cat conf/src.mkf >> src/Makefile
+
+  echo "Done!"
+else
+
+  echo "ABCp - Configuration script"
+  echo "Known configurations:"
+  echo "  mingw"
+
+fi

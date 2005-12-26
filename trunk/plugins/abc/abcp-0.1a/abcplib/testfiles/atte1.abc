@@ -1,0 +1,44 @@
+X:1
+T:Attes G-spin
+C:Atte André Jensen
+M:4/4
+L:1/8
+Q:1/4=130
+K:none
+%%text (medium bossa)
+P:A
+"Bmaj7"^c3B ^F^D2E- | "Am7"E4 "D7"z2^FG | "Gmaj7"A3G DB,2C- | "Fm7"C4 "Bb7"z2D_E |
+"Ebmaj7"F3_E "-/D"DE2G- | "Cm7"G_B3 "-/Bb"z2_e2 | "Am7b5"d4c3_B- | "D7"B4 z2^FG ||
+P:A
+"Gmaj7"A3G DB,2C- | "Fm7"C4 "Bb7"z2D_E | "Ebmaj7"F3_E _B,G,2^G,- | "C#m7" G,4 "F#7"z2^A,B, |
+"Bmaj7"^C3B, "-/A#"^A,B,2^D- | "G#m7"D^F3 "-/F#"z2B2 | "Fm7b5"_B3_A _GF2_E- | "Bb7"EF3z2 _B,2 ||
+P:B
+"Ebmaj7"G8- | G3F _ED2E- | "Am7b5"E4F3D- | "D7"D4 z2D2 |
+"Gmaj7"B8- | B3A G^F2G- | "C#m7b5"G8 | "F#7"z4^F4 |
+"Bmaj7"^d4- d^c2 B- | B^A2B- B^c2_B- | "Fm7b5"_B4_c3_A- | "Bb7"A4_B4 |
+"Ebmaj7/Bb"G8- | "Fm7/Bb"G8- | "Ebmaj7/Bb"G8 | "C#m7 F#7"z8 |]
+
+
+
+
+X:1
+T:Manic tones
+C:Atte André Jensen
+M:6/8
+L:1/8
+Q:3/8=108
+K:none
+P:A
+"Cbmaj7"_G3 zF_E | F_G_A .F2_E | "Fm7b5"F3 z_E_D | "Bb7"=D_G_B ._d2_c |
+"Ebm7"_B3_G3 | "-/Db"_E3_B,3 | "Cm7b5"F_G_A F_EF- | "F7"F3 z3 ||
+P:B
+[M:4/4][Q:3/8=1/2]"Bbmaj7"zD3 F2A2 | "Am7b5"c4 "D7"_B2A[d=B]- | "Gmaj7"[d4=B4] z4 | "F#m7b5"z[A3c3]"B7"[B2d2][Ac][^GB]- |
+"Emaj7"[G4B4] z4 | "Ebm7b5"z[_G3__B3] "Ab7"[F2A2][G2_E2] | "Dbmaj7"(3[F4_D4][_A4F4][c4A4] | "Gb7"[c4_e4]z4 || 
+P:A
+[M:6/8][Q:1/2=3/8]"Cbmaj7"_G3 zF_E | F_G_A .F2_E | "Fm7b5"F3 z_E_D | "Bb7"=D_G_B ._d2_c |
+"Ebm7"_B3_G3 | "-/Db"_E3_B,3 | "Cm7b5"F_G_A F_EF- | "F7"F3 z3 ||
+P:B'
+[M:4/4][Q:3/8=1/2]"Bbmaj7"zD3 F2A2 | "Am7b5"c3_B- "D7"B2A2 | "Bm7b5"(3[d4f4][c4e4][d4B4] | "E7sus4"[c4A4] "E7"[^G4B4] |
+"Am7"[d8B,8] | "D7"[_B8D8] | "Gmaj7"[A8^F8]- | "C7#11"[A8F8]- |
+"Gmaj7"[A8F8]- | "C7#11"[A8F8]- | "Gmaj7"[A8F8]- | "C7#11"[A8F8]- | "Gmaj7"[A8F8]- | "C7#11"[A8F8] |]
+

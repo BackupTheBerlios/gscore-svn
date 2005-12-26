@@ -1,0 +1,16 @@
+;; Object debian/
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "debian/"
+  :tables (list 
+   (semanticdb-table "rules"
+    :major-mode 'makefile-mode
+    :tags '(("CFLAGS" variable (:default-value ("-Wall" "-g")) nil [435 453]) ("version" variable (:default-value ("2.0.5")) nil [662 676]) ("major" variable (:default-value ("2")) nil [676 684]) ("configure" function (:arguments ("configure-stamp")) nil [986 1028]) ("configure-stamp" function nil nil [1013 1090]) ("build" function (:arguments ("build-stamp")) nil [1115 1145]) ("build-stamp" function (:arguments ("configure-stamp")) nil [1134 1177]) ("clean" function nil nil [1270 1338]) ("install" function (:arguments ("build")) nil [1425 1496]) ("binary-indep" function (:arguments ("build" "install")) nil [1671 1735]) ("binary-arch" function (:arguments ("build" "install")) nil [1779 1903]) ("binary" function (:arguments ("binary-indep" "binary-arch")) nil [2235 2274]))
+    :file "rules"
+    :pointmax 2338
+    :unmatched-syntax 'nil
+    )
+   )
+  :file "semantic.cache"
+  :semantic-tag-version "2.0beta3"
+  :semanticdb-version "2.0beta3"
+  )

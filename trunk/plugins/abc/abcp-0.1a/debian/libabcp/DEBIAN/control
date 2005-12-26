@@ -1,0 +1,11 @@
+Package: libabcp
+Version: 0.1a-1
+Section: libs
+Priority: optional
+Architecture: i386
+Depends: libc6 (>= 2.3.2.ds1-4)
+Installed-Size: 68
+Maintainer: Cheyenne <j.marrec@10pouces.org>
+Source: abcp
+Description: Generic parser for ABC format
+ ABC is an ASCII musical notation format

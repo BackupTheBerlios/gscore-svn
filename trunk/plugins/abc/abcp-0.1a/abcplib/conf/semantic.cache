@@ -1,0 +1,15 @@
+;; Object conf/
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "conf/"
+  :tables (list 
+   (semanticdb-table "src.mkf"
+    :major-mode 'makefile-mode
+    :tags '((".SUFFIXES" function (:arguments (".re" ".d$(OBJ)" ".c" ".$(OBJ)")) nil [40 77]) (".re.c" function nil nil [77 96]) (".c.d" function nil nil [96 154]) (".c." function nil nil [154 191]) (".re.obj" function nil nil [191 259]) (".re.dobj" function nil nil [251 332]) ("OBJL" variable (:default-value ("abcpnote.$(OBJ)" "abcpkey.$(OBJ)" "abcpdecor.$(OBJ)" "abcptext.$(OBJ)" "abcpmeter.$(OBJ)" "abcpextf.$(OBJ)" "abcptempo.$(OBJ)" "abcpslurs.$(OBJ)" "abcpbar.$(OBJ)")) nil [370 543]) ("OBJD" variable nil nil [544 586]) ("LOBJS" variable (:default-value ("abcpscan.$(OBJ)" "$(OBJL)")) nil [587 619]) ("DOBJS" variable (:default-value ("abcpscan.d$(OBJ)" "$(OBJD)")) nil [619 651]) ("all" function (:arguments ("libabcp.$(LIB)")) nil [669 690]) ("incipit" function (:arguments ("libabcp.$(LIB)" "incipit.$(OBJ)")) nil [707 802]) ("abcp" function (:arguments ("libabcp.$(LIB)" "abcp.$(OBJ)")) nil [802 885]) ("abcpl" function (:arguments ("libabcp.$(LIB)" "abcpl.$(OBJ)")) nil [885 981]) ("libabcp." function (:arguments ("$(LOBJS)")) nil [981 1052]) ("abcp.dll" function (:arguments ("$(DOBJ)")) nil [1052 1100]) ("abcpl." function (:arguments ("abcp.c")) nil [1100 1171]) ("abcpextf." function (:arguments ("abcpextf.c")) nil [1171 1251]) ("abcpdecor." function (:arguments ("abcpdecor.c")) nil [1251 1333]) ("abcpscan.c" function (:arguments ("abcpscan.re")) nil [1445 1470]) ("clean" function nil nil [1509 1593]) ("install" function nil nil [1593 1670]))
+    :file "src.mkf"
+    :pointmax 1670
+    )
+   )
+  :file "semantic.cache"
+  :semantic-tag-version "2.0beta3"
+  :semanticdb-version "2.0beta3"
+  )

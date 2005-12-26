@@ -1,0 +1,20 @@
+Source: abcp
+Priority: optional
+Maintainer: Cheyenne <j.marrec@10pouces.org>
+Build-Depends: debhelper (>= 4.0.0)
+Standards-Version: 3.6.1
+
+Package: libabcp-dev
+Section: libdev
+Architecture: any
+Depends: libabcp (= ${Source-Version})
+Description: Generic parser for ABC format,development files
+ ABC is an ASCII musical notation format
+
+Package: libabcp
+Section: libs
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Generic parser for ABC format
+ ABC is an ASCII musical notation format
+ 

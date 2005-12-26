@@ -1,0 +1,19 @@
+X:1
+K:AM =a^b^^c_d __e f# Gb violin m=C transpose=-2 
+A
+
+X:1
+K:Bb mix =a^b^^c_d __e f# Gb perc m C transpose +5  stafflines=3
+A
+
+X:1
+K:Bb mix =a^b^^c_d __e f# Gb 
+V:ID name="a very very long instrumnent name as a grand piano" \
+     snm 'short name' treble4-15  mC s3 transpose=-2 \
+
+A
+
+X:3
+%%01234567890123456789012
+V:asd name="XXX" snm="YY" middle = C
+V:asd name=XXX snm=YY middle = C

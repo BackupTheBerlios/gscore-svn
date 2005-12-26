@@ -1,0 +1,64 @@
+UP=../
+LUAROOT=../../../lua-5.0.2
+OBJ=o
+EXE=
+# utiliser ld
+AR=ld -lc -Bdynamic -shared -o 
+CFLAGS=-I$(LUAROOT)/include -O 
+CC=gcc 
+LINKER=gcc -o
+LIBS=-L. -labcp
+LLIBS=-L$(LUAROOT)/lib -llua -llualib 
+DEL=rm -f
+LIB=so
+
+HLIBS= -lm
+
+MP=sh makep.sh
+MR=sh maker.sh
+
+CFLAGS = -O -c
+###########################
+
+
+
+.SUFFIXES : .re .d$(OBJ) .c .$(OBJ)
+
+.c.$(OBJ):
+	$(CC) -O -c $*.c
+
+OBJS = lookupa.$(OBJ) recycle.$(OBJ) perfhex.$(OBJ) perfect.$(OBJ)
+TOBJS = phash.$(OBJ) testperf.$(OBJ)
+
+all: perfect$(EXE) hlist$(EXE)
+
+perfect$(EXE): $(OBJS)
+	$(LINKER) perfect$(EXE) $(OBJS) $(HLIBS)
+
+hlist$(EXE): hlist.$(OBJ)
+	$(LINKER) hlist$(EXE) hlist.$(OBJ) $(HLIBS)
+
+hhlist:
+	$(CC) -O -c -DSTATIC=static -DHASH -o hhlist.$(OBJ) hlist.c
+	$(LINKER) hhlist$(EXE) hhlist.$(OBJ) lookupa.$(OBJ) $(HLIBS)
+
+clean:
+	$(DEL) perfect$(EXE)
+	$(DEL) hlist$(EXE)
+	$(DEL) hhlist$(EXE)
+	$(DEL) *.$(OBJ)
+	
+	
+# DEPENDENCIES
+
+lookupa.$(OBJ) : lookupa.c standard.h lookupa.h
+
+recycle.$(OBJ) : recycle.c standard.h recycle.h
+
+perfhex.$(OBJ) : perfhex.c standard.h lookupa.h recycle.h perfect.h
+
+perfect.$(OBJ) : perfect.c standard.h lookupa.h recycle.h perfect.h
+
+phash.$(OBJ)    : phash.c standard.h phash.h lookupa.h
+
+testperf.$(OBJ) : testperf.c standard.h recycle.h phash.h

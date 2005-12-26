@@ -1,0 +1,107 @@
+UP=../
+LUAROOT=../../../lua-5.0.2
+OBJ=o
+EXE=
+# utiliser ld
+AR=ld -lc -Bdynamic -shared -o 
+CFLAGS=-I$(LUAROOT)/include -O 
+CC=gcc 
+LINKER=gcc -o
+LIBS=-L. -labcp
+LLIBS=-L$(LUAROOT)/lib -llua -llualib 
+DEL=rm -f
+LIB=so
+
+HLIBS= -lm
+
+MP=sh makep.sh
+MR=sh maker.sh
+
+CFLAGS = -O -c
+## DEFAULT RULES ################
+# 
+
+.SUFFIXES : .re .d$(OBJ) .c .$(OBJ)
+
+.re.c:
+	$(MR) $* 
+
+.c.d$(OBJ):
+	$(CC) -c $(CFLAGS) -DDLL -o $*.d$(OBJ) $*.c
+
+.c.$(OBJ):
+	$(CC) -c $(CFLAGS) $*.c
+
+.re.obj:
+	$(MR) $* 
+	$(CC) -c $(CFLAGS) $*.c
+	@$(DEL) $*.c
+
+.re.dobj:
+	$(MR) $* 
+	$(CC) -c $(CFLAGS) -DDLL -o $*.d$(OBJ) $*.c
+	@$(DEL) $*.c
+
+## TARGETS ######################
+# 
+
+OBJL = abcpnote.$(OBJ) abcpkey.$(OBJ)   abcpdecor.$(OBJ) \
+       abcptext.$(OBJ) abcpmeter.$(OBJ) abcpextf.$(OBJ) \
+       abcptempo.$(OBJ) abcpslurs.$(OBJ) abcpbar.$(OBJ)
+
+OBJD = #abcpnote.d$(OBJ) abcpkey.d$(OBJ) 
+
+LOBJS= abcpscan.$(OBJ)  $(OBJL)
+DOBJS= abcpscan.d$(OBJ) $(OBJD)
+
+#all: abcp$(EXE)
+all: libabcp.$(LIB)
+ # incipit$(EXE)
+
+incipit$(EXE): libabcp.$(LIB) incipit.$(OBJ) 
+	$(LINKER) incipit$(EXE) incipit.$(OBJ) $(LIBS)
+
+abcp$(EXE):	libabcp.$(LIB) abcp.$(OBJ) 
+	$(LINKER) abcp$(EXE) abcp.$(OBJ) $(LIBS)
+
+abcpl$(EXE):	libabcp.$(LIB) abcpl.$(OBJ) 
+	$(LINKER) abcpl$(EXE) abcpl.$(OBJ) $(LIBS) $(LLIBS)
+
+libabcp.$(LIB): $(LOBJS)
+	$(AR)libabcp.$(LIB) lookupa.$(OBJ) $(LOBJS)
+
+abcp.dll: $(DOBJ)
+	$(LINKDLL) abcp.dll $(DOBJ)
+
+abcpl.$(OBJ): abcp.c
+	$(CC) -c $(CFLAGS) -o abcpl.$(OBJ) -DLUA abcp.c
+
+abcpextf.$(OBJ): abcpextf.c
+	$(MP) $*
+	$(CC) -DSTATIC=static -c $(CFLAGS) $*.c
+
+abcpdecor.$(OBJ): abcpdecor.c
+	$(MP) $*
+	$(CC) -DSTATIC=static -c $(CFLAGS) $*.c
+
+# abcpkey.$(OBJ): abcpkey.re
+# 	$(MR) $*
+# 	$(MP) $*
+# 	$(CC) -DSTATIC=static -c $(CFLAGS) $*.c
+# 	$(DEL) $*.c
+
+abcpscan.c: abcpscan.re
+
+
+## UTILITIES ####################
+# 
+
+clean:
+	$(DEL) *.$(OBJ)
+	$(DEL) abcp$(EXE)
+	$(DEL) libabcp.$(LIB)
+	$(DEL) abcp.dll
+
+install:
+	mkdir -p $(DESTDIR)/usr/lib
+	cp libabcp.$(LIB) $(DESTDIR)/usr/lib/

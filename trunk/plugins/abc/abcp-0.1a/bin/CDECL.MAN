@@ -1,0 +1,132 @@
+
+
+
+     CCCCDDDDEEEECCCCLLLL((((1111))))                  UUUUNNNNIIIIXXXX SSSSyyyysssstttteeeemmmm VVVV                  CCCCDDDDEEEECCCCLLLL((((1111))))
+
+
+
+     NNNNAAAAMMMMEEEE
+          cdecl - Compose C declarations
+
+     SSSSYYYYNNNNOOOOPPPPSSSSIIIISSSS
+          ccccddddeeeeccccllll
+
+     DDDDEEEESSSSCCCCRRRRIIIIPPPPTTTTIIIIOOOONNNN
+          _C_d_e_c_l is a program for encoding and decoding C type-
+          declarations.  It reads standard input for statements in the
+          language described below.  The results are written on
+          standard output.
+
+          _C_d_e_c_l'_s scope is intentionally small.  It doesn't help you
+          figure out storage classes or initializations.
+
+     CCCCOOOOMMMMMMMMAAAANNNNDDDD LLLLAAAANNNNGGGGUUUUAAAAGGGGEEEE
+          There are four statements in the language.  The "declare"
+          statement composes a C type-declaration from a verbose
+          description.  The "cast" statement composes a C type-cast as
+          might appear in an expression.  The "explain" statement
+          decodes a C type-declaration, producing a verbose
+          description.  The "help" statement describes the others.
+
+          The following grammar describes the language.  In the
+          grammar, words in "<>" are non-terminals, bare lower-case
+          words are terminals that stand for themselves.  Bare upper-
+          case words are other lexical tokens:  NOTHING means the
+          empty string; NAME means a C identifier; NUMBER means a
+          string of decimal digits; and NL means the new-line
+          character.
+
+          <program>    ::= NOTHING
+                         | <program> <stat> NL
+          <stat>       ::= NOTHING
+                         | declare NAME as <decl>
+                         | cast NAME into <decl>
+                         | explain <cdecl>
+                         | help
+          <decl>       ::= array of <decl>
+                         | array NUMBER of <decl>
+                         | function returning <decl>
+                         | function ( NAME ) returning <decl>
+                         | pointer to <decl>
+                         | <type>
+          <cdecl>      ::= <cdecl1>
+                         | * <cdecl>
+          <cdecl1>     ::= <cdecl1> ( )
+                         | <cdecl1> [ ]
+                         | <cdecl1> [ NUMBER ]
+                         | ( <cdecl> )
+                         | NAME
+          <type>       ::= <typename> | <modlist>
+
+
+
+     Page 1                                         (printed 10/21/87)
+
+
+
+
+
+
+     CCCCDDDDEEEECCCCLLLL((((1111))))                  UUUUNNNNIIIIXXXX SSSSyyyysssstttteeeemmmm VVVV                  CCCCDDDDEEEECCCCLLLL((((1111))))
+
+
+
+                         | <modlist> <typename>
+                         | struct NAME | union NAME | enum NAME
+          <typename>   ::= int | char | double | float
+          <modlist>    ::= <modifier> | <modlist> <modifier>
+          <modifier>   ::= short | long | unsigned
+
+     EEEEXXXXAAAAMMMMPPPPLLLLEEEESSSS
+          To declare an array of pointers to functions like malloc(3),
+          do declare fptab as array of pointer to function returning
+          pointer to char The result of this command is char
+          *(*fptab[])() When you see this declaration in someone
+          else's code, you can make sense out of it by doing explain
+          char *(*fptab[])() The proper declaration for signal(2)
+          cannot be described in _c_d_e_c_l's language (it can't be
+          described in C either).  An adequate declaration for most
+          purposes is given by declare signal as function returning
+          pointer to function returning int The function declaration
+          that results has two sets of empty parentheses.  The author
+          of such a function might wonder where the parameters go.
+          declare signal as function (args) returning pointer to
+          function returning int provides the solution:  int
+          (*signal(args))()
+
+     DDDDIIIIAAAAGGGGNNNNOOOOSSSSTTTTIIIICCCCSSSS
+          The declare statement tries to point out constructions that
+          are not supported in C.  Also, certain non-portable
+          constructs are flagged.
+
+          Syntax errors cause the parser to play dead until a newline
+          is read.
+
+     SSSSEEEEEEEE AAAALLLLSSSSOOOO
+          Section 8.4 of the C Reference Manual.
+
+     BBBBUUUUGGGGSSSS
+          The pseudo-English syntax is excessively verbose.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+     Page 2                                         (printed 10/21/87)
+
+
+

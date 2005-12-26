@@ -1,0 +1,23 @@
+abcpkey.re: In function `clef':
+abcpkey.re:162: warning: unused variable `t'
+abcpkey.re:163: warning: unused variable `i'
+abcpkey.re:165: warning: unused variable `YYEND'
+<stdout>:11: warning: label `yy1' defined but not used
+abcpkey.re: In function `abcNKey':
+abcpkey.re:339: warning: unused variable `m'
+abcpkey.re:339: warning: unused variable `d'
+<stdout>:1725: warning: label `yy306' defined but not used
+<stdout>:1313: warning: label `yy246' defined but not used
+<stdout>:1218: warning: label `yy227' defined but not used
+abcpkey.re:340: warning: `marker' might be used uninitialized in this function
+<stdout>:1216: warning: `yyaccept' might be used uninitialized in this function
+abcpkey.re: In function `abcNVoice':
+abcpkey.re:439: warning: unused variable `t'
+abcpkey.re:440: warning: unused variable `d'
+abcpkey.re:441: warning: unused variable `marker'
+abcpkey.re: In function `abcNLength':
+abcpkey.re:493: warning: unused variable `t'
+abcpkey.re:493: warning: unused variable `c'
+abcpkey.re:495: warning: unused variable `limit'
+abcpkey.re:495: warning: unused variable `marker'
+abcpkey.re:495: warning: unused variable `YYSTART'

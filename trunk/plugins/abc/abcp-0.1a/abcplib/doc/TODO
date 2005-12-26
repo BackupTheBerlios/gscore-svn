@@ -1,0 +1,20 @@
+
+
+ 01 Complete X: fields
+ 02 Complete %% fields
+ 03 Create C interface      
+ 04 Create Lua interface    
+ 05 Create Delphi interface
+ 06 Extend to Gregorian (??)
+ 07 Extend to Tablature
+ 08 Elaborate the Music-sheet concept
+
+ 
+ abcMeterValue()
+ abcMeterNumerator()
+ abcMeterIsCommonTime()
+ abcMeterIsCutTime()
+ 
+ 
+ 
+ 

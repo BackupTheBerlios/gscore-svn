@@ -1,0 +1,355 @@
+
+abcpbar.c,112
+char *abcNBar(34,383
+  STATE(135,2141
+  STATE(174,2729
+  STATE(216,3370
+  STATE(248,3861
+  STATE(255,3966
+
+abcp.c,389
+  ERR_FIRST=4,34
+  ERR_NONE,5,49
+  ERR_NONE,  ERR_UNKNOWN,5,49
+  ERR_NONE,  ERR_UNKNOWN, ERR_UNKTOKEN,5,49
+  ERR_NOLUA,6,89
+  ERR_NOLUA, ERR_ARGS,6,89
+  ERR_NOLUA, ERR_ARGS, ERR_SCAN,6,89
+  ERR_LAST7,122
+} Errors;Errors8,133
+static lua_State *L 16,215
+static const luaL_reg lualibs[18,244
+static int init_lua(29,491
+int myhandler(45,757
+char *test=82,1454
+int main(84,1511
+
+abcpdecor.c,32
+char * abcNDecoration(224,5530
+
+abcpdecor.h,342
+typedef  unsigned long long  ub8;ub83,52
+typedef  unsigned long  int  ub4;ub44,87
+typedef  unsigned short int  ub2;ub25,122
+typedef  unsigned       char ub1;ub16,157
+#define PHASH 8,194
+#define PHASHNKEYS 9,215
+#define STATIC17,411
+static ub1 tab[21,493
+STATIC ub4 phash(29,722
+static ub4 codes[38,881
+#define code(code40,927
+
+abcpextf.c,26
+int getextfield 115,2159
+
+abcpextf.h,342
+typedef  unsigned long long  ub8;ub83,52
+typedef  unsigned long  int  ub4;ub44,87
+typedef  unsigned short int  ub2;ub25,122
+typedef  unsigned       char ub1;ub16,157
+#define PHASH 8,194
+#define PHASHNKEYS 9,215
+#define STATIC17,411
+static ub1 tab[21,493
+STATIC ub4 phash(29,722
+static ub4 codes[38,881
+#define code(code40,927
+
+abcp.h,4228
+#define ABCP_H2,16
+#define GLOBAL(GLOBAL11,148
+#define GLOBAL(GLOBAL13,180
+#define ABCAPI 18,254
+#define ABCAPI20,299
+#define USHORT 25,343
+#define ULONG 29,403
+#define RATIONAL 34,534
+#define RAT(RAT35,574
+#define RAT_NUM(RAT_NUM36,610
+#define RAT_DEN(RAT_DEN37,642
+#define RAT_VAL(RAT_VAL38,679
+#define RAT_EQU(RAT_EQU40,745
+#define STATE(STATE46,924
+#define GOTO(GOTO47,950
+#define ENDSTATE 48,978
+#define YYCTYPE 55,1043
+#define YYCURSOR 56,1076
+#define YYLIMIT 57,1102
+#define YYMARKER 58,1127
+#define YYFILL(YYFILL59,1153
+#define S_EOF 62,1176
+#define S_ERROR 63,1205
+#define S_LIMBO 64,1234
+#define S_NONE 65,1263
+#define S_TUNE 66,1292
+#define S_FIELD 67,1321
+#define S_EXTFIELD 68,1352
+#define S_INFIELD 69,1381
+#define S_ANYFIELD 70,1410
+#define S_CFIELD 71,1439
+#define m_LFIELD(m_LFIELD74,1510
+#define m_isFIELD(m_isFIELD75,1554
+#define abcSt 77,1601
+  T_FIRST,80,1641
+  T_UNKNOWN,81,1653
+  T_UNKNOWN,   T_NONE,81,1653
+  T_UNKNOWN,   T_NONE,         T_EOF,81,1653
+  T_UNKNOWN,   T_NONE,         T_EOF,       T_COMMENT,81,1653
+  T_UNKNOWN,   T_NONE,         T_EOF,       T_COMMENT,   T_EMPTYLINE,81,1653
+  T_EXTFIELD,82,1724
+  T_EXTFIELD,  T_FIELD,82,1724
+  T_EXTFIELD,  T_FIELD,        T_NOTE,82,1724
+  T_EXTFIELD,  T_FIELD,        T_NOTE,      T_WSPACE,82,1724
+  T_EXTFIELD,  T_FIELD,        T_NOTE,      T_WSPACE,    T_BAR,82,1724
+  T_INFIELD,83,1789
+  T_INFIELD,   T_TEXT,83,1789
+  T_INFIELD,   T_TEXT,         T_ENDLINE,83,1789
+  T_INFIELD,   T_TEXT,         T_ENDLINE,   T_CONTINUE,83,1789
+  T_INFIELD,   T_TEXT,         T_ENDLINE,   T_CONTINUE,  T_DECOR,83,1789
+  T_REST,84,1856
+  T_REST,      T_INVREST,84,1856
+  T_REST,      T_INVREST,      T_MULTIREST,84,1856
+  T_REST,      T_INVREST,      T_MULTIREST, T_SPACER,84,1856
+  T_REST,      T_INVREST,      T_MULTIREST, T_SPACER,    T_NPLET,84,1856
+  T_OPENSLUR,85,1923
+  T_OPENSLUR,  T_CLOSESLUR,85,1923
+  T_OPENSLUR,  T_CLOSESLUR,    T_DOTRIGHT,85,1923
+  T_OPENSLUR,  T_CLOSESLUR,    T_DOTRIGHT,  T_DOTLEFT,85,1923
+  T_OPENSLUR,  T_CLOSESLUR,    T_DOTRIGHT,  T_DOTLEFT,   T_CHORDSTART,85,1923
+  T_CHORDEND,86,1995
+  T_CHORDEND,  T_CHORD,86,1995
+  T_CHORDEND,  T_CHORD,        T_REPEAT,86,1995
+  T_CHORDEND,  T_CHORD,        T_REPEAT,    T_GRACEAPP,86,1995
+  T_CHORDEND,  T_CHORD,        T_REPEAT,    T_GRACEAPP,  T_GRACEACC,86,1995
+  T_GRACEEND,87,2065
+  T_GRACEEND,  T_TIE,87,2065
+  T_GRACEEND,  T_TIE,          T_STRING,87,2065
+  T_GRACEEND,  T_TIE,          T_STRING,    T_STRINGUNF,87,2065
+  T_GRACEEND,  T_TIE,          T_STRING,    T_STRINGUNF, T_ANNOTATION,87,2065
+  T_BREAK,88,2137
+  T_BREAK,     T_OVERLAY,88,2137
+  T_BREAK,     T_OVERLAY,      T_STARTLINE,88,2137
+  T_BREAK,     T_OVERLAY,      T_STARTLINE, T_FIELDB,88,2137
+  T_BREAK,     T_OVERLAY,      T_STARTLINE, T_FIELDB,    T_PRAGMA,88,2137
+  T_LYR_SYLL,89,2205
+  T_LYR_SYLL,  T_LYR_BLANK,89,2205
+  T_LYR_SYLL,  T_LYR_BLANK,    T_LYR_BAR,89,2205
+  T_LYR_SYLL,  T_LYR_BLANK,    T_LYR_BAR,   T_LYR_SPACE,89,2205
+  T_LYR_SYLL,  T_LYR_BLANK,    T_LYR_BAR,   T_LYR_SPACE, T_LYR_CONT,89,2205
+  T_LYR_VERSE,90,2275
+  T_LYR_VERSE, T_OPENSLUR_DOT,90,2275
+  T_LYR_VERSE, T_OPENSLUR_DOT, T_TIE_DOT,90,2275
+  T_LYR_VERSE, T_OPENSLUR_DOT, T_TIE_DOT,   T_DUPMESURE,90,2275
+  T_LYR_VERSE, T_OPENSLUR_DOT, T_TIE_DOT,   T_DUPMESURE, T_DECOR_BLANK,90,2275
+  T_BSPACE,91,2348
+  T_LAST92,2361
+} abcToks;abcToks93,2371
+} abcScanner;abcScanner114,2826
+#define abcHandle 116,2843
+typedef char *abcPacked;abcPacked117,2870
+typedef int (*abcHandler)abcHandler121,2967
+#define STM(STM139,3516
+#define setspace(setspace141,3550
+#define setpack(setpack146,3736
+#define setperr(setperr152,3947
+#define sethex(sethex156,4078
+#define sethex2(sethex2160,4230
+#define skipspace(skipspace166,4510
+#define skiptospace(skiptospace167,4565
+typedef char *(abcNfunc)abcNfunc171,4708
+abcNfunc abcNNote;173,4797
+abcNfunc abcNKey;174,4817
+abcNfunc abcNVoice;175,4836
+abcNfunc abcNDecoration;176,4857
+abcNfunc abcNMeter;177,4883
+abcNfunc abcNLength;178,4904
+abcNfunc abcNTempo;179,4926
+abcNfunc abcNSlurTie;180,4947
+abcNfunc abcNBar;181,4970
+abcNfunc abcNlist;184,4993
+abcNfunc abcNstring;185,5013
+
+abcpkey.c,300
+#define getnum(getnum112,2877
+#define v(v119,3143
+static char *clef(121,3166
+  STATE(1300,28862
+  STATE(1317,29279
+static char abcpkdnote(1322,29313
+char *abcNKey(1337,29591
+  STATE(1449,31868
+  STATE(1840,39881
+  STATE(2020,43560
+char *abcNVoice(2038,43813
+char *abcNLength(2092,44737
+
+abcpkey.h,319
+typedef  unsigned long long  ub8;ub83,52
+typedef  unsigned long  int  ub4;ub44,87
+typedef  unsigned short int  ub2;ub25,122
+typedef  unsigned       char ub1;ub16,157
+#define PHASH 8,194
+#define PHASHNKEYS 9,215
+#define STATIC17,410
+STATIC ub4 phash(21,461
+static ub4 codes[29,552
+#define code(code31,602
+
+abcpmeter.c,141
+char * ABCAPI abcNMeter(53,1010
+  STATE(159,2917
+  STATE(250,4547
+  STATE(255,4639
+  STATE(335,6045
+  STATE(340,6155
+  STATE(358,6530
+
+abcpnote.c,1487
+char * abcNNote(83,2185
+   YYSTART=169,3581
+	YYCTYPE yych;172,3607
+	unsigned int yyaccept;173,3622
+	goto yy14;174,3646
+yy15:	++YYCURSOR;175,3658
+	yych 178,3723
+	goto yy16;182,3826
+yy16:	yych 183,3838
+	goto yy28;184,3864
+yy18:	yych 188,3939
+	goto yy23;191,4021
+yy20:	yych 195,4096
+	goto yy21;196,4122
+yy22:	++YYCURSOR;200,4179
+	yych 202,4233
+	goto yy23;203,4252
+	goto yy19;205,4297
+yy24:	++YYCURSOR;206,4309
+	yych 208,4363
+	goto yy25;209,4382
+	goto yy26;212,4455
+yy27:	++YYCURSOR;216,4530
+	yych 218,4584
+	goto yy28;219,4603
+	goto yy17;222,4676
+  pak[234,4797
+  pak[235,4828
+	YYCTYPE yych;238,4861
+	unsigned int yyaccept;239,4876
+	goto yy29;240,4900
+yy30:	++YYCURSOR;241,4912
+	yych 244,4972
+yy31:	yych 255,5193
+	goto yy32;256,5219
+yy33:	yych 260,5273
+	goto yy34;261,5299
+yy35:	yych 265,5353
+	goto yy36;266,5379
+yy37:	yych 270,5433
+	goto yy38;271,5459
+  pak[315,6127
+  num=316,6149
+  num=1;den=316,6149
+  YYSTART=319,6177
+	YYCTYPE yych;322,6204
+	unsigned int yyaccept;323,6219
+	goto yy47;324,6243
+yy48:	++YYCURSOR;325,6255
+	yych 328,6320
+	goto yy49;332,6423
+yy49:	yych 333,6435
+	goto yy61;334,6461
+yy51:	yych 338,6539
+	goto yy56;341,6621
+yy53:	yych 345,6698
+	goto yy54;346,6724
+yy55:	++YYCURSOR;350,6770
+	yych 352,6824
+	goto yy56;353,6843
+	goto yy52;355,6888
+yy57:	++YYCURSOR;356,6900
+	yych 358,6954
+	goto yy58;359,6973
+	goto yy59;362,7046
+yy60:	++YYCURSOR;366,7123
+	yych 368,7177
+	goto yy61;369,7196
+	goto yy50;372,7269
+
+abcpscan.c,1463
+#define GLOBAL29,739
+#define SOL 34,832
+#define EOL 35,851
+BOOL WINAPI __declspec(43,999
+static char *abcTokName[64,1408
+static char *abcStName[80,2263
+#define MINBUFSIZE 95,2478
+#define MAXBUFSIZE 96,2506
+#define m_guard(m_guard106,2614
+#define m_unguard(m_unguard107,2656
+#define m_guarded(m_guarded108,2698
+#define RETURN(RETURN134,3612
+#define m_linestart(m_linestart146,4195
+#define m_lineempty(m_lineempty147,4248
+#define m_resetbuf(m_resetbuf148,4297
+#define m_eof(m_eof157,4688
+#define m_column(m_column161,4801
+static void abcGetLine(175,5184
+#define P(P238,6566
+static void abcNparse(240,6620
+static int abcNT(281,7506
+static int abcNT_FIELD_H(477,10971
+static int abcNT_FIELD_w(569,12558
+static int abcNT_FIELD_s(781,16531
+static int abcNT_TUNE(1056,22001
+int ABCAPI abcNextToken(1738,35842
+void ABCAPI abcClose(1846,38354
+static abcScanner *abcNew(1879,39241
+abcScanner * ABCAPI abcFileScanner(1907,39805
+abcScanner * ABCAPI abcStringScanner(1929,40253
+static int abcScan(1952,40691
+int ABCAPI abcScanFile(1978,41275
+int ABCAPI abcScanString(1987,41429
+const char * ABCAPI abcTokenName(1996,41578
+const char * ABCAPI abcStateName(2001,41683
+int ABCAPI abcToken(2029,42406
+int ABCAPI abcState(2032,42464
+const char * ABCAPI abcString(2035,42522
+const abcPacked ABCAPI abcParsedString(2038,42591
+const char * ABCAPI abcFilename(2044,42707
+int ABCAPI abcLine(2047,42780
+int ABCAPI abcColumn(2050,42836
+
+abcpslurs.c,26
+char *abcNSlurTie(16,183
+
+abcptempo.c,171
+int getfrac(28,480
+char *abcNTempo(58,1034
+  STATE(116,2003
+  STATE(243,4286
+  STATE(308,5363
+  STATE(358,6215
+  STATE(392,6880
+  STATE(463,8078
+  STATE(474,8263
+
+abcptext.c,67
+static char * text(19,339
+#define abcN(abcN50,883
+abcN(53,1015
+
+garbage.c,0
+
+incipit.c,119
+char buffer[3,23
+char *cursor=4,44
+int nbars=6,70
+int incipitfound;7,85
+int handleincipit(9,108
+int main(48,1107
+
+rats.c,77
+RATIONAL RAT_CMP(6,119
+static int gcd(13,280
+RATIONAL RAT_SIMPLIFY(26,447

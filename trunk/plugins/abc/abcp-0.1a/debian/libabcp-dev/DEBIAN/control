@@ -1,0 +1,11 @@
+Package: libabcp-dev
+Version: 0.1a-1
+Section: libdev
+Priority: optional
+Architecture: i386
+Depends: libabcp (= 0.1a-1)
+Installed-Size: 60
+Maintainer: Cheyenne <j.marrec@10pouces.org>
+Source: abcp
+Description: Generic parser for ABC format,development files
+ ABC is an ASCII musical notation format

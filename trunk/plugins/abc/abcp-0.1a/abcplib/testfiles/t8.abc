@@ -1,0 +1,76 @@
+% Ave_Maria_Palestrina.abp    -*- abc -*-
+%
+% Written for abcpp, abcm2ps and abc2midi:
+% http://abcplus.sourceforge.net
+%
+% Edited by Guido Gonzato <ggonza@tin.it>, 1 August 2003
+% To typeset this file:
+%       abcpp Ave_Maria_Palestrina.abp Ave_Maria_Palestrina.abc
+%       abcm2ps -O= -c Ave_Maria_Palestrina.abc
+% To make a MIDI file:
+%       abcpp -MIDI Ave_Maria_Palestrina.abp Ave_Maria_Palestrina.abc
+%       abc2midi Ave_Maria_Palestrina.abc
+%
+%
+H: sda ajsd akj aksd asj kd sakd
+asdja sdkj sadlksa 
+askdjsajdas
+%%pageheight     29.7cm
+%%pagewidth      21cm
+%%topspace       0cm
+%%topmargin      1cm
+%%botmargin      0cm
+%%leftmargin     1cm
+%%rightmargin    1cm
+%%titlespace     0cm
+%%titlefont      Times-Bold 32
+%%subtitlefont   Times-Bold 24
+%%composerfont   Times 16
+%%vocalfont      Times-Roman 14
+%%partsfont      Times-BoldItalic 13
+%%staffsep       2.5cm
+%%sysstaffsep    1cm
+%%musicspace     1cm
+%%composerspace  0.5cm
+%%vocalspace     0.5cm
+%%slurheight     0.5
+%%measurebox     1
+%%measurenb      0
+%%barsperstaff   6
+%%maxshrink      0.85
+%%scale          0.75
+X: 1
+T: Ave Maria
+C: Giovanni Pierluigi da Palestrina (1525 - 1594)
+M: C|
+L: 1/2
+#ifdef MIDI
+Q: 1/2 = 120
+#define "V: S" "V: 1"
+#define "V: A" "V: 2"
+#define "V: T" "V: 3"
+#define "V: B" "V: 4"
+#define "S A T B" "1 2 3 4"
+%%staves [S A T B]
+V: S clef=treble   name="Soprano"
+V: A clef=treble   name="Alto"
+V: T clef=treble-8 name="Tenor"
+V: B clef=bass     name="Bass" octave=-2
+#else
+Q: "Moderato"
+#endif
+K: Gm
+#define !,! !breath!
+#define !H! !fermata!
+%
+% 1 - 5
+%
+[V: S] !p!G4 |G2G2|_A2G2  |z4          |c2Fc-|
+w: A- ve Ma- ri- a, a- ve Ma-
+[V: A] !mf!E4|B,4 |C4     |(G4         |_A4) |
+w: A- ve Ma- ri -
+[V: T] !p!c4 |d3e |(f3e/d/|ed/c/de     |f3e  |
+w: A- ve Ma- ri_________
+[V: B] !p!c4 |g2g2|f2cc'  |(c'=b/a/b)c'|f4   |
+w: A- ve Ma- ri- a, a- ve___ Ma- ri-
+%

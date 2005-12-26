@@ -1,0 +1,54 @@
+#! /usr/bin/env python
+
+############################
+## load the config
+
+## Use the environment and the tools set in the top-level
+## SConstruct file (set with 'Export') - this is very important
+
+Import( 'env' )
+myenv=env.Copy()
+
+#############################
+## The programs to build
+
+# The sources for our program - only .ui, .skel and .cpp are accepted
+sources="""
+abc.c
+export-abc.c
+import-abc.c
+"""
+
+myenv.G_shlib( "abc", sources )
+
+############################
+## Customization
+
+myenv.G_addpaths_includes('#/src/include/ #/src #/ #/plugins/abc')
+
+## Necessary libraries to link against
+#myenv.KDEaddlibs( 't' )
+
+## This shows how to add other link flags to the program
+myenv.G_addflags_link('-labcp -avoid-version -module')
+
+myenv.AppendUnique(RPATH = [env['PREFIX']+'/lib/gscore'])
+
+#############################
+## Data to install
+
+## The ui.rc file and the tips go into datadir/appname/
+#myenv.KDEinstall( 'KDEDATA', 'test1', 'test1ui.rc' )
+#myenv.KDEinstall( 'KDEDATA', 'test1', 'tips' )
+
+## The kcfg file is installed in a global kcfg directory
+#myenv.KDEinstall( 'KDEKCFG', '', 'test1.kcfg' )
+
+## Warning : there is a difference between the normal destop file used for the menu
+##     and the servicetype desktop file, so they go in different directories
+##     you will find more information in 'test3'
+#myenv.KDEinstall( 'KDEMENU', 'Utilities', 'test1.desktop')
+
+## Use this when you need to install a mimetype file
+#myenv.KDEinstall( 'KDEMIME', 'application', 'x-test1.desktop' )
+

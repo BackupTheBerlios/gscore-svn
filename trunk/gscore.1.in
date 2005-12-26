@@ -1,0 +1,12 @@
+.TH Gscore 1 "19 April 2005" "" "Gscore Manual Pages"
+.SH NAME
+gscore - a music notation software
+.SH SYNOPSIS
+.B gscore
+[file]
+
+.SH DESCRIPTION
+.PP
+Gscore is a music notation software.
+
+

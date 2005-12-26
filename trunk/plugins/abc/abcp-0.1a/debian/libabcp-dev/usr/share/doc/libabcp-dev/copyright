@@ -1,0 +1,35 @@
+ABCp licence follows the "Historical Permission Notice and Disclaimer"
+template and is Open Source Software according to the OSI definition. 
+
+Copyright notice:
+
+.--------------------------------------------------------------------,
+|                                                                    |
+|  This software includes parts of ABCp, the generic ABC parser,     |
+|  written by Remo Dentato <rdentato@users.sourceforge.net>.         |
+|  (http://abcp.sourceforge.net)                                     |
+|                                                                    |
+|  ABCp includes modified source code of the minimal perfect hashing |
+|  function by Bob Jenkins <jenkins at burtleburtle.net>.            |
+|  (http://burtleburtle.net/bob/hash/perfect.html)                   |
+|                                                                    |
+|  ABCp scanner has been created using re2c originally written by    |
+|  Peter Bumbulis  <peter at csg.uwaterloo.ca> and currently         |
+|  maintained by: Dan Nuffer     <nuffer at users.sourceforge.net>,  |
+|                 Marcus Boerger <helly at users.sourceforge.net>,   |
+|                 Hartmut Kaiser <hkaiser at users.sourceforge.net>  | 
+|  (http://re2c.sourceforge.net)                                     | 
+|                                                                    |
+`--------------------------------------------------------------------'
+  
+Permission to use, copy, modify and distribute ABCp and its documentation
+for any purpose is hereby granted without fee, provided that the above
+copyright notice appear in all copies and supporting documentation.
+
+Different representations of the above copyright notice are acceptable
+as long as they contain the same information.
+
+Copyright holders makes no representations about the suitability of this
+software for any purpose. It is provided "as is" without express or
+implied warranty.
+

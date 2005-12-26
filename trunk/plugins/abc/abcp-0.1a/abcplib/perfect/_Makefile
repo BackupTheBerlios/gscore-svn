@@ -1,0 +1,50 @@
+CC=lcc 
+LN=lcclnk.exe -subsystem console  -o
+LIBS=
+OBJ=obj
+EXE=.exe
+
+#CC=gcc
+#LIBS = -lm
+#OBJ=o
+#LN=gcc -o
+#EXE=
+
+CFLAGS = -O -c
+
+.SUFFIXES : .re .d$(OBJ) .c .$(OBJ)
+
+.c.$(OBJ):
+	$(CC) $(CFLAGS) $*.c
+
+OBJS = lookupa.$(OBJ) recycle.$(OBJ) perfhex.$(OBJ) perfect.$(OBJ)
+TOBJS = phash.$(OBJ) testperf.$(OBJ)
+
+all: perfect$(EXE) hlist$(EXE)
+
+perfect$(EXE): $(OBJS)
+	$(LN) $*$(EXE) $(OBJS) $(LIBS)
+
+hlist$(EXE): hlist.$(OBJ)
+	$(LN) $*$(EXE) hlist.$(OBJ) $(LIBS)
+
+hhlist$(EXE):
+	$(CC) $(CFLAGS) -DSTATIC=static -DHASH -o $*.$(OBJ) hlist.c
+	$(LN) $*$(EXE) $*.$(OBJ) lookupa.$(OBJ) $(LIBS)
+
+
+	
+	
+# DEPENDENCIES
+
+lookupa.$(OBJ) : lookupa.c standard.h lookupa.h
+
+recycle.$(OBJ) : recycle.c standard.h recycle.h
+
+perfhex.$(OBJ) : perfhex.c standard.h lookupa.h recycle.h perfect.h
+
+perfect.$(OBJ) : perfect.c standard.h lookupa.h recycle.h perfect.h
+
+phash.$(OBJ)    : phash.c standard.h phash.h lookupa.h
+
+testperf.$(OBJ) : testperf.c standard.h recycle.h phash.h

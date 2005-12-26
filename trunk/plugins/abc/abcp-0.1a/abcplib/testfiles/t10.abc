@@ -1,0 +1,4 @@
+X:1
+[| ABC | def |: ge'd | Ge''d :: e d'' d |]
+[| ABC || def : ge'd .| Ge''d :||: e d'' d |]
+[| ABC [|] def : ge'd .| Ge''d :||: e d'' d |]
