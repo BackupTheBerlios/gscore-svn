@@ -61,7 +61,7 @@ libLTLIBRARIES_INSTALL = $(INSTALL)
 LTLIBRARIES = $(lib_LTLIBRARIES)
 am__DEPENDENCIES_1 =
 libgscorebase_la_DEPENDENCIES = $(am__DEPENDENCIES_1)
-am__objects_1 = score.lo selection.lo
+am__objects_1 = object_color.lo score.lo selection.lo
 am_libgscorebase_la_OBJECTS = $(am__objects_1)
 libgscorebase_la_OBJECTS = $(am_libgscorebase_la_OBJECTS)
 DEFAULT_INCLUDES = -I. -I$(srcdir) -I$(top_builddir)
@@ -254,6 +254,7 @@ INCLUDES = \
 
 lib_LTLIBRARIES = libgscorebase.la
 libgscorebase_sources = \
+			object_color.c 	\
 			score.c 	\
 			selection.c 
 
@@ -337,6 +338,7 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/object_color.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/score.Plo@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/selection.Plo@am__quote@
 

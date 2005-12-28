@@ -47,6 +47,9 @@ struct _ObjectColor
 
 } _ObjectColor;
 
+
+ObjectColor * gscore_object_color_new(void);
+
 G_END_DECLS
 
 #endif /* __OBJECT_COLOR_H__ */

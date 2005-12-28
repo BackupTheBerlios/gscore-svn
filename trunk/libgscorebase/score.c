@@ -28,6 +28,8 @@
 #include <libgscore/gscoretypes.h>
 #include <libgscorebase/score.h>
 #include <libgscorebase/selection.h>
+#include <libgscorebase/object_color.h>
+
 
 extern Score   * gscore_score_new(void);
 extern gint      gscore_score_set_window_title(Score *score, gchar *title);
@@ -79,41 +81,10 @@ gscore_score_new(void)
 
         score->selection_area = gscore_selection_area_new();
 
-
+        score->objectcolor = gscore_object_color_new();
 
 /*         score->Staff_list = NULL; */
                 
-/*         score->ColorObject = g_malloc(sizeof(struct GscoreColorObject_t)); */
-/*         if ( ! score->ColorObject ) { */
-/*                 g_print("Memory exhausted: cannot allocate new color object\n"); */
-/*                 return NULL; */
-/*         } */
-/*         score->ColorObject->staves = g_malloc(sizeof(struct GscoreColor_t)); */
-/*         if ( ! score->ColorObject->staves ) { */
-/*                 g_print("Memory exhausted: cannot allocate new staves color\n"); */
-/*                 return NULL; */
-/*         } */
-/*         score->ColorObject->clefs = g_malloc(sizeof(struct GscoreColor_t)); */
-/*         if ( ! score->ColorObject->clefs ) { */
-/*                 g_print("Memory exhausted: cannot allocate new clefs color\n"); */
-/*                 return NULL; */
-/*         } */
-/*         score->ColorObject->objects = g_malloc(sizeof(struct GscoreColor_t)); */
-/*         if ( ! score->ColorObject->staves ) { */
-/*                 g_print("Memory exhausted: cannot allocate new objects color\n"); */
-/*                 return NULL; */
-/*         } */
-
-/*         /\* By default, everything is black *\/ */
-/*         score->ColorObject->staves->red = 0; */
-/*         score->ColorObject->staves->green = 0; */
-/*         score->ColorObject->staves->blue = 0; */
-/*         score->ColorObject->clefs->red = 0; */
-/*         score->ColorObject->clefs->green = 0; */
-/*         score->ColorObject->clefs->blue = 0; */
-/*         score->ColorObject->objects->red = 0; */
-/*         score->ColorObject->objects->green = 0; */
-/*         score->ColorObject->objects->blue = 0; */
 
 /*         score->Identity = g_malloc(sizeof(Identity_t)); */
 /*         if ( ! score->Identity ) { */
