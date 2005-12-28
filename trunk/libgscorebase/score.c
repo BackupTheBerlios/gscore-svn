@@ -29,6 +29,7 @@
 #include <libgscorebase/score.h>
 #include <libgscorebase/selection.h>
 #include <libgscorebase/object_color.h>
+#include <libgscorebase/identity.h>
 
 
 extern Score   * gscore_score_new(void);
@@ -82,6 +83,8 @@ gscore_score_new(void)
         score->selection_area = gscore_selection_area_new();
 
         score->objectcolor = gscore_object_color_new();
+
+        score->identity = gscore_identity_new();
 
 /*         score->Staff_list = NULL; */
                 

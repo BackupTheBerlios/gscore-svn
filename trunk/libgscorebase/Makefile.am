@@ -11,6 +11,7 @@ INCLUDES = 		\
 lib_LTLIBRARIES = libgscorebase.la
 
 libgscorebase_sources = 		\
+			identity.c 	\
 			object_color.c 	\
 			score.c 	\
 			selection.c 

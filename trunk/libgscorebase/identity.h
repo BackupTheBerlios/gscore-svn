@@ -46,6 +46,9 @@ struct _Identity
         
 } _Identity;
 
+
+Identity * gscore_identity_new(void);
+
 G_END_DECLS
 
 #endif /* __IDENTITY_H__ */
