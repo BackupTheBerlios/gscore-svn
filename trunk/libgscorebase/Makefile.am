@@ -12,9 +12,11 @@ lib_LTLIBRARIES = libgscorebase.la
 
 libgscorebase_sources = 		\
 			identity.c 	\
+			object.c 	\
 			object_color.c 	\
 			score.c 	\
-			selection.c 
+			selection.c  	\
+			staff.c
 
 libgscorebase_la_SOURCES = $(libgscorebase_sources)
 

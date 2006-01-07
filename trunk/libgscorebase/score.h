@@ -27,6 +27,7 @@
 
 #include <glib.h>
 #include <libgscore/gscoretypes.h>
+#include <libgscore/gscoreerrors.h>
 
 G_BEGIN_DECLS
 
@@ -46,7 +47,7 @@ struct _Score
 	/** Has the score been modified since we saved ? useful for save/save as and quit */
         gboolean      is_modified;  
 	/** How many staves in the score */
-        gint          staves; 
+        gint          count_staves; 
         /** Zoom applied to score */
         gdouble       zoom;
 	/** How wide is the drawing area (score) widget ? */     
@@ -58,40 +59,41 @@ struct _Score
 	/** Position X where the staff ends */
         gdouble       staff_extremity_end_x;
 
-        struct Identity    * identity; /* Useful informations */
-        struct ObjectColor * objectcolor;
-        struct Display     * display;
+        Identity      * identity; /* Useful informations */
+        ObjectColor   * objectcolor;
+        Display       * display;
 
         /* Staves: *FIXME* One of the two is useless */
-        GList         * staff_list;
-        struct Staff  * staff;
+        GList              * staves;
+/*         GList         * staff_list; */
+/*         struct Staff  * staff; */
 
         /* Selection Area */
-        SelectionArea * selection_area;
+        SelectionArea      * selection_area;
 
 };
 
-Score   * gscore_score_new(void);
-gint      gscore_score_set_window_title(Score *score, gchar *title);
-gchar   * gscore_score_get_window_title(Score *score);
-gint      gscore_score_set_tempo(Score *score, gint tempo);
-gint      gscore_score_get_tempo(Score *score);
-gint      gscore_score_set_tempo_note(Score *score, gint tempo_note);
-gint      gscore_score_get_tempo_note(Score *score) ;
-gint      gscore_score_set_tempo_text(Score *score, gchar *tempo_text);
-gchar   * gscore_score_get_tempo_text(Score *score) ;
-gint      gscore_score_set_modified(Score *score, gboolean modified);
-gboolean  gscore_score_get_modified(Score *score);
-gint      gscore_score_set_zoom(Score *score, gdouble zoom);
-gdouble   gscore_score_get_zoom(Score *score);
-gint      gscore_score_set_width(Score *score, gdouble width);
-gdouble   gscore_score_get_width(Score *score);
-gint      gscore_score_set_height(Score *score, gdouble height);
-gdouble   gscore_score_get_height(Score *score);
-gint      gscore_score_set_staff_selected(Score *score, gint staff_selected);
-gint      gscore_score_get_staff_selected(Score *score);
-gint      gscore_score_set_staff_extremity_end_x(Score *score, gdouble staff_extremity_end_x);
-gdouble   gscore_score_get_staff_extremity_end_x(Score *score);
+Score        * gscore_score_new(void);
+GSCORE_ERROR   gscore_score_set_window_title(Score *score, gchar *title);
+gchar        * gscore_score_get_window_title(Score *score);
+GSCORE_ERROR   gscore_score_set_tempo(Score *score, gint tempo);
+gint           gscore_score_get_tempo(Score *score);
+GSCORE_ERROR   gscore_score_set_tempo_note(Score *score, gint tempo_note);
+gint           gscore_score_get_tempo_note(Score *score) ;
+GSCORE_ERROR   gscore_score_set_tempo_text(Score *score, gchar *tempo_text);
+gchar        * gscore_score_get_tempo_text(Score *score) ;
+GSCORE_ERROR   gscore_score_set_modified(Score *score, gboolean modified);
+gboolean       gscore_score_get_modified(Score *score);
+GSCORE_ERROR   gscore_score_set_zoom(Score *score, gdouble zoom);
+gdouble        gscore_score_get_zoom(Score *score);
+GSCORE_ERROR   gscore_score_set_width(Score *score, gdouble width);
+gdouble        gscore_score_get_width(Score *score);
+GSCORE_ERROR   gscore_score_set_height(Score *score, gdouble height);
+gdouble        gscore_score_get_height(Score *score);
+GSCORE_ERROR   gscore_score_set_staff_selected(Score *score, gint staff_selected);
+gint           gscore_score_get_staff_selected(Score *score);
+GSCORE_ERROR   gscore_score_set_staves_extremity_end_x(Score *score, gdouble staves_extremity_end_x);
+gdouble        gscore_score_get_staves_extremity_end_x(Score *score);
 
 G_END_DECLS
 

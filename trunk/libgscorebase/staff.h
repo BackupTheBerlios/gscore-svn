@@ -1,7 +1,7 @@
 /* -*- mode:C; tab-width:8; c-default-style:linux; c-basic-offset:8; indent-tabs-mode:nil -*- */
 /*
  * libgscorebase/staff.h
- * gscore - a musical score editor
+ * gscore - a musical notation software
  *
  * (C) Copyright 2001-2006 Sebastien Tricaud
  * e-mail : toady@gscore.org
@@ -52,7 +52,7 @@ struct _Staff
          * time_signature[0] = TIME_SIGNATURE_NORMAL | TIME_SIGNATURE_COMMON_TIME | TIME_SIGNATURE_ALLA_BREVE 
          * time_signature[1] = Number of beats 
          * time_signature[2] = Beat duration */
-        guint8     time_signature[2]; 
+        guint     time_signature[2]; 
 
         /** The number of the measure on which we are working */
         gint       measure_number; 
@@ -66,15 +66,19 @@ struct _Staff
         gdouble    extremity_begin_y; 
         /** The current position */
 	/** It is where the next object should be drawn */
-        gint       current_x;   
+        gdouble    current_x;   
 
         /** The Instrument for the staff (MIDI) */
         gint       midi_instrument; 
 
-        GList    * Object_list;
-        struct Object   * object;
+        GList    * objects;
 
-} Staff_t;
+};
+
+
+Staff * gscore_staff_new(Score *score, guint8 nb_lines, guint8 space_btw_lines, gdouble extremity_begin_x, gdouble extremity_begin_y);
+Staff * gscore_staff_new_default(Score *score, gdouble extremity_begin_x, gdouble extremity_begin_y);
+
 
 G_END_DECLS
 

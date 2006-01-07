@@ -26,33 +26,34 @@
 #include <glib.h>
 
 #include <libgscore/gscoretypes.h>
+#include <libgscore/gscoreerrors.h>
 #include <libgscorebase/score.h>
 #include <libgscorebase/selection.h>
 #include <libgscorebase/object_color.h>
 #include <libgscorebase/identity.h>
 
 
-extern Score   * gscore_score_new(void);
-extern gint      gscore_score_set_window_title(Score *score, gchar *title);
-extern gchar   * gscore_score_get_window_title(Score *score);
-extern gint      gscore_score_set_tempo(Score *score, gint tempo);
-extern gint      gscore_score_get_tempo(Score *score);
-extern gint      gscore_score_set_tempo_note(Score *score, gint tempo_note);
-extern gint      gscore_score_get_tempo_note(Score *score) ;
-extern gint      gscore_score_set_tempo_text(Score *score, gchar *tempo_text);
-extern gchar   * gscore_score_get_tempo_text(Score *score) ;
-extern gint      gscore_score_set_modified(Score *score, gboolean modified);
-extern gboolean  gscore_score_get_modified(Score *score);
-extern gint      gscore_score_set_zoom(Score *score, gdouble zoom);
-extern gdouble   gscore_score_get_zoom(Score *score);
-extern gint      gscore_score_set_width(Score *score, gdouble width);
-extern gdouble   gscore_score_get_width(Score *score);
-extern gint      gscore_score_set_height(Score *score, gdouble height);
-extern gdouble   gscore_score_get_height(Score *score);
-extern gint      gscore_score_set_staff_selected(Score *score, gint staff_selected);
-extern gint      gscore_score_get_staff_selected(Score *score);
-extern gint      gscore_score_set_staff_extremity_end_x(Score *score, gdouble staff_extremity_end_x);
-extern gdouble   gscore_score_get_staff_extremity_end_x(Score *score);
+extern Score        * gscore_score_new(void);
+extern GSCORE_ERROR   gscore_score_set_window_title(Score *score, gchar *title);
+extern gchar        * gscore_score_get_window_title(Score *score);
+extern GSCORE_ERROR   gscore_score_set_tempo(Score *score, gint tempo);
+extern gint           gscore_score_get_tempo(Score *score);
+extern GSCORE_ERROR   gscore_score_set_tempo_note(Score *score, gint tempo_note);
+extern gint           gscore_score_get_tempo_note(Score *score) ;
+extern GSCORE_ERROR   gscore_score_set_tempo_text(Score *score, gchar *tempo_text);
+extern gchar        * gscore_score_get_tempo_text(Score *score) ;
+extern GSCORE_ERROR   gscore_score_set_modified(Score *score, gboolean modified);
+extern gboolean       gscore_score_get_modified(Score *score);
+extern GSCORE_ERROR   gscore_score_set_zoom(Score *score, gdouble zoom);
+extern gdouble        gscore_score_get_zoom(Score *score);
+extern GSCORE_ERROR   gscore_score_set_width(Score *score, gdouble width);
+extern gdouble        gscore_score_get_width(Score *score);
+extern GSCORE_ERROR   gscore_score_set_height(Score *score, gdouble height);
+extern gdouble        gscore_score_get_height(Score *score);
+extern GSCORE_ERROR   gscore_score_set_staff_selected(Score *score, gint staff_selected);
+extern gint           gscore_score_get_staff_selected(Score *score);
+extern GSCORE_ERROR   gscore_score_set_staves_extremity_end_x(Score *score, gdouble staves_extremity_end_x);
+extern gdouble        gscore_score_get_staves_extremity_end_x(Score *score);
 
 /**
  * score_new:
@@ -82,179 +83,205 @@ gscore_score_new(void)
 
         score->selection_area = gscore_selection_area_new();
 
-        score->objectcolor = gscore_object_color_new();
+        score->objectcolor = (ObjectColor *)gscore_object_color_new();
 
-        score->identity = gscore_identity_new();
+        score->identity = (Identity *)gscore_identity_new();
 
-/*         score->Staff_list = NULL; */
-                
+        gscore_score_set_staves_extremity_end_x(score, 300);
 
-/*         score->Identity = g_malloc(sizeof(Identity_t)); */
-/*         if ( ! score->Identity ) { */
-/*                 printf("Memory exhausted!\n"); */
-/*                 return NULL; */
-/*         } */
+        score->staves = NULL;
 
-/*         score->Identity->title    = g_string_new(_("My Score")); */
-/*         score->Identity->subtitle = g_string_new(_("made with gscore")); */
-/*         score->Identity->composer = g_string_new(_("gscore's user")); */
-
-/*         score->staff_extremity_end_x = 300; /\* Just a value to start, nothing really important *\/ */
-/*         score->staff_startx = Spacings.Clefs.sb + STANDARD_KEY_SIZE + Spacings.Clefs.sa + Spacings.KeySignatures.saks + */
-/*                 STANDARD_TIME_SIGNATURE_SIZE + Spacings.TimeSignatures.sats; */
-
-
-/*         /\* Create a Staff, to have something when we start the software *\/ */
-/*         /\* Should be removed and put in staff_new *\/ */
-
-/*         if( ! create_staff(score, 5, 8, Spacings.Measures.xpsfm, Spacings.Measures.ypsfm) ) */
-/*                 printf("ERROR CREATING STAFF"); */
-
-/*         set_staff_selected(score, 0); */
-
-/*         staff_set_key(score, get_staff_selected(score), TREBLE_KEY); */
-
-/*         staff_set_key_signature(score, get_staff_selected(score), KEY_SIGNATURE_EMPTY); */
 
         return score;
+
 }
 
-extern gint
+extern GSCORE_ERROR
 gscore_score_set_window_title(Score *score, gchar *title)
 {
+
         score->window_title = title;
 
-        return 0;
+
+        return GSCORE_NOERR;
+
 }
 
 extern gchar * 
 gscore_score_get_window_title(Score *score) 
 {
+
         return score->window_title;
+
 }
 
-extern gint
+extern GSCORE_ERROR
 gscore_score_set_tempo(Score *score, gint tempo)
 {
+
         score->tempo = tempo;
 
-        return 0;
+
+        return GSCORE_NOERR;
+
 }
 
 extern gint 
 gscore_score_get_tempo(Score *score) 
 {
+
         return score->tempo;
+
 }
 
-extern gint
+extern GSCORE_ERROR
 gscore_score_set_tempo_note(Score *score, gint tempo_note)
 {
+
         score->tempo_note = tempo_note;
 
-        return 0;
+
+        return GSCORE_NOERR;
+
 }
 
 extern gint 
 gscore_score_get_tempo_note(Score *score) 
 {
+
         return score->tempo_note;
+
 }
 
-extern gint
+extern GSCORE_ERROR
 gscore_score_set_tempo_text(Score *score, gchar *tempo_text)
 {
+
         score->tempo_text = g_string_new(tempo_text);
 
-        return 0;
+
+        return GSCORE_NOERR;
+
 }
 
 extern gchar *
 gscore_score_get_tempo_text(Score *score) 
 {
+
         return score->tempo_text->str;
+
 }
 
-extern gint 
+extern GSCORE_ERROR 
 gscore_score_set_modified(Score *score, gboolean modified)
 {
+
         score->is_modified = modified;
 
-        return 0;
+
+        return GSCORE_NOERR;
+
 }
 
 extern gboolean
 gscore_score_get_modified(Score *score)
 {
+
         return score->is_modified;
+
 }
 
-extern gint
+extern GSCORE_ERROR
 gscore_score_set_zoom(Score *score, gdouble zoom)
 {
+
         score->zoom = zoom;
 
-        return 0;
+
+        return GSCORE_NOERR;
+
 }
 
 extern gdouble
 gscore_score_get_zoom(Score *score)
 {
+
         return score->zoom;
+
 }
 
-extern gint
+extern GSCORE_ERROR
 gscore_score_set_width(Score *score, gdouble width)
 {
+
         score->width = width;
 
-        return 0;
+
+        return GSCORE_NOERR;
+
 }
 
 extern gdouble
 gscore_score_get_width(Score *score)
 {
+
         return score->width;
+
 }
 
-extern gint
+extern GSCORE_ERROR
 gscore_score_set_height(Score *score, gdouble height)
 {
+
         score->height = height;
 
-        return 0;
+
+        return GSCORE_NOERR;
+
 }
 
 extern gdouble
 gscore_score_get_height(Score *score)
 {
+
         return score->height;
+
 }
 
-extern gint
+extern GSCORE_ERROR
 gscore_score_set_staff_selected(Score *score, gint staff_selected)
 {
+
         score->staff_selected = staff_selected;
 
-        return 0;
+
+        return GSCORE_NOERR;
+
 }
 
 extern gint
 gscore_score_get_staff_selected(Score *score)
 {
+
         return score->staff_selected;
+
 }
 
-extern gint
-gscore_score_set_staff_extremity_end_x(Score *score, gdouble staff_extremity_end_x)
+extern GSCORE_ERROR
+gscore_score_set_staves_extremity_end_x(Score *score, gdouble staff_extremity_end_x)
 {
+
         score->staff_extremity_end_x = staff_extremity_end_x;
 
-        return 0;
+
+        return GSCORE_NOERR;
+
 }
 
 extern gdouble
-gscore_score_get_staff_extremity_end_x(Score *score)
+gscore_score_get_staves_extremity_end_x(Score *score)
 {
+
         return score->staff_extremity_end_x;
+
 }
