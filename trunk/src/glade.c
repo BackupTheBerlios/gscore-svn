@@ -26,6 +26,7 @@
 #include <libgscore/gscoreerrors.h>
 
 #include "glade.h"
+#include "gettext.h"
 
 static GladeXML *gxml;
 

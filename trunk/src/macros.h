@@ -1,6 +1,6 @@
 /* -*- mode:C; tab-width:8; c-default-style:linux; c-basic-offset:8; indent-tabs-mode:nil -*- */
 /*
- * main.c
+ * macros.h
  * gscore - a musical notation software
  *
  * (C) Copyright 2001-2006 Sebastien Tricaud
@@ -22,25 +22,4 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-#include <gtk/gtk.h>
-#include <libgscore/gscoretypes.h>
-#include <libgscorebase/score.h>
-
-#include "glade.h"
-
-int main(int argc, char **argv)
-{
-
-	gtk_init(&argc, &argv);
-
-        gxml_create(get_file_from_data_dir("glade/gscore.glade"));
-        
-#ifdef DEBUG
-	g_log_set_fatal_mask("Gtk", G_LOG_LEVEL_CRITICAL);
-	g_log_set_fatal_mask("Gdk", G_LOG_LEVEL_CRITICAL);
-#endif
-
-	gtk_main();
-
-        return 0;
-}
+#define get_file_from_data_dir(file) g_strconcat(DATA_DIR, G_DIR_SEPARATOR_S, "gscore", G_DIR_SEPARATOR_S, file, NULL)
