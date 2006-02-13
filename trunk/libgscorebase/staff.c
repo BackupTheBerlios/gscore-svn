@@ -1,6 +1,6 @@
 /* -*- mode:C; tab-width:8; c-default-style:linux; c-basic-offset:8; indent-tabs-mode:nil -*- */
 /*
- * main.c
+ * score.c
  * gscore - a musical notation software
  *
  * (C) Copyright 2001-2006 Sebastien Tricaud
@@ -22,22 +22,17 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-#include <gtk/gtk.h>
+
+#include <glib.h>
+
 #include <libgscore/gscoretypes.h>
+#include <libgscore/gscoreerrors.h>
 #include <libgscorebase/score.h>
+#include <libgscorebase/selection.h>
+#include <libgscorebase/object_color.h>
+#include <libgscorebase/identity.h>
 
-int main(int argc, char **argv)
-{
+extern Staff * gscore_staff_new(Score *score, guint8 nb_lines, guint8 space_btw_lines, gdouble extremity_begin_x, gdouble extremity_begin_y);
+extern Staff * gscore_staff_new_default(Score *score, gdouble extremity_begin_x, gdouble extremity_begin_y);
 
-	gtk_init(&argc, &argv);
 
-        
-#ifdef DEBUG
-	g_log_set_fatal_mask("Gtk", G_LOG_LEVEL_CRITICAL);
-	g_log_set_fatal_mask("Gdk", G_LOG_LEVEL_CRITICAL);
-#endif
-
-	gtk_main();
-
-        return 0;
-}

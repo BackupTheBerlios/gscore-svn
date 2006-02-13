@@ -1,6 +1,6 @@
 /* -*- mode:C; tab-width:8; c-default-style:linux; c-basic-offset:8; indent-tabs-mode:nil -*- */
 /*
- * main.c
+ * glade.c
  * gscore - a musical notation software
  *
  * (C) Copyright 2001-2006 Sebastien Tricaud
@@ -22,22 +22,31 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-#include <gtk/gtk.h>
-#include <libgscore/gscoretypes.h>
-#include <libgscorebase/score.h>
+#include <glade/glade.h>
+#include <libgscore/gscoreerrors.h>
 
-int main(int argc, char **argv)
+#include "glade.h"
+
+static GladeXML *gxml;
+
+extern GSCORE_ERROR gxml_create(char *filename);
+
+
+extern GSCORE_ERROR
+gxml_create(char *filename)
 {
 
-	gtk_init(&argc, &argv);
+	gxml = glade_xml_new(filename, NULL, NULL);
+	
+	if ( ! gxml ) {
+		g_error(_("Glade file not found in %s\n"), filename);
+		
+		return GSCORE_FILENOTFOUND;
+	}
+	
 
-        
-#ifdef DEBUG
-	g_log_set_fatal_mask("Gtk", G_LOG_LEVEL_CRITICAL);
-	g_log_set_fatal_mask("Gdk", G_LOG_LEVEL_CRITICAL);
-#endif
+	glade_xml_signal_autoconnect(gxml);
 
-	gtk_main();
+	return GSCORE_NOERR;
 
-        return 0;
 }

@@ -1,6 +1,6 @@
 /* -*- mode:C; tab-width:8; c-default-style:linux; c-basic-offset:8; indent-tabs-mode:nil -*- */
 /*
- * main.c
+ * libgscore/gscoreerrors.h
  * gscore - a musical notation software
  *
  * (C) Copyright 2001-2006 Sebastien Tricaud
@@ -22,22 +22,17 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-#include <gtk/gtk.h>
-#include <libgscore/gscoretypes.h>
-#include <libgscorebase/score.h>
+#ifndef __GSCOREERRORS_H__
+#define __GSCOREERRORS_H__
 
-int main(int argc, char **argv)
-{
+G_BEGIN_DECLS
 
-	gtk_init(&argc, &argv);
+typedef int GSCORE_ERROR;
 
-        
-#ifdef DEBUG
-	g_log_set_fatal_mask("Gtk", G_LOG_LEVEL_CRITICAL);
-	g_log_set_fatal_mask("Gdk", G_LOG_LEVEL_CRITICAL);
-#endif
+#define GSCORE_NOERR 0;
+#define GSCORE_OUTMEM 1;
+#define GSCORE_FILENOTFOUND 2;
 
-	gtk_main();
+G_END_DECLS
 
-        return 0;
-}
+#endif /* __GSCOREERRORS_H__ */

@@ -7,11 +7,12 @@ DEFS = \
 	-DDATA_DIR=\"$(datadir)\"		\
 	-I$(top_srcdir)/ 	\
 	-I$(srcdir)/include/	\
-	$(GLIB2_CFLAGS)
+	$(LIBGLADE2_CFLAGS)
 
 bin_PROGRAMS = gscore
 gscore_LDFLAGS = -export-dynamic
-gscore_LDADD = $(GLIB2_LIBS) ../libgscore/libgscore.la ../libgscorebase/libgscorebase.la
+gscore_LDADD = $(LIBGLADE2_LIBS) ../libgscore/libgscore.la ../libgscorebase/libgscorebase.la
 
 gscore_SOURCES = \
+		glade.c \
 		main.c

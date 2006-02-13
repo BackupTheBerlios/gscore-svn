@@ -1,7 +1,7 @@
 /* -*- mode:C; tab-width:8; c-default-style:linux; c-basic-offset:8; indent-tabs-mode:nil -*- */
 /*
- * main.c
- * gscore - a musical notation software
+ * libgscorebase/identity.c
+ * gscore - a musical score editor
  *
  * (C) Copyright 2001-2006 Sebastien Tricaud
  * e-mail : toady@gscore.org
@@ -22,22 +22,37 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-#include <gtk/gtk.h>
-#include <libgscore/gscoretypes.h>
-#include <libgscorebase/score.h>
+#include <glib.h>
 
-int main(int argc, char **argv)
+#include <libgscore/gscoretypes.h>
+#include <libgscore/gscoreerrors.h>
+#include <libgscorebase/score.h>
+#include <libgscorebase/selection.h>
+#include <libgscorebase/object_color.h>
+#include <libgscorebase/identity.h>
+
+extern Identity * gscore_identity_new(void);
+
+extern Identity *
+gscore_identity_new(void)
 {
 
-	gtk_init(&argc, &argv);
+        Identity *identity;
 
-        
-#ifdef DEBUG
-	g_log_set_fatal_mask("Gtk", G_LOG_LEVEL_CRITICAL);
-	g_log_set_fatal_mask("Gdk", G_LOG_LEVEL_CRITICAL);
-#endif
+        identity = g_malloc(sizeof(identity));
+        if ( ! identity ) {
+                g_print("Memory exhausted: cannot allocate new score\n");
+                return NULL;
+        }
 
-	gtk_main();
+        identity->title     = g_string_new("");
+        identity->subtitle  = g_string_new("");
+        identity->composer  = g_string_new("");
+        identity->copyright = g_string_new("");
 
-        return 0;
+        identity->filename  = g_string_new("");
+
+
+        return identity;
+
 }
