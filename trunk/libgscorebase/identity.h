@@ -1,7 +1,7 @@
 /* -*- mode:C; tab-width:8; c-default-style:linux; c-basic-offset:8; indent-tabs-mode:nil -*- */
 /*
  * libgscorebase/identity.h
- * gscore - a musical score editor
+ * gscore - a musical notation software
  *
  * (C) Copyright 2001-2006 Sebastien Tricaud
  * e-mail : toady@gscore.org

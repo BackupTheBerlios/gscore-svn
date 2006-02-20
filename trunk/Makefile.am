@@ -1,6 +1,7 @@
-SUBDIRS = \
-	libgscorebase \
-	libgscore \
+SUBDIRS = 			\
+	libgscore 		\
+	libgscorebase 		\
+	libgscorespacings 	\
 	src
 
 EXTRA_DIST = \

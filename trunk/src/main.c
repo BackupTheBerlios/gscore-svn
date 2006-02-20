@@ -23,10 +23,13 @@
  */
 
 #include <gtk/gtk.h>
+
 #include <libgscore/gscoretypes.h>
+#include <libgscore/macros.h>
 #include <libgscorebase/score.h>
 
 #include "glade.h"
+
 
 int main(int argc, char **argv)
 {

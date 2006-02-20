@@ -1,6 +1,6 @@
 /* -*- mode:C; tab-width:8; c-default-style:linux; c-basic-offset:8; indent-tabs-mode:nil -*- */
 /*
- * libgscore/gscoreerrors.h
+ * macros.h
  * gscore - a musical notation software
  *
  * (C) Copyright 2001-2006 Sebastien Tricaud
@@ -22,19 +22,4 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-#ifndef __GSCOREERRORS_H__
-#define __GSCOREERRORS_H__
-
-G_BEGIN_DECLS
-
-typedef enum {
-        GSCORE_NOERR = 0,
-        GSCORE_OUTMEM = 1,
-        GSCORE_FILENOTFOUND = 2
-} gscore_error_t;
-
-typedef gscore_error_t GSCORE_ERROR;
-
-G_END_DECLS
-
-#endif /* __GSCOREERRORS_H__ */
+#define get_file_from_data_dir(file) g_strconcat(DATA_DIR, G_DIR_SEPARATOR_S, "gscore", G_DIR_SEPARATOR_S, file, NULL)

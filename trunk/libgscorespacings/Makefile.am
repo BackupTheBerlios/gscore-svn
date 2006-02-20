@@ -1,21 +1,21 @@
-libgscorebase     = $(top_build_dir)/libgscorebase/libgscorebase-$(GSCORE_API_VERSION).la
+libgscorespacingsincludedir = $(includedir)/gscore/libgscorespacings
 
-libgscorespacingsincludedir = $(includedir)/gscore-$(GSCORE_API_VERSION)/libgscorespacings
+DEFS = 	-DPLUGINS_DIR=\"$(plugins_dir)\"	\
+	-DDATA_DIR=\"$(datadir)\"
 
 INCLUDES = 		\
 	-I$(top_srcdir) \
 	$(GLIB_CFLAGS)  \
 	-I$(includedir)
 
-lib_LTLIBRARIES = libgscorespacings-$(GSCORE_API_VERSION).la
+lib_LTLIBRARIES = libgscorespacings.la
 
-# libgscorespacings_sources = \
-# 			\
+libgscorespacings_sources = 		\
+			spacings.c
 
-libgscorespacings_1_0_la_SOURCES = $(libgscorespacings_sources)
+libgscorespacings_la_SOURCES = $(libgscorespacings_sources)
 
-# libgscorespacingsinclude_HEADERS = \
+libgscorespacingsinclude_HEADERS = 	\
+			spacings.h
 
-libgscorespacings_1_0_la_DEPENDENCIES = $(libgscorebase)
-
-libgscorespacings_1_0_la_LIBADD = $(GLIB_LIBS)
+libgscorespacings_la_LIBADD = $(GLIB_LIBS)

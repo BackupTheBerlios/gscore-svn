@@ -1,4 +1,4 @@
-libgscorebase     = $(top_srcdir)/libgscorebase/libgscorebase.la
+#libgscorebase     = $(top_srcdir)/libgscorebase/libgscorebase.la
 libgscore         = ./libgscore.la
 
 INCLUDES =			\
@@ -16,12 +16,13 @@ libgscore_la_SOURCES = \
 			gscoretypes.h
 
 libgscoreincludedir = $(includedir)/gscore/libgscore
-libgscoreinclude_HEADERS = \
-		datastructures.h \
-		gscoretypes.h
+libgscoreinclude_HEADERS = 		\
+		constants.h		\
+		datastructures.h 	\
+		gscoretypes.h		\
+		macros.h
 
-
-libgscore_la_DEPENDENCIES = $(libgscorebase)
+#libgscore_la_DEPENDENCIES = $(libgscorebase)
 
 extra_DIST = \
 	$(gscoreinclude_HEADERS)

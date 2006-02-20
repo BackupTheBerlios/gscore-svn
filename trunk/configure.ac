@@ -276,6 +276,7 @@ pixmaps/Makefile
 
 libgscore/Makefile
 libgscorebase/Makefile
+libgscorespacings/Makefile
 
 src/Makefile
 
