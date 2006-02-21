@@ -48,6 +48,9 @@ typedef struct _Display Display;
 /* In libgscorebase/selection.h */
 typedef struct _SelectionArea SelectionArea;
 
+/* In libgscorespacings/spacings.h */
+typedef struct _Spacings Spacings;
+
 G_END_DECLS
 
 #endif /* __GSCORETYPES_H__ */
