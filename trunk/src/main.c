@@ -28,7 +28,8 @@
 #include <libgscore/macros.h>
 #include <libgscorebase/score.h>
 
-#include "glade.h"
+#include "include/glade.h"
+#include "include/score-window.h"
 
 
 int main(int argc, char **argv)
@@ -37,6 +38,12 @@ int main(int argc, char **argv)
 	gtk_init(&argc, &argv);
 
         gxml_create(get_file_from_data_dir("glade/gscore.glade"));
+
+/*         plugins_load(); */
+
+        spacings_init();
+
+        score_window_new();
         
 #ifdef DEBUG
 	g_log_set_fatal_mask("Gtk", G_LOG_LEVEL_CRITICAL);

@@ -44,6 +44,9 @@ typedef struct _Display
 
 } _Display;
 
+
+Display *gscore_display_new(void);
+
 G_END_DECLS
 
 #endif /* __DISPLAY_H__ */

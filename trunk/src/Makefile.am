@@ -13,6 +13,8 @@ bin_PROGRAMS = gscore
 gscore_LDFLAGS = -export-dynamic
 gscore_LDADD = $(LIBGLADE2_LIBS) ../libgscore/libgscore.la ../libgscorebase/libgscorebase.la ../libgscorespacings/libgscorespacings.la
 
-gscore_SOURCES = \
-		glade.c \
-		main.c
+gscore_SOURCES = 			\
+		glade.c 		\
+		main.c			\
+		score-window.c
+

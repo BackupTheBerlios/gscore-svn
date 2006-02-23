@@ -1,7 +1,7 @@
 /* -*- mode:C; tab-width:8; c-default-style:linux; c-basic-offset:8; indent-tabs-mode:nil -*- */
 /*
- * glade.c
- * gscore - a musical notation software
+ * libgscorebase/display.c
+ * gscore - a musical score editor
  *
  * (C) Copyright 2001-2006 Sebastien Tricaud
  * e-mail : toady@gscore.org
@@ -22,32 +22,36 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
-#include <glade/glade.h>
-#include <libgscore/gscoreerrors.h>
-
-#include "include/glade.h"
-#include "include/gettext.h"
-
-static GladeXML *gxml;
-
-extern GSCORE_ERROR gxml_create(char *filename);
+#include <libgscore/gscoretypes.h>
+#include <libgscorebase/display.h>
 
 
-extern GSCORE_ERROR
-gxml_create(char *filename)
+extern Display *gscore_display_new(void);
+
+
+extern Display *
+gscore_display_new(void)
 {
 
-	gxml = glade_xml_new(filename, NULL, NULL);
-	
-	if ( ! gxml ) {
-		g_error(_("Glade file not found in %s\n"), filename);
-		
-		return GSCORE_FILENOTFOUND;
+        Display *display;
+
+        display = g_malloc(sizeof(Display));
+
+        if ( ! display ) {
+		g_print("Memory exhausted: cannot allocate new display\n");
+		return NULL;
 	}
-	
 
-	glade_xml_signal_autoconnect(gxml);
+        display->measure_number = TRUE;
+        display->instruments = FALSE;
+        display->clefs = TRUE;
+        display->score_expressions = TRUE;
+        display->barlines = TRUE;
+        display->ending_bar = TRUE;
+        display->key_signature = TRUE;
+        display->time_signature = TRUE;
+        display->tempo = TRUE;
 
-	return GSCORE_NOERR;
+        return display;
 
 }
