@@ -28,8 +28,8 @@
 #include <libgscore/gscoretypes.h>
 #include <libgscore/gscoreerrors.h>
 #include <libgscorebase/score.h>
-#include <libgscorebase/selection.h>
-#include <libgscorebase/object_color.h>
+#include <libgscorebase/selection-area.h>
+#include <libgscorebase/object-color.h>
 #include <libgscorebase/identity.h>
 
 

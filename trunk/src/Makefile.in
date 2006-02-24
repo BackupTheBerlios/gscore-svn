@@ -49,7 +49,8 @@ CONFIG_CLEAN_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 binPROGRAMS_INSTALL = $(INSTALL_PROGRAM)
 PROGRAMS = $(bin_PROGRAMS)
-am_gscore_OBJECTS = glade.$(OBJEXT) main.$(OBJEXT)
+am_gscore_OBJECTS = glade.$(OBJEXT) main.$(OBJEXT) \
+	score-window.$(OBJEXT)
 gscore_OBJECTS = $(am_gscore_OBJECTS)
 am__DEPENDENCIES_1 =
 gscore_DEPENDENCIES = $(am__DEPENDENCIES_1) ../libgscore/libgscore.la \
@@ -251,8 +252,9 @@ SUBDIRS =
 gscore_LDFLAGS = -export-dynamic
 gscore_LDADD = $(LIBGLADE2_LIBS) ../libgscore/libgscore.la ../libgscorebase/libgscorebase.la ../libgscorespacings/libgscorespacings.la
 gscore_SOURCES = \
-		glade.c \
-		main.c
+		glade.c 		\
+		main.c			\
+		score-window.c
 
 all: all-recursive
 
@@ -327,6 +329,7 @@ distclean-compile:
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/glade.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/main.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/score-window.Po@am__quote@
 
 .c.o:
 @am__fastdepCC_TRUE@	if $(COMPILE) -MT $@ -MD -MP -MF "$(DEPDIR)/$*.Tpo" -c -o $@ $<; \

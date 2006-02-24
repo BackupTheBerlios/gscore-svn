@@ -41,9 +41,9 @@ int main(int argc, char **argv)
 
 /*         plugins_load(); */
 
-        spacings_init();
+/*         spacings_init(); */
 
-        score_window_new();
+/*         score_window_new(); */
         
 #ifdef DEBUG
 	g_log_set_fatal_mask("Gtk", G_LOG_LEVEL_CRITICAL);

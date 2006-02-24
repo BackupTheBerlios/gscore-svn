@@ -57,7 +57,8 @@ am__installdirs = "$(DESTDIR)$(libdir)" \
 	"$(DESTDIR)$(libgscoreincludedir)"
 libLTLIBRARIES_INSTALL = $(INSTALL)
 LTLIBRARIES = $(lib_LTLIBRARIES)
-libgscore_la_DEPENDENCIES =
+am__DEPENDENCIES_1 =
+libgscore_la_DEPENDENCIES = $(am__DEPENDENCIES_1)
 am_libgscore_la_OBJECTS =
 libgscore_la_OBJECTS = $(am_libgscore_la_OBJECTS)
 DEFAULT_INCLUDES = -I. -I$(srcdir) -I$(top_builddir)
@@ -249,7 +250,7 @@ INCLUDES = \
 	-I$(includedir)
 
 lib_LTLIBRARIES = libgscore.la 
-libgscore_la_LIBADD = $(libgscorebase)
+libgscore_la_LIBADD = $(GLIB2_LIBS)
 libgscore_la_SOURCES = \
 			gscoretypes.h
 

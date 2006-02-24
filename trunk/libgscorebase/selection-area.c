@@ -26,7 +26,7 @@
 #include <glib.h>
 
 #include <libgscore/gscoretypes.h>
-#include <libgscorebase/selection.h>
+#include <libgscorebase/selection-area.h>
 
 
 extern SelectionArea * gscore_selection_area_new(void);

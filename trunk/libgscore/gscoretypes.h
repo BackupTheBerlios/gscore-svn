@@ -33,7 +33,7 @@ typedef struct _Score Score;
 /* In libgscorebase/identity.h */
 typedef struct _Identity Identity;
 
-/* In libgscorebase/object_color.h */
+/* In libgscorebase/object-color.h */
 typedef struct _ObjectColor ObjectColor;
 
 /* In libgscorebase/staff.h */

@@ -26,7 +26,7 @@
 #include <glib.h>
 
 #include <libgscore/gscoretypes.h>
-#include <libgscorebase/object_color.h>
+#include <libgscorebase/object-color.h>
 
 
 extern ObjectColor * gscore_object_color_new(void);

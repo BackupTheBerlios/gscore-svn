@@ -10,7 +10,7 @@ INCLUDES =			\
 
 lib_LTLIBRARIES = libgscore.la 
 
-libgscore_la_LIBADD = $(libgscorebase)
+libgscore_la_LIBADD = $(GLIB2_LIBS)
 
 libgscore_la_SOURCES = \
 			gscoretypes.h

@@ -26,9 +26,6 @@
 
 #include <libgscore/gscoretypes.h>
 #include <libgscore/gscoreerrors.h>
-#include <libgscorebase/score.h>
-#include <libgscorebase/selection.h>
-#include <libgscorebase/object_color.h>
 #include <libgscorebase/identity.h>
 
 extern Identity * gscore_identity_new(void);

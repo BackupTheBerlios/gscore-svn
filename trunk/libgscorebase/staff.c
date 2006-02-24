@@ -28,8 +28,7 @@
 #include <libgscore/gscoretypes.h>
 #include <libgscore/gscoreerrors.h>
 #include <libgscorebase/score.h>
-#include <libgscorebase/selection.h>
-#include <libgscorebase/object_color.h>
+#include <libgscorebase/object-color.h>
 #include <libgscorebase/identity.h>
 
 extern Staff * gscore_staff_new(Score *score, guint8 nb_lines, guint8 space_btw_lines, gdouble extremity_begin_x, gdouble extremity_begin_y);
